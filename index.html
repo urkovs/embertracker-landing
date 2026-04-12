@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ember — Migraine Tracker</title>
+<meta name="description" content="A migraine tracker that classifies your days automatically and generates the reports your provider needs.">
+<meta property="og:title" content="Ember — Migraine Tracker">
+<meta property="og:description" content="A migraine tracker that classifies your days automatically and generates the reports your provider needs.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0a0a0a">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --surface: #151515;
+    --card: #1a1a1a;
+    --card-border: #2a2a2a;
+    --divider: #222222;
+    --text: #e8e4df;
+    --text-muted: #8a847b;
+    --hint: #6e685f;
+    --text-dim: #5a5550;
+    --accent: #c4b5a0;
+    --migraine: #9b7acc;
+    --headache: #4a8abf;
+    --green: #5a9a6a;
+    --yellow: #c8a43e;
+    --red: #c06060;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, 'SF Pro Text', BlinkMacSystemFont, system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  nav {
+    padding: 28px 0;
+    border-bottom: 1px solid var(--divider);
+  }
+  nav .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 22px;
+    letter-spacing: -0.5px;
+    color: var(--text);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo-mark {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #e8a86a 0%, #c4793a 45%, #6b3818 100%);
+    box-shadow: 0 0 14px rgba(196, 121, 58, 0.35);
+    flex-shrink: 0;
+  }
+  .nav-contact {
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-contact:hover { color: var(--accent); }
+
+  .hero {
+    padding: 120px 0 100px;
+    text-align: center;
+  }
+  .hero-mark {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #f0b575 0%, #c4793a 45%, #5a2e14 100%);
+    box-shadow: 0 0 48px rgba(196, 121, 58, 0.4);
+    margin: 0 auto 40px;
+  }
+  h1 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 56px;
+    font-weight: 400;
+    letter-spacing: -1.2px;
+    line-height: 1.05;
+    margin-bottom: 24px;
+  }
+  .hero-sub {
+    font-size: 18px;
+    color: var(--text-muted);
+    max-width: 520px;
+    margin: 0 auto 48px;
+  }
+  .cta-row {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-block;
+    padding: 16px 32px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: 1px solid var(--card-border);
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #1a1410;
+    border-color: var(--accent);
+  }
+  .btn-primary:hover { background: #d6c7b0; }
+  .btn-primary.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  .coming-soon {
+    display: block;
+    margin-top: 16px;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.5px;
+  }
+
+  section {
+    padding: 96px 0;
+    border-top: 1px solid var(--divider);
+  }
+  .section-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  h2 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 36px;
+    font-weight: 400;
+    letter-spacing: -0.5px;
+    line-height: 1.15;
+    text-align: center;
+    margin: 0 auto 64px;
+    max-width: 640px;
+  }
+
+  .features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .feature {
+    background: var(--surface);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 32px 28px;
+  }
+  .feature-num {
+    font-family: Georgia, serif;
+    font-size: 13px;
+    color: var(--accent);
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+  }
+  .feature h3 {
+    font-family: Georgia, serif;
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 12px;
+    color: var(--text);
+    line-height: 1.25;
+  }
+  .feature p {
+    font-size: 13px;
+    color: var(--hint);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .screenshots {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .phone-mock {
+    background: var(--surface);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 24px 18px;
+    min-height: 440px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .mock-title {
+    font-family: Georgia, serif;
+    font-size: 17px;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .mock-section-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .stoplight-row { display: flex; gap: 6px; }
+  .pill {
+    padding: 9px 6px;
+    border-radius: 8px;
+    font-size: 10px;
+    flex: 1;
+    text-align: center;
+    border: 1px solid var(--card-border);
+    color: var(--hint);
+  }
+  .pill.active-yellow {
+    background: rgba(200,164,62,0.15);
+    border-color: var(--yellow);
+    color: var(--yellow);
+  }
+  .chip-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+  .chip {
+    padding: 9px 6px;
+    border-radius: 8px;
+    font-size: 10px;
+    border: 1px solid var(--card-border);
+    color: var(--hint);
+    text-align: center;
+  }
+  .chip.selected {
+    background: rgba(196,181,160,0.1);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .badge {
+    background: rgba(155,122,204,0.12);
+    border: 1px solid var(--migraine);
+    color: var(--migraine);
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 10px;
+    text-align: center;
+    font-weight: 600;
+    margin-top: auto;
+  }
+  .cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+  }
+  .cal-day {
+    aspect-ratio: 1;
+    background: var(--card);
+    border-radius: 4px;
+    position: relative;
+    font-size: 8px;
+    color: var(--hint);
+    padding: 2px 3px;
+  }
+  .cal-day.mild { background: rgba(90,154,106,0.2); }
+  .cal-day.mod { background: rgba(200,164,62,0.2); }
+  .cal-day.sev { background: rgba(192,96,96,0.25); }
+  .cal-day.mig::after {
+    content: '';
+    position: absolute;
+    bottom: 3px;
+    right: 3px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--migraine);
+  }
+  .cal-legend {
+    display: flex;
+    gap: 10px;
+    font-size: 9px;
+    color: var(--hint);
+    flex-wrap: wrap;
+    margin-top: auto;
+  }
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--divider);
+    font-size: 11px;
+  }
+  .stat-row:last-child { border-bottom: none; }
+  .stat-label { color: var(--hint); }
+  .stat-num { color: var(--text); font-weight: 600; }
+  .stat-num.purple { color: var(--migraine); }
+  .stat-num.green-val { color: var(--green); }
+
+  .contact-wrap { text-align: center; }
+  .contact-email {
+    display: inline-block;
+    font-family: Georgia, serif;
+    font-size: 22px;
+    color: var(--accent);
+    text-decoration: none;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--card-border);
+    transition: border-color 0.2s;
+  }
+  .contact-email:hover { border-color: var(--accent); }
+
+  footer {
+    padding: 48px 0 64px;
+    border-top: 1px solid var(--divider);
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 11px;
+    letter-spacing: 0.5px;
+  }
+  footer p { margin-bottom: 8px; color: var(--text-dim); }
+  .disclaimer {
+    max-width: 560px;
+    margin: 20px auto 0;
+    font-size: 10px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 760px) {
+    .features, .screenshots { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .hero { padding: 70px 0 60px; }
+    h1 { font-size: 40px; }
+    h2 { font-size: 28px; margin-bottom: 48px; }
+    section { padding: 64px 0; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a href="#" class="logo">
+      <span class="logo-mark"></span>
+      Ember
+    </a>
+    <a href="mailto:hello@cascadeheadache.com" class="nav-contact">Contact</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="hero-mark"></div>
+    <h1>Migraine tracking,<br>finally done right.</h1>
+    <p class="hero-sub">Log your day in under a minute. Ember handles the clinical work.</p>
+    <div class="cta-row">
+      <a href="#" class="btn btn-primary disabled" aria-disabled="true">Join the TestFlight</a>
+    </div>
+    <span class="coming-soon">Opening soon</span>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+    <div class="section-label">Why Ember</div>
+    <h2>Three things no other tracker does.</h2>
+    <div class="features">
+      <div class="feature">
+        <div class="feature-num">01</div>
+        <h3>Automatic classification</h3>
+        <p>Headache day or migraine day? You shouldn't have to decide. Ember reads your symptoms and medications and applies the same criteria your headache provider uses — consistently, every day.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-num">02</div>
+        <h3>Insurance-ready reports</h3>
+        <p>Frequency, severity, disability, and treatment response — formatted for prior authorization renewals on Botox, Ajovy, Qulipta, Emgality, and other preventives.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-num">03</div>
+        <h3>Improvement that actually counts</h3>
+        <p>When you're better but haven't hit the 50% threshold insurers demand, Ember builds the clinical significance narrative — severity, function, disability — that keeps your treatment approved.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-label">A Look Inside</div>
+    <h2>Quiet by design.</h2>
+    <div class="screenshots">
+
+      <div class="phone-mock">
+        <div class="mock-title">Today</div>
+        <div class="mock-section-label">Severity</div>
+        <div class="stoplight-row">
+          <div class="pill">None</div>
+          <div class="pill">Mild</div>
+          <div class="pill active-yellow">Moderate</div>
+          <div class="pill">Severe</div>
+        </div>
+        <div class="mock-section-label" style="margin-top:6px">Symptoms</div>
+        <div class="chip-grid">
+          <div class="chip selected">Light sensitivity</div>
+          <div class="chip selected">Nausea</div>
+          <div class="chip">Aura</div>
+          <div class="chip selected">Throbbing</div>
+        </div>
+        <div class="badge">Migraine day · 3 features</div>
+      </div>
+
+      <div class="phone-mock">
+        <div class="mock-title">Calendar</div>
+        <div class="mock-section-label">March</div>
+        <div class="cal-grid">
+          <div class="cal-day">1</div><div class="cal-day mild">2</div><div class="cal-day">3</div><div class="cal-day mod mig">4</div><div class="cal-day mod mig">5</div><div class="cal-day mild">6</div><div class="cal-day">7</div>
+          <div class="cal-day">8</div><div class="cal-day">9</div><div class="cal-day sev mig">10</div><div class="cal-day sev mig">11</div><div class="cal-day mod mig">12</div><div class="cal-day mild">13</div><div class="cal-day">14</div>
+          <div class="cal-day">15</div><div class="cal-day mild">16</div><div class="cal-day">17</div><div class="cal-day">18</div><div class="cal-day mod mig">19</div><div class="cal-day mod">20</div><div class="cal-day">21</div>
+          <div class="cal-day">22</div><div class="cal-day">23</div><div class="cal-day sev mig">24</div><div class="cal-day mod mig">25</div><div class="cal-day mild">26</div><div class="cal-day">27</div><div class="cal-day">28</div>
+          <div class="cal-day">29</div><div class="cal-day mild">30</div><div class="cal-day">31</div>
+        </div>
+        <div class="cal-legend">
+          <span style="color:var(--migraine)">● Migraine</span>
+          <span style="color:var(--green)">■ Mild</span>
+          <span style="color:var(--yellow)">■ Mod</span>
+          <span style="color:var(--red)">■ Sev</span>
+        </div>
+      </div>
+
+      <div class="phone-mock">
+        <div class="mock-title">Report</div>
+        <div class="mock-section-label">Since Starting Botox</div>
+        <div class="stat-row"><span class="stat-label">Before</span><span class="stat-num">25 / mo</span></div>
+        <div class="stat-row"><span class="stat-label">Now</span><span class="stat-num purple">16 / mo</span></div>
+        <div class="stat-row"><span class="stat-label">Change</span><span class="stat-num green-val">−36%</span></div>
+        <div class="mock-section-label" style="margin-top:14px">Last 90 Days</div>
+        <div class="stat-row"><span class="stat-label">Migraine days</span><span class="stat-num purple">18</span></div>
+        <div class="stat-row"><span class="stat-label">Headache days</span><span class="stat-num">7</span></div>
+        <div class="stat-row"><span class="stat-label">Clear days</span><span class="stat-num">65</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container contact-wrap">
+    <div class="section-label">Get In Touch</div>
+    <h2>Patients, clinicians, questions.</h2>
+    <a href="mailto:hello@cascadeheadache.com" class="contact-email">hello@cascadeheadache.com</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>Ember — Migraine Tracker</p>
+    <p>© 2026 Cascade Headache, LLC</p>
+    <p class="disclaimer">Ember is a wellness and self-tracking tool. It is not a medical device and does not diagnose, treat, cure, or prevent any disease. Always consult your healthcare provider about your symptoms and treatment.</p>
+  </div>
+</footer>
+
+</body>
+</html>
