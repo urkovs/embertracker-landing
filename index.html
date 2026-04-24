@@ -262,7 +262,7 @@
   }
 
   /* ─── Generic section + titles ──────────────────────────── */
-  .bleed { padding: clamp(28px, 3.8vw, 48px) 0; position: relative; }
+  .bleed { padding: clamp(18px, 2.4vw, 32px) 0; position: relative; }
   .section-label {
     font-family: var(--sans); font-size: 11.5px;
     letter-spacing: 3px; text-transform: uppercase;
@@ -287,7 +287,7 @@
     font-size: clamp(18px, 1.5vw, 21px);
     line-height: 1.55;
     color: var(--text-muted);
-    margin: 0 0 56px;
+    margin: 0 0 36px;
     max-width: 52ch;
   }
 
@@ -597,7 +597,7 @@
     font-size: 12.5px;
     line-height: 1.65;
     color: var(--hint);
-    max-width: 80ch;
+    max-width: none;
     margin: 0 0 28px;
   }
   .practice-note {
@@ -605,7 +605,7 @@
     font-size: 13px;
     line-height: 1.65;
     color: var(--text-muted);
-    max-width: 80ch;
+    max-width: none;
     margin: 0 0 28px;
     padding-top: 20px;
     border-top: 1px solid var(--border-subtle);
@@ -803,7 +803,7 @@
 <section class="hero">
   <div class="wrap hero-grid">
     <div class="hero-copy">
-      <p class="eyebrow">A NEW MIGRAINE TRACKER FOR IPHONE</p>
+      <p class="eyebrow">A BETTER MIGRAINE TRACKER</p>
 
       <div class="hero-variant literary">
         <h1>The day was hard.<br><em>The check-in can be easy.</em></h1>
@@ -820,11 +820,10 @@
       </div>
 
       <p class="hero-sub">
-        One quiet evening check-in, under a minute. Built by a headache specialist
-        who sees patients like you every week.
+        One quiet evening check-in that takes less than 10 seconds. Built by a headache specialist
+        who gets it.
         <br><br>
-        <span>Walk into your next visit with a report your provider can actually use.
-        Trust us, they&rsquo;ll be impressed.</span>
+        <span>Walk into your next visit with a report your provider can actually use.</span>
       </p>
 
       <div class="cta-row">
@@ -847,15 +846,13 @@
 <section class="bleed" id="why">
   <div class="wrap">
     <div class="reveal">
-      <div class="section-label">Why Ember</div>
+      <div class="section-label" style="font-size: 12px; color: rgb(95, 168, 156)">Why Ember?</div>
       <h2 class="section-title">The first app that understands what migraine is really like.</h2>
       <p class="section-lede">
         Most headache tracker apps annoy you with too many questions or bright
-        screens. The last thing you want to do during an attack is look at
-        your phone!
+        screens.
         <br><br>
-        Clearly the other apps weren&rsquo;t built by a person with migraine
-        disease. Ember is.
+        Ember&rsquo;s guiding philosophy: minimal user input, maximal output.
       </p>
     </div>
 
@@ -869,18 +866,16 @@
       </article>
       <article class="pillar gem-teal">
         <div class="pillar-num">ii.</div>
-        <h3>You begin to see your own pattern</h3>
+        <h3 style="color: rgb(172, 211, 203)">You begin to see your own pattern</h3>
         <p>
-          Migraine days, headache days, clear days. Things you sensed but
-          couldn&rsquo;t name.
+          Ember turns your short check-ins into insights you can actually use.
         </p>
       </article>
       <article class="pillar gem-rose">
         <div class="pillar-num">iii.</div>
-        <h3>Walk into your next visit prepared</h3>
+        <h3 style="color: rgb(211, 180, 194)">Walk into your next visit prepared</h3>
         <p>
-          Ember turns 90 days of check-ins into a summary your provider can
-          actually read.
+          Give your provider exactly what they need to know, nothing more or less.
         </p>
       </article>
     </div>
@@ -891,15 +886,10 @@
 <section class="bleed" id="how" style="background: linear-gradient(180deg, transparent, rgba(21,21,21,0.4) 30%, rgba(21,21,21,0.4) 70%, transparent);">
   <div class="wrap">
     <div class="reveal">
-      <div class="section-label">How it works</div>
+      <div class="section-label" style="font-size: 12px; color: rgb(95, 168, 156)">How it works</div>
       <h2 class="section-title">A check-in, every evening.</h2>
       <p class="section-lede">
-        We get it &ndash; the last thing you want to do during an attack is
-        look at your phone.
-        <br><br>
-        Ember waits until the evening. Tell it how today was. Add symptoms or
-        meds if you want. That&rsquo;s the whole check-in. Easy to do from
-        bed, with the lights low.
+        Ember makes it easy, fast, and beautiful.
       </p>
     </div>
 
@@ -916,7 +906,7 @@
           <div class="step-num">02</div>
           <div>
             <h4>Symptoms + Meds?</h4>
-            <p>Pick any symptoms you noticed or medications you took. Skip what does not apply.</p>
+            <p>Pick any symptoms you noticed or medications you took. Skip what didn't apply.</p>
           </div>
         </article>
         <article class="step" data-step="3">
@@ -943,15 +933,15 @@
     <div class="privacy-mark" aria-hidden="true">
       <svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6l7-3z"/><path d="M9 12l2.2 2.2L15 10.6"/></svg>
     </div>
-    <div class="section-label" style="text-align:center">Privacy</div>
+    <div class="section-label" style="text-align: center; color: rgb(95, 168, 156); font-size: 12px">Privacy</div>
     <h2 class="section-title" style="text-align:center; margin-inline:auto">Your data stays on your iPhone.</h2>
     <p class="section-lede" style="text-align:center; margin-inline:auto">
       What you track is personal. Ember is built to keep it that way.
     </p>
     <div class="privacy-points">
-      <p><strong>Your health information never leaves your device</strong>Your check-ins, symptoms, medications, and reports stay on your device.</p>
-      <p><strong>Only your email and password are sent for sign-in</strong>We use them to keep your account in good standing. That is all we see.</p>
-      <p><strong>You choose what to share, and with whom</strong>When you are ready, export your data to bring to your provider.</p>
+      <p><strong>Health data never leaves your device</strong>Your check-ins, symptoms, medications, and reports stay on your device.</p>
+      <p><strong>Only your Apple ID is used to login.</strong>We use it to keep your account in good standing. That is all we see.</p>
+      <p><strong>You choose what to share</strong>When you are ready, export your data to bring to your provider.</p>
     </div>
   </div>
 </section>
@@ -960,12 +950,22 @@
 <section class="bleed">
   <div class="wrap built reveal">
     <div>
-      <div class="section-label">Built by a headache specialist</div>
+      <div class="section-label" style="font-size: 12px; color: rgb(95, 168, 156)">Built by a headache specialist</div>
       <blockquote>
-        &ldquo;I built Ember for the patient who sits in front of me and
-        says, &lsquo;I know something changed, I just can&rsquo;t find the
-        words.&rsquo; After every existing migraine tracking app left me
-        wanting something better, I decided to build a better one myself.&rdquo;
+        &ldquo;I built Ember for the patient with brain fog who has a hard
+        time communicating about their symptoms. For the one with ADHD who
+        can&rsquo;t keep track of their headaches consistently or who loses
+        their paper calendar. And the ones who don&rsquo;t know how to
+        differentiate between headaches and migraines.
+        <br><br>
+        And for myself&mdash;As a person living with migraine disease, I
+        wanted something that was actually useful, something I&rsquo;d truly
+        enjoy using. Something that gave me actionable information from
+        minimal interaction. Let&rsquo;s face it&mdash;we could all use less
+        screen time!
+        <br><br>
+        After every existing migraine tracking app left me wanting something
+        better, I decided to build a better one myself.&rdquo;
       </blockquote>
       <div class="attrib">
         <strong>Dr. Sam Urkov, DNP, FNP-C</strong>
@@ -978,17 +978,17 @@
 <!-- FINAL CTA ─────────────────────────────────────────────── -->
 <section class="final-cta" id="beta">
   <div class="wrap reveal">
-    <h2>Start today.</h2>
-    <p>The TestFlight beta is open. <br>Your first check-in takes about 45 seconds.</p>
+    <h2>Start today</h2>
+    <p>The TestFlight beta is open!</p>
     <div class="cta-row">
       <a href="https://embertracker.app/beta/" class="btn-primary">
         Join the TestFlight beta
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </a>
-      <a href="mailto:hello@cascadeheadache.com" class="btn-ghost">Get in touch</a>
+      <a href="/cdn-cgi/l/email-protection#8de5e8e1e1e2cdeeecfeeeece9e8e5e8ece9eceee5e8a3eee2e0" class="btn-ghost">Get in touch</a>
     </div>
     <p style="font-family: var(--sans); font-size: 12.5px; color: var(--hint); letter-spacing: 0.3px; margin: 28px auto 0; max-width: 46ch; line-height: 1.6;">
-      Price should never keep anyone from tracking their migraines. If cost is a barrier, <a href="mailto:hello@cascadeheadache.com?subject=Ember%20Scholarship%20Request" style="color: var(--accent); border-bottom: 1px solid rgba(196,181,160,0.3); transition: color .2s, border-color .2s;">email us</a>.
+      Price should never keep anyone from tracking their migraines. If cost is a barrier, <a href="/cdn-cgi/l/email-protection#640c0108080b24070517070500010c01050005070c014a070b095b1711060e01071059210906011641565437070c0b080516170c0d1441565436011511011710" style="color: var(--accent); border-bottom: 1px solid rgba(196,181,160,0.3); transition: color .2s, border-color .2s;">email us</a>.
     </p>
   </div>
 </section>
@@ -1014,7 +1014,7 @@
       </div>
       <div class="foot-col">
         <h5>Company</h5>
-        <a href="mailto:hello@cascadeheadache.com">hello@cascadeheadache.com</a>
+        <a href="/cdn-cgi/l/email-protection#d6beb3babab996b5b7a5b5b7b2b3beb3b7b2b7b5beb3f8b5b9bb"><span class="__cf_email__" data-cfemail="9bf3fef7f7f4dbf8fae8f8fafffef3fefafffaf8f3feb5f8f4f6">[email&#160;protected]</span></a>
         <a href="https://www.cascadeheadache.com" target="_blank" rel="noopener">Cascade Headache</a>
         <a href="privacy/">Privacy Policy</a>
         <a href="terms/">Terms of Service</a>
@@ -1091,7 +1091,7 @@
   </div>
 </aside>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   /* ─── Apply saved/initial tweak state ───────────────────── */
   const TWEAK_KEYS = ["hero", "herotint", "serif", "accent", "accents", "motion"];
   function applyTweaks(state) {
