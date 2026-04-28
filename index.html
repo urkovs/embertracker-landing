@@ -3,1178 +3,162 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Ember — Migraine & headache tracking for people in pain</title>
-<meta name="description" content="Ember is a quiet migraine and headache tracker for iPhone. Check in once a day, watch your pattern emerge, and bring a clear summary to every visit." />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Ember — A migraine tracker for iPhone</title>
+<meta name="description" content="A migraine tracker for iPhone. Dark, quiet, and fast. Log your day in under a minute." />
+<meta name="theme-color" content="#0a0a0a" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  /* ────────────────────────────────────────────────────────────
-     Ember brand tokens (from the iOS app's theme/tokens.ts)
-     ──────────────────────────────────────────────────────────── */
-  :root {
-    --bg: #0a0a0a;
-    --surface: #151515;
-    --surface-elev: #1a1a1a;
-    --card-border: #2a2a2a;
-    --divider: #222;
-
-    --text-primary: #E8E6E3;
-    --text: #d8c8b0;           /* warm cream, body */
-    --text-body: #C9C5C0;
-    --text-muted: #8a847b;
-    --hint: #6e685f;
-    --dim: #5a5550;
-
-    --accent: #c4b5a0;          /* muted gold */
-    --amber: #E8A547;           /* saturated accent */
-    --amber-muted: #A8772F;
-    --amber-glow: rgba(232, 165, 71, 0.18);
-
-    /* classification palette — used sparingly */
-    --migraine: #9b7acc;
-    --headache: #4a8abf;
-    --green: #5a9a6a;
-    --yellow: #c8a43e;
-    --red: #c06060;
-    --orange: #c48a4a;
-
-    --border-subtle: rgba(232, 230, 227, 0.08);
-    --border-defined: rgba(232, 230, 227, 0.15);
-
-    /* Gemstone accents — muted facets drawn from the in-app Attack Mode palette.
-       Applied only to numerals, eyebrows, and faint background washes; never
-       on buttons or primary CTAs (amber remains the only action color). */
-    --g-violet: #c8b8e8;
-    --g-violet-wash: rgba(42, 32, 64, 0.45);
-    --g-teal: #b0d8d0;
-    --g-teal-wash: rgba(26, 48, 56, 0.45);
-    --g-indigo: #c0c0e0;
-    --g-indigo-wash: rgba(40, 40, 64, 0.40);
-    --g-rose: #d8b8c8;
-    --g-rose-wash: rgba(48, 32, 40, 0.42);
-    --g-slate: #b8c8d0;
-    --g-slate-wash: rgba(32, 40, 48, 0.42);
-
-    --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
-    --sans: "Inter", -apple-system, "SF Pro Text", system-ui, sans-serif;
-
-    --container: 1120px;
-    --gutter: clamp(20px, 4vw, 40px);
-  }
-
-  /* Tweak-driven overrides */
-  html[data-serif="georgia"]  { --serif: Georgia, "Times New Roman", serif; }
-  html[data-accent="amber"]   { --accent: #E8A547; }
-  html[data-accent="gold"]    { --accent: #c4b5a0; }
-
-  * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); }
-  body {
-    font-family: var(--sans);
-    font-size: 17px;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-    overflow-x: hidden;
-  }
-  a { color: inherit; text-decoration: none; }
-  img { max-width: 100%; display: block; }
-  ::selection { background: rgba(232,165,71,0.35); color: var(--text-primary); }
-
-  .wrap { max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); }
-
-  /* ─── Reveal on scroll ──────────────────────────────────── */
-  .reveal { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease; }
-  .reveal.in { opacity: 1; transform: none; }
-  html[data-motion="off"] .reveal { opacity: 1; transform: none; transition: none; }
-
-  /* ─── Nav ───────────────────────────────────────────────── */
-  .nav {
-    position: sticky; top: 0; z-index: 40;
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    background: rgba(10,10,10,0);
-    border-bottom: 1px solid transparent;
-    transition: background .25s ease, border-color .25s ease;
-  }
-  .nav.scrolled {
-    background: rgba(10,10,10,0.82);
-    border-bottom-color: var(--border-subtle);
-  }
-  .nav-inner {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 18px 0;
-  }
-  .brand {
-    display: flex; align-items: center; gap: 10px;
-    font-family: var(--serif);
-    font-size: 22px; letter-spacing: 0.4px;
-    color: var(--text-primary);
-  }
-  .brand-orb {
-    width: 28px; height: 28px;
-    background: url("assets/ember-orb.png") center/contain no-repeat;
-    filter: drop-shadow(0 0 10px rgba(232,165,71,0.28));
-  }
-  .nav-links {
-    display: flex; align-items: center; gap: 28px;
-    font-family: var(--sans); font-size: 14.5px;
-  }
-  .nav-links a { color: var(--text-muted); transition: color .2s; }
-  .nav-links a:hover { color: var(--text); }
-  .nav-cta {
-    background: linear-gradient(180deg, #E8A547, #c48a2e);
-    color: #1a1208 !important;
-    font-weight: 600;
-    padding: 9px 16px;
-    border-radius: 10px;
-    box-shadow: 0 1px 0 rgba(255,255,255,0.08) inset, 0 6px 20px rgba(232,165,71,0.18);
-  }
-  .nav-cta:hover { filter: brightness(1.06); }
-  @media (max-width: 720px) {
-    .nav-links { gap: 16px; font-size: 13.5px; }
-    .nav-links a:not(.nav-cta) { display: none; }
-  }
-
-  /* ─── Hero ──────────────────────────────────────────────── */
-  .hero {
-    position: relative;
-    padding: clamp(28px, 4.5vw, 60px) 0 clamp(30px, 5vw, 64px);
-    overflow: hidden;
-  }
-  .hero::before {
-    content: "";
-    position: absolute; inset: 0;
-    background:
-      radial-gradient(ellipse 70% 55% at 50% 0%, rgba(232,165,71,0.11), transparent 65%),
-      radial-gradient(ellipse 80% 50% at 85% 40%, rgba(155,122,204,0.05), transparent 70%);
-    pointer-events: none;
-  }
-  .hero-grid {
-    display: grid;
-    grid-template-columns: 1.15fr 1fr;
-    gap: clamp(30px, 6vw, 70px);
-    align-items: center;
-    position: relative;
-  }
-  @media (max-width: 860px) {
-    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
-    .hero-orb-wrap { order: -1; max-width: 300px; margin: 0 auto; }
-  }
-  .eyebrow {
-    font-family: var(--sans);
-    font-size: 12px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: rgb(95, 168, 156); /* muted teal */
-    margin: 0 0 24px;
-    font-weight: 500;
-  }
-  .hero h1 {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: clamp(42px, 6.2vw, 78px);
-    line-height: 1.03;
-    letter-spacing: -0.01em;
-    color: var(--text-primary);
-    margin: 0 0 28px;
-    text-wrap: balance;
-  }
-  .hero h1 em {
-    font-style: italic;
-    color: var(--text);
-  }
-  /* Hero variants (data-hero on <html>) */
-  .hero-variant { display: none; }
-  html[data-hero="literary"] .hero-variant.literary,
-  html[data-hero="clinical"] .hero-variant.clinical,
-  html[data-hero="stanza"]   .hero-variant.stanza { display: block; }
-  html[data-hero="stanza"] .hero h1 { font-size: clamp(34px, 4.8vw, 58px); line-height: 1.2; }
-  html[data-hero="stanza"] .hero h1 .line { display: block; }
-
-  /* Optional literary blue tint on hero h1 — off by default */
-  html[data-herotint="blue"] .hero h1 { color: rgb(121, 172, 204); }
-  html[data-herotint="blue"] .hero h1 em { color: var(--text-primary); }
-
-  .hero-sub {
-    font-family: var(--serif);
-    font-size: clamp(19px, 1.6vw, 22px);
-    line-height: 1.5;
-    color: var(--text-muted);
-    margin: 0 0 36px;
-    max-width: 48ch;
-    font-style: italic;
-  }
-  .cta-row {
-    display: flex; gap: 14px; align-items: center; flex-wrap: wrap;
-  }
-  .btn-primary {
-    display: inline-flex; align-items: center; gap: 10px;
-    background: linear-gradient(180deg, #E8A547, #c48a2e);
-    color: #1a1208;
-    font-family: var(--sans); font-weight: 600; font-size: 15px;
-    padding: 14px 22px;
-    border-radius: 12px;
-    letter-spacing: 0.2px;
-    box-shadow: 0 1px 0 rgba(255,255,255,0.08) inset, 0 14px 30px rgba(232,165,71,0.22);
-    transition: transform .15s ease, filter .15s ease;
-  }
-  .btn-primary:hover { filter: brightness(1.06); transform: translateY(-1px); }
-  .btn-ghost {
-    font-family: var(--sans); font-size: 14.5px; color: var(--text-muted);
-    padding: 14px 18px;
-    border-radius: 12px;
-    border: 1px solid var(--border-defined);
-    transition: color .2s, border-color .2s;
-  }
-  .btn-ghost:hover { color: var(--text); border-color: var(--accent); }
-
-  .hero-meta {
-    margin-top: 28px;
-    display: flex; gap: 18px; align-items: center;
-    font-family: var(--sans); font-size: 13px; color: var(--hint);
-    letter-spacing: 0.3px;
-  }
-  .hero-meta::before {
-    content: ""; width: 28px; height: 1px; background: var(--border-defined);
-  }
-
-  /* Breathing orb */
-  .hero-orb-wrap {
-    display: flex; align-items: center; justify-content: center;
-    position: relative;
-    aspect-ratio: 1;
-  }
-  .hero-orb {
-    width: min(380px, 92%);
-    aspect-ratio: 1;
-    background: url("assets/ember-orb.png") center/contain no-repeat;
-    filter: drop-shadow(0 0 60px rgba(232,165,71,0.32));
-    animation: breathe 4.2s ease-in-out infinite;
-  }
-  html[data-motion="off"] .hero-orb { animation: none; }
-  @keyframes breathe {
-    0%, 100% { transform: scale(1);     opacity: 0.94; filter: drop-shadow(0 0 50px rgba(232,165,71,0.28)); }
-    50%      { transform: scale(1.045); opacity: 1.00; filter: drop-shadow(0 0 80px rgba(232,165,71,0.42)); }
-  }
-
-  /* ─── Generic section + titles ──────────────────────────── */
-  .bleed { padding: clamp(18px, 2.4vw, 32px) 0; position: relative; }
-  .section-label {
-    font-family: var(--sans); font-size: 11.5px;
-    letter-spacing: 3px; text-transform: uppercase;
-    color: var(--accent);
-    margin: 0 0 20px;
-    font-weight: 500;
-  }
-  .section-title {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: clamp(36px, 5vw, 58px);
-    line-height: 1.1;
-    letter-spacing: -0.005em;
-    color: var(--text-primary);
-    margin: 0 0 22px;
-    max-width: 22ch;
-    text-wrap: balance;
-  }
-  .section-lede {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: clamp(18px, 1.5vw, 21px);
-    line-height: 1.55;
-    color: var(--text-muted);
-    margin: 0 0 36px;
-    max-width: 52ch;
-  }
-
-  /* ─── Why Ember pillars ─────────────────────────────────── */
-  .pillars {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
-    border-top: 1px solid var(--border-subtle);
-    border-bottom: 1px solid var(--border-subtle);
-    background: var(--border-subtle);
-  }
-  @media (max-width: 800px) {
-    .pillars { grid-template-columns: 1fr; }
-  }
-  .pillar {
-    background: var(--bg);
-    padding: clamp(28px, 3.5vw, 44px) clamp(22px, 3vw, 36px) clamp(36px, 4vw, 52px);
-    transition: background .3s ease;
-  }
-  .pillar-num {
-    font-family: var(--serif); font-style: italic;
-    font-size: 22px;
-    color: var(--accent);
-    margin-bottom: 28px;
-    letter-spacing: 0.5px;
-  }
-  .pillar h3 {
-    font-family: var(--serif);
-    font-weight: 500;
-    font-size: clamp(22px, 2vw, 27px);
-    line-height: 1.25;
-    color: var(--text-primary);
-    margin: 0 0 16px;
-    text-wrap: balance;
-  }
-  .pillar p {
-    font-family: var(--sans);
-    font-size: 15.5px;
-    line-height: 1.6;
-    color: var(--text-muted);
-    margin: 0;
-  }
-
-  /* Gemstone washes (only when accents=gems) */
-  html[data-accents="gems"] .pillar.gem-violet {
-    background: linear-gradient(180deg, var(--g-violet-wash), transparent 75%), var(--bg);
-  }
-  html[data-accents="gems"] .pillar.gem-teal {
-    background: linear-gradient(180deg, var(--g-teal-wash), transparent 75%), var(--bg);
-  }
-  html[data-accents="gems"] .pillar.gem-rose {
-    background: linear-gradient(180deg, var(--g-rose-wash), transparent 75%), var(--bg);
-  }
-  html[data-accents="gems"] .pillar.gem-violet .pillar-num { color: var(--g-violet); }
-  html[data-accents="gems"] .pillar.gem-teal   .pillar-num { color: var(--g-teal); }
-  html[data-accents="gems"] .pillar.gem-rose   .pillar-num { color: var(--g-rose); }
-
-  /* ─── How it works ──────────────────────────────────────── */
-  .how-grid {
-    display: grid;
-    grid-template-columns: 1fr 340px;
-    gap: clamp(30px, 6vw, 80px);
-    align-items: center;
-  }
-  @media (max-width: 900px) {
-    .how-grid { grid-template-columns: 1fr; }
-    .phone { order: -1; justify-self: center; }
-  }
-  .steps {
-    display: flex; flex-direction: column; gap: 4px;
-  }
-  .step {
-    display: grid;
-    grid-template-columns: 60px 1fr;
-    gap: 22px;
-    padding: 26px 0;
-    border-top: 1px solid var(--border-subtle);
-  }
-  .step:last-child { border-bottom: 1px solid var(--border-subtle); }
-  .step-num {
-    font-family: var(--serif); font-style: italic;
-    font-size: 28px;
-    color: var(--accent);
-    align-self: start;
-  }
-  html[data-accents="gems"] .step[data-step="1"] .step-num { color: var(--g-indigo); }
-  html[data-accents="gems"] .step[data-step="2"] .step-num { color: var(--g-teal); }
-  html[data-accents="gems"] .step[data-step="3"] .step-num { color: var(--g-violet); }
-  .step h4 {
-    font-family: var(--serif);
-    font-weight: 500;
-    font-size: clamp(21px, 1.7vw, 25px);
-    color: var(--text-primary);
-    margin: 0 0 8px;
-  }
-  .step p {
-    font-family: var(--sans);
-    font-size: 15px;
-    color: var(--text-muted);
-    margin: 0;
-    max-width: 44ch;
-  }
-
-  /* Faux iPhone */
-  .phone {
-    position: sticky; top: 120px;
-    justify-self: end;
-  }
-  .phone-screen {
-    width: 300px; height: 620px;
-    background: #0a0a0a;
-    border: 1px solid var(--border-defined);
-    border-radius: 44px;
-    padding: 0;
-    display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.02) inset;
-  }
-  .phone-screenshot {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    object-fit: cover;
-    object-position: top center;
-    border-radius: 44px;
-  }
-
-  /* ─── Privacy band ──────────────────────────────────────── */
-  .privacy-band {
-    background:
-      radial-gradient(ellipse 55% 50% at 22% 20%, rgba(74,138,191,0.08), transparent 65%),
-      radial-gradient(ellipse 55% 50% at 82% 85%, rgba(155,122,204,0.06), transparent 65%),
-      var(--bg);
-    border-top: 1px solid var(--border-subtle);
-    border-bottom: 1px solid var(--border-subtle);
-    text-align: center;
-  }
-  html[data-accents="gems"] .privacy-band {
-    background:
-      radial-gradient(ellipse 55% 50% at 22% 20%, rgba(74,122,122,0.14), transparent 65%),
-      radial-gradient(ellipse 55% 50% at 82% 85%, rgba(90,90,138,0.12), transparent 65%),
-      var(--bg);
-  }
-  .privacy-mark {
-    width: 64px; height: 64px;
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 22px;
-    border-radius: 18px;
-    border: 1px solid var(--border-defined);
-    background: var(--surface);
-  }
-  html[data-accents="gems"] .privacy-mark {
-    border-color: rgba(176,216,208,0.35);
-    background: linear-gradient(180deg, rgba(26,48,56,0.55), rgba(21,21,21,0.9));
-  }
-  .privacy-mark svg {
-    width: 28px; height: 28px; stroke: var(--accent);
-    fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
-  }
-  html[data-accents="gems"] .privacy-mark svg { stroke: var(--g-teal); }
-  .privacy-points {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    margin-top: 48px;
-    text-align: left;
-    max-width: 960px;
-    margin-inline: auto;
-  }
-  @media (max-width: 820px) {
-    .privacy-points { grid-template-columns: 1fr; gap: 24px; }
-  }
-  .privacy-points p {
-    font-family: var(--sans);
-    font-size: 14.5px;
-    line-height: 1.6;
-    color: var(--text-muted);
-    margin: 0;
-    padding-left: 18px;
-    border-left: 1px solid var(--border-subtle);
-  }
-  html[data-accents="gems"] .privacy-points p {
-    border-left-color: rgba(184,200,208,0.32);
-  }
-  .privacy-points strong {
-    display: block;
-    font-family: var(--serif);
-    font-weight: 500;
-    font-size: 16.5px;
-    color: var(--text-primary);
-    margin-bottom: 6px;
-    font-style: normal;
-  }
-
-  /* ─── Built by ──────────────────────────────────────────── */
-  .built {
-    display: block;
-  }
-  .built blockquote {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: clamp(21px, 2vw, 26px);
-    line-height: 1.45;
-    color: var(--text);
-    margin: 0 0 24px;
-    text-wrap: pretty;
-  }
-  .attrib {
-    font-family: var(--sans);
-    font-size: 14px;
-    line-height: 1.55;
-    color: var(--text-muted);
-  }
-  .attrib strong {
-    display: block;
-    color: var(--text-primary);
-    font-weight: 500;
-    margin-bottom: 2px;
-  }
-
-  /* ─── Final CTA ─────────────────────────────────────────── */
-  .final-cta {
-    text-align: center;
-    padding: clamp(40px, 5vw, 60px) 0;
-    position: relative;
-    overflow: hidden;
-  }
-  .final-cta::before {
-    content: "";
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse 50% 80% at 50% 100%, rgba(232,165,71,0.09), transparent 70%);
-    pointer-events: none;
-  }
-  .final-cta h2 {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: clamp(32px, 4.4vw, 54px);
-    line-height: 1.15;
-    margin: 0 auto 20px;
-    color: var(--text-primary);
-    max-width: 18ch;
-    text-wrap: balance;
-    font-style: italic;
-    position: relative;
-  }
-  .final-cta p {
-    font-family: var(--serif);
-    color: var(--text-muted);
-    font-size: 19px;
-    margin: 0 auto 40px;
-    max-width: 42ch;
-    position: relative;
-  }
-  .final-cta .cta-row { justify-content: center; position: relative; }
-
-  /* ─── Footer ────────────────────────────────────────────── */
-  footer {
-    border-top: 1px solid var(--divider);
-    padding: 56px 0 40px;
-    background: var(--bg);
-  }
-  .foot-top {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr 1fr;
-    gap: 40px;
-    padding-bottom: 40px;
-    border-bottom: 1px solid var(--border-subtle);
-    margin-bottom: 32px;
-  }
-  @media (max-width: 760px) { .foot-top { grid-template-columns: 1fr; gap: 32px; } }
-  .foot-col h5 {
-    font-family: var(--sans);
-    font-size: 11px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--hint);
-    margin: 0 0 16px;
-    font-weight: 500;
-  }
-  .foot-col a, .foot-col p {
-    font-family: var(--sans);
-    display: block;
-    font-size: 14.5px;
-    color: var(--text-muted);
-    margin: 0 0 10px;
-    transition: color .2s;
-  }
-  .foot-col a:hover { color: var(--text); }
-  .foot-brand {
-    font-family: var(--serif);
-    font-size: 22px;
-    color: var(--text-primary);
-    display: flex; align-items: center; gap: 10px;
-    margin-bottom: 12px;
-  }
-  .foot-tag {
-    font-family: var(--serif);
-    font-style: italic;
-    color: var(--text-muted);
-    font-size: 15px;
-    max-width: 32ch;
-    margin: 0;
-  }
-  .disclaimer {
-    font-family: var(--sans);
-    font-size: 12.5px;
-    line-height: 1.65;
-    color: var(--hint);
-    max-width: none;
-    margin: 0 0 28px;
-  }
-  .practice-note {
-    font-family: var(--sans);
-    font-size: 13px;
-    line-height: 1.65;
-    color: var(--text-muted);
-    max-width: none;
-    margin: 0 0 28px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border-subtle);
-  }
-  .practice-note a {
-    color: var(--accent);
-    border-bottom: 1px solid rgba(196,181,160,0.3);
-    transition: color .2s, border-color .2s;
-  }
-  .practice-note a:hover {
-    color: var(--text-primary);
-    border-bottom-color: var(--accent);
-  }
-  .foot-bottom {
-    font-family: var(--sans);
-    font-size: 12.5px;
-    color: var(--dim);
-    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
-  }
-
-  /* ─── Tweaks panel ─────────────────────────────────────── */
-  #tweaks {
-    display: none;
-    position: fixed; right: 18px; bottom: 18px; z-index: 100;
-    width: 240px;
-    background: rgba(21,21,21,0.96);
-    border: 1px solid var(--border-defined);
-    border-radius: 14px;
-    padding: 16px;
-    backdrop-filter: blur(16px);
-    box-shadow: 0 24px 60px rgba(0,0,0,0.5);
-  }
-  #tweaks.open { display: block; }
-  #tweaks h6 {
-    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
-    color: var(--accent); margin: 0 0 12px; font-weight: 500;
-  }
-  #tweaks .t-row { margin-bottom: 14px; }
-  #tweaks .t-row:last-child { margin-bottom: 0; }
-  #tweaks label {
-    display: block;
-    font-size: 11px; letter-spacing: 1.3px; text-transform: uppercase;
-    color: var(--text-muted); margin-bottom: 6px;
-  }
-  #tweaks .seg {
-    display: flex;
-    border: 1px solid var(--border-defined);
-    border-radius: 8px; overflow: hidden;
-    background: var(--surface);
-  }
-  #tweaks .seg button {
-    flex: 1;
-    background: transparent; color: var(--text-muted);
-    border: none;
-    padding: 8px 6px;
-    font: inherit;
-    font-size: 12px;
-    cursor: pointer;
-    transition: background .15s, color .15s;
-    border-right: 1px solid var(--border-subtle);
-  }
-  #tweaks .seg button:last-child { border-right: none; }
-  #tweaks .seg button[aria-pressed="true"] {
-    background: var(--amber-glow);
-    color: var(--text-primary);
-  }
-
-  /* ─── Mobile responsive overrides ──────────────────────── */
-  @media (max-width: 768px) {
-    /* How it works — stack phone above steps */
-    .how-grid {
-      grid-template-columns: 1fr;
-    }
-    .phone {
-      order: -1;
-      position: relative;
-      top: auto;
-      justify-self: center;
-    }
-    .phone-screen {
-      width: 260px;
-      height: 540px;
-    }
-
-    /* Nav — shrink brand + CTA */
-    .brand { font-size: 20px; }
-    .brand-orb { width: 24px; height: 24px; }
-    .nav-cta { padding: 8px 14px; }
-
-    /* Section padding — tighten vertical rhythm */
-    .bleed { padding: 22px 0; }
-  }
-
-  @media (max-width: 480px) {
-    /* Hero */
-    .hero h1 { font-size: 32px; }
-    .hero-sub { font-size: 17px; }
-
-    /* Section titles + ledes */
-    .section-title { font-size: 28px; }
-    .section-lede { font-size: 16px; }
-
-    /* Steps — tighter number column + gap */
-    .step {
-      grid-template-columns: 44px 1fr;
-      gap: 14px;
-    }
-    .step-num { font-size: 24px; }
-    .step h4 { font-size: 19px; }
-    .step p { font-size: 14px; }
-
-    /* CTAs stack full-width */
-    .cta-row {
-      flex-direction: column;
-      width: 100%;
-    }
-    .cta-row .btn-primary,
-    .cta-row .btn-ghost {
-      width: 100%;
-      min-height: 44px;
-      justify-content: center;
-      text-align: center;
-    }
-
-    /* Phone screen */
-    .phone-screen {
-      width: 220px;
-      height: 460px;
-    }
-
-    /* Pillars */
-    .pillar h3 { font-size: 20px; }
-    .pillar p { font-size: 14.5px; }
-    .pillar-num { font-size: 20px; margin-bottom: 20px; }
-
-    /* Privacy */
-    .privacy-points p { font-size: 13.5px; }
-    .privacy-points strong { font-size: 15.5px; }
-
-    /* Built by — blockquote */
-    .built blockquote { font-size: 19px; line-height: 1.5; }
-    .attrib { font-size: 13px; }
-
-    /* Final CTA — keep buttons off the edge */
-    .final-cta h2 { font-size: 30px; }
-    .final-cta p { font-size: 17px; }
-    .final-cta .cta-row {
-      padding-left: 16px;
-      padding-right: 16px;
-    }
-
-    /* Footer */
-    .foot-brand { font-size: 20px; }
-    .foot-tag { font-size: 14px; }
-    .foot-col a, .foot-col p { font-size: 13.5px; }
-    .disclaimer { font-size: 12px; }
-    .practice-note { font-size: 12.5px; }
-    .foot-bottom { font-size: 12px; }
-  }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
 
-<!-- Tweaks defaults — edited in place when toolbar Tweaks is active -->
-<script>
-  const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
-    "hero": "literary",
-    "herotint": "off",
-    "serif": "georgia",
-    "accent": "gold",
-    "accents": "gems",
-    "motion": "on"
-  }/*EDITMODE-END*/;
-</script>
-
-<!-- Nav ──────────────────────────────────────────────────── -->
+<!-- ─── Header ─────────────────────────────────────────────── -->
 <header class="nav" id="nav">
   <div class="wrap nav-inner">
-    <a href="#top" class="brand">
+    <a href="/" class="brand" aria-label="Ember home">
       <span class="brand-orb" aria-hidden="true"></span>
-      <span>Ember</span>
+      <span class="brand-name">Ember</span>
     </a>
-    <nav class="nav-links">
-      <a href="#why">Why Ember</a>
-      <a href="#how">How it works</a>
-      <a href="#privacy">Privacy</a>
-      <a href="providers/">For Providers</a>
-      <a href="https://embertracker.app/beta/" class="nav-cta">Join the Beta</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="providers/" class="nav-link">For Providers</a>
+      <a href="beta/" class="nav-cta">Join the Beta</a>
     </nav>
   </div>
 </header>
 
-<!-- HERO ─────────────────────────────────────────────────── -->
-<main id="top">
-<section class="hero">
-  <div class="wrap hero-grid">
-    <div class="hero-copy">
-      <p class="eyebrow">A BETTER MIGRAINE TRACKER</p>
+<main>
 
-      <div class="hero-variant literary">
-        <h1>The day was hard.<br><em>The check-in can be easy.</em></h1>
-      </div>
-      <div class="hero-variant clinical">
-        <h1>A quiet tracker for <em>migraine and headache.</em> Built for the way it actually is.</h1>
-      </div>
-      <div class="hero-variant stanza">
-        <h1>
-          <span class="line">The day was long.</span>
-          <span class="line"><em>The record can be short.</em></span>
-          <span class="line">Ember keeps it.</span>
-        </h1>
-      </div>
-
-      <p class="hero-sub">
-        One quiet evening check-in that takes less than 10 seconds. Built by a headache specialist
-        who gets it.
-        <br><br>
-        <span>Walk into your next visit with a report your provider can actually use.</span>
-      </p>
-
-      <div class="cta-row">
-        <a href="https://embertracker.app/beta/" class="btn-primary">
-          Try Ember free
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-        </a>
-      </div>
-
-      <div class="hero-meta">Free during beta · iPhone</div>
-    </div>
-
-    <div class="hero-orb-wrap" aria-hidden="true">
-      <div class="hero-orb"></div>
-    </div>
-  </div>
-</section>
-
-<!-- WHY EMBER ─────────────────────────────────────────────── -->
-<section class="bleed" id="why">
-  <div class="wrap">
-    <div class="reveal">
-      <div class="section-label" style="font-size: 12px; color: rgb(95, 168, 156)">Why Ember?</div>
-      <h2 class="section-title">The first app that understands what migraine is really like.</h2>
-      <p class="section-lede">
-        Most headache tracker apps annoy you with too many questions or bright
-        screens.
-        <br><br>
-        Ember&rsquo;s guiding philosophy: minimal user input, maximal output.
-      </p>
-    </div>
-
-    <div class="pillars reveal">
-      <article class="pillar gem-violet">
-        <div class="pillar-num">i.</div>
-        <h3>Gentle to use, even on a hard day</h3>
-        <p>
-          Quick enough to do from bed. No long forms, no bright screens.
-        </p>
-      </article>
-      <article class="pillar gem-teal">
-        <div class="pillar-num">ii.</div>
-        <h3 style="color: rgb(172, 211, 203)">You begin to see your own pattern</h3>
-        <p>
-          Ember turns your short check-ins into insights you can actually use.
-        </p>
-      </article>
-      <article class="pillar gem-rose">
-        <div class="pillar-num">iii.</div>
-        <h3 style="color: rgb(211, 180, 194)">Walk into your next visit prepared</h3>
-        <p>
-          Give your provider exactly what they need to know, nothing more or less.
-        </p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- HOW IT WORKS ──────────────────────────────────────────── -->
-<section class="bleed" id="how" style="background: linear-gradient(180deg, transparent, rgba(21,21,21,0.4) 30%, rgba(21,21,21,0.4) 70%, transparent);">
-  <div class="wrap">
-    <div class="reveal">
-      <div class="section-label" style="font-size: 12px; color: rgb(95, 168, 156)">How it works</div>
-      <h2 class="section-title">A check-in, every evening.</h2>
-      <p class="section-lede">
-        Ember makes it easy, fast, and beautiful.
-      </p>
-    </div>
-
-    <div class="how-grid">
-      <div class="steps reveal">
-        <article class="step" data-step="1">
-          <div class="step-num">01</div>
-          <div>
-            <h4>Any head pain today?</h4>
-            <p>Four options: none, mild, moderate, severe. Choose the one that fits.</p>
-          </div>
-        </article>
-        <article class="step" data-step="2">
-          <div class="step-num">02</div>
-          <div>
-            <h4>Symptoms + Meds?</h4>
-            <p>Pick any symptoms you noticed or medications you took. Skip what didn't apply.</p>
-          </div>
-        </article>
-        <article class="step" data-step="3">
-          <div class="step-num">03</div>
-          <div>
-            <h4>Ember takes it from there</h4>
-            <p>Your check-in becomes part of your calendar and your report.</p>
-          </div>
-        </article>
-      </div>
-
-      <div class="phone reveal" aria-hidden="true">
-        <div class="phone-screen" id="phoneScreen">
-          <img src="assets/daily-entry-screenshot.jpg" alt="" class="phone-screenshot">
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PRIVACY ───────────────────────────────────────────────── -->
-<section class="bleed privacy-band" id="privacy">
-  <div class="wrap reveal">
-    <div class="privacy-mark" aria-hidden="true">
-      <svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6l7-3z"/><path d="M9 12l2.2 2.2L15 10.6"/></svg>
-    </div>
-    <div class="section-label" style="text-align: center; color: rgb(95, 168, 156); font-size: 12px">Privacy</div>
-    <h2 class="section-title" style="text-align:center; margin-inline:auto">Your data stays on your iPhone.</h2>
-    <p class="section-lede" style="text-align:center; margin-inline:auto">
-      What you track is personal. Ember is built to keep it that way.
+<!-- ─── Hero (centered, with oversized phone below CTA) ─── -->
+<section class="hero hero--center">
+  <div class="wrap hero-center">
+    <h1>A <em style="color: rgb(225, 177, 117); font-style: normal;">better</em> migraine tracker for iPhone.</h1>
+    <p class="hero-sub">
+      Dark, quiet, and fast. Log your day in under a minute.
+      The summary it produces is one your provider can actually use.
     </p>
-    <div class="privacy-points">
-      <p><strong>Health data never leaves your device</strong>Your check-ins, symptoms, medications, and reports stay on your device.</p>
-      <p><strong>Only your Apple ID is used to login.</strong>We use it to keep your account in good standing. That is all we see.</p>
-      <p><strong>You choose what to share</strong>When you are ready, export your data to bring to your provider.</p>
-    </div>
-  </div>
-</section>
 
-<!-- BUILT BY ──────────────────────────────────────────────── -->
-<section class="bleed">
-  <div class="wrap built reveal">
-    <div>
-      <div class="section-label" style="font-size: 12px; color: rgb(95, 168, 156)">Built by a headache specialist</div>
-      <blockquote>
-        &ldquo;I built Ember for the patient with brain fog who has a hard
-        time communicating about their symptoms. For the one with ADHD who
-        can&rsquo;t keep track of their headaches consistently or who loses
-        their paper calendar. And the ones who don&rsquo;t know how to
-        differentiate between headaches and migraines.
-        <br><br>
-        And for myself&mdash;As a person living with migraine disease, I
-        wanted something that was actually useful, something I&rsquo;d truly
-        enjoy using. Something that gave me actionable information from
-        minimal interaction. Let&rsquo;s face it&mdash;we could all use less
-        screen time!
-        <br><br>
-        After every existing migraine tracking app left me wanting something
-        better, I decided to build a better one myself.&rdquo;
-      </blockquote>
-      <div class="attrib">
-        <strong>Dr. Sam Urkov, DNP, FNP-C</strong>
-        Headache Specialist Nurse Practitioner
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FINAL CTA ─────────────────────────────────────────────── -->
-<section class="final-cta" id="beta">
-  <div class="wrap reveal">
-    <h2>Start today</h2>
-    <p>The TestFlight beta is open!</p>
-    <div class="cta-row">
-      <a href="https://embertracker.app/beta/" class="btn-primary">
-        Join the TestFlight beta
+    <div class="cta-row cta-row--center">
+      <a href="beta/" class="btn-primary">
+        Join the Beta
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </a>
-      <a href="/cdn-cgi/l/email-protection#8de5e8e1e1e2cdeeecfeeeece9e8e5e8ece9eceee5e8a3eee2e0" class="btn-ghost">Get in touch</a>
     </div>
-    <p style="font-family: var(--sans); font-size: 12.5px; color: var(--hint); letter-spacing: 0.3px; margin: 28px auto 0; max-width: 46ch; line-height: 1.6;">
-      Price should never keep anyone from tracking their migraines. If cost is a barrier, <a href="/cdn-cgi/l/email-protection#640c0108080b24070517070500010c01050005070c014a070b095b1711060e01071059210906011641565437070c0b080516170c0d1441565436011511011710" style="color: var(--accent); border-bottom: 1px solid rgba(196,181,160,0.3); transition: color .2s, border-color .2s;">email us</a>.
+    <p class="cta-caption cta-caption--center">60 days free. Then $4.99/month.</p>
+
+    <div class="hero-anchor" aria-hidden="true">
+      <div class="phone-frame phone-frame--xl">
+        <img src="assets/screens/daily-entry.jpg" alt="" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── §1  Designed for migraine ──────────────────────── -->
+<section class="feat">
+  <div class="wrap feat-grid">
+    <div class="feat-copy">
+      <h2 class="feat-title"><span style="color: rgb(225, 177, 121);">Designed for migraine.</span>
+<span style="display: block;">By a headache specialist who also gets them.</span></h2>
+      <p class="feat-body">
+        Pure black. Warm type. Low contrast. Comfortable in a dark
+        room with the lights off.
+      </p>
+    </div>
+    <div class="feat-phone">
+      <div class="phone-frame">
+        <img src="assets/screens/daily-full.jpg" alt="Daily entry screen" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── §2  Tap a few things → report ──────────────────── -->
+<section class="feat">
+  <div class="wrap feat-grid">
+    <div class="feat-copy">
+      <h2 class="feat-title">
+        Tap a few things.<br>Get something worth showing your provider.
+      </h2>
+      <p class="feat-body">
+        Three months of patterns at a glance. Frequency, severity,
+        how your treatments are working. A clean report you can hand
+        over or send through your patient portal.
+      </p>
+    </div>
+    <div class="feat-phone">
+      <!-- Cropped chart-note: shown as a document, not a phone -->
+      <div class="doc-crop">
+        <img src="assets/screens/chart-note.jpg" alt="Top of a chart-note summary, reading like a clinical document" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── §3  Your data stays on your phone (centered band) ─ -->
+<section class="band band--tight">
+  <div class="wrap band-inner">
+    <h2 class="feat-title">Your data stays on your phone.</h2>
+    <p class="feat-body band-body">
+      Nothing leaves your device unless you send it.<br>
+      No cloud. No company watching you log.
     </p>
   </div>
 </section>
+
+<!-- ─── Closing ────────────────────────────────────────── -->
+<section class="closing">
+  <div class="wrap closing-inner">
+    <p class="closing-quote">
+      We tried every migraine tracker out there. None of them
+      worked the way we wanted.
+    </p>
+    <p class="closing-quote closing-quote--last" style="color: rgb(226, 179, 121)">So we built Ember.</p>
+
+    <div class="cta-row cta-row--center">
+      <a href="beta/" class="btn-primary">
+        Join the Beta
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <p class="cta-caption cta-caption--center">
+      60 days free. Then $4.99/month.<br>
+      If cost is a barrier,
+      <a href="mailto:hello@cascadeheadache.com?subject=Ember">email us</a>.
+    </p>
+  </div>
+</section>
+
 </main>
 
-<!-- FOOTER ────────────────────────────────────────────────── -->
-<footer>
-  <div class="wrap">
-    <div class="foot-top">
-      <div class="foot-col">
-        <div class="foot-brand">
-          <span class="brand-orb" aria-hidden="true"></span>
-          <span>Ember</span>
-        </div>
-        <p class="foot-tag">A migraine and headache tracker for iPhone.</p>
+<!-- ─── Footer ─────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <div class="brand">
+        <span class="brand-orb" aria-hidden="true"></span>
+        <span class="brand-name">Ember</span>
       </div>
-      <div class="foot-col">
-        <h5>Product</h5>
-        <a href="#why">Why Ember</a>
-        <a href="#how">How it works</a>
-        <a href="#privacy">Privacy</a>
-        <a href="providers/">For Providers</a>
-      </div>
-      <div class="foot-col">
-        <h5>Company</h5>
-        <a href="/cdn-cgi/l/email-protection#d6beb3babab996b5b7a5b5b7b2b3beb3b7b2b7b5beb3f8b5b9bb"><span class="__cf_email__" data-cfemail="9bf3fef7f7f4dbf8fae8f8fafffef3fefafffaf8f3feb5f8f4f6">[email&#160;protected]</span></a>
-        <a href="https://www.cascadeheadache.com" target="_blank" rel="noopener">Cascade Headache</a>
-        <a href="privacy/">Privacy Policy</a>
-        <a href="terms/">Terms of Service</a>
-      </div>
+      <p class="footer-tag">A better migraine and headache tracker for iPhone.</p>
     </div>
-
-    <p class="practice-note">
-      Dr. Urkov practices at Cascade Headache in the Pacific Northwest.
-      If you are in Washington or Oregon and are looking for a headache specialist,
-      you can learn more at <a href="https://www.cascadeheadache.com" target="_blank" rel="noopener">cascadeheadache.com</a>.
-    </p>
-
-    <p class="disclaimer">
-      Ember is an informational tool to help you track your experience and prepare
-      for visits with your healthcare provider. It is not a medical device and does
-      not diagnose, treat, cure, or prevent any condition. Ember is not a substitute
-      for professional medical care. If you are experiencing a medical emergency,
-      call your local emergency number. Always consult your healthcare provider
-      about symptoms, medications, and treatment decisions.
-    </p>
-
-    <div class="foot-bottom">
-      <span>© 2026 Cascade Headache, LLC</span>
-      <span>embertracker.app</span>
+    <nav class="footer-links" aria-label="Footer">
+      <a href="/">Why Ember</a>
+      <a href="providers/">For Providers</a>
+      <a href="privacy/">Privacy</a>
+      <a href="terms/">Terms</a>
+    </nav>
+    <div class="footer-meta">
+      <a href="mailto:hello@cascadeheadache.com">hello@cascadeheadache.com</a>
+      <span>Cascade Headache</span>
     </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>© 2026 Cascade Headache, LLC</span>
+    <span>embertracker.app</span>
   </div>
 </footer>
 
-<!-- Tweaks panel ──────────────────────────────────────────── -->
-<aside id="tweaks" aria-label="Tweaks">
-  <h6>Tweaks</h6>
-  <div class="t-row">
-    <label>Hero variant</label>
-    <div class="seg" data-key="hero">
-      <button data-val="literary">Literary</button>
-      <button data-val="clinical">Clinical</button>
-      <button data-val="stanza">Stanza</button>
-    </div>
-  </div>
-  <div class="t-row">
-    <label>Hero tint</label>
-    <div class="seg" data-key="herotint">
-      <button data-val="off">Cream</button>
-      <button data-val="blue">Blue</button>
-    </div>
-  </div>
-  <div class="t-row">
-    <label>Display serif</label>
-    <div class="seg" data-key="serif">
-      <button data-val="cormorant">Cormorant</button>
-      <button data-val="georgia">Georgia</button>
-    </div>
-  </div>
-  <div class="t-row">
-    <label>Accent</label>
-    <div class="seg" data-key="accent">
-      <button data-val="gold">Muted gold</button>
-      <button data-val="amber">Saturated amber</button>
-    </div>
-  </div>
-  <div class="t-row">
-    <label>Gemstone accents</label>
-    <div class="seg" data-key="accents">
-      <button data-val="none">Off</button>
-      <button data-val="gems">On</button>
-    </div>
-  </div>
-  <div class="t-row">
-    <label>Breathing motion</label>
-    <div class="seg" data-key="motion">
-      <button data-val="on">On</button>
-      <button data-val="off">Off</button>
-    </div>
-  </div>
-</aside>
-
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  /* ─── Apply saved/initial tweak state ───────────────────── */
-  const TWEAK_KEYS = ["hero", "herotint", "serif", "accent", "accents", "motion"];
-  function applyTweaks(state) {
-    TWEAK_KEYS.forEach(k => document.documentElement.setAttribute("data-" + k, state[k]));
-    document.querySelectorAll("#tweaks .seg").forEach(seg => {
-      const key = seg.dataset.key;
-      seg.querySelectorAll("button").forEach(b => {
-        b.setAttribute("aria-pressed", String(b.dataset.val === state[key]));
-      });
-    });
-    const big = document.getElementById("phoneBig");
-    if (big) big.textContent = state.hero === "clinical" ? "Daily Entry" : "Any head pain today?";
-  }
-  let tweakState = { ...TWEAK_DEFAULTS };
-  try {
-    const saved = JSON.parse(localStorage.getItem("ember_tweaks") || "null");
-    if (saved) tweakState = { ...tweakState, ...saved };
-  } catch(_) {}
-  applyTweaks(tweakState);
-
-  /* ─── Tweaks panel wiring + edit-mode protocol ─────────── */
-  const panel = document.getElementById("tweaks");
-  function setTweak(key, val) {
-    tweakState = { ...tweakState, [key]: val };
-    applyTweaks(tweakState);
-    try { localStorage.setItem("ember_tweaks", JSON.stringify(tweakState)); } catch(_) {}
-    try {
-      window.parent.postMessage({ type: "__edit_mode_set_keys", edits: { [key]: val } }, "*");
-    } catch(_) {}
-  }
-  document.querySelectorAll("#tweaks .seg").forEach(seg => {
-    const key = seg.dataset.key;
-    seg.addEventListener("click", e => {
-      const btn = e.target.closest("button");
-      if (!btn) return;
-      setTweak(key, btn.dataset.val);
-    });
-  });
-
-  window.addEventListener("message", e => {
-    const d = e.data || {};
-    if (d.type === "__activate_edit_mode")   panel.classList.add("open");
-    if (d.type === "__deactivate_edit_mode") panel.classList.remove("open");
-  });
-  try { window.parent.postMessage({ type: "__edit_mode_available" }, "*"); } catch(_) {}
-
-  /* ─── Nav background on scroll ─────────────────────────── */
-  const nav = document.getElementById("nav");
-  const onScroll = () => {
-    if (window.scrollY > 12) nav.classList.add("scrolled");
-    else nav.classList.remove("scrolled");
-  };
-  window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
-
-  /* ─── Reveal on scroll ─────────────────────────────────── */
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("in");
-        io.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12, rootMargin: "0px 0px -60px 0px" });
-  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
-
-  /* ─── Steps "active" highlight on scroll ─────────────────
-     (Disabled — all steps render fully bright. Kept observer stub
-     in case we reintroduce a phone-sync element later.) */
-
-  /* ─── Smooth scroll for in-page links ──────────────────── */
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener("click", e => {
-      const id = a.getAttribute("href").slice(1);
-      if (!id) return;
-      const target = document.getElementById(id);
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    });
-  });
-</script>
-
+<script src="assets/site.js"></script>
 </body>
 </html>
