@@ -1116,3 +1116,110 @@ body::before {
 .hero--prov::after {
   display: none !important;
 }
+/* ─── Scope section — visual upgrade ──────────────────────── */
+
+.band--scope {
+  position: relative;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 0%, rgba(232, 165, 71, 0.04), transparent 70%),
+    linear-gradient(180deg, transparent, rgba(21, 21, 21, 0.4) 30%, rgba(21, 21, 21, 0.4) 70%, transparent);
+}
+
+.band--scope::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(180deg, transparent, rgba(196, 181, 160, 0.3));
+}
+
+.scope-lede {
+  margin-bottom: 12px !important;
+}
+
+.scope-lede-emphasis {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(20px, 1.8vw, 24px);
+  font-style: italic;
+  text-align: center;
+  color: #e8d8b8;
+  margin: 0 auto 56px;
+  max-width: 36ch;
+  letter-spacing: 0.01em;
+}
+
+.scope-grid {
+  position: relative;
+}
+
+/* "Ember does" column — warm gold treatment */
+.scope-col--does .scope-tag {
+  color: #c4b5a0;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.scope-col--does .scope-tag::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #c4b5a0;
+  box-shadow: 0 0 12px rgba(196, 181, 160, 0.6);
+}
+
+.scope-col--does .scope-list li {
+  color: #d8c8b0;
+  padding-left: 26px;
+}
+
+.scope-col--does .scope-list li::before {
+  width: 14px;
+  background: linear-gradient(to right, #c4b5a0, transparent);
+  top: 22px;
+}
+
+/* "Ember doesn't" column — muted slate treatment */
+.scope-col--doesnt .scope-tag--quiet {
+  color: #6e7880;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.scope-col--doesnt .scope-tag--quiet::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4a5560;
+  border: 1px solid #6e7880;
+}
+
+.scope-col--doesnt .scope-list--quiet li {
+  color: #7a7570;
+  padding-left: 26px;
+  font-style: italic;
+}
+
+.scope-col--doesnt .scope-list--quiet li::before {
+  width: 14px;
+  background: #4a5560;
+  top: 22px;
+  opacity: 0.6;
+}
+
+/* Divider — gradient fade instead of flat line */
+.scope-divider {
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(232, 230, 227, 0.12) 20%,
+    rgba(232, 230, 227, 0.12) 80%,
+    transparent
+  ) !important;
+}
