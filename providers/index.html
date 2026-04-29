@@ -3,19 +3,16 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Ember for Providers — A migraine tracker built around how you document</title>
-<meta name="description" content="Your patient logs symptoms in the evening. Ember produces a clean patient summary they can hand you before the visit — or send through their portal." />
+<title>Ember for Providers — A patient history, ready before the visit</title>
+<meta name="description" content="Patients log on their own time. Ember turns ninety days of entries into a prepped chart note before the visit starts." />
 <meta name="theme-color" content="#0a0a0a" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/site.css">
-<style>
-  /* providers-page only: keep brand-orb path resolving from /providers/ */
-  .brand-orb { background-image: url("../assets/ember-orb.png"); }
-</style>
+<noscript><style>.reveal{opacity:1!important;transform:none!important;}</style></noscript>
 </head>
-<body>
+<body class="prov">
 
 <!-- ─── Header ─────────────────────────────────────────────── -->
 <header class="nav" id="nav">
@@ -35,37 +32,30 @@
 
 <main>
 
-<!-- ─── Hero (centered, mirrors patient hero) ──────────────── -->
+<!-- ─── Hero ──────────────────────────────────────────────── -->
 <section class="hero hero--center hero--prov">
   <div class="wrap hero-center">
-    <p class="eyebrow">For headache providers</p>
-    <h1>A migraine tracker built around how you document.</h1>
-    <p class="hero-sub">
-      Your patient logs symptoms in the evening. Ember produces a
-      clean patient summary they can hand you before the visit —
-      or send through their portal.
+    <p class="eyebrow reveal">For clinicians</p>
+    <h1 class="reveal reveal--d1">Their update, ready <span class="text-accent">before</span> the visit.</h1>
+    <p class="hero-sub reveal reveal--d2">
+      Patients log on their own time. Ember organizes those entries
+      into a prepped chart note &mdash; so the visit starts already
+      informed.
     </p>
 
-    <div class="cta-row cta-row--center">
-      <a href="../beta/" class="btn-primary">Join the Beta</a>
-      <a href="mailto:hello@cascadeheadache.com?subject=Ember%20—%20Provider%20interest" class="btn-primary btn-primary--quiet">Get in touch</a>
-    </div>
-
-    <!-- Document-as-document anchor: HTML chart note. Renders
-         crisp at any size; scales down responsively. -->
-    <div class="hero-anchor" aria-hidden="true">
-      <div class="chart-note">
+    <div class="hero-anchor reveal reveal--d3" aria-hidden="true">
+      <div class="chart-note chart-note--hero">
         <div class="chart-note__chrome">
           <span class="chart-note__lights">
             <span class="cn-light cn-light--r"></span>
             <span class="cn-light cn-light--y"></span>
             <span class="cn-light cn-light--g"></span>
           </span>
-          <span class="chart-note__title">Provider Chart Note</span>
+          <span class="chart-note__title">chart note · apr 14 2026</span>
         </div>
         <div class="chart-note__body">
 <pre class="chart-note__pre"><span class="cn-h">HEADACHE DIARY SUMMARY</span>
-Jan 15 – Apr 14, 2026 (90 days)  <span class="cn-em">87% reporting compliance — HIGH DATA CONFIDENCE</span>
+Jan 15 – Apr 14, 2026 (90 days)  <span class="cn-em">87% reporting compliance</span>
 
 <span class="cn-h">FREQUENCY</span>
   Migraine days:    <span class="cn-v">18/mo → 7/mo</span>    <span class="cn-g">(61% reduction)</span>
@@ -75,9 +65,9 @@ Jan 15 – Apr 14, 2026 (90 days)  <span class="cn-em">87% reporting compliance 
   MIDAS:            <span class="cn-v">42 → 18</span>         <span class="cn-t">(Grade IV → III)</span>
 
 <span class="cn-h">ACUTE MEDICATION USE</span>
-  Triptans:         <span class="cn-v">4 days/mo</span> <span class="cn-em">(limit 8)</span>
-  NSAIDs:           <span class="cn-v">3 days/mo</span> <span class="cn-em">(limit 12)</span>
-  Gepants:          <span class="cn-v">6 days/mo</span> <span class="cn-em">(no limit)</span>
+  Triptans:         <span class="cn-v">4 days/mo</span> <span class="cn-em">(within threshold)</span>
+  NSAIDs:           <span class="cn-v">3 days/mo</span> <span class="cn-em">(within threshold)</span>
+  Gepants:          <span class="cn-v">6 days/mo</span>
 
 <span class="cn-h">BOTOX INTERVAL</span>
   Last injection:   Jan 20, 2026
@@ -108,193 +98,285 @@ Comparing reported baseline to current state on both preventives:
   Avg severity:     <span class="cn-v">8.5 → 4.1/10</span> <span class="cn-g">(52% reduction)</span></pre>
         </div>
       </div>
+      <p class="chart-note-caption">Sample chart note. Data anonymized.</p>
     </div>
   </div>
 </section>
 
-<!-- ─── §1  Patients log symptoms, not classifications ─────── -->
-<section class="feat feat--tight">
+<!-- ─── §1  Symptoms in. Migraine day out. ─────────────────── -->
+<section class="feat feat--full">
+  <div class="wrap">
+    <div class="feat-copy feat-copy--center">
+      <h2 class="feat-title reveal"><span class="text-accent">Symptoms</span> in. Classification out.</h2>
+      <p class="feat-body reveal reveal--d1">
+        Patients don&rsquo;t need to know what counts as a migraine.
+        Ember asks about symptoms, impact, and medication; the
+        ICHD&#8209;3 classification is automatic, and quietly
+        explained over time, so they start to recognize it themselves.
+      </p>
+    </div>
+
+    <div class="engine-viz reveal reveal--d2">
+      <div class="engine-viz__phone">
+        <div class="phone-frame phone-frame--video">
+          <div class="phone-scroll">
+            <video class="phone-video"
+                   autoplay muted loop playsinline preload="auto"
+                   poster="../assets/screens/daily-full.jpg"
+                   aria-label="Patient making a daily entry in Ember">
+              <source src="../assets/screens/daily-entry-recording.mp4" type="video/mp4">
+              <img src="../assets/screens/daily-full.jpg" alt="Patient daily-entry screen" />
+            </video>
+            <span class="phone-purple-pulse" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="engine-viz__content">
+        <div class="machine" aria-hidden="true">
+          <svg class="machine__svg" viewBox="0 0 520 410" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <linearGradient id="outGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%"  stop-color="rgba(232,165,71,0.85)"/>
+                <stop offset="100%" stop-color="rgba(167,139,250,0.95)"/>
+              </linearGradient>
+            </defs>
+
+            <!-- ── Input tubes (labels at left → engine left wall at x=180) ── -->
+            <g class="machine__tubes">
+              <path class="machine__tube" d="M 110 30  C 150 30, 160 100, 180 100" />
+              <path class="machine__tube" d="M 110 95  C 150 95, 160 130, 180 130" />
+              <path class="machine__tube" d="M 110 160 L 180 160" />
+              <path class="machine__tube" d="M 110 225 C 150 225, 160 195, 180 195" />
+              <path class="machine__tube" d="M 110 290 C 150 290, 160 230, 180 230" />
+            </g>
+
+            <!-- Tube labels — perfectly aligned with tube starts -->
+            <g class="machine__labels">
+              <text class="machine__label" x="2" y="30"  dominant-baseline="middle">HEAD PAIN · MOD</text>
+              <text class="machine__label" x="2" y="95"  dominant-baseline="middle">NECK PAIN</text>
+              <text class="machine__label" x="2" y="160" dominant-baseline="middle">NAUSEA · BRAIN FOG</text>
+              <text class="machine__label" x="2" y="225" dominant-baseline="middle">RELPAX (TRIPTAN)</text>
+              <text class="machine__label" x="2" y="290" dominant-baseline="middle">IMPACT · SEVERE</text>
+            </g>
+
+            <!-- ── Engine casing (180..420) ── -->
+            <g class="machine__engine">
+              <rect class="machine__casing" x="180" y="60" width="240" height="220" rx="14"/>
+              <!-- Vent slits top -->
+              <g class="machine__vents">
+                <rect x="208" y="68" width="38" height="3" rx="1"/>
+                <rect x="252" y="68" width="38" height="3" rx="1"/>
+                <rect x="296" y="68" width="38" height="3" rx="1"/>
+                <rect x="340" y="68" width="38" height="3" rx="1"/>
+              </g>
+
+              <!-- Half-circle pressure gauge (no longer clock-like) -->
+              <g class="machine__gauge" transform="translate(232 154)">
+                <path class="machine__gauge-bg" d="M -34 0 A 34 34 0 0 1 34 0 L 34 6 L -34 6 Z"/>
+                <path class="machine__gauge-rim" d="M -34 0 A 34 34 0 0 1 34 0" fill="none"/>
+                <!-- Cool blue zone (left third) -->
+                <path class="machine__gauge-zone-cool" d="M -34 0 A 34 34 0 0 1 -10 -32.5" fill="none"/>
+                <!-- Warm gold zone (right two-thirds) -->
+                <path class="machine__gauge-zone-warm" d="M -10 -32.5 A 34 34 0 0 1 34 0" fill="none"/>
+                <!-- Tick marks on the arc -->
+                <g class="machine__ticks">
+                  <line x1="-32" y1="0"   x2="-28" y2="0"/>
+                  <line x1="-24" y1="-24" x2="-21" y2="-21"/>
+                  <line x1="0"   y1="-32" x2="0"   y2="-28"/>
+                  <line x1="24"  y1="-24" x2="21"  y2="-21"/>
+                  <line x1="32"  y1="0"   x2="28"  y2="0"/>
+                </g>
+                <!-- Needle pivots from base center -->
+                <line class="machine__needle" x1="0" y1="0" x2="0" y2="-28"/>
+                <circle class="machine__needle-cap" cx="0" cy="0" r="4"/>
+                <text class="machine__gauge-label" x="0" y="20" text-anchor="middle">PROCESSING</text>
+              </g>
+
+              <!-- LEDs (mixed colors for visual variety) -->
+              <g class="machine__leds">
+                <circle class="machine__led machine__led--green" cx="332" cy="118" r="5"/>
+                <circle class="machine__led machine__led--gold"  cx="354" cy="118" r="5"/>
+                <circle class="machine__led machine__led--gold"  cx="376" cy="118" r="5"/>
+                <circle class="machine__led machine__led--teal"  cx="398" cy="118" r="5"/>
+              </g>
+
+              <!-- Pistons -->
+              <g class="machine__pistons">
+                <g class="machine__piston">
+                  <rect class="machine__piston-shaft" x="324" y="170" width="14" height="58" rx="3"/>
+                  <rect class="machine__piston-head"  x="320" y="160" width="22" height="14" rx="3"/>
+                </g>
+                <g class="machine__piston">
+                  <rect class="machine__piston-shaft" x="350" y="170" width="14" height="58" rx="3"/>
+                  <rect class="machine__piston-head"  x="346" y="160" width="22" height="14" rx="3"/>
+                </g>
+                <g class="machine__piston">
+                  <rect class="machine__piston-shaft" x="376" y="170" width="14" height="58" rx="3"/>
+                  <rect class="machine__piston-head"  x="372" y="160" width="22" height="14" rx="3"/>
+                </g>
+              </g>
+
+              <!-- Ember Logic Engine nameplate -->
+              <g class="machine__plate" transform="translate(300 254)">
+                <rect x="-86" y="-14" width="172" height="26" rx="6"/>
+                <text class="machine__plate-title" x="0" y="2" text-anchor="middle" dominant-baseline="middle">
+                  <tspan class="machine__plate-letter">E</tspan><tspan class="machine__plate-letter">M</tspan><tspan class="machine__plate-letter">B</tspan><tspan class="machine__plate-letter">E</tspan><tspan class="machine__plate-letter">R</tspan><tspan class="machine__plate-letter"> </tspan><tspan class="machine__plate-letter">L</tspan><tspan class="machine__plate-letter">O</tspan><tspan class="machine__plate-letter">G</tspan><tspan class="machine__plate-letter">I</tspan><tspan class="machine__plate-letter">C</tspan><tspan class="machine__plate-letter"> </tspan><tspan class="machine__plate-letter">E</tspan><tspan class="machine__plate-letter">N</tspan><tspan class="machine__plate-letter">G</tspan><tspan class="machine__plate-letter">I</tspan><tspan class="machine__plate-letter">N</tspan><tspan class="machine__plate-letter">E</tspan>
+                </text>
+              </g>
+            </g>
+
+            <!-- ── Output tube — exits engine bottom-center, goes DOWN to badge ── -->
+            <path class="machine__out-tube" d="M 300 280 L 300 380"/>
+            <polygon class="machine__out-arrow" points="300,402 282,374 318,374"/>
+          </svg>
+        </div>
+
+        <div class="engine-output" aria-hidden="true">Migraine day</div>
+      </div>
+    </div>
+
+    <p class="ai-note reveal reveal--d3">
+      <span class="ai-note__dot" aria-hidden="true"></span>
+      <strong>No AI inside.</strong>
+      All logic is hard-coded to published guidelines and studies &mdash; fully auditable.
+      <a href="../references/">See references</a>.
+    </p>
+  </div>
+</section>
+
+<!-- ─── §2  Each treatment, alone and combined ─────────────── -->
+<section class="feat">
   <div class="wrap feat-grid">
     <div class="feat-copy">
-      <h2 class="feat-title"><span style="color: rgb(225, 177, 121);">Symptoms</span>, not classifications.</h2>
-      <p class="feat-body">
-        Patients can&rsquo;t always distinguish a headache from a migraine.
-        So Ember doesn&rsquo;t ask them to. Each day is classified using
-        ICHD&#8209;3 criteria from logged symptoms and medications.
+      <h2 class="feat-title reveal">Each treatment, <span class="text-accent">alone and combined</span>.</h2>
+      <p class="feat-body reveal reveal--d1">
+        When patients are on overlapping preventives, Ember tracks
+        each medication&rsquo;s contribution and the combined effect.
+        Botox alone might be a 40% reduction. A CGRP alone, 40%.
+        Together &mdash; 78%.
       </p>
-      <p class="feat-body">
-        The patient sees plain language.<br>
-        <span style="color: rgb(227, 179, 119);">You get real data.</span>
+      <p class="feat-body reveal reveal--d2">
+        Ember reports the numbers cleanly, so the case for
+        continuing therapy is easier to make. The continuation
+        decisions are yours.
       </p>
     </div>
-    <div class="feat-phone">
+    <div class="feat-phone reveal reveal--d2">
       <div class="phone-frame">
-        <img src="../assets/screens/daily-full.jpg" alt="Daily entry showing symptoms, medications and impact" />
+        <img src="../assets/screens/treatment-story.jpg" alt="Treatment-story chart showing each medication's contribution and the combined response" />
       </div>
     </div>
   </div>
 </section>
 
-<!-- ─── §2  Built for documentation ────────────────────────── -->
-<section class="feat feat--tight feat--full">
-  <div class="wrap">
-    <div class="feat-copy" style="text-align: center; max-width: 56ch; margin: 0 auto 48px;">
-      <h2 class="feat-title">Built for documentation</h2>
-      <p class="feat-body">
-        Ember's Chart Note is clinical output, ready to paste into
-        your EHR. Migraine days and headache days split the way that
-        makes sense to a specialist and that payers like to see for
-        prior auth's: Frequency, severity, disability, medication
-        usage, treatment response.
-      </p>
-      <p class="feat-body">
-        Designed around the rolling window most insurers require for
-        prior authorization review.
-      </p>
-    </div>
-    <div style="display: flex; justify-content: center;">
-      <div class="phone-frame">
-        <img src="../assets/screens/chart-note.jpg" alt="Structured chart note ready for EHR" />
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ─── §3  See what each treatment is doing ──────────────── -->
-<section class="feat feat--tight feat--reverse">
+<!-- ─── §3  Overuse, watched gently ────────────────────────── -->
+<section class="feat feat--reverse">
   <div class="wrap feat-grid">
     <div class="feat-copy">
-      <h2 class="feat-title">See what each treatment is doing</h2>
-      <p class="feat-body">
-        When patients are on overlapping preventives, Ember separates
-        each medication&rsquo;s contribution to the patient&rsquo;s response.
-        If a patient adds Botox to an existing CGRP regimen, you can
-        see what each is actually doing, not the combined improvement
-        credited to whichever was started last.
+      <h2 class="feat-title reveal">Overuse, <span class="text-accent">watched gently</span>.</h2>
+      <p class="feat-body reveal reveal--d1">
+        Ember tracks acute medication use against overuse thresholds
+        and offers nonjudgmental nudges as patients approach the
+        limits. The nudges are easy to turn off.
       </p>
     </div>
-    <div class="feat-phone">
+    <div class="feat-phone reveal reveal--d2">
       <div class="phone-frame">
-        <img src="../assets/screens/treatment-story.jpg" alt="Treatment story chart separating each medication's contribution" />
+        <img src="../assets/screens/acute-meds.jpg" alt="Acute medication usage tracking" />
       </div>
     </div>
   </div>
 </section>
 
-<!-- ─── §4  Rebound monitoring ────────────────────────────── -->
-<section class="feat feat--tight feat--full">
-  <div class="wrap">
-    <div class="feat-copy" style="text-align: center; max-width: 52ch; margin: 0 auto 32px;">
-      <h2 class="feat-title">Rebound monitoring, built in.</h2>
-      <p class="feat-body">
-        Acute medication use is tracked against <strong>ICHD-3</strong>
-        overuse thresholds. Patients see warnings as they approach
-        limits — and know to bring it up at their visit.
-      </p>
-    </div>
-    <div style="display: flex; justify-content: center;">
-      <div class="phone-frame" style="max-width: 280px;">
-        <img src="../assets/screens/acute-meds.jpg" alt="Acute medication usage tracking with thresholds" />
-      </div>
-    </div>
+<!-- ─── Quiet band — scope + privacy in one breath ────────── -->
+<section class="band band--tight">
+  <div class="wrap band-inner">
+    <h2 class="feat-title reveal">Reports what they logged. <span class="text-accent">Nothing more.</span></h2>
+    <p class="feat-body band-body reveal reveal--d1">
+      Ember structures data; it doesn&rsquo;t interpret it.
+      The patient&rsquo;s logs stay on their phone &mdash; we never
+      see them. The clinical decisions remain yours.
+    </p>
+    <p class="band-aside reveal reveal--d2">
+      <a href="../references/">Read the clinical references</a>
+      &nbsp;·&nbsp;
+      <a href="#contact">Audit it with us</a>
+    </p>
   </div>
 </section>
 
-<!-- ─── §5  Documentation tool, not decision support ──────── -->
-<section class="band band--scope">
-  <div class="wrap scope-inner">
-    <p class="eyebrow eyebrow--center">A note on scope</p>
-    <h2 class="feat-title scope-title">A documentation tool.<br>Not a decision&#8209;support tool.</h2>
-<p class="feat-body scope-lede">
-      Ember reports what the patient logged, with structure.
-    </p>
-<p class="scope-lede-emphasis">
-      The clinical calls are still yours.
+<!-- ─── Contact form ─────────────────────────────────────── -->
+<section class="contact-section" id="contact">
+  <div class="wrap contact-inner">
+    <h2 class="feat-title reveal">Have a question? <span class="text-accent">Found something off?</span></h2>
+    <p class="feat-body reveal reveal--d1">
+      We&rsquo;re a small team. We answer. Specialists are welcome
+      to poke around &mdash; tap the version line in Profile seven
+      times to flip between your data and the bundled demo data.
     </p>
 
-    <div class="scope-grid" role="presentation">
-      <div class="scope-col scope-col--does">
-        <span class="scope-tag">Ember does</span>
-        <ul class="scope-list">
-          <li>Classifies each day against ICHD&#8209;3 from logged symptoms</li>
-          <li>Splits migraine days, headache days, MIDAS, severity</li>
-          <li>Tracks acute medication use against overuse thresholds</li>
-          <li>Separates each preventive&rsquo;s contribution to response</li>
-        </ul>
-      </div>
-      <div class="scope-divider" aria-hidden="true"></div>
-      <div class="scope-col scope-col--doesnt">
-        <span class="scope-tag scope-tag--quiet">Ember doesn&rsquo;t</span>
-        <ul class="scope-list scope-list--quiet">
-          <li>Recommend or change treatment</li>
-          <li>Flag drug interactions</li>
-          <li>Decide what counts as a rebound headache</li>
-          <li>Replace your clinical judgment, ever</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
+    <!--
+      Form delivery: posts to FormSubmit, which forwards to hello@cascadeheadache.com.
+      First-time setup: the very first submission triggers a confirmation email
+      to that address. Click the link in that email once and the form is live.
+    -->
+    <form class="form-card reveal reveal--d2"
+          action="https://formsubmit.co/hello@cascadeheadache.com"
+          method="POST"
+          data-contact-form
+          novalidate>
 
-<!-- ─── §6  Local-only architecture ───────────────────────── -->
-<section class="band band--arch">
-  <div class="wrap arch-inner">
-    <p class="eyebrow eyebrow--center">Local-only architecture</p>
-    <h2 class="feat-title arch-title">All patient data stays on the patient&rsquo;s device.</h2>
-    <p class="feat-body arch-lede">
-      Ember has no backend that stores PHI. Patients share their
-      summaries through whatever channel they choose &mdash; patient
-      portal, email, print.
-    </p>
+      <div class="form-row">
+        <label class="form-label" for="contact-name">Name</label>
+        <input class="input" id="contact-name" name="name" type="text" autocomplete="name" required />
+      </div>
 
-    <div class="arch-diagram" aria-hidden="true">
-      <div class="arch-node arch-node--phone">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/></svg>
-        <span class="arch-node__label">Patient&rsquo;s phone</span>
-        <span class="arch-node__sub">All logs, all classification</span>
+      <div class="form-row">
+        <label class="form-label" for="contact-email">Email</label>
+        <input class="input" id="contact-email" name="email" type="email" autocomplete="email" required />
       </div>
-      <div class="arch-link">
-        <span class="arch-link__line"></span>
-        <span class="arch-link__label">Shared by patient</span>
-      </div>
-      <div class="arch-node arch-node--you">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7l-5-5z"/><path d="M14 2v5h5"/><path d="M9 12h6M9 16h6"/></svg>
-        <span class="arch-node__label">You</span>
-        <span class="arch-node__sub">Portal, email, or print</span>
-      </div>
-      <div class="arch-noserver">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M5.5 5.5l13 13"/></svg>
-        <span>No Ember server in between</span>
-      </div>
-    </div>
 
-    <aside class="note-card note-card--center">
-      <p class="note-card__label">In plain terms</p>
-      <p class="note-card__body">
-        Because Ember doesn&rsquo;t transmit PHI, no BAA is required.
-        You can recommend it to a patient today, with no IT or legal
-        review.
-      </p>
-    </aside>
+      <div class="form-row">
+        <label class="form-label" for="contact-affiliation">
+          Practice or affiliation
+          <span class="form-hint">optional</span>
+        </label>
+        <input class="input" id="contact-affiliation" name="affiliation" type="text" autocomplete="organization" />
+      </div>
+
+      <div class="form-row">
+        <label class="form-label" for="contact-message">Message</label>
+        <textarea class="textarea" id="contact-message" name="message" rows="4" required></textarea>
+      </div>
+
+      <input type="hidden" name="_subject" value="Ember — Provider inquiry" />
+      <input type="hidden" name="_template" value="table" />
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" aria-hidden="true" />
+
+      <button class="form-submit" type="submit">Send</button>
+      <p class="form-status" role="status" aria-live="polite"></p>
+    </form>
   </div>
 </section>
 
 <!-- ─── Closing ───────────────────────────────────────────── -->
-<section class="closing closing--prov">
+<section class="closing">
   <div class="wrap closing-inner">
-    <h2 class="closing-title">
-      We&rsquo;re in beta and could use your help!
-    </h2>
-    <p class="closing-body">
-      Together, we can build the app we all wish our patients actually used.
+    <p class="closing-quote reveal">
+      Ember is the migraine tracker we wished existed in clinical practice.
     </p>
+    <p class="closing-quote closing-quote--last text-accent reveal reveal--d1">So we built it.</p>
 
-    <div class="cta-row cta-row--center">
-      <a href="../beta/" class="btn-primary">Join the Beta</a>
-      <a href="mailto:hello@cascadeheadache.com?subject=Ember%20—%20Provider%20interest" class="btn-primary btn-primary--quiet">Get in touch</a>
+    <div class="cta-row cta-row--center reveal reveal--d2">
+      <a href="../beta/" class="btn-primary">
+        Join the Beta
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
     </div>
-    <p class="cta-caption cta-caption--center">
-      Request access to the TestFlight Beta and share with patients of yours who would enjoy helping out! All Beta testers will receive 6 months free once we officially launch on the App Store.
+    <p class="cta-caption cta-caption--center reveal reveal--d3">
+      Join us &mdash; help us build the best migraine tracker out there.
     </p>
   </div>
 </section>
@@ -309,11 +391,12 @@ Comparing reported baseline to current state on both preventives:
         <span class="brand-orb" aria-hidden="true"></span>
         <span class="brand-name">Ember</span>
       </div>
-      <p class="footer-tag">A migraine and headache tracker for iPhone.</p>
+      <p class="footer-tag">A quiet migraine and headache tracker for iPhone.</p>
     </div>
     <nav class="footer-links" aria-label="Footer">
       <a href="../">Why Ember</a>
       <a href="../providers/" class="is-current" aria-current="page">For Providers</a>
+      <a href="../references/">References</a>
       <a href="../privacy/">Privacy</a>
       <a href="../terms/">Terms</a>
     </nav>

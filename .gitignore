@@ -1,0 +1,8 @@
+# Claude Code preview/dev tooling — local only
+.claude/
+
+# macOS metadata
+.DS_Store
+
+# Heavy raw video — we ship the optimized .mp4 instead
+assets/screens/daily-entry-recording.mov
