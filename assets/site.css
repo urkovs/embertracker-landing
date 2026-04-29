@@ -1667,17 +1667,24 @@ body.prov .hero--prov { padding: clamp(40px, 6vw, 72px) 0 clamp(36px, 5vw, 64px)
 /* ─── Hero chart-note responsive — wrap text on small screens ── */
 .hero--prov .chart-note { max-width: 920px; }
 
+/* Chart note — never scroll horizontally. Wrap long lines, vertical
+   scroll only when the document is taller than the body window. */
+.chart-note__pre {
+  white-space: pre-wrap;
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+.chart-note__body {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
 @media (max-width: 720px) {
   .hero--prov .chart-note { max-width: 100%; }
   .chart-note__pre {
-    /* Allow line breaks at natural spaces; keeps no horizontal scroll */
-    white-space: pre-line;
-    word-break: break-word;
     font-size: 12px;
     line-height: 1.6;
   }
-  /* Some lines are still long; let the body soft-clip if any escape */
-  .chart-note__body { overflow-x: hidden; }
 }
 
 /* ─── Classification engine animation (§1) ───────────────────── */
@@ -2118,17 +2125,18 @@ body.prov .hero--prov { padding: clamp(40px, 6vw, 72px) 0 clamp(36px, 5vw, 64px)
   animation: engine-phone-scroll 2.4s cubic-bezier(0.4, 0, 0.2, 1) 0.3s 1 forwards;
 }
 
-/* Phone-frame variant for the full-aspect screen recording — no fixed height,
-   no clipping. The video drives the frame's height naturally. */
-.engine-viz__phone .phone-frame--video {
+/* Phone-frame variant for full-aspect screen recordings — no fixed
+   height, no clipping. The video drives the frame's height naturally.
+   Used for §1 daily-entry video and §2 treatment-story video. */
+.phone-frame--video {
   width: clamp(240px, 22vw, 290px);
   height: auto;
   padding: 7px;
-  margin: 0;
+  margin: 0 auto;
   display: block;
   overflow: visible;
 }
-.engine-viz__phone .phone-frame--video .phone-scroll {
+.phone-frame--video .phone-scroll {
   width: 100%;
   height: auto;
   overflow: hidden;
@@ -2141,8 +2149,7 @@ body.prov .hero--prov { padding: clamp(40px, 6vw, 72px) 0 clamp(36px, 5vw, 64px)
   height: auto;
   display: block;
 }
-/* Phone-purple-pulse follows the natural video frame */
-.engine-viz__phone .phone-frame--video .phone-purple-pulse {
+.phone-frame--video .phone-purple-pulse {
   border-radius: 38px;
 }
 
@@ -2731,10 +2738,13 @@ body.prov .hero--prov { padding: clamp(40px, 6vw, 72px) 0 clamp(36px, 5vw, 64px)
 .engine-viz > .engine-arrow { display: none; }
 .engine-viz > .engine-zone { display: none; }
 
-/* Engine viz layout — 2 columns: phone | (machine stacked above output) */
+/* Engine viz layout — phone | (machine stacked above output)
+   Both columns size to content (auto/auto) so the whole pair can be
+   centered horizontally on the page. */
 .engine-viz {
-  grid-template-columns: auto 1fr;
+  grid-template-columns: auto auto;
   align-items: center;
+  justify-content: center;
   max-width: 1080px;
 }
 .engine-viz > .engine-zone,
