@@ -715,3 +715,113 @@ a { color: inherit; text-decoration: none; }
 .after-inner { max-width: 640px; margin: 0 auto; }
 .after .feat-title { font-size: clamp(32px, 3.8vw, 44px); margin-bottom: 18px; }
 .after .feat-body { margin-bottom: 16px; }
+
+/* ─── Chart note (provider hero anchor) ─────────────────────
+   Renders the structured chart note as a window/document.
+   Used in the provider page hero. */
+
+.hero-anchor {
+  margin: 48px auto 0;
+  max-width: 720px;
+  width: 100%;
+}
+
+.chart-note {
+  background: #0d0d0d;
+  border: 1px solid rgba(232, 230, 227, 0.12);
+  border-radius: 10px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 30px 80px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(232, 165, 71, 0.04);
+  overflow: hidden;
+  text-align: left;
+}
+
+.chart-note__chrome {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 18px;
+  border-bottom: 1px solid rgba(232, 230, 227, 0.08);
+  background: #151515;
+}
+
+.chart-note__lights {
+  display: flex;
+  gap: 6px;
+}
+
+.cn-light {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #2a2a2a;
+}
+
+.chart-note__title {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 12.5px;
+  letter-spacing: 1px;
+  color: #8a847b;
+}
+
+.chart-note__body {
+  padding: 22px 26px 28px;
+  overflow-x: auto;
+}
+
+.chart-note__pre {
+  margin: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: #c9c5c0;
+  white-space: pre;
+  tab-size: 2;
+}
+
+/* Syntax classes used inside the <pre> */
+.cn-h {
+  color: #c4b5a0;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.cn-v {
+  color: #e8e6e3;
+  font-weight: 500;
+}
+
+.cn-g {
+  color: #5a9a6a;
+}
+
+.cn-t {
+  color: #b0d8d0;
+}
+
+.cn-em {
+  color: #6e685f;
+  font-style: italic;
+}
+
+/* Mobile: smaller text, less padding, allow horizontal scroll */
+@media (max-width: 600px) {
+  .hero-anchor {
+    margin-top: 32px;
+  }
+  .chart-note__body {
+    padding: 16px 18px 20px;
+  }
+  .chart-note__pre {
+    font-size: 11.5px;
+    line-height: 1.65;
+  }
+  .chart-note__chrome {
+    padding: 10px 14px;
+  }
+  .chart-note__title {
+    font-size: 11.5px;
+  }
+}
