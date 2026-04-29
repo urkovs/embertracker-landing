@@ -1097,3 +1097,22 @@ a { color: inherit; text-decoration: none; }
     padding-bottom: 48px !important;
   }
 }
+/* ─── Page-wide ambient glow ──────────────────────────────── */
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 70% 50% at 20% 15%, rgba(232, 165, 71, 0.055), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 85% 45%, rgba(196, 181, 160, 0.06), transparent 65%),
+    radial-gradient(ellipse 70% 60% at 30% 85%, rgba(176, 216, 208, 0.03), transparent 65%);
+}
+
+/* Kill the existing concentrated burst behind the hero */
+.hero--prov::before,
+.hero--prov::after {
+  display: none !important;
+}
