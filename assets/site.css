@@ -2734,7 +2734,7 @@ body.prov .hero--prov { padding: clamp(40px, 6vw, 72px) 0 clamp(36px, 5vw, 64px)
 /* Engine viz layout — 2 columns: phone | (machine stacked above output) */
 .engine-viz {
   grid-template-columns: auto 1fr;
-  align-items: start;
+  align-items: center;
   max-width: 1080px;
 }
 .engine-viz > .engine-zone,
