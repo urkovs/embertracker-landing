@@ -103,148 +103,674 @@ Comparing reported baseline to current state on both preventives:
   </div>
 </section>
 
-<!-- ─── §1  Symptoms in. Migraine day out. ─────────────────── -->
-<section class="feat feat--full">
-  <div class="wrap">
-    <div class="feat-copy feat-copy--center">
-      <h2 class="feat-title reveal"><span class="text-accent">Symptoms</span> in. Classification out.</h2>
-      <p class="feat-body reveal reveal--d1">
-        Patients don&rsquo;t need to know what counts as a migraine.
-        Ember asks about symptoms, impact, and medication; the
-        ICHD&#8209;3 classification is automatic, and quietly
-        explained over time, so they start to recognize it themselves.
-      </p>
-    </div>
+<!-- BEGIN: Ember Classification Engine Animation -->
 
-    <div class="engine-viz reveal reveal--d2">
-      <div class="engine-viz__phone">
-        <div class="phone-frame phone-frame--video">
-          <div class="phone-scroll">
-            <video class="phone-video"
-                   autoplay muted loop playsinline preload="auto"
-                   poster="../assets/screens/daily-full.jpg"
-                   aria-label="Patient making a daily entry in Ember">
-              <source src="../assets/screens/daily-entry-recording.mp4" type="video/mp4">
-              <img src="../assets/screens/daily-full.jpg" alt="Patient daily-entry screen" />
-            </video>
-            <span class="phone-purple-pulse" aria-hidden="true"></span>
-          </div>
-        </div>
-      </div>
+<style>
+.engine-stage {
+  background: #0a0a0a;
+  border-radius: 12px;
+  padding: 22px 24px 28px;
+  font-family: -apple-system, 'SF Pro Text', sans-serif;
+  color: #e8e4df;
+  position: relative;
+  scroll-margin-top: 80px;
+}
+.scenario-controls {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #1a1a1a;
+}
+.scenario-btn {
+  background: transparent;
+  border: 1px solid;
+  font-size: 11px;
+  padding: 7px 14px;
+  border-radius: 14px;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: 0.3px;
+  transition: all 0.2s ease;
+  position: relative;
+}
+.scenario-btn[data-color="migraine"] { color: #c8b8e8; border-color: rgba(155, 122, 204, 0.45); }
+.scenario-btn[data-color="migraine"]:hover { border-color: #9b7acc; background: rgba(155, 122, 204, 0.10); }
+.scenario-btn[data-color="migraine"].active { background: rgba(155, 122, 204, 0.18); border-color: #9b7acc; }
 
-      <div class="engine-viz__content">
-        <div class="machine" aria-hidden="true">
-          <svg class="machine__svg" viewBox="0 0 600 420" preserveAspectRatio="xMidYMid meet">
-            <defs>
-              <linearGradient id="outGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%"  stop-color="rgba(232,165,71,0.85)"/>
-                <stop offset="100%" stop-color="rgba(167,139,250,0.95)"/>
-              </linearGradient>
-            </defs>
+.scenario-btn[data-color="headache"] { color: #b0d8e8; border-color: rgba(74, 138, 191, 0.45); }
+.scenario-btn[data-color="headache"]:hover { border-color: #4a8abf; background: rgba(74, 138, 191, 0.10); }
+.scenario-btn[data-color="headache"].active { background: rgba(74, 138, 191, 0.18); border-color: #4a8abf; }
 
-            <!-- ── Input tubes (labels at left → engine left wall at x=180) ── -->
-            <g class="machine__tubes">
-              <path class="machine__tube" d="M 110 30  C 150 30, 160 100, 180 100" />
-              <path class="machine__tube" d="M 110 95  C 150 95, 160 130, 180 130" />
-              <path class="machine__tube" d="M 110 160 L 180 160" />
-              <path class="machine__tube" d="M 110 225 C 150 225, 160 195, 180 195" />
-              <path class="machine__tube" d="M 110 290 C 150 290, 160 230, 180 230" />
-            </g>
+.scenario-btn[data-color="clear"] { color: #cee7f2; border-color: rgba(90, 141, 168, 0.45); }
+.scenario-btn[data-color="clear"]:hover { border-color: #5a8da8; background: rgba(90, 141, 168, 0.10); }
+.scenario-btn[data-color="clear"].active { background: rgba(90, 141, 168, 0.18); border-color: #5a8da8; }
 
-            <!-- Tube labels — perfectly aligned with tube starts -->
-            <g class="machine__labels">
-              <text class="machine__label" x="2" y="30"  dominant-baseline="middle">HEAD PAIN · MOD</text>
-              <text class="machine__label" x="2" y="95"  dominant-baseline="middle">NECK PAIN</text>
-              <text class="machine__label" x="2" y="160" dominant-baseline="middle">NAUSEA · BRAIN FOG</text>
-              <text class="machine__label" x="2" y="225" dominant-baseline="middle">RELPAX (TRIPTAN)</text>
-              <text class="machine__label" x="2" y="290" dominant-baseline="middle">IMPACT · SEVERE</text>
-            </g>
+.scenario-btn[data-color="warn"] { color: #e8c89a; border-color: rgba(196, 138, 74, 0.45); }
+.scenario-btn[data-color="warn"]:hover { border-color: #c48a4a; background: rgba(196, 138, 74, 0.10); }
+.scenario-btn[data-color="warn"].active { background: rgba(196, 138, 74, 0.18); border-color: #c48a4a; }
 
-            <!-- ── Engine casing (180..420) ── -->
-            <g class="machine__engine">
-              <rect class="machine__casing" x="180" y="60" width="240" height="220" rx="14"/>
-              <!-- Vent slits top -->
-              <g class="machine__vents">
-                <rect x="208" y="68" width="38" height="3" rx="1"/>
-                <rect x="252" y="68" width="38" height="3" rx="1"/>
-                <rect x="296" y="68" width="38" height="3" rx="1"/>
-                <rect x="340" y="68" width="38" height="3" rx="1"/>
-              </g>
+.scenario-btn[data-color="variant"] { color: #e8b8b8; border-color: rgba(196, 110, 110, 0.45); }
+.scenario-btn[data-color="variant"]:hover { border-color: #c46e6e; background: rgba(196, 110, 110, 0.10); }
+.scenario-btn[data-color="variant"].active { background: rgba(196, 110, 110, 0.18); border-color: #c46e6e; }
+.scenario-btn[data-color="variant"]::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 14px;
+  border: 1px solid rgba(196, 110, 110, 0.4);
+  pointer-events: none;
+}
 
-              <!-- Half-circle pressure gauge (no longer clock-like) -->
-              <g class="machine__gauge" transform="translate(232 154)">
-                <path class="machine__gauge-bg" d="M -34 0 A 34 34 0 0 1 34 0 L 34 6 L -34 6 Z"/>
-                <path class="machine__gauge-rim" d="M -34 0 A 34 34 0 0 1 34 0" fill="none"/>
-                <!-- Cool blue zone (left third) -->
-                <path class="machine__gauge-zone-cool" d="M -34 0 A 34 34 0 0 1 -10 -32.5" fill="none"/>
-                <!-- Warm gold zone (right two-thirds) -->
-                <path class="machine__gauge-zone-warm" d="M -10 -32.5 A 34 34 0 0 1 34 0" fill="none"/>
-                <!-- Tick marks on the arc -->
-                <g class="machine__ticks">
-                  <line x1="-32" y1="0"   x2="-28" y2="0"/>
-                  <line x1="-24" y1="-24" x2="-21" y2="-21"/>
-                  <line x1="0"   y1="-32" x2="0"   y2="-28"/>
-                  <line x1="24"  y1="-24" x2="21"  y2="-21"/>
-                  <line x1="32"  y1="0"   x2="28"  y2="0"/>
-                </g>
-                <!-- Needle pivots from base center -->
-                <line class="machine__needle" x1="0" y1="0" x2="0" y2="-28"/>
-                <circle class="machine__needle-cap" cx="0" cy="0" r="4"/>
-                <text class="machine__gauge-label" x="0" y="20" text-anchor="middle">PROCESSING</text>
-              </g>
+.engine-grid {
+  display: grid;
+  grid-template-columns: 200px 1fr 200px;
+  gap: 24px;
+  align-items: start;
+  position: relative;
+}
+@media (max-width: 700px) {
+  .engine-stage { padding: 18px 16px 24px; scroll-margin-top: 70px; }
+  .engine-grid {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+  .col {
+    max-width: 320px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .input-stack { min-height: auto !important; }
+  .engine-box { min-height: auto !important; }
+  .output-area {
+    min-height: auto !important;
+    padding-top: 4px !important;
+  }
+  .svg-overlay { display: none; }
+}
+.svg-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+.col {
+  position: relative;
+  z-index: 2;
+}
+.col-label {
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  font-weight: 500;
+  color: #c4b5a0;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  text-align: center;
+}
+.input-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 320px;
+}
+.input-chip {
+  background: rgba(196, 181, 160, 0.08);
+  border: 1px solid rgba(196, 181, 160, 0.25);
+  border-radius: 18px;
+  padding: 9px 13px;
+  font-size: 11.5px;
+  color: #c4b5a0;
+  opacity: 0;
+  transform: translateX(-16px);
+  transition: opacity 0.45s ease, transform 0.45s ease, background 0.35s ease, border-color 0.35s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.input-chip.visible { opacity: 1; transform: translateX(0); }
+.input-chip.firing {
+  background: rgba(196, 181, 160, 0.16);
+  border-color: #c4b5a0;
+}
+.input-chip.firing-warn {
+  background: rgba(196, 138, 74, 0.14);
+  border-color: #c48a4a;
+  color: #e8c89a;
+}
+.input-chip.firing-variant {
+  background: rgba(196, 110, 110, 0.14);
+  border-color: #c46e6e;
+  color: #e8b8b8;
+}
+.chip-tag {
+  font-size: 9px;
+  letter-spacing: 0.7px;
+  color: #6e685f;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+.engine-box {
+  background: #141414;
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  padding: 18px 16px;
+  position: relative;
+  min-height: 320px;
+}
+.engine-label {
+  position: absolute;
+  top: -8px;
+  left: 14px;
+  background: #0a0a0a;
+  padding: 0 8px;
+  font-size: 9px;
+  letter-spacing: 1.2px;
+  color: #6e685f;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+.rule-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 6px 0;
+  font-size: 11.5px;
+  color: #8a847b;
+  opacity: 0.4;
+  transition: opacity 0.35s ease, color 0.35s ease;
+}
+.rule-row.fired { opacity: 1; color: #c4b5a0; }
+.rule-row.failed { opacity: 0.55; color: #6e685f; }
+.rule-row.warn-fired { opacity: 1; color: #e8c89a; }
+.rule-row.variant-fired { opacity: 1; color: #e8b8b8; }
+.rule-icon {
+  width: 13px;
+  height: 13px;
+  border-radius: 3px;
+  border: 1px solid #2a2a2a;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  background: #0a0a0a;
+  color: transparent;
+  transition: all 0.35s ease;
+}
+.rule-row.fired .rule-icon {
+  background: rgba(95, 138, 95, 0.22);
+  border-color: #5a8a5a;
+  color: #8acc8a;
+}
+.rule-row.failed .rule-icon {
+  background: rgba(110, 104, 95, 0.12);
+  border-color: #4a443c;
+  color: #6e685f;
+}
+.rule-row.warn-fired .rule-icon {
+  background: rgba(196, 138, 74, 0.22);
+  border-color: #c48a4a;
+  color: #e8c89a;
+}
+.rule-row.variant-fired .rule-icon {
+  background: rgba(196, 110, 110, 0.22);
+  border-color: #c46e6e;
+  color: #e8b8b8;
+}
+.rule-counter {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #2a2a2a;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  color: #6e685f;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.rule-counter.visible { opacity: 1; }
+.counter-num {
+  font-family: Georgia, serif;
+  font-size: 20px;
+  color: #c4b5a0;
+}
+.counter-thresh { color: #6e685f; font-size: 10.5px; }
+.output-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  min-height: 320px;
+  padding-top: 30px;
+}
+.output-pill {
+  font-family: Georgia, serif;
+  font-size: 17px;
+  padding: 12px 22px;
+  border-radius: 24px;
+  opacity: 0;
+  transform: scale(0.85);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  border: 1px solid;
+  text-align: center;
+}
+.output-pill.visible { opacity: 1; transform: scale(1); }
+.output-pill.migraine {
+  background: rgba(155, 122, 204, 0.12);
+  border-color: #9b7acc;
+  color: #c8b8e8;
+}
+.output-pill.headache {
+  background: rgba(74, 138, 191, 0.12);
+  border-color: #4a8abf;
+  color: #b0d8e8;
+}
+.output-pill.clear {
+  background: rgba(206, 231, 242, 0.08);
+  border-color: #5a8da8;
+  color: #cee7f2;
+}
+.output-pill.warn {
+  background: rgba(196, 138, 74, 0.12);
+  border-color: #c48a4a;
+  color: #e8c89a;
+  font-size: 14px;
+  padding: 10px 18px;
+  margin-top: 4px;
+}
+.output-pill.variant {
+  background: rgba(196, 110, 110, 0.12);
+  border-color: #c46e6e;
+  color: #e8b8b8;
+  font-size: 12px;
+  padding: 7px 14px;
+  margin-top: 4px;
+  font-family: -apple-system, sans-serif;
+  position: relative;
+}
+.output-pill.variant::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 24px;
+  border: 1px solid rgba(196, 110, 110, 0.4);
+  pointer-events: none;
+}
+.loop-back-btn {
+  background: transparent;
+  border: 1px solid #2a2a2a;
+  color: #8a847b;
+  font-size: 11px;
+  padding: 8px 16px;
+  border-radius: 16px;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: 0.3px;
+  margin-top: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.5s ease, transform 0.5s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.loop-back-btn.visible { opacity: 1; transform: translateY(0); }
+.loop-back-btn:hover { color: #c4b5a0; border-color: #c4b5a0; }
+.loop-back-btn .arrow {
+  font-size: 12px;
+  line-height: 1;
+}
+</style>
 
-              <!-- LEDs (mixed colors for visual variety) -->
-              <g class="machine__leds">
-                <circle class="machine__led machine__led--green" cx="332" cy="118" r="5"/>
-                <circle class="machine__led machine__led--gold"  cx="354" cy="118" r="5"/>
-                <circle class="machine__led machine__led--gold"  cx="376" cy="118" r="5"/>
-                <circle class="machine__led machine__led--teal"  cx="398" cy="118" r="5"/>
-              </g>
+<div class="engine-stage" id="engine-stage" aria-label="Interactive demo of Ember's classification engine. Five scenarios available; click any to run.">
 
-              <!-- Pistons -->
-              <g class="machine__pistons">
-                <g class="machine__piston">
-                  <rect class="machine__piston-shaft" x="324" y="170" width="14" height="58" rx="3"/>
-                  <rect class="machine__piston-head"  x="320" y="160" width="22" height="14" rx="3"/>
-                </g>
-                <g class="machine__piston">
-                  <rect class="machine__piston-shaft" x="350" y="170" width="14" height="58" rx="3"/>
-                  <rect class="machine__piston-head"  x="346" y="160" width="22" height="14" rx="3"/>
-                </g>
-                <g class="machine__piston">
-                  <rect class="machine__piston-shaft" x="376" y="170" width="14" height="58" rx="3"/>
-                  <rect class="machine__piston-head"  x="372" y="160" width="22" height="14" rx="3"/>
-                </g>
-              </g>
-
-              <!-- Ember Logic Engine nameplate -->
-              <g class="machine__plate" transform="translate(300 254)">
-                <rect x="-86" y="-14" width="172" height="26" rx="6"/>
-                <text class="machine__plate-title" x="0" y="2" text-anchor="middle" dominant-baseline="middle">
-                  <tspan class="machine__plate-letter">E</tspan><tspan class="machine__plate-letter">M</tspan><tspan class="machine__plate-letter">B</tspan><tspan class="machine__plate-letter">E</tspan><tspan class="machine__plate-letter">R</tspan><tspan class="machine__plate-letter"> </tspan><tspan class="machine__plate-letter">L</tspan><tspan class="machine__plate-letter">O</tspan><tspan class="machine__plate-letter">G</tspan><tspan class="machine__plate-letter">I</tspan><tspan class="machine__plate-letter">C</tspan><tspan class="machine__plate-letter"> </tspan><tspan class="machine__plate-letter">E</tspan><tspan class="machine__plate-letter">N</tspan><tspan class="machine__plate-letter">G</tspan><tspan class="machine__plate-letter">I</tspan><tspan class="machine__plate-letter">N</tspan><tspan class="machine__plate-letter">E</tspan>
-                </text>
-              </g>
-            </g>
-
-            <!-- ── Output tube — exits engine bottom-center, goes DOWN to badge ── -->
-            <path class="machine__out-tube" d="M 300 280 L 300 380"/>
-            <polygon class="machine__out-arrow" points="300,402 282,374 318,374"/>
-          </svg>
-        </div>
-
-        <div class="engine-output" aria-hidden="true">Migraine day</div>
-      </div>
-    </div>
-
-    <p class="ai-note reveal reveal--d3">
-      <span class="ai-note__dot" aria-hidden="true"></span>
-      <strong>No AI inside.</strong>
-      All logic is hard-coded to published guidelines and studies &mdash; fully auditable.
-      <a href="../references/">See references</a>.
-    </p>
+  <div class="scenario-controls" id="scenario-controls" role="tablist">
+    <button class="scenario-btn active" data-scenario="0" data-color="migraine">Migraine day</button>
+    <button class="scenario-btn" data-scenario="1" data-color="headache">Headache day</button>
+    <button class="scenario-btn" data-scenario="2" data-color="clear">Clear day</button>
+    <button class="scenario-btn" data-scenario="3" data-color="warn">Rebound risk</button>
+    <button class="scenario-btn" data-scenario="4" data-color="variant">Hemiplegic variant</button>
   </div>
-</section>
 
+  <div class="engine-grid" id="grid">
+
+    <svg class="svg-overlay" id="svg-overlay" preserveAspectRatio="none" aria-hidden="true"></svg>
+
+    <div class="col">
+      <div class="col-label">Patient input</div>
+      <div class="input-stack" id="inputs"></div>
+    </div>
+
+    <div class="col">
+      <div class="col-label">Ember logic engine</div>
+      <div class="engine-box" id="engine-box">
+        <div class="engine-label">ICHD-3 rules</div>
+        <div class="rule-row" id="rule-1" data-rule="1">
+          <div class="rule-icon">✓</div>
+          <span>Head pain present</span>
+        </div>
+        <div class="rule-row" id="rule-2" data-rule="2">
+          <div class="rule-icon">✓</div>
+          <span>Photophobia or phonophobia</span>
+        </div>
+        <div class="rule-row" id="rule-3" data-rule="3">
+          <div class="rule-icon">✓</div>
+          <span>Nausea or vomiting</span>
+        </div>
+        <div class="rule-row" id="rule-4" data-rule="4">
+          <div class="rule-icon">✓</div>
+          <span>Aura</span>
+        </div>
+        <div class="rule-row" id="rule-5" data-rule="5">
+          <div class="rule-icon">✓</div>
+          <span>Functional impact</span>
+        </div>
+        <div class="rule-row" id="rule-6" data-rule="6">
+          <div class="rule-icon">✓</div>
+          <span>Migraine-specific medication</span>
+        </div>
+        <div class="rule-row" id="rule-7" data-rule="7">
+          <div class="rule-icon">!</div>
+          <span>Acute med ≥ monthly limit</span>
+        </div>
+        <div class="rule-row" id="rule-8" data-rule="8">
+          <div class="rule-icon">!</div>
+          <span>One-sided weakness (variant)</span>
+        </div>
+        <div class="rule-counter" id="counter">
+          <span><span class="counter-num" id="counter-num">0</span> <span class="counter-thresh">migraine features</span></span>
+          <span class="counter-thresh">≥2 → migraine</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="col-label">Classification</div>
+      <div class="output-area" id="output-area">
+        <div class="output-pill" id="output-pill"></div>
+        <div class="output-pill" id="output-secondary"></div>
+        <button class="loop-back-btn" id="loop-back"><span class="arrow">↑</span> See another scenario</button>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+(function() {
+  const scenarios = [
+    {
+      name: 'Migraine day',
+      inputs: [
+        { tag: 'Head pain',  value: 'Moderate',         rules: [1] },
+        { tag: 'Symptom',    value: 'Photophobia',      rules: [2] },
+        { tag: 'Symptom',    value: 'Nausea',           rules: [3] },
+        { tag: 'Medication', value: 'Ubrelvy',          rules: [6] },
+        { tag: 'Impact',     value: 'Limited activity', rules: [5] }
+      ],
+      result: 'migraine',
+      label: 'Migraine day'
+    },
+    {
+      name: 'Headache day',
+      inputs: [
+        { tag: 'Head pain',  value: 'Mild',         rules: [1] },
+        { tag: 'Medication', value: 'Ibuprofen',    rules: [] },
+        { tag: 'Impact',     value: 'No impact',    rules: [] }
+      ],
+      result: 'headache',
+      label: 'Headache day'
+    },
+    {
+      name: 'Clear day',
+      inputs: [
+        { tag: 'Head pain', value: 'None',          rules: [] },
+        { tag: 'Symptom',   value: 'None reported', rules: [] }
+      ],
+      result: 'clear',
+      label: 'Clear day'
+    },
+    {
+      name: 'Rebound risk',
+      inputs: [
+        { tag: 'Head pain',  value: 'Moderate',          rules: [1] },
+        { tag: 'Symptom',    value: 'Photophobia',       rules: [2] },
+        { tag: 'Medication', value: 'Maxalt (10th this month)', rules: [6, 7], warn: true }
+      ],
+      result: 'migraine',
+      secondary: 'warn',
+      secondaryLabel: 'Rebound risk · 10 of 9',
+      label: 'Migraine day'
+    },
+    {
+      name: 'Hemiplegic variant',
+      inputs: [
+        { tag: 'Head pain',  value: 'Severe',                  rules: [1] },
+        { tag: 'Symptom',    value: 'Photophobia',             rules: [2] },
+        { tag: 'Symptom',    value: 'One-sided weakness',      rules: [8], variant: true }
+      ],
+      result: 'migraine',
+      secondary: 'variant',
+      secondaryLabel: 'Hemiplegic variant',
+      label: 'Migraine day'
+    }
+  ];
+
+  let timers = [];
+  const inputsEl = document.getElementById('inputs');
+  const counterEl = document.getElementById('counter');
+  const counterNumEl = document.getElementById('counter-num');
+  const outputPill = document.getElementById('output-pill');
+  const outputSecondary = document.getElementById('output-secondary');
+  const loopBackBtn = document.getElementById('loop-back');
+  const svgOverlay = document.getElementById('svg-overlay');
+  const gridEl = document.getElementById('grid');
+  const stageEl = document.getElementById('engine-stage');
+  const controlsEl = document.getElementById('scenario-controls');
+  const ruleEls = {};
+  for (let i = 1; i <= 8; i++) ruleEls[i] = document.getElementById('rule-' + i);
+
+  function clearTimers() {
+    timers.forEach(t => clearTimeout(t));
+    timers = [];
+  }
+
+  function reset() {
+    clearTimers();
+    inputsEl.innerHTML = '';
+    svgOverlay.innerHTML = '';
+    counterEl.classList.remove('visible');
+    counterNumEl.textContent = '0';
+    outputPill.className = 'output-pill';
+    outputPill.textContent = '';
+    outputSecondary.className = 'output-pill';
+    outputSecondary.textContent = '';
+    loopBackBtn.classList.remove('visible');
+    for (let i = 1; i <= 8; i++) {
+      ruleEls[i].classList.remove('fired', 'failed', 'warn-fired', 'variant-fired');
+    }
+  }
+
+  function isMobile() {
+    return window.innerWidth <= 700;
+  }
+
+  function sizeOverlay() {
+    if (isMobile()) return;
+    const rect = gridEl.getBoundingClientRect();
+    svgOverlay.setAttribute('viewBox', '0 0 ' + rect.width + ' ' + rect.height);
+    svgOverlay.style.height = rect.height + 'px';
+  }
+
+  function drawConnector(fromEl, toEl, isWarn, isVariant) {
+    if (isMobile()) return;
+    const gridRect = gridEl.getBoundingClientRect();
+    const fromRect = fromEl.getBoundingClientRect();
+    const toRect = toEl.getBoundingClientRect();
+
+    const x1 = fromRect.right - gridRect.left;
+    const y1 = fromRect.top + fromRect.height / 2 - gridRect.top;
+    const x2 = toRect.left - gridRect.left;
+    const y2 = toRect.top + toRect.height / 2 - gridRect.top;
+
+    const midX = (x1 + x2) / 2;
+    const path = 'M ' + x1 + ' ' + y1 + ' C ' + midX + ' ' + y1 + ', ' + midX + ' ' + y2 + ', ' + x2 + ' ' + y2;
+
+    const pathEl = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    pathEl.setAttribute('d', path);
+    let stroke = '#c4b5a0';
+    if (isWarn) stroke = '#c48a4a';
+    if (isVariant) stroke = '#c46e6e';
+    pathEl.setAttribute('stroke', stroke);
+    pathEl.setAttribute('stroke-width', '1');
+    pathEl.setAttribute('fill', 'none');
+    pathEl.setAttribute('opacity', '0');
+    pathEl.style.transition = 'opacity 0.5s ease';
+    svgOverlay.appendChild(pathEl);
+
+    requestAnimationFrame(() => {
+      pathEl.setAttribute('opacity', '0.45');
+    });
+  }
+
+  function runScenario(idx) {
+    reset();
+    const s = scenarios[idx];
+
+    s.inputs.forEach((inp, i) => {
+      const chip = document.createElement('div');
+      chip.className = 'input-chip';
+      chip.innerHTML = '<span class="chip-tag">' + inp.tag + '</span><span>' + inp.value + '</span>';
+      chip.dataset.idx = i;
+      inputsEl.appendChild(chip);
+      timers.push(setTimeout(() => chip.classList.add('visible'), 150 + i * 160));
+    });
+
+    const inputCount = s.inputs.length;
+    const inputsDoneAt = 150 + inputCount * 160 + 300;
+
+    let firedCount = 0;
+    s.inputs.forEach((inp, i) => {
+      timers.push(setTimeout(() => {
+        const chip = inputsEl.querySelector('[data-idx="' + i + '"]');
+        if (!chip) return;
+        if (inp.variant) chip.classList.add('firing-variant');
+        else if (inp.warn) chip.classList.add('firing-warn');
+        else chip.classList.add('firing');
+
+        inp.rules.forEach(ruleIdx => {
+          const ruleEl = ruleEls[ruleIdx];
+          if (ruleIdx === 7) ruleEl.classList.add('warn-fired');
+          else if (ruleIdx === 8) ruleEl.classList.add('variant-fired');
+          else {
+            ruleEl.classList.add('fired');
+            firedCount++;
+            if (firedCount <= 6) counterNumEl.textContent = firedCount;
+          }
+          drawConnector(chip, ruleEl, ruleIdx === 7, ruleIdx === 8);
+        });
+      }, inputsDoneAt + i * 280));
+    });
+
+    const rulesDoneAt = inputsDoneAt + inputCount * 280 + 350;
+
+    timers.push(setTimeout(() => {
+      counterEl.classList.add('visible');
+      for (let i = 1; i <= 6; i++) {
+        if (!ruleEls[i].classList.contains('fired')) {
+          ruleEls[i].classList.add('failed');
+        }
+      }
+      for (let i = 7; i <= 8; i++) {
+        if (!ruleEls[i].classList.contains('warn-fired') && !ruleEls[i].classList.contains('variant-fired')) {
+          ruleEls[i].classList.add('failed');
+        }
+      }
+    }, rulesDoneAt));
+
+    timers.push(setTimeout(() => {
+      outputPill.classList.add('visible', s.result);
+      outputPill.textContent = s.label;
+    }, rulesDoneAt + 500));
+
+    if (s.secondary) {
+      timers.push(setTimeout(() => {
+        outputSecondary.classList.add('visible', s.secondary);
+        outputSecondary.textContent = s.secondaryLabel;
+      }, rulesDoneAt + 850));
+    }
+
+    timers.push(setTimeout(() => {
+      loopBackBtn.classList.add('visible');
+    }, rulesDoneAt + (s.secondary ? 1200 : 950)));
+  }
+
+  let activeScenario = 0;
+
+  function findScrollableParent(el) {
+    let parent = el.parentElement;
+    while (parent) {
+      const style = window.getComputedStyle(parent);
+      const overflowY = style.overflowY;
+      const isScrollable = (overflowY === 'auto' || overflowY === 'scroll')
+        && parent.scrollHeight > parent.clientHeight;
+      if (isScrollable) return parent;
+      parent = parent.parentElement;
+    }
+    return null;
+  }
+
+  function scrollToControls() {
+    const offset = 80;
+    const scrollableParent = findScrollableParent(controlsEl);
+
+    if (scrollableParent) {
+      const parentRect = scrollableParent.getBoundingClientRect();
+      const controlsRect = controlsEl.getBoundingClientRect();
+      const targetScrollTop = scrollableParent.scrollTop
+        + (controlsRect.top - parentRect.top)
+        - offset;
+      scrollableParent.scrollTo({ top: targetScrollTop, behavior: 'smooth' });
+    } else {
+      const controlsRect = controlsEl.getBoundingClientRect();
+      const targetY = window.scrollY + controlsRect.top - offset;
+      window.scrollTo({ top: targetY, behavior: 'smooth' });
+    }
+  }
+
+  document.querySelectorAll('.scenario-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.scenario-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeScenario = parseInt(btn.dataset.scenario);
+      sizeOverlay();
+      scrollToControls();
+      runScenario(activeScenario);
+    });
+  });
+
+  loopBackBtn.addEventListener('click', () => {
+    scrollToControls();
+  });
+
+  window.addEventListener('resize', () => sizeOverlay());
+
+  setTimeout(() => {
+    sizeOverlay();
+    runScenario(0);
+  }, 300);
+})();
+</script>
+
+<!-- END: Ember Classification Engine Animation -->
 <!-- ─── §2  Each treatment, alone and combined ─────────────── -->
 <section class="feat">
   <div class="wrap feat-grid">
