@@ -58,8 +58,8 @@ Jan 15 – Apr 14, 2026 (90 days)  <span class="cn-em">87% reporting compliance<
 <span class="cn-h">FREQUENCY</span>
   Migraine days:    <span class="cn-v">18/mo → 7/mo</span>    <span class="cn-g">(61% reduction)</span>
   Total HA days:    <span class="cn-v">22/mo → 10/mo</span>   <span class="cn-g">(55% reduction)</span>
-  Impact days:      <span class="cn-v">15/mo → 4/mo</span>    <span class="cn-g">(73% reduction)</span>
-  Avg severity:     <span class="cn-v">7/10 → 4/10</span>     <span class="cn-g">(43% reduction)</span>
+  Impact days:      <span class="cn-v">15/mo → 4/mo</span>    <span class="cn-g-soft">(73% reduction)</span>
+  Avg severity:     <span class="cn-v">7/10 → 6/10</span>     <span class="cn-g-soft">(14% reduction)</span>
   MIDAS:            <span class="cn-v">42 → 18</span>         <span class="cn-t">(Grade IV → III)</span>
 
 <span class="cn-h">ACUTE MEDICATION USE</span>
@@ -70,7 +70,7 @@ Jan 15 – Apr 14, 2026 (90 days)  <span class="cn-em">87% reporting compliance<
 <span class="cn-h">BOTOX INTERVAL</span>
   Last injection:   Jan 20, 2026
   Onset:            Day 3
-  Wear-off:         Week 10 of 12
+  Wearing off:      Week 10 of 12
   Adverse effects:  mild neck stiffness
 
 <span class="cn-h">HORMONAL PATTERN</span>
@@ -112,6 +112,9 @@ Comparing reported baseline to current state on both preventives:
   color: #e8e4df;
   position: relative;
   scroll-margin-top: 80px;
+  max-width: 1120px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .scenario-controls {
   display: flex;
@@ -244,6 +247,22 @@ Comparing reported baseline to current state on both preventives:
   background: rgba(196, 110, 110, 0.14);
   border-color: #c46e6e;
   color: #e8b8b8;
+}
+.input-chip.firing-contraindicated {
+  background: rgba(196, 70, 70, 0.18);
+  border-color: #d44a4a;
+  color: #f0a8a8;
+  position: relative;
+  padding-right: 28px;
+}
+.input-chip.firing-contraindicated::after {
+  content: '⚠';
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  color: #f0a8a8;
+  font-size: 13px;
 }
 .chip-tag {
   font-size: 9px;
@@ -401,6 +420,27 @@ Comparing reported baseline to current state on both preventives:
   border: 1px solid rgba(196, 110, 110, 0.4);
   pointer-events: none;
 }
+.output-pill.contraindication {
+  background: rgba(196, 70, 70, 0.15);
+  border-color: #d44a4a;
+  color: #f0a8a8;
+  font-size: 13px;
+  padding: 9px 16px;
+  margin-top: 6px;
+  font-family: -apple-system, sans-serif;
+  font-weight: 500;
+}
+.output-tertiary-detail {
+  font-size: 11px;
+  color: #c4928a;
+  margin-top: 4px;
+  text-align: center;
+  max-width: 220px;
+  line-height: 1.5;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.output-tertiary-detail.visible { opacity: 1; }
 .loop-back-btn {
   background: transparent;
   border: 1px solid #2a2a2a;
@@ -494,6 +534,8 @@ Comparing reported baseline to current state on both preventives:
       <div class="output-area" id="output-area">
         <div class="output-pill" id="output-pill"></div>
         <div class="output-pill" id="output-secondary"></div>
+        <div class="output-pill" id="output-tertiary"></div>
+        <div class="output-tertiary-detail" id="output-tertiary-detail"></div>
         <button class="loop-back-btn" id="loop-back"><span class="arrow">↑</span> See another scenario</button>
       </div>
     </div>
@@ -553,11 +595,15 @@ Comparing reported baseline to current state on both preventives:
       inputs: [
         { tag: 'Head pain',  value: 'Severe',                  rules: [1] },
         { tag: 'Symptom',    value: 'Photophobia',             rules: [2] },
-        { tag: 'Symptom',    value: 'One-sided weakness',      rules: [8], variant: true }
+        { tag: 'Symptom',    value: 'One-sided weakness',      rules: [8], variant: true },
+        { tag: 'Medication', value: 'Maxalt (rizatriptan)',    rules: [6], contraindicated: true }
       ],
       result: 'migraine',
       secondary: 'variant',
       secondaryLabel: 'Hemiplegic variant',
+      tertiary: 'contraindication',
+      tertiaryLabel: '⚠ Triptans contraindicated',
+      tertiaryDetail: 'Patient flagged to discuss with provider',
       label: 'Migraine day'
     }
   ];
@@ -568,6 +614,8 @@ Comparing reported baseline to current state on both preventives:
   const counterNumEl = document.getElementById('counter-num');
   const outputPill = document.getElementById('output-pill');
   const outputSecondary = document.getElementById('output-secondary');
+  const outputTertiary = document.getElementById('output-tertiary');
+  const outputTertiaryDetail = document.getElementById('output-tertiary-detail');
   const loopBackBtn = document.getElementById('loop-back');
   const svgOverlay = document.getElementById('svg-overlay');
   const gridEl = document.getElementById('grid');
@@ -591,6 +639,10 @@ Comparing reported baseline to current state on both preventives:
     outputPill.textContent = '';
     outputSecondary.className = 'output-pill';
     outputSecondary.textContent = '';
+    outputTertiary.className = 'output-pill';
+    outputTertiary.textContent = '';
+    outputTertiaryDetail.className = 'output-tertiary-detail';
+    outputTertiaryDetail.textContent = '';
     loopBackBtn.classList.remove('visible');
     for (let i = 1; i <= 8; i++) {
       ruleEls[i].classList.remove('fired', 'failed', 'warn-fired', 'variant-fired');
@@ -608,7 +660,7 @@ Comparing reported baseline to current state on both preventives:
     svgOverlay.style.height = rect.height + 'px';
   }
 
-  function drawConnector(fromEl, toEl, isWarn, isVariant) {
+  function drawConnector(fromEl, toEl, isWarn, isVariant, isContraindication) {
     if (isMobile()) return;
     const gridRect = gridEl.getBoundingClientRect();
     const fromRect = fromEl.getBoundingClientRect();
@@ -627,6 +679,7 @@ Comparing reported baseline to current state on both preventives:
     let stroke = '#c4b5a0';
     if (isWarn) stroke = '#c48a4a';
     if (isVariant) stroke = '#c46e6e';
+    if (isContraindication) stroke = '#d44a4a';
     pathEl.setAttribute('stroke', stroke);
     pathEl.setAttribute('stroke-width', '1');
     pathEl.setAttribute('fill', 'none');
@@ -660,7 +713,8 @@ Comparing reported baseline to current state on both preventives:
       timers.push(setTimeout(() => {
         const chip = inputsEl.querySelector('[data-idx="' + i + '"]');
         if (!chip) return;
-        if (inp.variant) chip.classList.add('firing-variant');
+        if (inp.contraindicated) chip.classList.add('firing-contraindicated');
+        else if (inp.variant) chip.classList.add('firing-variant');
         else if (inp.warn) chip.classList.add('firing-warn');
         else chip.classList.add('firing');
 
@@ -673,7 +727,7 @@ Comparing reported baseline to current state on both preventives:
             firedCount++;
             if (firedCount <= 6) counterNumEl.textContent = firedCount;
           }
-          drawConnector(chip, ruleEl, ruleIdx === 7, ruleIdx === 8);
+          drawConnector(chip, ruleEl, ruleIdx === 7, ruleIdx === 8, !!inp.contraindicated);
         });
       }, inputsDoneAt + i * 280));
     });
@@ -706,9 +760,21 @@ Comparing reported baseline to current state on both preventives:
       }, rulesDoneAt + 850));
     }
 
+    if (s.tertiary) {
+      timers.push(setTimeout(() => {
+        outputTertiary.classList.add('visible', s.tertiary);
+        outputTertiary.textContent = s.tertiaryLabel;
+        outputTertiaryDetail.classList.add('visible');
+        outputTertiaryDetail.textContent = s.tertiaryDetail;
+      }, rulesDoneAt + 1200));
+    }
+
+    const loopBackTime = s.tertiary
+      ? rulesDoneAt + 1600
+      : (s.secondary ? rulesDoneAt + 1200 : rulesDoneAt + 950);
     timers.push(setTimeout(() => {
       loopBackBtn.classList.add('visible');
-    }, rulesDoneAt + (s.secondary ? 1200 : 950)));
+    }, loopBackTime));
   }
 
   let activeScenario = 0;
@@ -784,6 +850,10 @@ Comparing reported baseline to current state on both preventives:
         Ember reports the numbers cleanly, so the case for
         continuing therapy is easier to make. The continuation
         decisions are yours.
+      </p>
+      <p class="feat-body reveal reveal--d3">
+        The data tells the story &mdash; continuation
+        conversations get clearer.
       </p>
     </div>
     <div class="feat-phone reveal reveal--d2">
@@ -900,16 +970,6 @@ Comparing reported baseline to current state on both preventives:
       Ember is the migraine tracker we wished existed in clinical practice.
     </p>
     <p class="closing-quote closing-quote--last text-accent reveal reveal--d1">So we built it.</p>
-
-    <div class="cta-row cta-row--center reveal reveal--d2">
-      <a href="../beta/" class="btn-primary">
-        Join the Beta
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-      </a>
-    </div>
-    <p class="cta-caption cta-caption--center reveal reveal--d3">
-      Join us &mdash; help us build the best migraine tracker out there.
-    </p>
   </div>
 </section>
 
