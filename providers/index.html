@@ -125,6 +125,34 @@ Comparing reported baseline to current state on both preventives:
   margin-left: auto;
   margin-right: auto;
 }
+.scenario-cue {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 0 0 14px;
+  font-size: 11.5px;
+  letter-spacing: 0.35px;
+  color: #8a847b;
+  font-weight: 500;
+  text-align: center;
+}
+.scenario-cue__arrow {
+  flex-shrink: 0;
+  color: #c4b5a0;
+  animation: scenario-cue-bounce 1.8s ease-in-out infinite;
+}
+@keyframes scenario-cue-bounce {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(3px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scenario-cue__arrow { animation: none; }
+}
+@media (min-width: 701px) {
+  .scenario-cue { font-size: 13px; margin-bottom: 18px; }
+}
+
 .scenario-controls {
   display: flex;
   gap: 6px;
@@ -497,6 +525,13 @@ Comparing reported baseline to current state on both preventives:
 </style>
 
 <div class="engine-stage" id="engine-stage" aria-label="Interactive demo of Ember's classification engine. Five scenarios available; click any to run.">
+
+  <p class="scenario-cue">
+    <svg class="scenario-cue__arrow" width="11" height="13" viewBox="0 0 11 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M5.5 1.5v9M1.5 7l4 4 4-4"/>
+    </svg>
+    Tap a scenario to see Ember in action
+  </p>
 
   <div class="scenario-controls" id="scenario-controls" role="tablist">
     <button class="scenario-btn active" data-scenario="0" data-color="migraine">Migraine day</button>
