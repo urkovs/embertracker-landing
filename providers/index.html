@@ -415,7 +415,15 @@ Comparing reported baseline to current state on both preventives:
   font-size: 20px;
   color: #c4b5a0;
 }
-.counter-thresh { color: #6e685f; font-size: 10.5px; }
+.counter-thresh {
+  color: #c8b8e8;
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+@media (min-width: 701px) {
+  .counter-thresh { font-size: 13.5px; }
+}
 .output-area {
   display: flex;
   flex-direction: column;
