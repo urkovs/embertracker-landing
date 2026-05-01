@@ -1,4 +1,4 @@
-/* Ember site — minimal interactivity */
+/* Ember site. minimal interactivity */
 (function () {
   // Sticky nav background once user scrolls
   const nav = document.getElementById('nav');
@@ -25,7 +25,7 @@
     targets.forEach((el) => io.observe(el));
   }
 
-  // Contact form — fetch-based submission with inline status
+  // Contact form. fetch-based submission with inline status
   const form = document.querySelector('form[data-contact-form]');
   if (form) {
     const status = form.querySelector('.form-status');
@@ -40,7 +40,7 @@
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      // Honeypot — silently drop bots
+      // Honeypot. silently drop bots
       const honey = form.querySelector('input[name="_honey"]');
       if (honey && honey.value) return;
 
@@ -64,7 +64,7 @@
         });
         if (res.ok) {
           form.reset();
-          setStatus('Thanks — we got it. We’ll be in touch.', 'ok');
+          setStatus('Thanks. We got it. We’ll be in touch.', 'ok');
         } else {
           setStatus('Something went wrong. Please try again, or email hello@cascadeheadache.com.', 'err');
         }

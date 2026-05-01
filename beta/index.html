@@ -60,7 +60,7 @@
 
   .wrap { max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); width: 100%; }
 
-  /* Nav — minimal */
+  /* Nav. minimal */
   .nav {
     padding: 22px 0;
     border-bottom: 1px solid var(--border-subtle);
@@ -592,7 +592,7 @@
   .know-illus--feedback .fb-scene { width: 260px; height: 240px; }
   .know-illus--taps .tap-frame { max-width: 200px; height: 320px; }
 
-  /* Tips section — stacked carousel */
+  /* Tips section. stacked carousel */
   .tips-section {
     margin: 32px auto 40px;
     max-width: 860px;
@@ -781,7 +781,7 @@
   }
   .tip-subtle strong { color: var(--text-muted); font-weight: 500; }
 
-  /* Profile-version illustration — show the bottom of the screenshot
+  /* Profile-version illustration. Show the bottom of the screenshot
      where "Ember v1.0" lives. We crop to a shorter aspect ratio and
      anchor object-position to the bottom so the version text sits
      about 60% down the visible frame. */
@@ -854,6 +854,16 @@
     position: absolute;
     left: -10000px;
     width: 1px; height: 1px; opacity: 0;
+  }
+
+  /* Contain the floating screenshot illustration inside a soft callout
+     so it reads as an intentional illustration, not loose elements. */
+  .know-illus--feedback {
+    background: rgba(10, 10, 10, 0.6);
+    border: 1px solid rgba(196, 181, 160, 0.15);
+    border-radius: 14px;
+    padding: 24px 16px 16px;
+    overflow: visible;
   }
 
   /* Screenshot-feedback illustration */
@@ -942,7 +952,7 @@
   .fb-item.danger .label { color: #ff6b6b; }
   .fb-item.danger .ico { color: #ff6b6b; }
 
-  /* TestFlight update illustration — rose gemstone */
+  /* TestFlight update illustration. rose gemstone */
   .tip-illus--update {
     padding: 20px 8px;
   }
@@ -1074,11 +1084,11 @@
 
   /* ─── Mobile responsive overrides ──────────────────────── */
   @media (max-width: 768px) {
-    /* Nav — shrink brand */
+    /* Nav. shrink brand */
     .brand { font-size: 20px; }
     .brand-orb { width: 24px; height: 24px; }
 
-    /* Cards — tighter padding */
+    /* Cards. tighter padding */
     .tester-info, form {
       padding: 22px 20px;
       border-radius: 14px;
@@ -1217,7 +1227,7 @@
 
     <form id="betaForm" novalidate>
 
-      <!-- Honeypot — bots fill this, humans don't see it -->
+      <!-- Honeypot. bots fill this, humans don't see it -->
       <input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off">
 
       <div class="field">
@@ -1234,7 +1244,7 @@
         <label>Which describes you best?<span class="req">*</span></label>
         <div class="options" role="radiogroup" aria-label="Which describes you best">
           <label class="option">
-            <input type="radio" name="role" value="Patient — migraine or headache disease" required>
+            <input type="radio" name="role" value="Patient. Migraine or headache disease" required>
             <div class="option-body">
               <span class="option-title">I have migraine or headache disease</span>
               <span class="option-sub">You are living with it and looking for a better way to track.</span>
@@ -1287,7 +1297,7 @@
       </div>
       <h2>You&rsquo;re in!</h2>
 
-      <!-- 3 things to know — shown BEFORE install buttons so users actually read them -->
+      <!-- 3 things to know. shown BEFORE install buttons so users actually read them -->
       <div class="know-section" aria-label="Three things to know before installing">
         <div class="know-header">
           <span class="know-eyebrow">Before you install</span>
@@ -1435,8 +1445,8 @@
             <div class="step-kicker">First, on your iPhone or iPad</div>
             <h3 class="step-title">Download TestFlight.</h3>
             <p class="step-body">
-              Apple&rsquo;s free app for running beta software. <em>iPhone only</em>
-              &mdash; Ember is not yet available on Android or the web.
+              Apple&rsquo;s free app for running beta software. <em>iPhone only</em>.
+              Ember is not yet available on Android or the web.
             </p>
             <a href="https://apps.apple.com/us/app/testflight/id899247664"
                target="_blank" rel="noopener"
@@ -1541,7 +1551,7 @@
                 </p>
                 <p class="tip-subtle">
                   To flip back to your own data, tap the version text
-                  <strong>seven more times</strong> &mdash; same gesture, toggles right back.
+                  <strong>seven more times</strong>. Same gesture, toggles right back.
                 </p>
               </div>
             </article>
@@ -1586,7 +1596,7 @@
                   When we ship a new version of Ember, <strong>Apple sends you
                   an email</strong> letting you know. Open the
                   <em>TestFlight</em> app on your phone and tap
-                  <strong>Update</strong> next to Ember &mdash; that pulls in
+                  <strong>Update</strong> next to Ember. That pulls in
                   the latest build.
                 </p>
                 <p class="tip-subtle">
@@ -1654,7 +1664,7 @@
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    // Native validation — required fields, email format, etc.
+    // Native validation. required fields, email format, etc.
     if (!form.checkValidity()) {
       form.reportValidity();
       return;
@@ -1721,7 +1731,7 @@
     }
   });
 
-  // ——— Tips carousel ———
+  // === Tips carousel ===
   (function initTipsCarousel() {
     const track = document.getElementById("tipsTrack");
     const dots = document.querySelectorAll("#tipsDots .tips-dot");

@@ -1,5 +1,5 @@
 /* ─────────────────────────────────────────────────────────────
-   Ember — shared site styles
+   Ember . shared site styles
    Dark, quiet, Apple-like. One column on mobile, two on desktop.
    ───────────────────────────────────────────────────────────── */
 
@@ -310,8 +310,25 @@ a { color: inherit; text-decoration: none; }
   padding: var(--section-y) 0;
   position: relative;
 }
+
+/* Engine intro . sits above the classification widget */
+.engine-intro {
+  padding: clamp(56px, 8vw, 96px) 0 clamp(28px, 4vw, 44px);
+  text-align: center;
+}
+.engine-intro-inner {
+  max-width: 60ch;
+  margin: 0 auto;
+}
+.engine-intro .feat-title {
+  margin-inline: auto;
+}
+.engine-intro-body {
+  max-width: 56ch;
+  margin: 0 auto;
+}
 .feat.alt {
-  /* deprecated — every section on pure black */
+  /* deprecated . every section on pure black */
   background: var(--bg);
 }
 .feat-grid {
@@ -671,6 +688,20 @@ body.prov .eyebrow {
 @media (max-width: 480px) {
   body.prov .eyebrow { font-size: 12px; }
 }
+@media (min-width: 768px) {
+  body.prov .eyebrow {
+    font-size: 18px;
+    letter-spacing: 2.4px;
+    margin-bottom: 28px;
+  }
+}
+@media (min-width: 1200px) {
+  body.prov .eyebrow {
+    font-size: 22px;
+    letter-spacing: 3px;
+    margin-bottom: 32px;
+  }
+}
 
 /* Form (beta page) */
 .form-card {
@@ -862,7 +893,7 @@ body.prov .eyebrow {
 }
 
 /* ─────────────────────────────────────────────────────────────
-   Doc crop — chart-note as document, not as a phone screen
+   Doc crop . chart-note as document, not as a phone screen
    ───────────────────────────────────────────────────────────── */
 .doc-crop {
   position: relative;
@@ -891,7 +922,7 @@ body.prov .eyebrow {
   filter: brightness(1.45) contrast(1.05);
 }
 .doc-crop::after {
-  /* Soft fade at bottom — implies "this continues" without a hard edge */
+  /* Soft fade at bottom . implies "this continues" without a hard edge */
   content: "";
   position: absolute; left: 0; right: 0; bottom: 0;
   height: 70px;
@@ -906,7 +937,7 @@ body.prov .eyebrow {
   .doc-crop::after { height: 50px; }
 }
 
-/* Tighter privacy band — a quick beat, not a feature pitch */
+/* Tighter privacy band . a quick beat, not a feature pitch */
 .band--tight {
   padding: clamp(56px, 8vw, 88px) 0;
 }
@@ -953,12 +984,22 @@ body.prov .eyebrow {
   font-weight: 500;
 }
 
-.cn-g {
-  color: #5a9a6a;
+/* Reduction-magnitude tiers . shade tracks improvement size */
+.cn-g-strong {
+  color: #4aa56a;
+  font-weight: 500;
 }
-
+.cn-g {
+  color: #6cb676;
+}
+.cn-g-mid {
+  color: #9bc66e;
+}
 .cn-g-soft {
-  color: #a0b85a;
+  color: #c2c668;
+}
+.cn-g-faint {
+  color: #d6c45a;
 }
 
 .cn-t {
@@ -1250,7 +1291,7 @@ body::before {
 .hero--prov::after {
   display: none !important;
 }
-/* ─── Scope section — visual upgrade ──────────────────────── */
+/* ─── Scope section . visual upgrade ──────────────────────── */
 
 .band--scope {
   position: relative;
@@ -1289,7 +1330,7 @@ body::before {
   position: relative;
 }
 
-/* "Ember does" column — warm gold treatment */
+/* "Ember does" column . warm gold treatment */
 .scope-col--does .scope-tag {
   color: #c4b5a0;
   display: inline-flex;
@@ -1317,7 +1358,7 @@ body::before {
   top: 22px;
 }
 
-/* "Ember doesn't" column — muted slate treatment */
+/* "Ember doesn't" column . muted slate treatment */
 .scope-col--doesnt .scope-tag--quiet {
   color: #6e7880;
   display: inline-flex;
@@ -1347,7 +1388,7 @@ body::before {
   opacity: 0.6;
 }
 
-/* Divider — gradient fade instead of flat line */
+/* Divider . gradient fade instead of flat line */
 .scope-divider {
   background: linear-gradient(
     180deg,
@@ -1357,7 +1398,7 @@ body::before {
     transparent
   ) !important;
 }
-/* ─── Chart note window — clean rebuild ───────────────────── */
+/* ─── Chart note window . clean rebuild ───────────────────── */
 
 .chart-note {
   background: #1c1c1c;
@@ -1469,11 +1510,11 @@ body::before {
 }
 
 /* ─────────────────────────────────────────────────────────────
-   Providers page — v2
+   Providers page . v2
    Reveal-stagger helpers, hero chart-note polish, transform-pair
    ───────────────────────────────────────────────────────────── */
 
-/* Reveal stagger — used to cascade hero/section elements in */
+/* Reveal stagger . used to cascade hero/section elements in */
 .reveal--d1 { transition-delay: .08s; }
 .reveal--d2 { transition-delay: .18s; }
 .reveal--d3 { transition-delay: .28s; }
@@ -1482,7 +1523,7 @@ body::before {
   .reveal--d1, .reveal--d2, .reveal--d3, .reveal--d4 { transition-delay: 0s; }
 }
 
-/* Hero chart note — sit nicely inside the existing .hero-anchor halo */
+/* Hero chart note . sit nicely inside the existing .hero-anchor halo */
 .hero--prov .hero-anchor {
   flex-direction: column;
   gap: 18px;
@@ -1494,7 +1535,7 @@ body::before {
   margin: 0 auto;
 }
 
-/* Tiny caption beneath the chart note — adds quiet authenticity */
+/* Tiny caption beneath the chart note . adds quiet authenticity */
 .chart-note-caption {
   margin: 16px auto 0;
   text-align: center;
@@ -1668,7 +1709,7 @@ body::before {
 }
 
 /* ─────────────────────────────────────────────────────────────
-   Providers page — v3
+   Providers page . v3
    Tighter rhythm, classification engine, contact form, copy fixes
    ───────────────────────────────────────────────────────────── */
 
@@ -1683,10 +1724,10 @@ body.prov .hero--prov { padding: clamp(40px, 6vw, 72px) 0 clamp(36px, 5vw, 64px)
 .cta-caption { color: var(--text-muted); }
 .cta-caption a { color: var(--accent-strong); border-bottom-color: rgba(212, 196, 173, 0.4); }
 
-/* ─── Hero chart-note responsive — wrap text on small screens ── */
+/* ─── Hero chart-note responsive . wrap text on small screens ── */
 .hero--prov .chart-note { max-width: 920px; }
 
-/* Chart note — never scroll horizontally. Wrap long lines, vertical
+/* Chart note . never scroll horizontally. Wrap long lines, vertical
    scroll only when the document is taller than the body window. */
 .chart-note__pre {
   white-space: pre-wrap;
@@ -1892,7 +1933,7 @@ body.prov .hero--prov { padding: clamp(40px, 6vw, 72px) 0 clamp(36px, 5vw, 64px)
   100% { opacity: 1; transform: translateX(0); }
 }
 
-/* Output badge — Migraine day, with purple pulse */
+/* Output badge . Migraine day, with purple pulse */
 .engine-viz__output {
   position: relative;
   padding: 12px 18px;
@@ -1937,7 +1978,7 @@ body.prov .hero--prov { padding: clamp(40px, 6vw, 72px) 0 clamp(36px, 5vw, 64px)
   .engine-viz.in .pipe__line { transform: scaleX(1); }
 }
 
-/* Engine viz responsive — stack vertically on smaller screens */
+/* Engine viz responsive . stack vertically on smaller screens */
 @media (max-width: 880px) {
   .engine-viz {
     grid-template-columns: 1fr;
@@ -2012,7 +2053,7 @@ body.prov .hero--prov { padding: clamp(40px, 6vw, 72px) 0 clamp(36px, 5vw, 64px)
 .band--tight { padding: clamp(48px, 7vw, 80px) 0; }
 .closing { padding: clamp(56px, 8vw, 96px) 0 clamp(48px, 7vw, 80px); }
 
-/* ─── Desktop scale-up — let the design fill a real monitor ───
+/* ─── Desktop scale-up . let the design fill a real monitor ───
    Apple-style pages use 1280-1440px content widths and large
    hero imagery. Bump container, type, and asset sizes on wide
    viewports so the page doesn't feel adrift in black. */
@@ -2087,7 +2128,7 @@ body.prov .hero--prov { padding: clamp(40px, 6vw, 72px) 0 clamp(36px, 5vw, 64px)
   .contact-section .feat-title { font-size: 56px; }
 }
 
-/* Privacy band visual lift — small phone+lock motif above the headline */
+/* Privacy band visual lift . small phone+lock motif above the headline */
 .privacy-mark {
   display: flex;
   justify-content: center;
@@ -2117,7 +2158,7 @@ body.prov .hero--prov { padding: clamp(40px, 6vw, 72px) 0 clamp(36px, 5vw, 64px)
 }
 
 /* ─────────────────────────────────────────────────────────────
-   Engine viz — v4 (chaos → ICHD-3 → Migraine day → phone pulse)
+   Engine viz . v4 (chaos → ICHD-3 → Migraine day → phone pulse)
    The narrative: phone shows quick patient entry; data appears
    chaotic; ICHD-3 classifier resolves; Migraine day pops out
    in migraine purple; the phone screen pulses purple back.
@@ -2139,12 +2180,12 @@ body.prov .hero--prov { padding: clamp(40px, 6vw, 72px) 0 clamp(36px, 5vw, 64px)
 .engine-viz > .engine-arrow    { margin-left: -16px; margin-right: -8px; }
 .engine-viz > .engine-output   { margin-left: -8px; }
 
-/* Phone scroll — quick (2.4s), preserving the original keyframes for static fallback */
+/* Phone scroll . quick (2.4s), preserving the original keyframes for static fallback */
 .engine-viz.in .phone-scroll img:not([src*="daily-full"]) {
   animation: engine-phone-scroll 2.4s cubic-bezier(0.4, 0, 0.2, 1) 0.3s 1 forwards;
 }
 
-/* Phone-frame variant for full-aspect screen recordings — no fixed
+/* Phone-frame variant for full-aspect screen recordings . no fixed
    height, no clipping. The video drives the frame's height naturally.
    Used for §1 daily-entry video and §2 treatment-story video. */
 .phone-frame--video {
@@ -2172,7 +2213,7 @@ body.prov .hero--prov { padding: clamp(40px, 6vw, 72px) 0 clamp(36px, 5vw, 64px)
   border-radius: 38px;
 }
 
-/* Phone purple pulse — fires after the result emerges, closing the loop */
+/* Phone purple pulse . fires after the result emerges, closing the loop */
 .phone-purple-pulse {
   position: absolute;
   inset: 0;
@@ -2197,14 +2238,14 @@ body.prov .hero--prov { padding: clamp(40px, 6vw, 72px) 0 clamp(36px, 5vw, 64px)
   100% { opacity: 0; }
 }
 
-/* Engine zone — holds chaos tokens and the resolving pill */
+/* Engine zone . holds chaos tokens and the resolving pill */
 .engine-zone {
   position: relative;
   width: clamp(220px, 28vw, 320px);
   height: 240px;
 }
 
-/* Chaos tokens — appear scattered, jitter, then absorb into the pill */
+/* Chaos tokens . appear scattered, jitter, then absorb into the pill */
 .chaos-token {
   position: absolute;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -2263,7 +2304,7 @@ body.prov .hero--prov { padding: clamp(40px, 6vw, 72px) 0 clamp(36px, 5vw, 64px)
   100% { opacity: 0; transform: translate(0, 0) rotate(0) scale(0.4); }
 }
 
-/* Engine pill — emerges at the right side of the chaos zone, pulled
+/* Engine pill . emerges at the right side of the chaos zone, pulled
    close to the arrow so it reads as connected to Migraine day */
 .engine-pill {
   position: absolute;
@@ -2306,7 +2347,7 @@ body.prov .hero--prov { padding: clamp(40px, 6vw, 72px) 0 clamp(36px, 5vw, 64px)
   letter-spacing: 0;
 }
 
-/* Connector arrow from engine pill to output — bolder so the
+/* Connector arrow from engine pill to output . bolder so the
    ICHD-3 → Migraine day link reads at a glance */
 .engine-arrow {
   position: relative;
@@ -2338,7 +2379,7 @@ body.prov .hero--prov { padding: clamp(40px, 6vw, 72px) 0 clamp(36px, 5vw, 64px)
   100% { opacity: 1; transform: translateX(0); }
 }
 
-/* Output badge — Migraine day in migraine purple, with steady gentle glow */
+/* Output badge . Migraine day in migraine purple, with steady gentle glow */
 .engine-output {
   position: relative;
   padding: 14px 24px;
@@ -2377,7 +2418,7 @@ body.prov .hero--prov { padding: clamp(40px, 6vw, 72px) 0 clamp(36px, 5vw, 64px)
   50%      { box-shadow: 0 0 28px 4px rgba(167, 139, 250, 0.40); }
 }
 
-/* Reduce motion — disable the animations, jump to end states */
+/* Reduce motion . disable the animations, jump to end states */
 @media (prefers-reduced-motion: reduce) {
   .engine-viz.in .phone-scroll img,
   .engine-viz.in .chaos-token,
@@ -2395,7 +2436,7 @@ body.prov .hero--prov { padding: clamp(40px, 6vw, 72px) 0 clamp(36px, 5vw, 64px)
   .engine-viz.in .engine-output { transform: none; }
 }
 
-/* Mobile — stack the engine viz vertically */
+/* Mobile . stack the engine viz vertically */
 @media (max-width: 880px) {
   .engine-viz {
     grid-template-columns: 1fr;
@@ -2430,7 +2471,7 @@ body.prov .hero--prov { padding: clamp(40px, 6vw, 72px) 0 clamp(36px, 5vw, 64px)
   }
 }
 
-/* References-page lead callout — a touch hazier, words a touch warmer */
+/* References-page lead callout . a touch hazier, words a touch warmer */
 .legal-callout {
   background: linear-gradient(
     135deg,
@@ -2446,7 +2487,7 @@ body.prov .hero--prov { padding: clamp(40px, 6vw, 72px) 0 clamp(36px, 5vw, 64px)
   color: var(--accent-strong);
 }
 
-/* ─── Engine viz — extra polish ────────────────────────────
+/* ─── Engine viz . extra polish ────────────────────────────
    - SVG beams from chaos tokens converging into the pill on absorb
    - ICHD-3 type-in (letter by letter) inside the pill
    - Cascading purple ripples on the output badge
@@ -2558,7 +2599,7 @@ body.prov .hero--prov { padding: clamp(40px, 6vw, 72px) 0 clamp(36px, 5vw, 64px)
 }
 
 /* ─────────────────────────────────────────────────────────────
-   Machine — literal engine with tubes, gauges, pistons, LEDs.
+   Machine . literal engine with tubes, gauges, pistons, LEDs.
    Replaces chaos tokens. Reads as a working machine.
    ───────────────────────────────────────────────────────────── */
 
@@ -2575,7 +2616,7 @@ body.prov .hero--prov { padding: clamp(40px, 6vw, 72px) 0 clamp(36px, 5vw, 64px)
   overflow: visible;
 }
 
-/* Tubes — gold lines with rounded caps, drawn-in then flowing */
+/* Tubes . gold lines with rounded caps, drawn-in then flowing */
 .machine__tube {
   fill: none;
   stroke: rgba(232, 165, 71, 0.55);
@@ -2600,7 +2641,7 @@ body.prov .hero--prov { padding: clamp(40px, 6vw, 72px) 0 clamp(36px, 5vw, 64px)
    show data moving along them. Implemented via a sibling pseudo. */
 .machine__tubes::after { content: none; }
 
-/* Tube labels — small monospace tags at each tube's start */
+/* Tube labels . small monospace tags at each tube's start */
 .machine__label {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 10.5px;
@@ -2617,7 +2658,7 @@ body.prov .hero--prov { padding: clamp(40px, 6vw, 72px) 0 clamp(36px, 5vw, 64px)
 .engine-viz.in .machine__label:nth-of-type(5) { animation-delay: 3.18s; }
 @keyframes label-fade { to { opacity: 1; } }
 
-/* Engine casing — appears once tubes are drawn, then comes alive */
+/* Engine casing . appears once tubes are drawn, then comes alive */
 .machine__engine { opacity: 0; }
 .engine-viz.in .machine__engine { animation: engine-arrive .6s ease-out 3.4s forwards; }
 @keyframes engine-arrive { to { opacity: 1; } }
@@ -2662,7 +2703,7 @@ body.prov .hero--prov { padding: clamp(40px, 6vw, 72px) 0 clamp(36px, 5vw, 64px)
   100% { transform: rotate(72deg); }
 }
 
-/* LEDs — blink in sequence */
+/* LEDs . blink in sequence */
 .machine__led {
   fill: rgba(232, 165, 71, 0.18);
   stroke: rgba(232, 165, 71, 0.6);
@@ -2678,7 +2719,7 @@ body.prov .hero--prov { padding: clamp(40px, 6vw, 72px) 0 clamp(36px, 5vw, 64px)
   50%      { fill: rgba(232, 165, 71, 0.95); filter: drop-shadow(0 0 5px rgba(232, 165, 71, 0.8)); }
 }
 
-/* Pistons — pump up and down, staggered */
+/* Pistons . pump up and down, staggered */
 .machine__piston {
   transform-origin: center bottom;
   transform-box: fill-box;
@@ -2725,7 +2766,7 @@ body.prov .hero--prov { padding: clamp(40px, 6vw, 72px) 0 clamp(36px, 5vw, 64px)
 .engine-viz.in .machine__plate-letter:nth-of-type(6) { animation-delay: 4.10s; }
 @keyframes plate-letter { to { opacity: 1; } }
 
-/* Output tube — bold, gold→purple gradient, with a CHUNKY arrowhead */
+/* Output tube . bold, gold→purple gradient, with a CHUNKY arrowhead */
 .machine__out-tube {
   fill: none;
   stroke: url(#outGrad);
@@ -2757,7 +2798,7 @@ body.prov .hero--prov { padding: clamp(40px, 6vw, 72px) 0 clamp(36px, 5vw, 64px)
 .engine-viz > .engine-arrow { display: none; }
 .engine-viz > .engine-zone { display: none; }
 
-/* Engine viz layout — phone | (machine stacked above output)
+/* Engine viz layout . phone | (machine stacked above output)
    Both columns size to content (auto/auto) so the whole pair can be
    centered horizontally on the page. */
 .engine-viz {
@@ -2875,7 +2916,7 @@ body.prov .hero--prov { padding: clamp(40px, 6vw, 72px) 0 clamp(36px, 5vw, 64px)
   animation: none;
 }
 
-/* Plate title — adjust for new wider "EMBER LOGIC ENGINE" text */
+/* Plate title . adjust for new wider "EMBER LOGIC ENGINE" text */
 .machine__plate-title {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 9px;
@@ -2884,7 +2925,7 @@ body.prov .hero--prov { padding: clamp(40px, 6vw, 72px) 0 clamp(36px, 5vw, 64px)
 }
 .machine__plate-label { display: none; }
 
-/* ─── "No AI inside" note — teal pill, distinct from the gold engine ─── */
+/* ─── "No AI inside" note . teal pill, distinct from the gold engine ─── */
 .ai-note {
   display: flex;
   align-items: center;
