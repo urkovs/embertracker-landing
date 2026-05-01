@@ -72,6 +72,19 @@
       </p>
     </div>
 
+    <div class="entry-demo" aria-label="Daily entry flow demonstration">
+      <span class="entry-demo-badge">Sample data</span>
+      <div class="phone-frame phone-frame--video">
+        <div class="phone-scroll">
+          <video class="phone-video"
+                 autoplay muted loop playsinline preload="auto"
+                 aria-label="A few taps logs a complete day in the Ember app">
+            <source src="assets/daily-entry-flow.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+
     <div class="cal-card" id="emberCalendar" aria-label="Sample 90-day migraine calendar export">
       <div class="cal-header">
         <div class="cal-title-row">
@@ -145,6 +158,27 @@
 }
 .feat--cal .feat-head .feat-title { margin-inline: auto; }
 .feat--cal .feat-head .feat-body { margin-inline: auto; max-width: 56ch; }
+
+/* Daily-entry video demo, sits between body copy and the calendar card */
+.entry-demo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin: 0 auto clamp(36px, 5vw, 56px);
+}
+.entry-demo-badge {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: #E8A547;
+  background: rgba(232, 165, 71, 0.1);
+  border: 1px solid rgba(232, 165, 71, 0.28);
+  padding: 4px 9px;
+  border-radius: 4px;
+  font-weight: 500;
+}
 
 .cal-card {
   background: #111111;
