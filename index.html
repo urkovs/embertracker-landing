@@ -72,27 +72,497 @@
   </div>
 </section>
 
-<!-- ─── §2  Tap a few things → report ──────────────────── -->
-<section class="feat">
-  <div class="wrap feat-grid">
-    <div class="feat-copy">
+<!-- ─── §2  Calendar export. what patients produce ─────── -->
+<section class="feat feat--cal">
+  <div class="wrap">
+    <div class="feat-head">
       <h2 class="feat-title">
         A few taps today. <span class="text-accent">A complete picture for your provider.</span>
       </h2>
       <p class="feat-body">
-        Each day builds your record. Three months of patterns,
-        organized and ready for your next visit, so it doesn&rsquo;t
-        start with twenty minutes of digging.
+        Three months of your patterns, color-coded and ready to
+        share. Hand it to your provider, upload it to your portal,
+        or keep it for yourself.
       </p>
     </div>
-    <div class="feat-phone">
-      <!-- Cropped chart-note: shown as a document, not a phone -->
-      <div class="doc-crop">
-        <img src="assets/screens/chart-note.jpg" alt="Top of a chart-note summary, reading like a clinical document" />
+
+    <div class="cal-card" id="emberCalendar" aria-label="Sample 90-day migraine calendar export">
+      <div class="cal-header">
+        <div class="cal-title-row">
+          <h3 class="cal-title">Migraine Calendar</h3>
+          <span class="cal-badge">Sample data</span>
+        </div>
+        <p class="cal-subtitle">90 days &middot; Jan 31 &ndash; Apr 30, 2026</p>
+      </div>
+
+      <div class="cal-stats">
+        <div class="cal-stat">
+          <span class="cal-stat-num cal-stat-num--mig">34/90</span>
+          <span class="cal-stat-label">Migraine</span>
+        </div>
+        <div class="cal-stat">
+          <span class="cal-stat-num cal-stat-num--head">18/90</span>
+          <span class="cal-stat-label">Headache</span>
+        </div>
+        <div class="cal-stat">
+          <span class="cal-stat-num cal-stat-num--imp">23/90</span>
+          <span class="cal-stat-label">Impacted</span>
+        </div>
+        <div class="cal-stat">
+          <span class="cal-stat-num cal-stat-num--clr">38/90</span>
+          <span class="cal-stat-label">Clear</span>
+        </div>
+        <div class="cal-stat">
+          <span class="cal-stat-num cal-stat-num--base">&minus;37%</span>
+          <span class="cal-stat-label">vs Baseline</span>
+        </div>
+      </div>
+
+      <div class="cal-grid">
+        <div class="cal-axis"></div>
+        <div class="cal-rows"></div>
+      </div>
+
+      <div class="cal-legend">
+        <span class="cal-legend-item">
+          <span class="cal-legend-swatch cal-legend-swatch--mig"></span>
+          Migraine day
+        </span>
+        <span class="cal-legend-item">
+          <span class="cal-legend-swatch cal-legend-swatch--head"></span>
+          Headache day
+        </span>
+        <span class="cal-legend-item">
+          <span class="cal-legend-swatch cal-legend-swatch--clear"></span>
+          Clear
+        </span>
+        <span class="cal-legend-item">
+          <span class="cal-legend-dot cal-legend-dot--imp"></span>
+          Impacted
+        </span>
+        <span class="cal-legend-item">
+          <span class="cal-legend-dot cal-legend-dot--per"></span>
+          Period day
+        </span>
       </div>
     </div>
   </div>
 </section>
+
+<style>
+/* Calendar export showcase. self-contained so site.css stays clean */
+.feat--cal { padding: var(--section-y) 0; }
+.feat--cal .feat-head {
+  max-width: 60ch;
+  margin: 0 auto clamp(36px, 5vw, 56px);
+  text-align: center;
+}
+.feat--cal .feat-head .feat-title { margin-inline: auto; }
+.feat--cal .feat-head .feat-body { margin-inline: auto; max-width: 56ch; }
+
+.cal-card {
+  background: #111111;
+  border: 1px solid rgba(196, 181, 160, 0.12);
+  border-radius: 14px;
+  padding: clamp(20px, 3vw, 32px);
+  font-family: var(--sans);
+  position: relative;
+  max-width: 920px;
+  margin: 0 auto;
+}
+.cal-header {
+  margin-bottom: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(196, 181, 160, 0.08);
+}
+.cal-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+.cal-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(20px, 2.4vw, 26px);
+  color: #E8E6E3;
+  margin: 0;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.cal-badge {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: #E8A547;
+  background: rgba(232, 165, 71, 0.1);
+  border: 1px solid rgba(232, 165, 71, 0.28);
+  padding: 4px 9px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+.cal-subtitle {
+  font-size: 12.5px;
+  color: #6e685f;
+  margin: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  letter-spacing: 0.2px;
+}
+
+.cal-stats {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-bottom: 22px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid rgba(196, 181, 160, 0.08);
+}
+.cal-stat { display: flex; flex-direction: column; gap: 5px; }
+.cal-stat-num {
+  font-family: Georgia, serif;
+  font-size: clamp(18px, 2.2vw, 22px);
+  font-weight: 400;
+  line-height: 1;
+}
+.cal-stat-num--mig  { color: #c8b8e8; }
+.cal-stat-num--head { color: #b0d8e8; }
+.cal-stat-num--imp  { color: #e8c89a; }
+.cal-stat-num--clr  { color: #bdb8af; }
+.cal-stat-num--base { color: #5a9a6a; }
+.cal-stat-label {
+  font-size: 9.5px;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+  color: #6e685f;
+  font-weight: 500;
+}
+@media (max-width: 600px) {
+  .cal-stats { grid-template-columns: repeat(3, 1fr); gap: 14px 10px; }
+}
+@media (max-width: 380px) {
+  .cal-stats { grid-template-columns: repeat(2, 1fr); }
+}
+
+.cal-grid { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+.cal-axis,
+.cal-row {
+  display: grid;
+  grid-template-columns: 48px repeat(31, 1fr);
+  gap: 2px;
+}
+.cal-axis {
+  font-size: 9.5px;
+  color: #5a5550;
+  margin-bottom: 6px;
+  align-items: end;
+  height: 14px;
+}
+.cal-axis-num { text-align: center; letter-spacing: 0; }
+.cal-row { margin-bottom: 3px; align-items: stretch; }
+.cal-month-label {
+  font-size: 10.5px;
+  color: #8a847b;
+  font-family: var(--sans);
+  letter-spacing: 0.3px;
+  align-self: center;
+}
+.cal-cell {
+  aspect-ratio: 1;
+  border-radius: 3px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.92);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  cursor: default;
+}
+.cal-cell.empty { background: transparent; }
+.cal-cell.dim   { background: transparent; opacity: 0.18; }
+.cal-cell.clear {
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+.cal-cell.mig.mild  { background: rgba(155, 122, 204, 0.42); }
+.cal-cell.mig.mod   { background: rgba(155, 122, 204, 0.74); }
+.cal-cell.mig.sev   { background: rgba(155, 122, 204, 1); }
+.cal-cell.head.mild { background: rgba(74, 138, 191, 0.42); }
+.cal-cell.head.mod  { background: rgba(74, 138, 191, 0.74); }
+.cal-cell.head.sev  { background: rgba(74, 138, 191, 1); }
+
+.cal-letter {
+  font-size: 9.5px;
+  line-height: 1;
+  letter-spacing: 0;
+}
+.cal-med {
+  font-size: 7px;
+  line-height: 1;
+  margin-top: 2px;
+  opacity: 0.78;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.cal-cell.impacted::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  margin-left: -2px;
+  border-radius: 50%;
+  background: #e8a547;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.4);
+}
+.cal-cell.impacted .cal-med { display: none; }
+
+.cal-cell.period::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 3.5px;
+  height: 3.5px;
+  border-radius: 50%;
+  background: #d8a3b3;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.4);
+}
+
+.cal-cell.mig:hover, .cal-cell.head:hover {
+  transform: scale(1.45);
+  z-index: 5;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.6);
+}
+
+@media (max-width: 700px) {
+  .cal-axis, .cal-row { grid-template-columns: 38px repeat(31, 1fr); }
+  .cal-month-label { font-size: 9.5px; }
+  .cal-letter { font-size: 7px; }
+  .cal-med { display: none; }
+  .cal-cell.impacted::after { width: 3px; height: 3px; bottom: 1px; margin-left: -1.5px; }
+  .cal-cell.period::before { width: 2.5px; height: 2.5px; top: 1px; right: 1px; }
+}
+@media (max-width: 480px) {
+  .cal-axis, .cal-row { grid-template-columns: 32px repeat(31, 1fr); gap: 1.5px; }
+  .cal-letter { font-size: 6.5px; }
+}
+
+.cal-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: center;
+  margin-top: 22px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(196, 181, 160, 0.08);
+  font-size: 11.5px;
+  color: #8a847b;
+}
+.cal-legend-item { display: inline-flex; align-items: center; gap: 7px; }
+.cal-legend-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+.cal-legend-swatch--mig   { background: #9b7acc; }
+.cal-legend-swatch--head  { background: #4a8abf; }
+.cal-legend-swatch--clear { background: #1a1a1a; border: 1px solid rgba(255, 255, 255, 0.08); }
+.cal-legend-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin: 0 3px;
+}
+.cal-legend-dot--imp { background: #e8a547; }
+.cal-legend-dot--per { background: #d8a3b3; }
+
+@media (max-width: 480px) {
+  .cal-legend { gap: 10px 14px; font-size: 10.5px; }
+}
+</style>
+
+<script>
+(function() {
+  const root = document.getElementById('emberCalendar');
+  if (!root) return;
+  const axisEl = root.querySelector('.cal-axis');
+  const rowsEl = root.querySelector('.cal-rows');
+
+  // [monthKey, day, type, severity, meds[], impacted?]
+  const data = [
+    ['jan', 31, 'M', 'mod', ['Ub']],
+
+    ['feb', 1, 'M', 'mod', ['Ub']],
+    ['feb', 3, 'M', 'sev', ['Mx'], true],
+    ['feb', 5, 'M', 'mod', ['Mx']],
+    ['feb', 6, 'H', 'mild'],
+    ['feb', 7, 'H', 'mod'],
+    ['feb', 10, 'M', 'mod', ['Ub']],
+    ['feb', 11, 'M', 'sev', ['Ub'], true],
+    ['feb', 12, 'H', 'mild'],
+    ['feb', 13, 'H', 'mod', ['Ib']],
+    ['feb', 14, 'M', 'sev', ['Mx'], true],
+    ['feb', 15, 'M', 'mod', ['Mx']],
+    ['feb', 16, 'M', 'sev', ['Ub'], true],
+    ['feb', 17, 'H', 'mod', ['Ib']],
+    ['feb', 18, 'M', 'mod', ['Ub']],
+    ['feb', 19, 'M', 'sev', ['Mx'], true],
+    ['feb', 20, 'H', 'mild'],
+    ['feb', 21, 'H', 'mod', ['Ib']],
+    ['feb', 25, 'H', 'mod', ['Ib']],
+    ['feb', 27, 'M', 'sev', ['Ub'], true],
+    ['feb', 28, 'M', 'mod', ['Ub']],
+
+    ['mar', 1, 'M', 'sev', ['Mx'], true],
+    ['mar', 2, 'M', 'mod', ['Ub']],
+    ['mar', 3, 'M', 'mod', ['Ub']],
+    ['mar', 5, 'H', 'mild'],
+    ['mar', 8, 'M', 'mod', ['Ub']],
+    ['mar', 10, 'H', 'mod', ['Ib']],
+    ['mar', 11, 'H', 'mild', ['Ib']],
+    ['mar', 12, 'M', 'mod', ['Ub']],
+    ['mar', 16, 'H', 'mod', ['Ib']],
+    ['mar', 17, 'M', 'sev', ['Ub'], true],
+    ['mar', 20, 'M', 'mod', ['Mx']],
+    ['mar', 24, 'H', 'mild'],
+    ['mar', 25, 'H', 'mild'],
+    ['mar', 26, 'M', 'mod', ['Mx']],
+    ['mar', 27, 'M', 'sev', ['Ub'], true],
+    ['mar', 29, 'M', 'mod', ['Ub']],
+    ['mar', 30, 'M', 'sev', ['Ib'], true],
+    ['mar', 31, 'M', 'sev', ['Mx', 'Ub'], true],
+
+    ['apr', 1, 'H', 'mild'],
+    ['apr', 2, 'M', 'sev', ['Mx'], true],
+    ['apr', 4, 'M', 'mod', ['Mx']],
+    ['apr', 8, 'M', 'mod', ['Ub']],
+    ['apr', 9, 'M', 'mod', ['Mx']],
+    ['apr', 12, 'H', 'mild'],
+    ['apr', 14, 'M', 'mod', ['Ub']],
+    ['apr', 18, 'H', 'mod', ['Ib']],
+    ['apr', 20, 'H', 'mild'],
+    ['apr', 24, 'M', 'mod', ['Ub']],
+    ['apr', 25, 'M', 'sev', ['Ub'], true],
+    ['apr', 28, 'M', 'mild'],
+    ['apr', 30, 'M', 'mod', ['Ub']]
+  ];
+
+  const dayMap = {};
+  data.forEach(d => { dayMap[d[0] + '-' + d[1]] = d; });
+
+  const periodDays = new Set([
+    'feb-8','feb-9','feb-10','feb-11','feb-12',
+    'mar-7','mar-8','mar-9','mar-10','mar-11',
+    'apr-5','apr-6','apr-7','apr-8','apr-9'
+  ]);
+
+  const months = [
+    { key: 'jan', label: "Jan '26", days: 31, partial: 31 },
+    { key: 'feb', label: "Feb '26", days: 28 },
+    { key: 'mar', label: "Mar '26", days: 31 },
+    { key: 'apr', label: "Apr '26", days: 30 }
+  ];
+
+  const monthName = { jan:'Jan', feb:'Feb', mar:'Mar', apr:'Apr' };
+  const sevLabel  = { mild:'Mild', mod:'Moderate', sev:'Severe' };
+  const medFull   = { Ub:'Ubrelvy', Mx:'Maxalt', Ib:'Ibuprofen' };
+  const showAxis  = new Set([1, 5, 10, 15, 20, 25, 30]);
+
+  axisEl.innerHTML = '';
+  axisEl.appendChild(document.createElement('span'));
+  for (let i = 1; i <= 31; i++) {
+    const span = document.createElement('span');
+    span.className = 'cal-axis-num';
+    span.textContent = showAxis.has(i) ? i : '';
+    axisEl.appendChild(span);
+  }
+
+  rowsEl.innerHTML = '';
+  months.forEach(m => {
+    const row = document.createElement('div');
+    row.className = 'cal-row';
+
+    const lbl = document.createElement('span');
+    lbl.className = 'cal-month-label';
+    lbl.textContent = m.label;
+    row.appendChild(lbl);
+
+    for (let day = 1; day <= 31; day++) {
+      const cell = document.createElement('div');
+      const key = m.key + '-' + day;
+
+      if (day > m.days) {
+        cell.className = 'cal-cell empty';
+        row.appendChild(cell);
+        continue;
+      }
+
+      if (m.partial && day < m.partial) {
+        cell.className = 'cal-cell dim';
+        row.appendChild(cell);
+        continue;
+      }
+
+      const d = dayMap[key];
+      const classes = ['cal-cell'];
+      let letter = '';
+      let medCode = '';
+
+      if (d) {
+        const type = d[2] === 'M' ? 'mig' : 'head';
+        classes.push(type, d[3]);
+        if (d[5]) classes.push('impacted');
+        letter = d[2];
+        if (d[4] && d[4].length) medCode = d[4][0];
+      } else {
+        classes.push('clear');
+      }
+
+      if (periodDays.has(key)) classes.push('period');
+
+      cell.className = classes.join(' ');
+
+      if (letter) {
+        const lEl = document.createElement('span');
+        lEl.className = 'cal-letter';
+        lEl.textContent = letter;
+        cell.appendChild(lEl);
+      }
+      if (medCode) {
+        const mEl = document.createElement('span');
+        mEl.className = 'cal-med';
+        mEl.textContent = medCode;
+        cell.appendChild(mEl);
+      }
+
+      let tip = monthName[m.key] + ' ' + day + ': ';
+      if (d) {
+        tip += (d[2] === 'M' ? 'Migraine day' : 'Headache day') + ' · ' + sevLabel[d[3]];
+        if (d[4] && d[4].length) {
+          tip += ' · ' + d[4].map(c => medFull[c] || c).join(', ');
+        }
+        if (d[5]) tip += ' · Impacted activity';
+      } else {
+        tip += 'Clear day';
+      }
+      if (periodDays.has(key)) tip += ' · Period';
+      cell.title = tip;
+
+      row.appendChild(cell);
+    }
+
+    rowsEl.appendChild(row);
+  });
+})();
+</script>
 
 <!-- ─── §3  Your data stays on your phone (centered band) ─ -->
 <section class="band band--tight">
