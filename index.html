@@ -92,7 +92,7 @@
           <h3 class="cal-title">Migraine Calendar</h3>
           <span class="cal-badge">Sample data</span>
         </div>
-        <p class="cal-subtitle">90 days &middot; Jan 31 &ndash; Apr 30, 2026</p>
+        <p class="cal-subtitle">90 days &middot; Jan 31 &mdash; Apr 30, 2026</p>
       </div>
 
       <div class="cal-stats">
@@ -287,24 +287,12 @@
   background: #1a1a1a;
   border: 1px solid rgba(255, 255, 255, 0.04);
 }
-.cal-cell.mig.mild  { background: rgba(155, 122, 204, 0.42); }
-.cal-cell.mig.mod   { background: rgba(155, 122, 204, 0.74); }
-.cal-cell.mig.sev   { background: rgba(155, 122, 204, 1); }
-.cal-cell.head.mild { background: rgba(74, 138, 191, 0.42); }
-.cal-cell.head.mod  { background: rgba(74, 138, 191, 0.74); }
-.cal-cell.head.sev  { background: rgba(74, 138, 191, 1); }
+.cal-cell.mig  { background: #9b7acc; }
+.cal-cell.head { background: #4a8abf; }
 
 .cal-letter {
-  font-size: 9.5px;
+  font-size: 10.5px;
   line-height: 1;
-  letter-spacing: 0;
-}
-.cal-med {
-  font-size: 7px;
-  line-height: 1;
-  margin-top: 2px;
-  opacity: 0.78;
-  font-weight: 500;
   letter-spacing: 0;
 }
 
@@ -320,7 +308,6 @@
   background: #e8a547;
   box-shadow: 0 0 0 1px rgba(0,0,0,0.4);
 }
-.cal-cell.impacted .cal-med { display: none; }
 
 .cal-cell.period::before {
   content: '';
@@ -343,14 +330,13 @@
 @media (max-width: 700px) {
   .cal-axis, .cal-row { grid-template-columns: 38px repeat(31, 1fr); }
   .cal-month-label { font-size: 9.5px; }
-  .cal-letter { font-size: 7px; }
-  .cal-med { display: none; }
+  .cal-letter { font-size: 8px; }
   .cal-cell.impacted::after { width: 3px; height: 3px; bottom: 1px; margin-left: -1.5px; }
   .cal-cell.period::before { width: 2.5px; height: 2.5px; top: 1px; right: 1px; }
 }
 @media (max-width: 480px) {
   .cal-axis, .cal-row { grid-template-columns: 32px repeat(31, 1fr); gap: 1.5px; }
-  .cal-letter { font-size: 6.5px; }
+  .cal-letter { font-size: 7px; }
 }
 
 .cal-legend {
@@ -472,8 +458,6 @@
   ];
 
   const monthName = { jan:'Jan', feb:'Feb', mar:'Mar', apr:'Apr' };
-  const sevLabel  = { mild:'Mild', mod:'Moderate', sev:'Severe' };
-  const medFull   = { Ub:'Ubrelvy', Mx:'Maxalt', Ib:'Ibuprofen' };
   const showAxis  = new Set([1, 5, 10, 15, 20, 25, 30]);
 
   axisEl.innerHTML = '';
@@ -514,14 +498,11 @@
       const d = dayMap[key];
       const classes = ['cal-cell'];
       let letter = '';
-      let medCode = '';
 
       if (d) {
-        const type = d[2] === 'M' ? 'mig' : 'head';
-        classes.push(type, d[3]);
+        classes.push(d[2] === 'M' ? 'mig' : 'head');
         if (d[5]) classes.push('impacted');
         letter = d[2];
-        if (d[4] && d[4].length) medCode = d[4][0];
       } else {
         classes.push('clear');
       }
@@ -536,19 +517,10 @@
         lEl.textContent = letter;
         cell.appendChild(lEl);
       }
-      if (medCode) {
-        const mEl = document.createElement('span');
-        mEl.className = 'cal-med';
-        mEl.textContent = medCode;
-        cell.appendChild(mEl);
-      }
 
       let tip = monthName[m.key] + ' ' + day + ': ';
       if (d) {
-        tip += (d[2] === 'M' ? 'Migraine day' : 'Headache day') + ' · ' + sevLabel[d[3]];
-        if (d[4] && d[4].length) {
-          tip += ' · ' + d[4].map(c => medFull[c] || c).join(', ');
-        }
+        tip += (d[2] === 'M' ? 'Migraine day' : 'Headache day');
         if (d[5]) tip += ' · Impacted activity';
       } else {
         tip += 'Clear day';
