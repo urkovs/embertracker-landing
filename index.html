@@ -33,11 +33,13 @@
 <!-- ─── Hero (centered) ──────────────────────────────────── -->
 <section class="hero hero--center">
   <div class="wrap hero-center">
-    <h1>A <span class="text-accent">calmer</span> migraine tracker for iPhone.</h1>
+    <h1>
+      <span class="text-accent">The migraine tracker that doesn&rsquo;t</span>
+      <span class="block">make your migraine worse.</span>
+    </h1>
     <p class="hero-sub">
-      Log symptoms, medication, and impact in under a minute.
-      Ember turns daily entries into clear patterns and summaries
-      your provider can use.
+      Built by an actual headache specialist. Open it, tap what
+      happened, and close it.
     </p>
 
     <div class="cta-row cta-row--center">
@@ -53,31 +55,15 @@
   </div>
 </section>
 
-<!-- ─── §1  Designed for migraine ──────────────────────── -->
-<section class="feat">
-  <div class="wrap feat-grid">
-    <div class="feat-copy">
-      <h2 class="feat-title"><span class="text-accent">Designed for migraine days.</span>
-<span class="block">By an actual headache specialist.</span></h2>
-      <p class="feat-body">
-        A low-glare screen for the times when bright apps are the
-        last thing you need. Open it, tap what happened, and close it.
-      </p>
-    </div>
-    <div class="feat-phone">
-      <div class="phone-frame">
-        <img src="assets/screens/daily-full.jpg" alt="Daily entry screen" />
-      </div>
-    </div>
-  </div>
-</section>
+<div class="section-divider" aria-hidden="true"></div>
 
 <!-- ─── §2  Calendar export. what patients produce ─────── -->
 <section class="feat feat--cal">
   <div class="wrap">
     <div class="feat-head">
       <h2 class="feat-title">
-        A few taps today. <span class="text-accent">A complete picture for your provider.</span>
+        <span class="text-accent">A few taps today.</span>
+        <span class="block">A complete picture for your provider.</span>
       </h2>
       <p class="feat-body">
         Three months of your patterns, color-coded and ready to
@@ -92,7 +78,7 @@
           <h3 class="cal-title">Migraine Calendar</h3>
           <span class="cal-badge">Sample data</span>
         </div>
-        <p class="cal-subtitle">90 days &middot; Jan 31 &mdash; Apr 30, 2026</p>
+        <p class="cal-subtitle">90 days &middot; Feb 1 &mdash; Apr 30, 2026</p>
       </div>
 
       <div class="cal-stats">
@@ -229,7 +215,7 @@
 .cal-stat-num--mig  { color: #c8b8e8; }
 .cal-stat-num--head { color: #b0d8e8; }
 .cal-stat-num--imp  { color: #e8c89a; }
-.cal-stat-num--clr  { color: #bdb8af; }
+.cal-stat-num--clr  { color: #A8C4D4; }
 .cal-stat-num--base { color: #5a9a6a; }
 .cal-stat-label {
   font-size: 9.5px;
@@ -282,10 +268,8 @@
   cursor: default;
 }
 .cal-cell.empty { background: transparent; }
-.cal-cell.dim   { background: transparent; opacity: 0.18; }
 .cal-cell.clear {
-  background: #1a1a1a;
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: rgba(168, 196, 212, 0.14);
 }
 .cal-cell.mig  { background: #9b7acc; }
 .cal-cell.head { background: #4a8abf; }
@@ -327,16 +311,33 @@
   box-shadow: 0 4px 14px rgba(0,0,0,0.6);
 }
 
-@media (max-width: 700px) {
-  .cal-axis, .cal-row { grid-template-columns: 38px repeat(31, 1fr); }
-  .cal-month-label { font-size: 9.5px; }
-  .cal-letter { font-size: 8px; }
-  .cal-cell.impacted::after { width: 3px; height: 3px; bottom: 1px; margin-left: -1.5px; }
-  .cal-cell.period::before { width: 2.5px; height: 2.5px; top: 1px; right: 1px; }
+/* Mobile: switch to horizontal heatmap strips. each day is a thin
+   vertical slice of color within a per-month ribbon. */
+@media (max-width: 767px) {
+  .cal-axis { display: none; }
+  .cal-row {
+    grid-template-columns: 44px repeat(31, 1fr);
+    gap: 1px;
+    margin-bottom: 4px;
+  }
+  .cal-month-label { font-size: 10px; }
+  .cal-cell {
+    aspect-ratio: auto;
+    height: 16px;
+    border-radius: 2px;
+  }
+  .cal-letter { display: none; }
+  .cal-cell.impacted::after,
+  .cal-cell.period::before { display: none; }
+  .cal-cell.mig:hover, .cal-cell.head:hover { transform: none; box-shadow: none; }
 }
-@media (max-width: 480px) {
-  .cal-axis, .cal-row { grid-template-columns: 32px repeat(31, 1fr); gap: 1.5px; }
-  .cal-letter { font-size: 7px; }
+@media (max-width: 420px) {
+  .cal-row {
+    grid-template-columns: 38px repeat(31, 1fr);
+    gap: 1px;
+  }
+  .cal-cell { height: 14px; }
+  .cal-month-label { font-size: 9.5px; }
 }
 
 .cal-legend {
@@ -359,7 +360,7 @@
 }
 .cal-legend-swatch--mig   { background: #9b7acc; }
 .cal-legend-swatch--head  { background: #4a8abf; }
-.cal-legend-swatch--clear { background: #1a1a1a; border: 1px solid rgba(255, 255, 255, 0.08); }
+.cal-legend-swatch--clear { background: rgba(168, 196, 212, 0.55); }
 .cal-legend-dot {
   width: 6px;
   height: 6px;
@@ -384,11 +385,8 @@
 
   // [monthKey, day, type, severity, meds[], impacted?]
   const data = [
-    ['jan', 31, 'M', 'mod', ['Ub']],
-
     ['feb', 1, 'M', 'mod', ['Ub']],
     ['feb', 3, 'M', 'sev', ['Mx'], true],
-    ['feb', 5, 'M', 'mod', ['Mx']],
     ['feb', 6, 'H', 'mild'],
     ['feb', 7, 'H', 'mod'],
     ['feb', 10, 'M', 'mod', ['Ub']],
@@ -451,13 +449,12 @@
   ]);
 
   const months = [
-    { key: 'jan', label: "Jan '26", days: 31, partial: 31 },
     { key: 'feb', label: "Feb '26", days: 28 },
     { key: 'mar', label: "Mar '26", days: 31 },
     { key: 'apr', label: "Apr '26", days: 30 }
   ];
 
-  const monthName = { jan:'Jan', feb:'Feb', mar:'Mar', apr:'Apr' };
+  const monthName = { feb:'Feb', mar:'Mar', apr:'Apr' };
   const showAxis  = new Set([1, 5, 10, 15, 20, 25, 30]);
 
   axisEl.innerHTML = '';
@@ -485,12 +482,6 @@
 
       if (day > m.days) {
         cell.className = 'cal-cell empty';
-        row.appendChild(cell);
-        continue;
-      }
-
-      if (m.partial && day < m.partial) {
-        cell.className = 'cal-cell dim';
         row.appendChild(cell);
         continue;
       }
@@ -563,7 +554,7 @@
     <p class="closing-quote">
       We tried every migraine tracker out there. <br>They all left us wanting more.
     </p>
-    <p class="closing-quote closing-quote--last text-accent">So we built Ember.</p>
+    <p class="closing-quote closing-quote--last text-accent" style="font-weight: 600;">So we built Ember.</p>
 
     <div class="cta-row cta-row--center">
       <a href="beta/" class="btn-primary">

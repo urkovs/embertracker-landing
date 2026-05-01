@@ -311,6 +311,14 @@ a { color: inherit; text-decoration: none; }
   position: relative;
 }
 
+/* Subtle amber gradient line between sections */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(196, 181, 160, 0.2), transparent);
+  margin: clamp(40px, 6vw, 72px) auto;
+  max-width: 800px;
+}
+
 /* Engine intro . sits above the classification widget */
 .engine-intro {
   padding: clamp(56px, 8vw, 96px) 0 clamp(28px, 4vw, 44px);
