@@ -318,6 +318,11 @@ a { color: inherit; text-decoration: none; }
   margin: clamp(40px, 6vw, 72px) auto;
   max-width: 800px;
 }
+body.prov .section-divider--prov {
+  margin: clamp(24px, 4vw, 52px) auto;
+  max-width: 860px;
+  opacity: 0.78;
+}
 
 /* Engine intro . sits above the classification widget */
 .engine-intro {
@@ -1726,7 +1731,12 @@ body.prov { --section-y: clamp(48px, 7vw, 90px); }
 body.prov .feat { padding: clamp(40px, 6vw, 72px) 0; }
 body.prov .band { padding: clamp(56px, 8vw, 96px) 0; }
 body.prov .closing { padding: clamp(56px, 8vw, 96px) 0 clamp(48px, 7vw, 80px); }
-body.prov .hero--prov { padding: clamp(40px, 6vw, 72px) 0 clamp(36px, 5vw, 64px); }
+body.prov .hero--prov {
+  padding: clamp(40px, 6vw, 72px) 0 clamp(36px, 5vw, 64px);
+  background:
+    radial-gradient(ellipse 70% 44% at 50% 0%, rgba(232, 165, 71, 0.105), transparent 68%),
+    radial-gradient(ellipse 46% 34% at 50% 18%, rgba(196, 138, 60, 0.065), transparent 72%);
+}
 
 /* Slightly more visible CTA caption (fixes legibility on dim background) */
 .cta-caption { color: var(--text-muted); }
