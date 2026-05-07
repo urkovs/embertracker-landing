@@ -32,7 +32,7 @@
 
 <p class="legal-kicker">Ember Migraine Tracker</p>
 <h1>Privacy Policy</h1>
-<p class="legal-meta">Last updated: April 18, 2026</p>
+<p class="legal-meta">Last updated: May 6, 2026</p>
 
 <div class="legal-callout">
   <strong>The short version:</strong> Your health data stays on your device. We do not collect it, transmit it, or sell it.
@@ -51,8 +51,10 @@
 <p><strong>All health data is stored locally on your device only.</strong> It is never transmitted to our servers, to third parties, or to any cloud service.</p>
 
 <h3>Data We Do NOT Collect</h3>
-<p>We do not collect your location data. We do not use analytics, tracking pixels, or advertising identifiers. We do not use cookies or similar tracking technologies. We do not collect device identifiers or usage telemetry.</p>
-
+<p>We do not collect your location data. We do not use behavioral analytics platforms, tracking pixels, or advertising identifiers. We do not use cookies, session replay, or similar tracking technologies. We do not collect advertising identifiers (IDFA) or behavioral usage telemetry.</p>
+<h3>Crash Reports</h3>
+<p>Ember uses Sentry, a crash reporting service, to capture stack traces when the app encounters an unexpected error. Crash reports include the location of the error in our code (file name, line number), your device's iOS version, and basic device model information.</p>
+<p>Crash reports are configured to <strong>explicitly exclude</strong> your name, email, or any other identifying information; any health data you have entered; your IP address or device-level identifiers (IDFV, IDFA); and any screen recordings or session replays. This data is used solely to identify and fix bugs in the app.</p>
 <h3>Optional Data Sharing</h3>
 <p>If you choose to use the export features, Ember generates a PDF report or chart note that you can share via your device's standard sharing functionality. This sharing is initiated and controlled entirely by you. We have no access to shared reports.</p>
 
@@ -78,13 +80,13 @@
 <hr>
 
 <h2>4. Third-Party Services</h2>
-<p>Ember uses two third-party services, neither of which receives your health data:</p>
+<p>Ember uses three third-party services, none of which receives your health data:</p>
 <ul>
   <li><strong>Firebase Authentication (Google):</strong> Manages your login credentials only. Receives your email address or Apple Sign-In identifier. Does not receive any health data.</li>
   <li><strong>RevenueCat:</strong> Manages subscription status and purchase receipts only. Does not receive any health data.</li>
+  <li><strong>Sentry:</strong> Receives anonymized crash reports (stack traces, iOS version, device model) when the app encounters an error. Configured to exclude all user identifiers and all health data. See "Crash Reports" in Section 1 above.</li>
 </ul>
-<p>Ember does not integrate with analytics platforms, advertising networks, crash reporting services that transmit health data, cloud databases, or social media services.</p>
-
+<p>Ember does not integrate with behavioral analytics platforms, advertising networks, cloud databases of health information, or social media services.</p>
 <hr>
 
 <h2>5. Data Sharing and Disclosure</h2>
