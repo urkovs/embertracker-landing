@@ -1,45 +1,29 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Join the Ember Beta</title>
-<meta name="description" content="Request a TestFlight invite to the Ember migraine and headache tracker." />
+<title>Ember is on the App Store</title>
+<meta name="description" content="The Ember beta has moved to the App Store. Download Ember Migraine Tracker for iPhone." />
+<meta name="robots" content="noindex" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #0a0a0a;
     --surface: #151515;
-    --surface-elev: #1a1a1a;
     --card-border: #2a2a2a;
     --divider: #222;
-
     --text-primary: #E8E6E3;
     --text: #d8c8b0;
-    --text-body: #C9C5C0;
     --text-muted: #8a847b;
     --hint: #6e685f;
-    --dim: #5a5550;
-
     --accent: #c4b5a0;
     --amber: #E8A547;
-    --amber-muted: #A8772F;
-    --amber-glow: rgba(232, 165, 71, 0.18);
-
-    --g-teal: #b0d8d0;
-    --g-violet: #c8b8e8;
-    --g-rose: #d8b8c8;
-
-    --border-subtle: rgba(232, 230, 227, 0.08);
-    --border-defined: rgba(232, 230, 227, 0.15);
-
     --serif: Georgia, "Times New Roman", serif;
     --sans: "Inter", -apple-system, "SF Pro Text", system-ui, sans-serif;
-
-    --container: 960px;
+    --container: 900px;
     --gutter: clamp(20px, 4vw, 48px);
   }
 
@@ -49,1144 +33,178 @@
     font-family: var(--sans);
     font-size: 16px;
     line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
     min-height: 100vh;
-    display: flex; flex-direction: column;
+    display: flex;
+    flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
   a { color: inherit; text-decoration: none; }
   ::selection { background: rgba(232,165,71,0.35); color: var(--text-primary); }
 
   .wrap { max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); width: 100%; }
 
-  /* Nav. minimal */
   .nav {
     padding: 22px 0;
-    border-bottom: 1px solid var(--border-subtle);
+    border-bottom: 1px solid rgba(232, 230, 227, 0.08);
   }
   .nav-inner {
-    display: flex; align-items: center; justify-content: space-between;
-    max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
   }
   .brand {
-    display: flex; align-items: center; gap: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
     font-family: var(--serif);
-    font-size: 22px; letter-spacing: 0;
+    font-size: 22px;
     color: var(--text-primary);
   }
   .brand-orb {
-    width: 28px; height: 28px;
+    width: 28px;
+    height: 28px;
     background: url("../assets/ember-orb.png") center/contain no-repeat;
     filter: drop-shadow(0 0 10px rgba(232,165,71,0.28));
   }
   .back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     font-size: 14px;
     color: var(--text-muted);
     transition: color .2s;
-    display: inline-flex; align-items: center; gap: 6px;
   }
   .back:hover { color: var(--text); }
 
   main {
     flex: 1;
-    padding: clamp(50px, 8vw, 90px) 0 clamp(40px, 6vw, 80px);
+    padding: clamp(56px, 9vw, 110px) 0 clamp(44px, 7vw, 90px);
     position: relative;
   }
   main::before {
     content: "";
     position: absolute;
-    inset: 0 0 auto 0;
-    height: 320px;
-    background: radial-gradient(ellipse 70% 100% at 50% 0%, rgba(232,165,71,0.08), transparent 70%);
+    inset: 0 0 auto;
+    height: 360px;
+    background: radial-gradient(ellipse 72% 100% at 50% 0%, rgba(232,165,71,0.09), transparent 70%);
     pointer-events: none;
   }
 
-  .intro {
-    text-align: center;
-    margin-bottom: 48px;
+  .card {
     position: relative;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: clamp(30px, 5vw, 54px);
+    background: linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.006)), var(--surface);
+    border: 1px solid rgba(232, 230, 227, 0.10);
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.35);
   }
   .eyebrow {
-    font-family: var(--sans);
-    font-size: 11.5px;
-    letter-spacing: 0;
-    text-transform: uppercase;
-    color: var(--g-teal);
-    margin: 0 0 20px;
-    font-weight: 500;
-  }
-  h1 {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: 52px;
-    line-height: 1.1;
-    letter-spacing: 0;
-    color: var(--text-primary);
-    margin: 0 0 18px;
-    text-wrap: balance;
-  }
-  h1 em {
-    font-style: italic;
-    color: var(--text);
-  }
-  .lede {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 19px;
-    line-height: 1.55;
-    color: var(--text-muted);
-    max-width: 46ch;
-    margin: 0 auto;
-  }
-
-  /* Form */
-  .tester-info {
-    background: var(--surface);
-    border: 1px solid var(--border-subtle);
-    border-radius: 16px;
-    padding: clamp(24px, 4vw, 36px);
-    margin-bottom: 28px;
-    position: relative;
-  }
-  .info-title {
-    font-family: var(--serif);
-    font-weight: 500;
-    font-style: italic;
-    font-size: 24px;
-    color: var(--text-primary);
-    margin: 0 0 20px;
-    letter-spacing: 0;
-  }
-  .info-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-  }
-  .info-list li {
-    font-family: var(--sans);
-    font-size: 14.5px;
-    line-height: 1.6;
-    color: var(--text-muted);
-    padding-left: 18px;
-    border-left: 2px solid var(--g-teal);
-  }
-  .info-list li:nth-child(1) strong { color: var(--g-teal); }
-  .info-list li:nth-child(2) { border-left-color: var(--g-violet); }
-  .info-list li:nth-child(2) strong { color: var(--g-violet); }
-  .info-list li:nth-child(3) { border-left-color: var(--g-rose); }
-  .info-list li:nth-child(3) strong { color: var(--g-rose); }
-  .info-list strong {
-    display: block;
-    font-family: var(--serif);
-    font-weight: 500;
-    font-style: normal;
-    font-size: 16px;
-    color: var(--text-primary);
-    margin-bottom: 4px;
-  }
-
-  form {
-    background: var(--surface);
-    border: 1px solid var(--border-subtle);
-    border-radius: 16px;
-    padding: clamp(24px, 4vw, 40px);
-    position: relative;
-  }
-  .field { margin-bottom: 22px; }
-  .field:last-of-type { margin-bottom: 0; }
-  label {
-    display: block;
-    font-family: var(--sans);
     font-size: 12px;
     letter-spacing: 0;
     text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 10px;
-    font-weight: 500;
+    color: var(--accent);
+    margin: 0 0 18px;
+    font-weight: 600;
   }
-  label .req { color: var(--accent); margin-left: 3px; }
-  input[type="text"],
-  input[type="email"],
-  textarea {
-    width: 100%;
-    background: var(--bg);
-    border: 1px solid var(--border-defined);
-    border-radius: 10px;
-    padding: 13px 14px;
-    font-family: var(--sans);
-    font-size: 15px;
+  h1 {
+    font-family: var(--serif);
+    font-size: clamp(40px, 8vw, 64px);
+    font-weight: 400;
+    line-height: 1.05;
     color: var(--text-primary);
-    transition: border-color .2s, box-shadow .2s;
+    margin: 0 0 20px;
+    text-wrap: balance;
   }
-  input[type="text"]:focus,
-  input[type="email"]:focus,
-  textarea:focus {
-    outline: none;
-    border-color: var(--amber-muted);
-    box-shadow: 0 0 0 3px var(--amber-glow);
+  h1 em {
+    color: var(--text);
+    font-style: italic;
   }
-  textarea { min-height: 96px; resize: vertical; font-family: var(--serif); font-style: italic; font-size: 15px; line-height: 1.5; }
-
-  /* Radio options */
-  .options {
-    display: flex; flex-direction: column; gap: 10px;
-  }
-  .option {
-    display: flex; align-items: flex-start; gap: 12px;
-    padding: 14px 16px;
-    background: var(--bg);
-    border: 1px solid var(--border-defined);
-    border-radius: 10px;
-    cursor: pointer;
-    transition: border-color .2s, background .2s;
-  }
-  .option:hover { border-color: var(--accent); }
-  .option input[type="radio"] {
-    margin: 4px 0 0 0;
-    accent-color: var(--amber);
-    cursor: pointer;
-  }
-  .option-body { flex: 1; }
-  .option-title {
-    font-family: var(--sans);
-    font-size: 15px;
-    color: var(--text-primary);
-    font-weight: 500;
-    display: block;
-    margin-bottom: 2px;
-  }
-  .option-sub {
-    font-family: var(--sans);
-    font-size: 13px;
+  .lede {
+    max-width: 50ch;
+    margin: 0 auto 28px;
     color: var(--text-muted);
-    line-height: 1.45;
-  }
-  .option input[type="radio"]:checked ~ .option-body .option-title {
-    color: var(--amber);
-  }
-  /* Highlight checked option */
-  .option:has(input[type="radio"]:checked) {
-    border-color: var(--amber-muted);
-    background: rgba(232, 165, 71, 0.04);
-  }
-
-  /* Conditional "other" field */
-  .other-detail {
-    margin-top: 12px;
-    display: none;
-  }
-  .other-detail.show { display: block; }
-
-  /* Submit */
-  .submit-row {
-    margin-top: 32px;
-    display: flex; flex-direction: column; gap: 22px; align-items: center;
+    font-size: clamp(16px, 2.4vw, 19px);
   }
   .btn-primary {
-    display: inline-flex; align-items: center; gap: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
     background: linear-gradient(180deg, #E8A547, #c48a2e);
     color: #1a1208;
-    font-family: var(--sans); font-weight: 600; font-size: 15px;
+    font-weight: 600;
+    font-size: 15px;
     padding: 14px 26px;
     border-radius: 12px;
-    border: none;
-    letter-spacing: 0;
-    cursor: pointer;
     box-shadow: 0 1px 0 rgba(255,255,255,0.08) inset, 0 14px 30px rgba(232,165,71,0.22);
     transition: transform .15s ease, filter .15s ease;
   }
   .btn-primary:hover { filter: brightness(1.06); transform: translateY(-1px); }
-  .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-
-  .fine-print {
-    font-family: var(--sans);
-    font-size: 12.5px;
+  .caption {
+    margin: 18px 0 0;
     color: var(--hint);
-    text-align: center;
-    max-width: 42ch;
-    line-height: 1.55;
-    margin: 8px 0 0;
-  }
-
-  /* Success state */
-  .success {
-    display: none;
-    text-align: center;
-    padding: clamp(32px, 6vw, 56px) clamp(20px, 3vw, 36px);
-    background: var(--surface);
-    border: 1px solid var(--border-subtle);
-    border-radius: 16px;
-  }
-  .success.show { display: block; }
-  .success-mark {
-    width: 56px; height: 56px;
-    margin: 0 auto 22px;
-    display: flex; align-items: center; justify-content: center;
-    border-radius: 50%;
-    background: rgba(232,165,71,0.14);
-    border: 1px solid rgba(232,165,71,0.35);
-  }
-  .success-mark svg {
-    width: 24px; height: 24px;
-    stroke: var(--amber); fill: none;
-    stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
-  }
-  .success h2 {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: 34px;
-    color: var(--text-primary);
-    margin: 0 0 14px;
-    font-style: italic;
-  }
-  .success > p {
-    font-family: var(--serif);
-    font-size: 17px;
-    color: var(--text-muted);
-    margin: 0 auto 8px;
-    max-width: 40ch;
+    font-size: 13px;
     line-height: 1.55;
   }
-  /* Two-step next-steps list */
-  .success .steps {
-    list-style: none;
-    padding: 0;
-    margin: 12px auto 40px;
+  .tester-note {
+    margin: 34px auto 0;
+    padding: 20px 22px;
     max-width: 560px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
+    border: 1px solid rgba(196, 181, 160, 0.18);
+    border-radius: 14px;
+    background: rgba(10, 10, 10, 0.55);
     text-align: left;
   }
-  .step-card {
-    display: flex;
-    gap: 18px;
-    padding: 22px 24px;
-    background: linear-gradient(180deg, rgba(176, 216, 208, 0.06), rgba(176, 216, 208, 0.02));
-    border: 1px solid rgba(176, 216, 208, 0.18);
-    border-radius: 14px;
-    align-items: flex-start;
-  }
-  .step-card .step-num {
-    flex-shrink: 0;
-    width: 32px; height: 32px;
-    border-radius: 50%;
-    background: rgba(232, 165, 71, 0.14);
-    border: 1px solid rgba(232, 165, 71, 0.4);
-    color: var(--amber);
-    display: flex; align-items: center; justify-content: center;
+  .tester-note strong {
+    display: block;
+    color: var(--text-primary);
     font-family: var(--serif);
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 500;
-    margin-top: 2px;
-  }
-  .step-card .step-content { flex: 1; min-width: 0; }
-  .step-kicker {
-    font-family: var(--sans);
-    font-size: 10.5px;
-    letter-spacing: 0;
-    text-transform: uppercase;
-    color: var(--g-teal);
-    font-weight: 600;
     margin-bottom: 6px;
   }
-  .step-card .step-title {
-    font-family: var(--serif);
-    font-weight: 500;
-    font-style: italic;
-    font-size: 22px;
-    color: var(--text-primary);
-    margin: 0 0 6px;
-    line-height: 1.2;
-  }
-  .step-card .step-body {
-    font-family: var(--sans);
-    font-size: 14px;
-    color: var(--text-muted);
-    line-height: 1.55;
-    margin: 0 0 14px;
-  }
-  .step-card .step-body em {
-    font-family: var(--serif);
-    font-style: italic;
-    color: var(--text);
-  }
-  .step-link {
-    display: inline-flex; align-items: center; gap: 9px;
-    background: var(--bg);
-    color: var(--text-primary);
-    font-family: var(--sans); font-weight: 500; font-size: 14px;
-    padding: 11px 18px;
-    border-radius: 10px;
-    border: 1px solid var(--border-defined);
-    letter-spacing: 0;
-    transition: border-color .2s, color .2s, transform .15s ease;
-  }
-  .step-link:hover { border-color: var(--accent); color: var(--text-primary); transform: translateY(-1px); }
-  .step-link--primary {
-    background: linear-gradient(180deg, #E8A547, #c48a2e);
-    color: #1a1208;
-    font-weight: 600;
-    border-color: transparent;
-    box-shadow: 0 1px 0 rgba(255,255,255,0.08) inset, 0 10px 24px rgba(232,165,71,0.22);
-  }
-  .step-link--primary:hover { filter: brightness(1.06); color: #1a1208; border-color: transparent; }
-
-  /* ─── "Three things to know" (pre-install, required reading) ─── */
-  .know-section {
-    margin: 8px auto 40px;
-    max-width: 800px;
-    text-align: left;
-  }
-  .know-header {
-    text-align: center;
-    margin-bottom: 32px;
-  }
-  .know-eyebrow {
-    display: block;
-    font-family: var(--sans);
-    font-size: 12px;
-    letter-spacing: 0;
-    text-transform: uppercase;
-    color: var(--amber);
-    font-weight: 600;
-    margin-bottom: 10px;
-  }
-  .know-title {
-    font-family: var(--serif);
-    font-style: italic;
-    font-weight: 400;
-    font-size: 38px;
-    color: var(--text-primary);
+  .tester-note p {
     margin: 0;
-    line-height: 1.2;
-  }
-  .know-list {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    counter-reset: know;
-  }
-  .know-card {
-    display: grid;
-    grid-template-columns: 36px 1fr;
-    gap: 18px;
-    align-items: start;
-    padding: clamp(24px, 4vw, 36px);
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
-    border: 1px solid var(--border-subtle);
-    border-radius: 18px;
-  }
-  .know-card .know-illus {
-    grid-column: 1 / -1;
-    min-height: 200px;
-    margin-top: 4px;
-  }
-  .know-num {
-    width: 34px; height: 34px;
-    border-radius: 50%;
-    background: rgba(232, 165, 71, 0.14);
-    border: 1px solid rgba(232, 165, 71, 0.4);
-    color: var(--amber);
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--serif);
-    font-size: 16px;
-    font-weight: 500;
-    align-self: start;
-    margin-top: 4px;
-  }
-  .know-illus {
-    position: relative;
-    width: 100%;
-    min-height: 240px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .know-illus--taps .tap-frame {
-    position: relative;
-    width: 100%;
-    max-width: 220px;
-    height: 340px;
-    border-radius: 28px;
-    overflow: hidden;
-    background: #000;
-    border: 1.5px solid #2a2520;
-    box-shadow: 0 24px 50px rgba(0,0,0,0.55), 0 0 0 1px rgba(232,165,71,0.06);
-  }
-  .know-illus--feedback .fb-scene {
-    position: relative;
-    width: 280px;
-    height: 260px;
-  }
-  .know-illus--update .tf-scene {
-    max-width: 260px;
-  }
-  .know-body { min-width: 0; grid-column: 2; }
-  .know-heading {
-    font-family: var(--serif);
-    font-weight: 500;
-    font-style: italic;
-    font-size: 26px;
-    line-height: 1.25;
-    color: var(--text-primary);
-    margin: 0 0 16px;
-  }
-  .know-heading em { color: var(--amber); }
-  .know-heading code {
-    font-family: "SF Mono", "Menlo", Consolas, monospace;
-    font-size: 16px;
-    color: var(--amber);
-    background: rgba(232,165,71,0.08);
-    padding: 2px 7px;
-    border-radius: 4px;
-    font-style: normal;
-    font-weight: 400;
-    letter-spacing: 0;
-    white-space: nowrap;
-  }
-  .know-text {
-    font-family: var(--sans);
-    font-size: 16.5px;
     color: var(--text-muted);
-    line-height: 1.6;
-    margin: 0 0 14px;
-  }
-  .know-text em, .know-subtle em {
-    font-family: var(--serif);
-    font-style: italic;
-    color: var(--text);
-  }
-  .know-text strong {
-    color: var(--text);
-    font-weight: 500;
-  }
-  .know-subtle {
-    font-family: var(--sans);
     font-size: 14px;
-    color: var(--hint);
-    line-height: 1.55;
-    margin: 0;
-    padding-top: 12px;
-    border-top: 1px dashed var(--border-subtle);
   }
-  .know-subtle strong { color: var(--text-muted); font-weight: 500; }
-  .know-footnote {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 17.5px;
-    color: var(--text-muted);
-    text-align: center;
-    margin: 32px auto 0;
-    max-width: 42ch;
-  }
-
-  .know-num { width: 34px; height: 34px; font-size: 16px; }
-  .know-illus--feedback .fb-scene { width: 260px; height: 240px; }
-  .know-illus--taps .tap-frame { max-width: 200px; height: 320px; }
-
-  /* Tips section. stacked carousel */
-  .tips-section {
-    margin: 32px auto 40px;
-    max-width: 860px;
-    padding: 56px clamp(20px, 3vw, 40px) 40px;
-    border-top: 1px solid var(--border-subtle);
-    text-align: center;
-  }
-  .tips-header { margin-bottom: 48px; }
-  .tips-eyebrow {
-    display: block;
-    font-family: var(--sans);
-    font-size: 10.5px;
-    letter-spacing: 0;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    font-weight: 600;
-    margin-bottom: 8px;
-  }
-  .tips-title {
-    font-family: var(--serif);
-    font-style: italic;
-    font-weight: 400;
-    font-size: 28px;
-    color: var(--text-primary);
-    margin: 0;
-    line-height: 1.2;
-  }
-  /* Carousel */
-  .tips-carousel {
-    position: relative;
-    overflow: hidden;
-    border-radius: 18px;
-  }
-  .tips-track {
-    display: flex;
-    transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
-    will-change: transform;
-  }
-  .tip-card {
-    flex: 0 0 100%;
-    min-width: 0;
-    display: grid;
-    grid-template-columns: minmax(260px, 340px) 1fr;
-    gap: clamp(32px, 5vw, 56px);
-    align-items: center;
-    padding: clamp(28px, 4vw, 44px) clamp(20px, 3vw, 40px);
-    text-align: left;
-    background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0));
-    border: 1px solid var(--border-subtle);
-    border-radius: 18px;
-    margin-right: 0;
-  }
-  .tip-card + .tip-card { margin-left: 0; }
-
-  /* Carousel controls */
-  .tips-nav {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 18px;
-    margin-top: 24px;
-  }
-  .tips-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: var(--border-defined);
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    transition: background 0.2s, transform 0.2s;
-  }
-  .tips-dot:hover { background: var(--text-muted); }
-  .tips-dot.is-active {
-    background: var(--amber);
-    transform: scale(1.25);
-  }
-  .tips-arrow {
-    width: 36px; height: 36px;
-    border-radius: 50%;
-    background: var(--surface);
-    border: 1px solid var(--border-defined);
-    color: var(--text-muted);
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer;
-    transition: border-color 0.2s, color 0.2s, background 0.2s;
-    padding: 0;
-  }
-  .tips-arrow:hover {
-    border-color: var(--accent);
-    color: var(--text-primary);
-  }
-  .tips-arrow svg { width: 14px; height: 14px; }
-  .tips-dots {
-    display: flex; gap: 10px; align-items: center;
-  }
-  .tip-illus {
-    position: relative;
-    width: 100%;
-    min-height: 280px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 8px;
-  }
-  .tip-body { padding: 0; min-width: 0; }
-  .tip-tag {
-    display: inline-block;
-    font-family: var(--sans);
-    font-size: 11.5px;
-    letter-spacing: 0;
-    text-transform: uppercase;
-    font-weight: 600;
-    padding: 5px 11px;
-    border-radius: 999px;
-    margin-bottom: 12px;
-    white-space: nowrap;
-  }
-  .tip-tag--amber {
-    color: var(--amber);
-    background: rgba(232, 165, 71, 0.1);
-    border: 1px solid rgba(232, 165, 71, 0.3);
-  }
-  .tip-tag--teal {
-    color: var(--g-teal);
-    background: rgba(176, 216, 208, 0.08);
-    border: 1px solid rgba(176, 216, 208, 0.28);
-  }
-  .tip-tag--violet {
-    color: var(--g-violet);
-    background: rgba(200, 184, 232, 0.08);
-    border: 1px solid rgba(200, 184, 232, 0.28);
-  }
-  .tip-tag--rose {
-    color: var(--g-rose);
-    background: rgba(216, 184, 200, 0.08);
-    border: 1px solid rgba(216, 184, 200, 0.28);
-  }
-  .tip-heading {
-    font-family: var(--serif);
-    font-weight: 500;
-    font-style: italic;
-    font-size: 23px;
-    line-height: 1.25;
-    color: var(--text-primary);
-    margin: 0 0 14px;
-  }
-  .tip-heading em {
-    color: var(--amber);
-  }
-  .tip-heading code {
-    font-family: "SF Mono", "Menlo", Consolas, monospace;
-    font-size: 14px;
-    color: var(--amber);
-    background: rgba(232,165,71,0.08);
-    padding: 1px 6px;
-    border-radius: 4px;
-    font-style: normal;
-    font-weight: 400;
-    letter-spacing: 0;
-    white-space: nowrap;
-  }
-  .tip-text {
-    font-family: var(--sans);
-    font-size: 15px;
-    color: var(--text-muted);
-    line-height: 1.6;
-    margin: 0 0 12px;
-  }
-  .tip-text em, .tip-subtle em {
-    font-family: var(--serif);
-    font-style: italic;
-    color: var(--text);
-  }
-  .tip-text strong {
-    color: var(--text);
-    font-weight: 500;
-  }
-  .tip-subtle {
-    font-family: var(--sans);
-    font-size: 13px;
-    color: var(--hint);
-    line-height: 1.55;
-    margin: 0;
-    padding-top: 12px;
-    border-top: 1px dashed var(--border-subtle);
-  }
-  .tip-subtle strong { color: var(--text-muted); font-weight: 500; }
-
-  /* Profile-version illustration. Show the bottom of the screenshot
-     where "Ember v1.0" lives. We crop to a shorter aspect ratio and
-     anchor object-position to the bottom so the version text sits
-     about 60% down the visible frame. */
-  .tip-illus--taps {
-    padding: 20px 8px;
-  }
-  .tip-illus--taps .tap-frame {
-    position: relative;
-    width: 100%;
-    max-width: 240px;
-    height: 380px;
-    border-radius: 28px;
-    overflow: hidden;
-    background: #000;
-    border: 1.5px solid #2a2520;
-    box-shadow:
-      0 28px 60px rgba(0,0,0,0.55),
-      0 0 0 1px rgba(232,165,71,0.06);
-  }
-  .tap-img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    object-position: center bottom;
-    display: block;
-  }
-  /* "Ember v1.0" is near the bottom of the screenshot (~82% down
-     the source). With object-position: bottom, it sits at ~82%
-     of the visible frame height. */
-  .tap-ring {
-    position: absolute;
-    top: 77%;
-    left: 50%;
-    width: 36px; height: 36px;
-    margin-left: -18px; margin-top: -18px;
-    border-radius: 50%;
-    border: 1.5px solid var(--amber);
-    opacity: 0;
-    animation: tapPulse 2.4s ease-out infinite;
-    pointer-events: none;
-  }
-  .tap-ring--2 { animation-delay: 0.8s; }
-  .tap-ring--3 { animation-delay: 1.6s; }
-  @keyframes tapPulse {
-    0%   { transform: scale(0.35); opacity: 0.95; }
-    70%  { transform: scale(2.2); opacity: 0; }
-    100% { transform: scale(2.2); opacity: 0; }
-  }
-
-  .success .back-home {
-    display: inline-block;
-    font-family: var(--sans);
-    font-size: 14px;
+  .tester-note a {
     color: var(--accent);
     border-bottom: 1px solid rgba(196,181,160,0.3);
-    padding-bottom: 2px;
   }
 
-  /* Footer */
   footer {
     border-top: 1px solid var(--divider);
     padding: 30px 0;
     text-align: center;
-    font-family: var(--sans);
     font-size: 12.5px;
-    color: var(--dim);
+    color: var(--hint);
   }
 
-  /* Hide honeypot */
-  .honey {
-    position: absolute;
-    left: -10000px;
-    width: 1px; height: 1px; opacity: 0;
-  }
-
-  /* Contain the floating screenshot illustration inside a soft callout
-     so it reads as an intentional illustration, not loose elements. */
-  .know-illus--feedback {
-    background: rgba(10, 10, 10, 0.6);
-    border: 1px solid rgba(196, 181, 160, 0.15);
-    border-radius: 14px;
-    padding: 24px 16px 16px;
-    overflow: visible;
-  }
-
-  /* Screenshot-feedback illustration */
-  .tip-illus--feedback {
-    padding: 20px 0;
-    overflow: visible;
-  }
-  .fb-scene {
-    position: relative;
-    width: 320px;
-    height: 280px;
-    margin: 0 auto;
-  }
-  .tip-illus--feedback .fb-device {
-    position: absolute;
-    top: 20px;
-    left: 0;
-    width: 142px;
-    height: 256px;
-    border-radius: 26px;
-    background: #000;
-    border: 1.5px solid #2a2520;
-    padding: 5px;
-    box-shadow:
-      0 24px 48px rgba(0,0,0,0.55),
-      0 0 0 1px rgba(232,165,71,0.08),
-      0 0 60px rgba(232,165,71,0.08);
-    overflow: hidden;
-    z-index: 1;
-  }
-  .tip-illus--feedback .fb-screen {
-    width: 100%; height: 100%;
-    border-radius: 21px;
-    overflow: hidden;
-    position: relative;
-    background: url("../assets/daily-entry-screenshot.jpg") center/cover no-repeat;
-  }
-  .tip-illus--feedback .fb-menu {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 186px;
-    background: rgba(30, 28, 26, 0.96);
-    -webkit-backdrop-filter: blur(20px);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 14px;
-    padding: 4px 0;
-    font-family: -apple-system, "SF Pro Text", system-ui, sans-serif;
-    font-size: 12.5px;
-    color: #f2f2f2;
-    box-shadow:
-      0 18px 40px rgba(0,0,0,0.55),
-      0 0 0 1px rgba(232,165,71,0.08);
-    z-index: 2;
-  }
-  .fb-item {
-    display: flex; align-items: center; gap: 9px;
-    padding: 8px 12px;
-    position: relative;
-  }
-  .fb-item + .fb-item::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 10px; right: 10px;
-    height: 1px;
-    background: rgba(255,255,255,0.06);
-  }
-  .fb-item .ico {
-    width: 15px; height: 15px; flex-shrink: 0;
-    color: #d8d8d8;
-  }
-  .fb-item.highlighted {
-    background: linear-gradient(90deg, rgba(232,165,71,0.22), rgba(232,165,71,0.08));
-    border-radius: 9px;
-    margin: 2px 4px;
-    padding: 8px 9px;
-  }
-  .fb-item.highlighted::before { display: none; }
-  .fb-item.highlighted + .fb-item::before { display: none; }
-  .fb-item.highlighted .label {
-    color: #ffd89b;
-    font-weight: 600;
-  }
-  .fb-item.highlighted .ico { color: #E8A547; }
-  .fb-item.danger .label { color: #ff6b6b; }
-  .fb-item.danger .ico { color: #ff6b6b; }
-
-  /* TestFlight update illustration. rose gemstone */
-  .tip-illus--update {
-    padding: 20px 8px;
-  }
-  .tip-illus--update .tf-scene {
-    position: relative;
-    width: 100%;
-    max-width: 300px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-  .tf-notif {
-    background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 16px;
-    padding: 12px 14px;
-    display: flex;
-    align-items: flex-start;
-    gap: 11px;
-    box-shadow: 0 14px 30px rgba(0,0,0,0.5);
-    -webkit-backdrop-filter: blur(16px);
-    backdrop-filter: blur(16px);
-    font-family: -apple-system, "SF Pro Text", system-ui, sans-serif;
-  }
-  .tf-notif-icon {
-    width: 38px; height: 38px;
-    border-radius: 9px;
-    background: linear-gradient(145deg, #0a84ff 0%, #0a5bd5 100%);
-    flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 2px 6px rgba(10, 91, 213, 0.4);
-    position: relative;
-  }
-  .tf-notif-icon svg { width: 22px; height: 22px; color: #fff; }
-  .tf-notif-body { flex: 1; min-width: 0; }
-  .tf-notif-top {
-    display: flex; justify-content: space-between; gap: 8px;
-    margin-bottom: 2px;
-  }
-  .tf-notif-app {
-    font-size: 11.5px; font-weight: 600; color: #e8e6e3; letter-spacing: 0;
-    text-transform: uppercase;
-  }
-  .tf-notif-time { font-size: 10.5px; color: #8a847b; }
-  .tf-notif-title {
-    font-size: 12.5px; font-weight: 600; color: #f2f2f2; margin-bottom: 1px;
-    line-height: 1.3;
-  }
-  .tf-notif-msg {
-    font-size: 11.5px; color: #c9c5c0; line-height: 1.35;
-  }
-  .tf-arrow {
-    align-self: center;
-    color: var(--g-rose);
-    opacity: 0.7;
-    filter: drop-shadow(0 0 6px rgba(216, 184, 200, 0.3));
-  }
-  .tf-update-card {
-    background: rgba(10, 10, 10, 0.9);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 14px;
-    padding: 14px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-family: -apple-system, "SF Pro Text", system-ui, sans-serif;
-    box-shadow: 0 14px 30px rgba(0,0,0,0.5);
-  }
-  .tf-ember-icon {
-    width: 46px; height: 46px;
-    border-radius: 10px;
-    background: #000;
-    border: 1px solid rgba(232, 165, 71, 0.2);
-    flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-    overflow: hidden;
-  }
-  .tf-ember-icon::before {
-    content: "";
-    width: 28px; height: 28px;
-    background: url("../assets/ember-orb.png") center/contain no-repeat;
-    filter: drop-shadow(0 0 8px rgba(232,165,71,0.4));
-  }
-  .tf-app-info { flex: 1; min-width: 0; text-align: left; }
-  .tf-app-name {
-    font-size: 13px; font-weight: 600; color: #f2f2f2; margin-bottom: 2px;
-    letter-spacing: 0;
-  }
-  .tf-app-version {
-    font-size: 11px; color: #8a847b;
-  }
-  .tf-update-btn {
-    background: linear-gradient(180deg, #0a84ff, #0a5bd5);
-    color: #fff;
-    font-size: 12px; font-weight: 600;
-    padding: 7px 16px;
-    border-radius: 999px;
-    flex-shrink: 0;
-    box-shadow: 0 4px 10px rgba(10, 91, 213, 0.35);
-    position: relative;
-  }
-  .tf-update-btn::after {
-    content: "";
-    position: absolute; inset: -6px;
-    border-radius: 999px;
-    border: 2px solid rgba(216, 184, 200, 0.6);
-    animation: tfPulse 2.2s ease-out infinite;
-  }
-  @keyframes tfPulse {
-    0%   { transform: scale(0.9); opacity: 0.8; }
-    70%  { transform: scale(1.25); opacity: 0; }
-    100% { transform: scale(1.25); opacity: 0; }
-  }
-
-  /* Responsive: tighter carousel on small screens */
-  @media (max-width: 680px) {
-    .tip-card {
-      grid-template-columns: 1fr;
-      gap: 24px;
-      padding: 28px 20px;
-    }
-    .tip-illus { min-height: 240px; }
-    .tip-illus--taps .tap-frame { max-width: 200px; }
-    .tip-illus--feedback .fb-device { width: 130px; height: 234px; transform: translateX(-30px); }
-    .tip-illus--feedback .fb-menu { width: 170px; right: calc(50% - 150px); }
-    .step-card { padding: 18px 18px; }
-    .success .steps { max-width: 100%; }
-  }
-
-  /* ─── Mobile responsive overrides ──────────────────────── */
-  @media (max-width: 768px) {
-    /* Nav. shrink brand */
-    .brand { font-size: 20px; }
-    .brand-orb { width: 24px; height: 24px; }
-
-    /* Cards. tighter padding */
-    .tester-info, form {
-      padding: 22px 20px;
-      border-radius: 14px;
-    }
-    .info-list li { font-size: 14px; }
-    .info-list strong { font-size: 15.5px; }
-
-    /* Form field spacing */
-    .field { margin-bottom: 18px; }
-    .option { padding: 12px 14px; }
-    .option-title { font-size: 14.5px; }
-    .option-sub { font-size: 12.5px; }
-
-    /* Submit */
-    .btn-primary {
-      width: 100%;
-      justify-content: center;
-      min-height: 44px;
-      padding: 13px 20px;
-    }
-    .submit-row { width: 100%; }
-  }
-
-  @media (max-width: 480px) {
-    h1 { font-size: 30px; }
-    .lede { font-size: 16px; }
-    .info-title { font-size: 19px; }
-    .info-list { gap: 14px; }
-    .info-list li { font-size: 13.5px; padding-left: 14px; }
-    .info-list strong { font-size: 15px; }
-
-    /* Success state */
-    .success { padding: 28px 18px; }
-    .success h2 { font-size: 24px; }
-    .success > p { font-size: 15.5px; }
-    .step-card {
-      padding: 18px 16px;
-      gap: 14px;
-    }
-    .step-card .step-num { width: 28px; height: 28px; font-size: 14px; }
-    .step-card .step-title { font-size: 19px; }
-    .step-card .step-body { font-size: 13.5px; }
-    .step-link {
-      width: 100%;
-      justify-content: center;
-      min-height: 44px;
-      font-size: 13.5px;
-    }
-
-    /* Tips */
-    .tips-section {
-      padding: 40px 4px 28px;
-      margin-top: 24px;
-    }
-    .tips-title { font-size: 20px; }
-    .tip-card { padding: 24px 16px; }
-    .tip-heading { font-size: 19px; }
-    .tip-text { font-size: 14px; }
-    .tip-subtle { font-size: 12.5px; }
-    .tips-arrow { width: 32px; height: 32px; }
-
-    /* Form fields */
-    input[type="text"],
-    input[type="email"],
-    textarea {
-      font-size: 16px; /* prevent iOS zoom on focus */
-    }
-
-    footer { padding: 24px 0; font-size: 11.5px; }
+  @media (max-width: 540px) {
+    .nav-inner { align-items: flex-start; gap: 18px; }
+    .back { padding-top: 3px; }
+    .card { text-align: left; }
+    .btn-primary { width: 100%; justify-content: center; }
+    .caption { text-align: center; }
   }
 </style>
 </head>
 <body>
 
-<template id="__bundler_thumbnail" data-bg-color="#0a0a0a">
-  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <radialGradient id="ember" cx="50%" cy="50%" r="50%">
-        <stop offset="0%" stop-color="#ffd89b" stop-opacity="1"/>
-        <stop offset="40%" stop-color="#E8A547" stop-opacity="0.9"/>
-        <stop offset="80%" stop-color="#c06a1e" stop-opacity="0.3"/>
-        <stop offset="100%" stop-color="#0a0a0a" stop-opacity="0"/>
-      </radialGradient>
-    </defs>
-    <rect width="1200" height="800" fill="#0a0a0a"/>
-    <circle cx="600" cy="400" r="160" fill="url(#ember)"/>
-    <circle cx="600" cy="400" r="70" fill="#E8A547" opacity="0.95"/>
-    <text x="600" y="670" text-anchor="middle" fill="#d8c8b0" font-family="Georgia, serif" font-size="36" font-style="italic" opacity="0.9">Join the Beta</text>
-  </svg>
-</template>
-
 <header class="nav">
   <div class="nav-inner">
-    <a href="../index.html" class="brand">
+    <a href="../" class="brand" aria-label="Ember home">
       <span class="brand-orb" aria-hidden="true"></span>
       <span>Ember</span>
     </a>
-    <a href="../index.html" class="back">
+    <a href="../" class="back">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
       Back
     </a>
@@ -1195,579 +213,33 @@
 
 <main>
   <div class="wrap">
-    <div class="intro" id="intro">
-      <p class="eyebrow">TestFlight beta</p>
-      <h1>Request your <em>invite</em></h1>
+    <section class="card" aria-labelledby="launch-title">
+      <p class="eyebrow">App Store launch</p>
+      <h1 id="launch-title">Ember is now on the <em>App Store.</em></h1>
       <p class="lede">
-        A few quick questions and we will send a TestFlight link your way.
+        The beta has moved to the official iPhone app. Download Ember from the App Store to start your 60-day free trial.
       </p>
-    </div>
+      <a href="https://apps.apple.com/us/app/ember-migraine-tracker/id6762041852" class="btn-primary" target="_blank" rel="noopener">
+        Download on the App Store
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+      <p class="caption">60-day free trial. Then $4.99/month.</p>
 
-    <section class="tester-info" id="testerInfo" aria-label="What to expect as a beta tester">
-      <h2 class="info-title">What to expect in the beta</h2>
-      <ul class="info-list">
-        <li>
-          <strong>Share specific feedback.</strong>
-          If something is confusing, broken, or missing, please tell us.
-          Screenshots, bug reports, questions, and ideas all help shape
-          the next build.
-        </li>
-        <li>
-          <strong>Six months free after launch.</strong>
-          As a thank you, every beta tester gets six months free once Ember
-          launches on the App Store.
-        </li>
-        <li>
-          <strong>Your data comes with you.</strong>
-          Everything you log during the beta stays with you when you move over
-          to the official App Store version. Nothing gets left behind.
-        </li>
-      </ul>
+      <div class="tester-note">
+        <strong>Beta testers, thank you.</strong>
+        <p>
+          Watch your email for a 6-month thank-you offer code. Do not see it when expected?
+          <a href="mailto:hello@cascadeheadache.com?subject=Ember%20beta%20offer%20code">Email us</a>
+          and we will help.
+        </p>
+      </div>
     </section>
-
-    <form id="betaForm" novalidate>
-
-      <!-- Honeypot. bots fill this, humans don't see it -->
-      <input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off">
-
-      <div class="field">
-        <label for="name">Name<span class="req">*</span></label>
-        <input id="name" name="name" type="text" required autocomplete="name" placeholder="Your name">
-      </div>
-
-      <div class="field">
-        <label for="email">Email<span class="req">*</span></label>
-        <input id="email" name="email" type="email" required autocomplete="email" placeholder="you@example.com">
-      </div>
-
-      <div class="field">
-        <label>Which describes you best?<span class="req">*</span></label>
-        <div class="options" role="radiogroup" aria-label="Which describes you best">
-          <label class="option">
-            <input type="radio" name="role" value="Patient. Migraine or headache disease" required>
-            <div class="option-body">
-              <span class="option-title">I have migraine or headache disease</span>
-              <span class="option-sub">You are living with it and looking for a better way to track.</span>
-            </div>
-          </label>
-          <label class="option">
-            <input type="radio" name="role" value="Headache provider">
-            <div class="option-body">
-              <span class="option-title">I am a headache provider</span>
-              <span class="option-sub">Neurologist, headache specialist, or headache-focused NP or PA.</span>
-            </div>
-          </label>
-          <label class="option">
-            <input type="radio" name="role" value="Primary care provider (PCP)">
-            <div class="option-body">
-              <span class="option-title">I am a primary care provider (PCP)</span>
-              <span class="option-sub">You see patients with migraine as part of general practice.</span>
-            </div>
-          </label>
-          <label class="option">
-            <input type="radio" name="role" value="Other" id="roleOther">
-            <div class="option-body">
-              <span class="option-title">Something else</span>
-              <span class="option-sub">Researcher, caregiver, student, other interested party.</span>
-            </div>
-          </label>
-        </div>
-
-        <div class="other-detail" id="otherDetail">
-          <label for="other">Tell us a bit more</label>
-          <textarea id="other" name="role_other" placeholder="What brings you here?"></textarea>
-        </div>
-      </div>
-
-      <div class="submit-row">
-        <button type="submit" class="btn-primary" id="submitBtn">
-          Request my TestFlight invite
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-        </button>
-        <p class="fine-print">
-          We will use this only to send your TestFlight link and occasional
-          beta updates. Your email stays private.
-        </p>
-      </div>
-    </form>
-
-    <div class="success" id="success" role="status" aria-live="polite">
-      <div class="success-mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 7"/></svg>
-      </div>
-      <h2>You&rsquo;re in!</h2>
-
-      <!-- 3 things to know. shown BEFORE install buttons so users actually read them -->
-      <div class="know-section" aria-label="Three things to know before installing">
-        <div class="know-header">
-          <span class="know-eyebrow">Before you install</span>
-          <h3 class="know-title">Three things to know</h3>
-        </div>
-        <ol class="know-list">
-
-          <!-- 1. Sample data -->
-          <li class="know-card">
-            <div class="know-num">1</div>
-            <div class="know-illus know-illus--taps" aria-hidden="true">
-              <div class="tap-frame">
-                <img src="../assets/profile-bottom-full.png" alt="" class="tap-img">
-                <div class="tap-ring tap-ring--1"></div>
-                <div class="tap-ring tap-ring--2"></div>
-                <div class="tap-ring tap-ring--3"></div>
-              </div>
-            </div>
-            <div class="know-body">
-              <div class="tip-tag tip-tag--violet">See it with data in it</div>
-              <h4 class="know-heading">Tap <code>Ember v1.0</code> seven times to load sample data.</h4>
-              <p class="know-text">
-                Open your <em>Profile</em>, scroll to the very bottom, and
-                tap the version text <strong>exactly seven times</strong>.
-                Ember loads <strong>180 days of sample data</strong> so you
-                can see what reports and patterns actually look like.
-              </p>
-              <p class="know-subtle">
-                To flip back to your own data, tap the version text
-                <strong>seven more times</strong>.
-              </p>
-            </div>
-          </li>
-
-          <!-- 2. Updates -->
-          <li class="know-card">
-            <div class="know-num">2</div>
-            <div class="know-illus know-illus--update" aria-hidden="true">
-              <div class="tf-scene">
-                <div class="tf-notif">
-                  <div class="tf-notif-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                      <path d="M21.5 12l-18-9 4 9-4 9z" opacity="0.85"/>
-                      <path d="M7.5 12L3.5 3 21.5 12 7.5 12z"/>
-                    </svg>
-                  </div>
-                  <div class="tf-notif-body">
-                    <div class="tf-notif-top">
-                      <span class="tf-notif-app">TestFlight</span>
-                      <span class="tf-notif-time">now</span>
-                    </div>
-                    <div class="tf-notif-title">Ember beta update available</div>
-                    <div class="tf-notif-msg">Open TestFlight to install the latest build.</div>
-                  </div>
-                </div>
-                <svg class="tf-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M12 5v14M5 12l7 7 7-7"/>
-                </svg>
-                <div class="tf-update-card">
-                  <div class="tf-ember-icon" aria-hidden="true"></div>
-                  <div class="tf-app-info">
-                    <div class="tf-app-name">Ember</div>
-                    <div class="tf-app-version">New build available</div>
-                  </div>
-                  <div class="tf-update-btn">Update</div>
-                </div>
-              </div>
-            </div>
-            <div class="know-body">
-              <div class="tip-tag tip-tag--rose">Getting updates</div>
-              <h4 class="know-heading">Apple emails you when a new build ships.</h4>
-              <p class="know-text">
-                We aim to ship new builds <strong>no more than once a week</strong>.
-                When we do, Apple sends you an email. Open the
-                <em>TestFlight</em> app and tap <strong>Update</strong> next
-                to Ember to pull it in.
-              </p>
-              <p class="know-subtle">
-                Watch for those emails so you always have the newest fixes
-                and features.
-              </p>
-            </div>
-          </li>
-
-          <!-- 3. Feedback -->
-          <li class="know-card">
-            <div class="know-num">3</div>
-            <div class="know-illus know-illus--feedback" aria-hidden="true">
-              <div class="fb-scene">
-                <div class="fb-device">
-                  <div class="fb-screen"></div>
-                </div>
-                <div class="fb-menu" role="img" aria-label="iOS screenshot menu with Share Beta Feedback highlighted">
-                  <div class="fb-item highlighted">
-                    <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                    </svg>
-                    <span class="label">Share Beta Feedback&hellip;</span>
-                  </div>
-                  <div class="fb-item">
-                    <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M12 3v13m0 0l-5-5m5 5l5-5M5 21h14"/>
-                    </svg>
-                    <span class="label">Save to Photos</span>
-                  </div>
-                  <div class="fb-item">
-                    <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
-                    </svg>
-                    <span class="label">Save to Files</span>
-                  </div>
-                  <div class="fb-item danger">
-                    <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                      <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
-                    </svg>
-                    <span class="label">Delete Screenshot</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="know-body">
-              <div class="tip-tag tip-tag--teal">Giving feedback</div>
-              <h4 class="know-heading">Screenshot anything, then tap <em>Share Beta Feedback&hellip;</em></h4>
-              <p class="know-text">
-                This is how we hear from you. Take a screenshot anywhere in
-                Ember, tap the preview in the corner, and choose
-                <em>Share Beta Feedback&hellip;</em> from the iOS menu. Your
-                screenshot comes to us with your note attached.
-              </p>
-            </div>
-          </li>
-
-        </ol>
-
-        <p class="know-footnote">
-          Got it? Install TestFlight, then add Ember to your beta apps.
-        </p>
-      </div>
-
-      <!-- Install buttons (moved below the three things to know) -->
-      <ol class="steps">
-        <li class="step-card">
-          <div class="step-num">1</div>
-          <div class="step-content">
-            <div class="step-kicker">First, on your iPhone or iPad</div>
-            <h3 class="step-title">Download TestFlight.</h3>
-            <p class="step-body">
-              Apple&rsquo;s free app for running beta software. <em>iPhone only</em>.
-              Ember is not yet available on Android or the web.
-            </p>
-            <a href="https://apps.apple.com/us/app/testflight/id899247664"
-               target="_blank" rel="noopener"
-               class="step-link">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v13m0 0l-5-5m5 5l5-5M5 21h14"/></svg>
-              Get TestFlight on the App Store
-            </a>
-          </div>
-        </li>
-        <li class="step-card">
-          <div class="step-num">2</div>
-          <div class="step-content">
-            <div class="step-kicker">Then, open this link on the same device</div>
-            <h3 class="step-title">Install Ember Beta.</h3>
-            <p class="step-body">
-              Opens TestFlight and adds Ember to your beta apps. Updates arrive
-              automatically as we ship new builds.
-            </p>
-            <a href="https://testflight.apple.com/join/yvpAKszw"
-               target="_blank" rel="noopener"
-               class="step-link step-link--primary">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-              Join the Ember Beta on TestFlight
-            </a>
-          </div>
-        </li>
-      </ol>
-
-      <div class="tips-section" hidden>
-        <div class="tips-header">
-          <span class="tips-eyebrow">Two things worth knowing</span>
-          <h3 class="tips-title">Once you&rsquo;re in the app&hellip;</h3>
-        </div>
-        <div class="tips-carousel" id="tipsCarousel">
-          <div class="tips-track" id="tipsTrack">
-
-            <!-- TIP 1: Screenshot feedback -->
-            <article class="tip-card">
-              <div class="tip-illus tip-illus--feedback" aria-hidden="true">
-                <div class="fb-scene">
-                  <div class="fb-device">
-                    <div class="fb-screen"></div>
-                  </div>
-                  <div class="fb-menu" role="img" aria-label="iOS screenshot menu with Share Beta Feedback highlighted">
-                    <div class="fb-item highlighted">
-                      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                      </svg>
-                      <span class="label">Share Beta Feedback&hellip;</span>
-                    </div>
-                    <div class="fb-item">
-                      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 3v13m0 0l-5-5m5 5l5-5M5 21h14"/>
-                      </svg>
-                      <span class="label">Save to Photos</span>
-                    </div>
-                    <div class="fb-item">
-                      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
-                      </svg>
-                      <span class="label">Save to Files</span>
-                    </div>
-                    <div class="fb-item danger">
-                      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
-                      </svg>
-                      <span class="label">Delete Screenshot</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="tip-body">
-                <div class="tip-tag tip-tag--teal">Giving feedback</div>
-                <h4 class="tip-heading">Screenshot anything, then tap <em>Share Beta Feedback&hellip;</em></h4>
-                <p class="tip-text">
-                  Fastest way to flag a bug or suggestion. Take a screenshot
-                  anywhere in Ember, tap the preview, and choose
-                  <em>Share Beta Feedback&hellip;</em> from the iOS menu.
-                  The screenshot comes to us with your note attached.
-                </p>
-              </div>
-            </article>
-
-            <!-- TIP 2: Sample data -->
-            <article class="tip-card">
-              <div class="tip-illus tip-illus--taps" aria-hidden="true">
-                <div class="tap-frame">
-                  <img src="../assets/profile-bottom-full.png" alt="" class="tap-img">
-                  <div class="tap-ring tap-ring--1"></div>
-                  <div class="tap-ring tap-ring--2"></div>
-                  <div class="tap-ring tap-ring--3"></div>
-                </div>
-              </div>
-              <div class="tip-body">
-                <div class="tip-tag tip-tag--violet">Exploring sample data</div>
-                <h4 class="tip-heading">Tap <code>Ember v1.0</code> seven times to load sample data.</h4>
-                <p class="tip-text">
-                  Want to see what Ember looks like with data in it? Open your
-                  <em>Profile</em>, scroll to the bottom, and quickly tap the
-                  version text seven times. Ember loads <strong>180 days of sample
-                  data</strong> so you can explore reports and patterns right away.
-                </p>
-                <p class="tip-subtle">
-                  To flip back to your own data, tap the version text
-                  <strong>seven more times</strong>. Same gesture, toggles right back.
-                </p>
-              </div>
-            </article>
-
-            <!-- TIP 3: Getting updates -->
-            <article class="tip-card">
-              <div class="tip-illus tip-illus--update" aria-hidden="true">
-                <div class="tf-scene">
-                  <div class="tf-notif">
-                    <div class="tf-notif-icon">
-                      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <path d="M21.5 12l-18-9 4 9-4 9z" opacity="0.85"/>
-                        <path d="M7.5 12L3.5 3 21.5 12 7.5 12z"/>
-                      </svg>
-                    </div>
-                    <div class="tf-notif-body">
-                      <div class="tf-notif-top">
-                        <span class="tf-notif-app">TestFlight</span>
-                        <span class="tf-notif-time">now</span>
-                      </div>
-                      <div class="tf-notif-title">Ember beta update available</div>
-                      <div class="tf-notif-msg">Open TestFlight to install the latest build.</div>
-                    </div>
-                  </div>
-                  <svg class="tf-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M12 5v14M5 12l7 7 7-7"/>
-                  </svg>
-                  <div class="tf-update-card">
-                    <div class="tf-ember-icon" aria-hidden="true"></div>
-                    <div class="tf-app-info">
-                      <div class="tf-app-name">Ember</div>
-                      <div class="tf-app-version">New build available</div>
-                    </div>
-                    <div class="tf-update-btn">Update</div>
-                  </div>
-                </div>
-              </div>
-              <div class="tip-body">
-                <div class="tip-tag tip-tag--rose">Getting updates</div>
-                <h4 class="tip-heading">Apple emails you when a new build is ready.</h4>
-                <p class="tip-text">
-                  When we ship a new version of Ember, <strong>Apple sends you
-                  an email</strong> letting you know. Open the
-                  <em>TestFlight</em> app on your phone and tap
-                  <strong>Update</strong> next to Ember. That pulls in
-                  the latest build.
-                </p>
-                <p class="tip-subtle">
-                  Watch for those emails so you always have the newest fixes
-                  and features.
-                </p>
-              </div>
-            </article>
-
-          </div>
-        </div>
-
-        <!-- Carousel nav -->
-        <nav class="tips-nav" aria-label="Tip carousel controls">
-          <button type="button" class="tips-arrow" id="tipsPrev" aria-label="Previous tip">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
-          </button>
-          <div class="tips-dots" id="tipsDots" role="tablist">
-            <button type="button" class="tips-dot is-active" data-idx="0" aria-label="Tip 1: Giving feedback"></button>
-            <button type="button" class="tips-dot" data-idx="1" aria-label="Tip 2: Exploring sample data"></button>
-            <button type="button" class="tips-dot" data-idx="2" aria-label="Tip 3: Getting updates"></button>
-          </div>
-          <button type="button" class="tips-arrow" id="tipsNext" aria-label="Next tip">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
-          </button>
-        </nav>
-      </div>
-
-      <a href="../index.html" class="back-home">Back to Ember</a>
-    </div>
   </div>
 </main>
 
 <footer>
-  <div class="wrap">© 2026 Cascade Headache, LLC · <a href="../index.html">embertracker.app</a></div>
+  <div class="wrap">© 2026 Cascade Headache, LLC · <a href="../">embertracker.app</a></div>
 </footer>
-
-<script>
-  // Toggle "other" detail field based on role selection
-  const otherRadio = document.getElementById("roleOther");
-  const otherDetail = document.getElementById("otherDetail");
-  const otherTextarea = document.getElementById("other");
-  document.querySelectorAll('input[name="role"]').forEach(r => {
-    r.addEventListener("change", () => {
-      if (otherRadio.checked) {
-        otherDetail.classList.add("show");
-        otherTextarea.focus();
-      } else {
-        otherDetail.classList.remove("show");
-      }
-    });
-  });
-
-  // Intercept submit, POST via fetch, show success view in-page
-  const form = document.getElementById("betaForm");
-  const intro = document.getElementById("intro");
-  const success = document.getElementById("success");
-  const submitBtn = document.getElementById("submitBtn");
-
-  // Google Apps Script web app endpoint (writes to the Google Sheet).
-  // Posted as text/plain so the browser skips the CORS preflight that
-  // Apps Script web apps don't respond to.
-  const SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbwpo3Du4qw8HCG_wJcVjKaDqDeZoV3qj5IwAwZCnUaclvXi6dCTkVLZhbSJn3qLPgNWbA/exec";
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    // Native validation. required fields, email format, etc.
-    if (!form.checkValidity()) {
-      form.reportValidity();
-      return;
-    }
-
-    // Honeypot: if a bot filled it, silently "succeed" and bail.
-    const honey = form.querySelector('input[name="_honey"]');
-    if (honey && honey.value) {
-      form.style.display = "none";
-      intro.style.display = "none";
-      const testerInfo = document.getElementById("testerInfo");
-      if (testerInfo) testerInfo.style.display = "none";
-      success.classList.add("show");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      return;
-    }
-
-    submitBtn.disabled = true;
-    submitBtn.textContent = "Sending...";
-
-    // Collect real form fields (skip the honeypot).
-    const fd = new FormData(form);
-    const payload = {
-      timestamp: new Date().toISOString(),
-      name: (fd.get("name") || "").toString().trim(),
-      email: (fd.get("email") || "").toString().trim(),
-      role: (fd.get("role") || "").toString(),
-      role_other: (fd.get("role_other") || "").toString().trim(),
-      source: "beta-signup"
-    };
-
-    try {
-      const res = await fetch(SHEET_ENDPOINT, {
-        method: "POST",
-        // text/plain avoids the CORS preflight. Apps Script reads the
-        // raw body via e.postData.contents and JSON.parse's it.
-        headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify(payload),
-        redirect: "follow"
-      });
-
-      // Apps Script usually returns JSON; accept any 2xx as success.
-      const text = await res.text();
-      let ok = res.ok;
-      try {
-        const parsed = JSON.parse(text);
-        if (parsed && parsed.result === "error") ok = false;
-      } catch (_) { /* non-JSON response is fine if status is 2xx */ }
-
-      if (!ok) throw new Error("Sheet responded " + res.status);
-
-      form.style.display = "none";
-      intro.style.display = "none";
-      const testerInfo = document.getElementById("testerInfo");
-      if (testerInfo) testerInfo.style.display = "none";
-      success.classList.add("show");
-      // Bring the user to the top so "You're in." is the first thing they see.
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    } catch (err) {
-      console.error("Beta signup failed:", err);
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = 'Try again <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>';
-      alert("Something went wrong sending your request. Please try again in a moment, or email hello@cascadeheadache.com directly.");
-    }
-  });
-
-  // === Tips carousel ===
-  (function initTipsCarousel() {
-    const track = document.getElementById("tipsTrack");
-    const dots = document.querySelectorAll("#tipsDots .tips-dot");
-    const prevBtn = document.getElementById("tipsPrev");
-    const nextBtn = document.getElementById("tipsNext");
-    if (!track || !dots.length) return;
-
-    const total = dots.length;
-    let idx = 0;
-
-    function go(i) {
-      idx = (i + total) % total;
-      track.style.transform = `translateX(-${idx * 100}%)`;
-      dots.forEach((d, di) => d.classList.toggle("is-active", di === idx));
-    }
-
-    dots.forEach(d => d.addEventListener("click", () => go(parseInt(d.dataset.idx, 10))));
-    if (prevBtn) prevBtn.addEventListener("click", () => go(idx - 1));
-    if (nextBtn) nextBtn.addEventListener("click", () => go(idx + 1));
-
-    // Touch swipe
-    let startX = 0, dx = 0, touching = false;
-    track.addEventListener("touchstart", (e) => {
-      touching = true; startX = e.touches[0].clientX; dx = 0;
-    }, { passive: true });
-    track.addEventListener("touchmove", (e) => {
-      if (!touching) return;
-      dx = e.touches[0].clientX - startX;
-    }, { passive: true });
-    track.addEventListener("touchend", () => {
-      if (!touching) return;
-      touching = false;
-      if (Math.abs(dx) > 40) go(idx + (dx < 0 ? 1 : -1));
-    });
-  })();
-</script>
 
 </body>
 </html>
