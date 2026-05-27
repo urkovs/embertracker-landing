@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#0a0a0a" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/site.css">
 <noscript><style>.reveal{opacity:1!important;transform:none!important;}</style></noscript>
 </head>
@@ -33,70 +33,40 @@
 <main>
 
 <!-- ─── Hero ──────────────────────────────────────────────── -->
-<section class="hero hero--center hero--prov">
-  <div class="wrap hero-center">
-    <p class="eyebrow reveal">For clinicians</p>
-    <h1 class="reveal reveal--d1">Patient data, organized & ready <span class="text-accent">before</span> the visit.</h1>
-    <p class="hero-sub reveal reveal--d2">
-      Patients log a few details each day. Ember turns them into chart-ready summaries, treatment response snapshots, and prior-auth friendly evidence.<br>All ready to drop right into your note.
-    </p>
-
-    <div class="hero-anchor reveal reveal--d3" aria-hidden="true">
-      <div class="chart-note chart-note--hero">
-        <div class="chart-note__chrome">
-          <span class="chart-note__lights">
-            <span class="cn-light cn-light--r"></span>
-            <span class="cn-light cn-light--y"></span>
-            <span class="cn-light cn-light--g"></span>
-          </span>
-          <span class="chart-note__title">chart note · apr 14 2026</span>
-        </div>
-        <div class="chart-note__body">
-<pre class="chart-note__pre"><span class="cn-h">HEADACHE DIARY SUMMARY</span>
-Jan 15 – Apr 14, 2026 (90 days)  <span class="cn-em">87% reporting compliance</span>
-
-<span class="cn-h">FREQUENCY</span>
-  Migraine days:    <span class="cn-v">18/mo → 7/mo</span>    <span class="cn-g-strong">(61% reduction)</span>
-  Total HA days:    <span class="cn-v">22/mo → 10/mo</span>   <span class="cn-g-strong">(55% reduction)</span>
-  Impact days:      <span class="cn-v">15/mo → 4/mo</span>    <span class="cn-g-strong">(73% reduction)</span>
-  Avg severity:     <span class="cn-v">7/10 → 6/10</span>     <span class="cn-g-faint">(14% reduction)</span>
-  MIDAS:            <span class="cn-v">42 → 18</span>         <span class="cn-t">(Grade IV → III)</span>
-
-<span class="cn-h">ACUTE MEDICATION USE</span>
-  Triptans:         <span class="cn-v">4 days/mo</span> <span class="cn-em">(within threshold)</span>
-  NSAIDs:           <span class="cn-v">3 days/mo</span> <span class="cn-em">(within threshold)</span>
-  Gepants:          <span class="cn-v">6 days/mo</span>
-
-<span class="cn-h">BOTOX INTERVAL</span>
-  Last injection:   Jan 20, 2026
-  Onset:            Day 3
-  Wearing off:      Week 10 of 12
-  Adverse effects:  mild neck stiffness
-
-<span class="cn-h">HORMONAL PATTERN</span>
-  38% of migraines occurred during or within 2 days of menstrual period.
-
-<span class="cn-h">TREATMENT RESPONSE</span>
-
-<span class="cn-t">Botox</span>. started Oct 2024
-Reported baseline before Botox: ~25 migraine days/mo, 20 impact days/mo, severity 9/10.
-Since starting Botox:
-  Migraine days:    <span class="cn-v">25 → 16/mo</span>   <span class="cn-g-mid">(36% reduction)</span>
-  Impact days:      <span class="cn-v">20 → 12/mo</span>   <span class="cn-g-mid">(40% reduction)</span>
-
-<span class="cn-t">Ajovy</span>. added Apr 2025
-Since adding Ajovy:
-  Migraine days:    <span class="cn-v">16 → 7/mo</span>    <span class="cn-g-strong">(56% additional reduction beyond Botox alone)</span>
-  Impact days:      <span class="cn-v">12 → 4/mo</span>    <span class="cn-g-strong">(67% additional reduction)</span>
-
-<span class="cn-t">Combined response on Botox + Ajovy</span>
-Comparing reported baseline to current state on both preventives:
-  Migraine days:    <span class="cn-v">25 → 7/mo</span>    <span class="cn-g-strong">(72% reduction)</span>
-  Impact days:      <span class="cn-v">20 → 4/mo</span>    <span class="cn-g-strong">(80% reduction)</span>
-  Avg severity:     <span class="cn-v">9/10 → 4/10</span>    <span class="cn-g-strong">(52% reduction)</span></pre>
-        </div>
+<section class="hero hero--prov provider-hero provider-hero--handoff">
+  <div class="wrap provider-hero__top">
+    <div class="provider-hero__copy provider-hero__copy--handoff">
+      <p class="eyebrow reveal">Provider handoff</p>
+      <h1 class="reveal reveal--d1">Send patients home with Ember already set up.</h1>
+      <p class="hero-sub reveal reveal--d2">
+        Use a local browser tool to create a Handoff File or text your patient can load into Ember. Your provider details, treatment plan, next appointment, and acute med limits are ready for review in the app.
+      </p>
+      <div class="provider-hero__actions reveal reveal--d3">
+        <a href="../provider-handoff/" class="btn-primary">Open Provider Handoff</a>
       </div>
     </div>
+
+    <aside class="handoff-steps reveal reveal--d2" aria-label="Provider handoff contents">
+      <div class="handoff-steps__row">
+        <span>01</span>
+        <strong>Provider details</strong>
+        <em>Name, clinic, phone, saved locally for next time.</em>
+      </div>
+      <div class="handoff-steps__row">
+        <span>02</span>
+        <strong>Treatment plan</strong>
+        <em>Preventive meds, acute meds, non-pharma treatments.</em>
+      </div>
+      <div class="handoff-steps__row">
+        <span>03</span>
+        <strong>Monthly limits</strong>
+        <em>Use Ember standards or set patient-specific acute med limits.</em>
+      </div>
+      <div class="handoff-steps__footer">
+        <span class="handoff-steps__dot" aria-hidden="true"></span>
+        <span>No login required. Generated locally without identifying patient details.</span>
+      </div>
+    </aside>
   </div>
 </section>
 
@@ -105,7 +75,7 @@ Comparing reported baseline to current state on both preventives:
 <!-- ─── §1.5  Engine intro ─────────────────────────────────── -->
 <section class="engine-intro">
   <div class="wrap engine-intro-inner">
-    <h2 class="feat-title reveal">Look <span class="text-accent">under the hood</span>.</h2>
+    <h2 class="feat-title reveal">Look under the hood.</h2>
     <p class="feat-body engine-intro-body reveal reveal--d1">
       Every classification follows deterministic ICHD-3 rules. No AI guesses, no black box.
     </p>
@@ -932,11 +902,85 @@ Comparing reported baseline to current state on both preventives:
 
 <div class="section-divider section-divider--prov" aria-hidden="true"></div>
 
+<!-- ─── §2  Chart-ready output ─────────────────────────────── -->
+<section class="chart-output-section">
+  <div class="wrap chart-output__head">
+    <p class="eyebrow reveal">Chart-ready output</p>
+    <h2 class="feat-title reveal reveal--d1">Migraine history, ready before the visit.</h2>
+    <p class="feat-body chart-output__body reveal reveal--d2">
+      Patients log a few details each day. Ember turns them into summaries,
+      treatment response snapshots, and prior-auth friendly evidence that is ready
+      to drop into your note.
+    </p>
+  </div>
+
+  <div class="wrap">
+    <div class="chart-output__window reveal reveal--d3" aria-hidden="true">
+      <div class="chart-note chart-note--hero">
+        <div class="chart-note__chrome">
+          <span class="chart-note__lights">
+            <span class="cn-light cn-light--r"></span>
+            <span class="cn-light cn-light--y"></span>
+            <span class="cn-light cn-light--g"></span>
+          </span>
+          <span class="chart-note__title">chart note · apr 14 2026</span>
+        </div>
+        <div class="chart-note__body">
+<pre class="chart-note__pre"><span class="cn-h">HEADACHE DIARY SUMMARY</span>
+Jan 15 – Apr 14, 2026 (90 days)  <span class="cn-em">87% reporting compliance</span>
+
+<span class="cn-h">FREQUENCY</span>
+  Migraine days:    <span class="cn-v">18/mo → 7/mo</span>    <span class="cn-g-strong">(61% reduction)</span>
+  Total HA days:    <span class="cn-v">22/mo → 10/mo</span>   <span class="cn-g-strong">(55% reduction)</span>
+  Impact days:      <span class="cn-v">15/mo → 4/mo</span>    <span class="cn-g-strong">(73% reduction)</span>
+  Avg severity:     <span class="cn-v">7/10 → 6/10</span>     <span class="cn-g-faint">(14% reduction)</span>
+  MIDAS:            <span class="cn-v">42 → 18</span>         <span class="cn-t">(Grade IV → III)</span>
+
+<span class="cn-h">ACUTE MEDICATION USE</span>
+  Triptans:         <span class="cn-v">4 days/mo</span> <span class="cn-em">(within threshold)</span>
+  NSAIDs:           <span class="cn-v">3 days/mo</span> <span class="cn-em">(within threshold)</span>
+  Gepants:          <span class="cn-v">6 days/mo</span>
+
+<span class="cn-h">BOTOX INTERVAL</span>
+  Last injection:   Jan 20, 2026
+  Onset:            Day 3
+  Wearing off:      Week 10 of 12
+  Adverse effects:  mild neck stiffness
+
+<span class="cn-h">HORMONAL PATTERN</span>
+  38% of migraines occurred during or within 2 days of menstrual period.
+
+<span class="cn-h">TREATMENT RESPONSE</span>
+
+<span class="cn-t">Botox</span>. started Oct 2024
+Reported baseline before Botox: ~25 migraine days/mo, 20 impact days/mo, severity 9/10.
+Since starting Botox:
+  Migraine days:    <span class="cn-v">25 → 16/mo</span>   <span class="cn-g-mid">(36% reduction)</span>
+  Impact days:      <span class="cn-v">20 → 12/mo</span>   <span class="cn-g-mid">(40% reduction)</span>
+
+<span class="cn-t">Ajovy</span>. added Apr 2025
+Since adding Ajovy:
+  Migraine days:    <span class="cn-v">16 → 7/mo</span>    <span class="cn-g-strong">(56% additional reduction beyond Botox alone)</span>
+  Impact days:      <span class="cn-v">12 → 4/mo</span>    <span class="cn-g-strong">(67% additional reduction)</span>
+
+<span class="cn-t">Combined response on Botox + Ajovy</span>
+Comparing reported baseline to current state on both preventives:
+  Migraine days:    <span class="cn-v">25 → 7/mo</span>    <span class="cn-g-strong">(72% reduction)</span>
+  Impact days:      <span class="cn-v">20 → 4/mo</span>    <span class="cn-g-strong">(80% reduction)</span>
+  Avg severity:     <span class="cn-v">9/10 → 4/10</span>    <span class="cn-g-strong">(52% reduction)</span></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider section-divider--prov" aria-hidden="true"></div>
+
 <!-- ─── §2  Each treatment, alone and combined ─────────────── -->
 <section class="feat">
   <div class="wrap feat-grid">
     <div class="feat-copy">
-      <h2 class="feat-title reveal">Each treatment, <span class="text-accent">alone & combined</span>.</h2>
+      <h2 class="feat-title reveal">Each treatment, alone &amp; combined.</h2>
       <p class="feat-body reveal reveal--d1">
         When patients are on overlapping preventives, Ember tracks
         each medication&rsquo;s contribution and the combined effect.
@@ -975,7 +1019,7 @@ Comparing reported baseline to current state on both preventives:
 <section class="feat feat--reverse">
   <div class="wrap feat-grid">
     <div class="feat-copy">
-      <h2 class="feat-title reveal"><span class="text-accent">Safety flags</span> built in.</h2>
+      <h2 class="feat-title reveal">Safety flags built in.</h2>
       <p class="feat-body reveal reveal--d1">
         Ember tracks acute medication use against published
         thresholds that indicate medication overuse headache risk,
@@ -1001,7 +1045,7 @@ Comparing reported baseline to current state on both preventives:
 <!-- ─── Quiet band. scope + privacy in one breath ────────── -->
 <section class="band band--tight">
   <div class="wrap band-inner">
-    <h2 class="feat-title reveal">Reports what they logged. <span class="text-accent">Nothing more.</span></h2>
+    <h2 class="feat-title reveal">Reports what they logged. Nothing more.</h2>
     <p class="feat-body band-body reveal reveal--d1">
       Ember structures data; it doesn&rsquo;t interpret it.
       The patient&rsquo;s logs stay on their phone. We never see
@@ -1018,10 +1062,10 @@ Comparing reported baseline to current state on both preventives:
 <!-- ─── Contact form ─────────────────────────────────────── -->
 <section class="contact-section" id="contact">
   <div class="wrap contact-inner">
-    <h2 class="feat-title reveal">Have a question? <span class="text-accent">Found something off?</span></h2>
+    <h2 class="feat-title reveal">Have a question?<br>Found something off?</h2>
     <p class="feat-body reveal reveal--d1">
       We&rsquo;re building this from the ground up to actually be useful. We invite you
-      to poke around in the app. <br><b>Tap the version line in Profile 7 times
+      to poke around in the app. <br><b>Use the Demo Mode toggle in Settings
       to flip between your data and the bundled demo data to see what Ember can do.</b>
     </p>
 
