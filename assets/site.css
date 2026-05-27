@@ -1738,6 +1738,76 @@ body.prov .hero--prov {
     radial-gradient(ellipse 46% 34% at 50% 18%, rgba(196, 138, 60, 0.065), transparent 72%);
 }
 
+.provider-handoff-strip {
+  padding: 0 0 clamp(36px, 5vw, 64px);
+}
+.handoff-callout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: clamp(22px, 4vw, 56px);
+  align-items: center;
+  padding: clamp(22px, 4vw, 34px);
+  border: 1px solid rgba(196, 181, 160, 0.18);
+  border-radius: 24px;
+  background:
+    radial-gradient(ellipse 58% 140% at 0% 0%, rgba(232, 165, 71, 0.13), transparent 62%),
+    linear-gradient(135deg, rgba(18, 18, 18, 0.94), rgba(10, 10, 10, 0.9));
+  box-shadow:
+    0 1px 0 rgba(255, 230, 200, 0.05) inset,
+    0 24px 70px rgba(0, 0, 0, 0.36);
+}
+.handoff-callout__copy {
+  max-width: 760px;
+}
+.handoff-callout .eyebrow {
+  margin-bottom: 10px;
+}
+.handoff-callout h2 {
+  margin: 0 0 10px;
+  color: var(--text-primary);
+  font-family: var(--serif);
+  font-size: clamp(34px, 4.2vw, 50px);
+  font-weight: 400;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+.handoff-callout p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 17px;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+.handoff-callout__action {
+  display: grid;
+  gap: 10px;
+  justify-items: end;
+  min-width: 250px;
+}
+.handoff-callout__action .btn-primary {
+  white-space: nowrap;
+}
+.handoff-callout__action p {
+  max-width: 24ch;
+  color: var(--text-dim);
+  font-size: 13px;
+  line-height: 1.45;
+  text-align: right;
+}
+
+@media (max-width: 820px) {
+  .handoff-callout {
+    grid-template-columns: 1fr;
+  }
+  .handoff-callout__action {
+    justify-items: start;
+    min-width: 0;
+  }
+  .handoff-callout__action p {
+    text-align: left;
+  }
+}
+
 /* Slightly more visible CTA caption (fixes legibility on dim background) */
 .cta-caption { color: var(--text-muted); }
 .cta-caption a { color: var(--accent-strong); border-bottom-color: rgba(212, 196, 173, 0.4); }
