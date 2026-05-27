@@ -51,7 +51,7 @@
 
       <form class="generator-grid" id="provider-handoff-form" novalidate>
         <div class="form-flow">
-          <section class="panel">
+          <section class="panel defaults-panel" id="provider-defaults-panel">
             <div class="panel-head">
               <div>
                 <p class="section-kicker">Step 1</p>
@@ -60,36 +60,41 @@
               <span class="panel-meta">Required fields are marked</span>
             </div>
 
+            <div class="defaults-saved-row" id="defaults-saved-row" aria-live="polite">
+              <span>Provider defaults saved locally on this device.</span>
+              <button class="btn-ghost" id="edit-defaults" type="button">Edit defaults</button>
+            </div>
+
             <div class="field-grid">
               <label class="field">
                 <span class="field-label">Provider name <b aria-hidden="true">*</b></span>
-                <input class="input" id="providerName" name="providerName" type="text" autocomplete="name" placeholder="Sam Murkov, DNP" required />
+                <input class="input" id="providerName" name="providerName" type="text" autocomplete="name" required />
               </label>
 
               <label class="field">
                 <span class="field-label">Clinic or practice <b aria-hidden="true">*</b></span>
-                <input class="input" id="clinicName" name="clinicName" type="text" autocomplete="organization" placeholder="Cascade Headache" required />
+                <input class="input" id="clinicName" name="clinicName" type="text" autocomplete="organization" required />
               </label>
 
               <label class="field">
                 <span class="field-label">Phone <b aria-hidden="true">*</b></span>
-                <input class="input" id="phone" name="phone" type="tel" autocomplete="tel" placeholder="206-555-0138" required />
+                <input class="input" id="phone" name="phone" type="tel" autocomplete="tel" required />
               </label>
             </div>
 
             <div class="defaults-row">
               <div>
                 <p class="defaults-title">Local provider defaults</p>
-                <p class="defaults-copy">Saves your provider details and usual acute limits in this browser. They load automatically next time on this device.</p>
+                <p class="defaults-copy">Press Save once to reuse these details next time on this device. They stay in this browser only.</p>
               </div>
               <div class="defaults-actions">
-                <button class="btn-secondary" id="save-defaults" type="button">Save my defaults here</button>
+                <button class="btn-secondary btn-save-defaults" id="save-defaults" type="button">Save my defaults here</button>
                 <button class="btn-ghost" id="clear-defaults" type="button">Clear saved defaults</button>
               </div>
             </div>
           </section>
 
-          <section class="panel">
+          <section class="panel" id="patient-plan-panel">
             <div class="panel-head">
               <div>
                 <p class="section-kicker">Step 2</p>
@@ -132,7 +137,7 @@
               </div>
               <div class="suggestion-menu" id="nonPharmaSuggestions" role="listbox" aria-label="Non-pharma treatment matches" hidden></div>
               <div class="selected-chip-list" id="nonPharmaSelected" aria-label="Selected non-pharma treatments"></div>
-              <span class="field-help">Start typing, then choose the matching Ember treatment.</span>
+              <span class="field-help">Start typing, then choose the correct treatment from the list.</span>
             </div>
           </section>
 

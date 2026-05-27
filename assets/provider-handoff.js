@@ -1,8 +1,11 @@
 /* Ember provider handoff generator.
    Client-only: no network requests, no server persistence. */
 (function () {
-  const STORAGE_KEY = 'ember.provider_handoff.defaults.v1';
-  const LEGACY_STORAGE_KEY = 'ember.provider_update.defaults.v1';
+  const STORAGE_KEY = 'ember.provider_handoff.defaults.v2';
+  const LEGACY_STORAGE_KEYS = [
+    'ember.provider_handoff.defaults.v1',
+    'ember.provider_update.defaults.v1'
+  ];
   const DEFAULT_LIMITS = {
     triptan_ergot: 9,
     nsaid: 14,
@@ -124,6 +127,8 @@
   const exportButton = $('export-json');
   const copyButton = $('copy-json');
   const lastAction = $('last-action');
+  const defaultsPanel = $('provider-defaults-panel');
+  const patientPlanPanel = $('patient-plan-panel');
   let showValidationMarkers = false;
 
   function item(key, display, value, meta, aliases) {
@@ -275,6 +280,25 @@
     lastAction.textContent = text;
     lastAction.classList.remove('is-ok', 'is-warn', 'is-error');
     if (kind) lastAction.classList.add(`is-${kind}`);
+  }
+
+  function collapseDefaultsPanel(options) {
+    if (!defaultsPanel) return;
+    defaultsPanel.classList.add('is-collapsed');
+    if (options && options.scroll && patientPlanPanel) {
+      const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      patientPlanPanel.scrollIntoView({
+        behavior: prefersReducedMotion ? 'auto' : 'smooth',
+        block: 'start'
+      });
+    }
+  }
+
+  function expandDefaultsPanel() {
+    if (!defaultsPanel) return;
+    defaultsPanel.classList.remove('is-collapsed');
+    const first = $('providerName');
+    if (first && typeof first.focus === 'function') first.focus();
   }
 
   function updateSummary(payload) {
@@ -621,8 +645,9 @@
     }
 
     localStorage.setItem(STORAGE_KEY, JSON.stringify(defaults));
-    localStorage.removeItem(LEGACY_STORAGE_KEY);
+    LEGACY_STORAGE_KEYS.forEach((key) => localStorage.removeItem(key));
     setLastAction('Provider defaults saved in this browser. They will load automatically next time.', 'ok');
+    collapseDefaultsPanel({ scroll: true });
     render();
   }
 
@@ -687,12 +712,13 @@
   }
 
   function loadSavedDefaults() {
-    const raw = localStorage.getItem(STORAGE_KEY) || localStorage.getItem(LEGACY_STORAGE_KEY);
+    const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return false;
 
     try {
       applyDefaults(parseDefaults(raw));
       setLastAction('Saved provider defaults loaded automatically for this browser.', 'ok');
+      collapseDefaultsPanel();
       return true;
     } catch (err) {
       setLastAction('Saved defaults could not be read. Clear and save again.', 'error');
@@ -702,8 +728,9 @@
 
   function clearDefaults() {
     localStorage.removeItem(STORAGE_KEY);
-    localStorage.removeItem(LEGACY_STORAGE_KEY);
+    LEGACY_STORAGE_KEYS.forEach((key) => localStorage.removeItem(key));
     setLastAction('Saved provider defaults cleared from this browser.', 'ok');
+    expandDefaultsPanel();
   }
 
   function resetLimits() {
@@ -752,6 +779,7 @@
 
   $('save-defaults').addEventListener('click', saveDefaults);
   $('clear-defaults').addEventListener('click', clearDefaults);
+  $('edit-defaults').addEventListener('click', expandDefaultsPanel);
   $('reset-limits').addEventListener('click', resetLimits);
   exportButton.addEventListener('click', exportProviderHandoff);
   copyButton.addEventListener('click', copyHandoffText);

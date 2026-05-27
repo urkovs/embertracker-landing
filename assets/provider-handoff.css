@@ -305,6 +305,10 @@ a {
   gap: 18px;
 }
 
+#patient-plan-panel {
+  scroll-margin-top: 104px;
+}
+
 .panel,
 .review-card {
   background: rgba(18, 18, 18, 0.92);
@@ -618,6 +622,39 @@ a {
   border-top: 1px solid var(--border);
 }
 
+.defaults-saved-row {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: -4px;
+  padding: 12px 14px;
+  border: 1px solid rgba(90, 154, 106, 0.34);
+  border-radius: 12px;
+  background: rgba(90, 154, 106, 0.085);
+  color: #b7d7be;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.defaults-panel.is-collapsed {
+  padding-block: clamp(16px, 2.2vw, 22px);
+}
+
+.defaults-panel.is-collapsed .panel-head {
+  margin-bottom: 14px;
+}
+
+.defaults-panel.is-collapsed .panel-meta,
+.defaults-panel.is-collapsed .field-grid,
+.defaults-panel.is-collapsed .defaults-row {
+  display: none;
+}
+
+.defaults-panel.is-collapsed .defaults-saved-row {
+  display: flex;
+}
+
 .defaults-title {
   margin: 0 0 2px;
   color: var(--text-primary);
@@ -660,6 +697,38 @@ a {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border-strong);
   font-weight: 600;
+}
+
+.btn-save-defaults {
+  color: #1a160e;
+  background: linear-gradient(180deg, #e8b87a, #c4956a);
+  border-color: rgba(232, 165, 71, 0.34);
+  box-shadow:
+    0 1px 0 rgba(255, 230, 200, 0.28) inset,
+    0 0 0 1px rgba(232, 165, 71, 0.2),
+    0 0 28px rgba(232, 165, 71, 0.25);
+  animation: save-defaults-glow 2.8s ease-in-out infinite;
+}
+
+.btn-save-defaults:hover:not(:disabled) {
+  color: #1a160e;
+  background: linear-gradient(180deg, #f0c184, #c99a6d);
+  border-color: rgba(232, 165, 71, 0.45);
+}
+
+@keyframes save-defaults-glow {
+  0%, 100% {
+    box-shadow:
+      0 1px 0 rgba(255, 230, 200, 0.28) inset,
+      0 0 0 1px rgba(232, 165, 71, 0.2),
+      0 0 22px rgba(232, 165, 71, 0.18);
+  }
+  50% {
+    box-shadow:
+      0 1px 0 rgba(255, 230, 200, 0.32) inset,
+      0 0 0 1px rgba(232, 165, 71, 0.34),
+      0 0 34px rgba(232, 165, 71, 0.34);
+  }
 }
 
 .btn-ghost,
