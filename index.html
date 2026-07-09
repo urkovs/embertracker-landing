@@ -1,20 +1,98 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Ember - Better migraine & headache tracking for iPhone</title>
-<meta name="description" content="A better migraine tracker for iPhone. Log symptoms quickly, keep health data local, and create summaries your provider can use." />
+<title>Ember · A better migraine tracker</title>
+<meta name="description" content="A free migraine tracker built by a practicing headache specialist. A few taps a day become patterns you can see and a report your clinician can use." />
 <meta name="theme-color" content="#0a0a0a" />
+<link rel="icon" type="image/png" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/site.css?v=8">
+<link rel="preload" as="image" href="assets/screens2/today-entry.jpg" fetchpriority="high">
+<noscript><style>.reveal{opacity:1!important;transform:none!important;}</style></noscript>
+<style>
+/* page-specific: app store badge */
+.app-badge { display: inline-flex; border-radius: 10px; transition: opacity 0.2s ease, transform 0.15s ease; }
+.app-badge:hover { opacity: 0.86; }
+.app-badge:active { transform: scale(0.97); }
+.app-badge img { display: block; width: 168px; height: auto; }
+
+/* page-specific: why-track row */
+.why-row { padding-block: clamp(40px, 6.5vw, 64px) 0; }
+.why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(22px, 3.5vw, 36px); }
+.why-card { text-align: center; }
+.why-icon { display: inline-flex; color: var(--ember); margin-bottom: 12px; }
+.why-title { font-family: var(--serif); font-weight: 500; font-size: 18px; color: var(--ink-hi); margin: 0 0 6px; }
+.why-body { font-size: 14px; color: var(--ink-mut); max-width: 30ch; margin: 0 auto; }
+@media (max-width: 720px) { .why-grid { grid-template-columns: 1fr; gap: 26px; max-width: 360px; margin-inline: auto; } }
+
+/* page-specific: feature carousel (center-focus / coverflow) */
+.fov { padding-block: calc(var(--sect) / 2); }
+.carousel { position: relative; }
+.fcards {
+  display: flex; gap: clamp(14px, 1.8vw, 20px);
+  overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth;
+  padding: 16px 0 14px;
+  margin-inline: calc(var(--gutter) * -1);
+  padding-inline: max(var(--gutter), calc((100% - 274px) / 2));
+  -webkit-overflow-scrolling: touch; scrollbar-width: none;
+}
+.fcards::-webkit-scrollbar { display: none; }
+.fcard {
+  flex: 0 0 auto; width: min(274px, 78vw); scroll-snap-align: center; text-align: center;
+  transform-origin: center center;
+  transition: transform 0.32s ease, opacity 0.32s ease;
+}
+.fcard .phone { width: min(262px, 72vw); max-width: 100%; margin-inline: auto; aspect-ratio: 860 / 1868; overflow: hidden; }
+.fcard .phone img, .fcard .phone video { width: 100%; height: 100%; object-fit: cover; }
+.fcard-label { font-size: 16px; font-weight: 600; color: var(--ink-hi); margin: 20px 0 6px; }
+.fcard-caption { font-family: var(--sans); font-size: 14px; line-height: 1.5; color: var(--ink-mid); max-width: 30ch; margin: 0 auto; }
+.carousel-arrow {
+  position: absolute; top: 45%; transform: translateY(-50%); z-index: 4;
+  width: 54px; height: 54px; border-radius: 50%;
+  display: none; align-items: center; justify-content: center;
+  background: rgba(34, 31, 27, 0.96); border: 1.5px solid rgba(236, 170, 104, 0.6);
+  color: var(--ink-hi); cursor: pointer;
+  box-shadow: 0 6px 22px -6px rgba(0, 0, 0, 0.8);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  transition: background 0.2s ease, border-color 0.2s ease, opacity 0.2s ease, transform 0.15s ease;
+}
+.carousel-arrow:hover { border-color: var(--ember); background: rgba(54, 46, 37, 0.98); color: #fff; }
+.carousel-arrow:active { transform: translateY(-50%) scale(0.94); }
+.carousel-arrow:disabled { opacity: 0.28; cursor: default; }
+.carousel-arrow--prev { left: 2px; }
+.carousel-arrow--next { right: 2px; }
+@media (hover: hover) and (min-width: 781px) { .carousel-arrow { display: inline-flex; } }
+@media (prefers-reduced-motion: reduce) { .fcard { transition: none; } }
+
+/* page-specific: switch-from callout */
+.import-note { padding-block: clamp(6px, 1.6vw, 16px); }
+.import-note-inner { max-width: 640px; margin-inline: auto; display: flex; align-items: center; justify-content: center; gap: 10px; text-align: center; }
+.import-note-icon { flex-shrink: 0; color: var(--ember); display: inline-flex; }
+.import-note p { font-size: clamp(14.5px, 1.7vw, 16px); color: var(--ink-mid); margin: 0; }
+@media (max-width: 480px) { .import-note-inner { flex-direction: column; text-align: center; gap: 8px; } }
+
+/* page-specific: mid-page CTA band */
+.cta-band { padding-block: calc(var(--sect) / 2.8); border-block: 1px solid var(--line); background: var(--bg-lift); }
+.cta-band-inner { display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center; }
+.cta-band-line { font-family: var(--serif); font-size: clamp(20px, 3.1vw, 26px); color: var(--ink-hi); margin: 0; max-width: 20ch; }
+
+/* page-specific: report showcase */
+.report-sect { padding-block: calc(var(--sect) / 2); }
+.report-head { max-width: 62ch; margin: 0 auto clamp(30px, 5vw, 46px); text-align: center; }
+.report-head .feat-body { margin-inline: auto; }
+.report-paper { max-width: 660px; margin-inline: auto; }
+.report-actions { justify-content: center; margin-top: 28px; }
+.report-provider-link { text-align: center; margin-top: 18px; font-size: 14.5px; }
+.report-provider-link a { color: var(--ink-mut); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(236,170,104,0.4); }
+.report-provider-link a:hover { color: var(--ink-hi); }
+</style>
 </head>
 <body class="home">
 
-<!-- ─── Header ─────────────────────────────────────────────── -->
 <header class="nav" id="nav">
   <div class="wrap nav-inner">
     <a href="/" class="brand" aria-label="Ember home">
@@ -22,8 +100,8 @@
       <span class="brand-name">Ember</span>
     </a>
     <nav class="nav-links" aria-label="Primary">
-      <a href="providers/" class="nav-link">For Providers</a>
-      <a href="contact/" class="nav-link nav-link--contact">Contact</a>
+      <a href="providers/" class="nav-link">For providers</a>
+      <a href="contact/" class="nav-link nav-link--secondary">Contact</a>
       <a href="https://apps.apple.com/us/app/ember-migraine-tracker/id6762041852" class="nav-cta" target="_blank" rel="noopener">Download</a>
     </nav>
   </div>
@@ -31,564 +109,228 @@
 
 <main>
 
-<!-- ─── Hero (centered) ──────────────────────────────────── -->
-<section class="hero hero--center">
-  <div class="wrap hero-center">
-    <h1>
-             <span class="block">Finally, a migraine tracker</span>
-        <span class="text-accent">that doesn&rsquo;t make you feel worse.</span>
-      
-    </h1>
-    <p class="hero-sub">
-      Built by a practicing headache specialist who also gets migraines.
-    </p>
-
-    <div class="cta-row cta-row--center">
-      <a href="https://apps.apple.com/us/app/ember-migraine-tracker/id6762041852" class="btn-primary" target="_blank" rel="noopener">
-        Download on the App Store
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-      </a>
+<!-- hero -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="hero-eyebrow reveal">A better migraine tracker</p>
+      <h1 class="reveal reveal--d1">Migraine tracking, without the headache.</h1>
+      <p class="hero-sub reveal reveal--d2">Finally, a better way to track your migraines. Built by a headache specialist who actually gets it, and free to use.</p>
+      <div class="cta-row reveal reveal--d2">
+        <a href="https://apps.apple.com/us/app/ember-migraine-tracker/id6762041852" class="app-badge" target="_blank" rel="noopener">
+          <img src="assets/app-store-badge.svg" alt="Download on the App Store" width="168" height="56">
+        </a>
+      </div>
     </div>
-    <p class="cta-caption cta-caption--center">
-      Free to use.
-    </p>
+    <figure class="shot hero-phone reveal reveal--d2">
+      <div class="phone phone--lg">
+        <img src="assets/screens2/today-entry.jpg" alt="Ember's daily entry screen. Mild pain is selected, symptoms and medications sit below as tappable chips." width="860" height="1868" fetchpriority="high">
+      </div>
+    </figure>
   </div>
 </section>
 
-<div class="section-divider" aria-hidden="true"></div>
+<div class="wrap"><hr class="rule"></div>
 
-<!-- ─── §2  Calendar export. what patients produce ─────── -->
-<section class="feat feat--cal">
+<!-- why track -->
+<section class="why-row">
+  <div class="wrap why-grid">
+    <div class="why-card reveal">
+      <span class="why-icon" aria-hidden="true">
+        <svg width="36" height="36" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="6" width="22" height="28" rx="3"/>
+          <path d="M15 4h10a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H15a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z"/>
+          <path d="M14 17h12M14 22h12M14 27h8"/>
+        </svg>
+      </span>
+      <h3 class="why-title">Better appointments</h3>
+      <p class="why-body">Ninety days of patterns, ready before you sit down.</p>
+    </div>
+    <div class="why-card reveal reveal--d1">
+      <span class="why-icon" aria-hidden="true">
+        <svg width="36" height="36" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M7 28 15 18 22 23 33 10"/>
+          <circle cx="7" cy="28" r="2"/>
+          <circle cx="15" cy="18" r="2"/>
+          <circle cx="22" cy="23" r="2"/>
+          <circle cx="33" cy="10" r="2"/>
+        </svg>
+      </span>
+      <h3 class="why-title">Spot your patterns</h3>
+      <p class="why-body">See how migraine days relate to your cycle, sleep, or stress.</p>
+    </div>
+    <div class="why-card reveal reveal--d2">
+      <span class="why-icon" aria-hidden="true">
+        <svg width="36" height="36" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 5 32 9v10c0 9-5.5 14.5-12 16-6.5-1.5-12-7-12-16V9Z"/>
+          <path d="M14.5 20 18 23.5 26 15.5"/>
+        </svg>
+      </span>
+      <h3 class="why-title">Safer medication use</h3>
+      <p class="why-body">An early flag before frequent acute use turns into overuse.</p>
+    </div>
+  </div>
+</section>
+
+<!-- feature carousel -->
+<section class="fov">
   <div class="wrap">
-    <div class="feat-head">
-      <h2 class="feat-title">
-        <span class="text-accent">A few taps each day<br>=<br></span>
-        <span class="block">A clearer picture you couldn&rsquo;t see before.</span>
-      </h2>
-
-      <div class="entry-demo" aria-label="Daily entry flow demonstration">
-        <div class="phone-frame phone-frame--video">
-          <div class="phone-scroll">
-            <video class="phone-video"
-                   autoplay muted loop playsinline preload="auto"
-                   aria-label="A few taps logs a complete day in the Ember app">
-              <source src="assets/daily-entry-flow.mp4" type="video/mp4">
+    <div class="carousel" data-carousel>
+      <button type="button" class="carousel-arrow carousel-arrow--prev" data-carousel-prev aria-label="Previous screens">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+      </button>
+      <div class="fcards" data-carousel-track>
+        <div class="fcard">
+          <div class="phone">
+            <video autoplay muted loop playsinline preload="metadata"
+                   poster="assets/daily-entry-flow-v2-poster.jpg"
+                   width="760" height="1650"
+                   aria-label="Screen recording of a complete daily entry in Ember, logged with a series of taps">
+              <source src="assets/daily-entry-flow-v2.mp4" type="video/mp4">
             </video>
           </div>
+          <p class="fcard-label">Daily check-in</p>
+          <p class="fcard-caption">A full day logged in ten to twenty seconds.</p>
+        </div>
+
+        <div class="fcard">
+          <div class="phone">
+            <img src="assets/screens2/today-classified.jpg" alt="A finished entry classified as a migraine day, with the reason shown: Ubrelvy used plus three migraine features detected." width="860" height="1868" loading="lazy">
+          </div>
+          <p class="fcard-label">Auto classification</p>
+          <p class="fcard-caption">Each day classified by fixed rules, not AI.</p>
+        </div>
+
+        <div class="fcard">
+          <div class="phone">
+            <img src="assets/screens2/calendar-impact.jpg" alt="Ember's month calendar with rings colored by impact level and day-type dots beneath each date." width="860" height="1868" loading="lazy">
+          </div>
+          <p class="fcard-label">Calendar</p>
+          <p class="fcard-caption">See the shape of a month at a glance.</p>
+        </div>
+
+        <div class="fcard">
+          <div class="phone">
+            <img src="assets/screens2/head-map.jpg" alt="Ember's head map with glowing marks on the right temple and behind the right eye, and location chips listed below." width="860" height="1868" loading="lazy">
+          </div>
+          <p class="fcard-label">Head map</p>
+          <p class="fcard-caption">Mark where it hurts.</p>
+        </div>
+
+        <div class="fcard">
+          <div class="phone">
+            <img src="assets/screens2/insights-baseline.jpg" alt="Insights showing migraine days 33 percent lower than baseline, with a treatment story chart marking where Botox and Emgality started." width="860" height="1868" loading="lazy">
+          </div>
+          <p class="fcard-label">Treatment response</p>
+          <p class="fcard-caption">See how your days compare to your baseline.</p>
+        </div>
+
+        <div class="fcard">
+          <div class="phone">
+            <img src="assets/screens2/safety-nudge.jpg" alt="An entry showing a note that Maxalt has been logged three days in the past week, suggesting you mention it to your provider." width="860" height="1868" loading="lazy">
+          </div>
+          <p class="fcard-label">Safety</p>
+          <p class="fcard-caption">An early flag before acute medication use becomes overuse.</p>
         </div>
       </div>
-
-      <p class="feat-body">
-        Log what happened, then get on with your day. Ember turns small daily entries into patterns you can understand and share with your provider.
-      </p>
-    </div>
-
-    <div class="cal-card" id="emberCalendar" aria-label="Sample 90-day migraine calendar export">
-      <div class="cal-header">
-        <div class="cal-title-row">
-          <h3 class="cal-title">Migraine Calendar</h3>
-          <span class="cal-badge">Sample data</span>
-        </div>
-        <p class="cal-subtitle">90 days &middot; Feb 1 - Apr 30, 2026</p>
-      </div>
-
-      <div class="cal-stats">
-        <div class="cal-stat">
-          <span class="cal-stat-num cal-stat-num--mig">34/90</span>
-          <span class="cal-stat-label">Migraine</span>
-        </div>
-        <div class="cal-stat">
-          <span class="cal-stat-num cal-stat-num--head">18/90</span>
-          <span class="cal-stat-label">Headache</span>
-        </div>
-        <div class="cal-stat">
-          <span class="cal-stat-num cal-stat-num--imp">23/90</span>
-          <span class="cal-stat-label">Impacted</span>
-        </div>
-        <div class="cal-stat">
-          <span class="cal-stat-num cal-stat-num--clr">38/90</span>
-          <span class="cal-stat-label">Clear</span>
-        </div>
-        <div class="cal-stat">
-          <span class="cal-stat-num cal-stat-num--base">&minus;37%</span>
-          <span class="cal-stat-label">vs Baseline</span>
-        </div>
-      </div>
-
-      <div class="cal-grid">
-        <div class="cal-axis"></div>
-        <div class="cal-rows"></div>
-      </div>
-
-      <div class="cal-legend">
-        <span class="cal-legend-item">
-          <span class="cal-legend-swatch cal-legend-swatch--mig"></span>
-          Migraine day
-        </span>
-        <span class="cal-legend-item">
-          <span class="cal-legend-swatch cal-legend-swatch--head"></span>
-          Headache day
-        </span>
-        <span class="cal-legend-item">
-          <span class="cal-legend-swatch cal-legend-swatch--clear"></span>
-          Clear
-        </span>
-        <span class="cal-legend-item">
-          <span class="cal-legend-dot cal-legend-dot--imp"></span>
-          Impacted
-        </span>
-        <span class="cal-legend-item">
-          <span class="cal-legend-dot cal-legend-dot--per"></span>
-          Period day
-        </span>
-      </div>
+      <button type="button" class="carousel-arrow carousel-arrow--next" data-carousel-next aria-label="More screens">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+      </button>
     </div>
   </div>
 </section>
 
-<style>
-/* Calendar export showcase. self-contained so site.css stays clean */
-.feat--cal { padding: var(--section-y) 0; }
-.feat--cal .feat-head {
-  max-width: 60ch;
-  margin: 0 auto clamp(36px, 5vw, 56px);
-  text-align: center;
-}
-.feat--cal .feat-head .feat-title { margin-inline: auto; }
-.feat--cal .feat-head .feat-body { margin-inline: auto; max-width: 56ch; }
+<!-- switch from Migraine Buddy -->
+<section class="import-note">
+  <div class="wrap import-note-inner reveal">
+    <span class="import-note-icon" aria-hidden="true">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11"/><path d="M8 11l4 4 4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+    </span>
+    <p>Easily transfer your data from other trackers, like Migraine Buddy.</p>
+  </div>
+</section>
 
-/* Daily-entry video demo, sits between the heading and the body copy */
-.entry-demo {
-  display: flex;
-  justify-content: center;
-  margin: clamp(24px, 3.5vw, 36px) auto clamp(28px, 4vw, 40px);
-}
+<!-- mid-page CTA -->
+<section class="cta-band">
+  <div class="wrap cta-band-inner reveal">
+    <p class="cta-band-line">A better migraine tracker that you'll actually enjoy using.</p>
+    <a href="https://apps.apple.com/us/app/ember-migraine-tracker/id6762041852" class="app-badge" target="_blank" rel="noopener">
+      <img src="assets/app-store-badge.svg" alt="Download on the App Store" width="168" height="56">
+    </a>
+  </div>
+</section>
 
-.cal-card {
-  background: #111111;
-  border: 1px solid rgba(196, 181, 160, 0.12);
-  border-radius: 14px;
-  padding: clamp(20px, 3vw, 32px);
-  font-family: var(--sans);
-  position: relative;
-  max-width: 920px;
-  margin: 0 auto;
-}
-.cal-header {
-  margin-bottom: 18px;
-  padding-bottom: 18px;
-  border-bottom: 1px solid rgba(196, 181, 160, 0.08);
-}
-.cal-title-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  flex-wrap: wrap;
-  margin-bottom: 4px;
-}
-.cal-title {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(20px, 2.4vw, 26px);
-  color: #E8E6E3;
-  margin: 0;
-  font-weight: 400;
-  letter-spacing: 0;
-}
-.cal-badge {
-  font-family: var(--sans);
-  font-size: 10px;
-  letter-spacing: 1.4px;
-  text-transform: uppercase;
-  color: #E8A547;
-  background: rgba(232, 165, 71, 0.1);
-  border: 1px solid rgba(232, 165, 71, 0.28);
-  padding: 4px 9px;
-  border-radius: 4px;
-  font-weight: 500;
-}
-.cal-subtitle {
-  font-size: 12.5px;
-  color: #6e685f;
-  margin: 0;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  letter-spacing: 0.2px;
-}
+<!-- the report -->
+<section class="report-sect" style="--thread: var(--ember)">
+  <div class="wrap">
+    <div class="report-head">
+      <p class="eyebrow reveal">For your appointments</p>
+      <h2 class="feat-title reveal">Walk in with the whole story on one page.</h2>
+      <p class="feat-body reveal reveal--d1">
+        Ember builds a 90-day calendar your provider can read in about a minute.
+        A chart note goes with it, written the way clinics write.
+      </p>
+    </div>
+    <div class="report-paper reveal reveal--d1">
+      <button type="button" class="paper paper--zoom" data-zoom aria-label="Enlarge the calendar report">
+        <img src="assets/report-full.jpg" alt="Ember's calendar report on a warm cream page: one month per row with day types, impact, medications taken, and menstrual timing, plus totals and a legend." width="1840" height="1421" loading="lazy">
+        <span class="zoom-hint" aria-hidden="true">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35M8 11h6M11 8v6"/></svg>
+          Click to enlarge
+        </span>
+      </button>
+    </div>
+    <div class="cta-row report-actions reveal">
+      <a href="assets/sample-calendar.pdf" class="btn-ghost" target="_blank" rel="noopener">Open the sample PDF</a>
+    </div>
+    <p class="report-provider-link reveal">
+      If you're a clinician, <a href="providers/">see what you receive</a>.
+    </p>
+  </div>
+</section>
 
-.cal-stats {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 10px;
-  margin-bottom: 22px;
-  padding-bottom: 22px;
-  border-bottom: 1px solid rgba(196, 181, 160, 0.08);
-}
-.cal-stat { display: flex; flex-direction: column; gap: 5px; }
-.cal-stat-num {
-  font-family: Georgia, serif;
-  font-size: clamp(18px, 2.2vw, 22px);
-  font-weight: 400;
-  line-height: 1;
-}
-.cal-stat-num--mig  { color: #c8b8e8; }
-.cal-stat-num--head { color: #b0d8e8; }
-.cal-stat-num--imp  { color: #e8c89a; }
-.cal-stat-num--clr  { color: #A8C4D4; }
-.cal-stat-num--base { color: #5a9a6a; }
-.cal-stat-label {
-  font-size: 9.5px;
-  letter-spacing: 1.3px;
-  text-transform: uppercase;
-  color: #6e685f;
-  font-weight: 500;
-}
-@media (max-width: 600px) {
-  .cal-stats { grid-template-columns: repeat(3, 1fr); gap: 14px 10px; }
-}
-@media (max-width: 380px) {
-  .cal-stats { grid-template-columns: repeat(2, 1fr); }
-}
-
-.cal-grid { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
-.cal-axis,
-.cal-row {
-  display: grid;
-  grid-template-columns: 48px repeat(31, 1fr);
-  gap: 2px;
-}
-.cal-axis {
-  font-size: 9.5px;
-  color: #5a5550;
-  margin-bottom: 6px;
-  align-items: end;
-  height: 14px;
-}
-.cal-axis-num { text-align: center; letter-spacing: 0; }
-.cal-row { margin-bottom: 3px; align-items: stretch; }
-.cal-month-label {
-  font-size: 10.5px;
-  color: #8a847b;
-  font-family: var(--sans);
-  letter-spacing: 0.3px;
-  align-self: center;
-}
-.cal-cell {
-  aspect-ratio: 1;
-  border-radius: 3px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.92);
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
-  cursor: default;
-}
-.cal-cell.empty { background: transparent; }
-.cal-cell.clear {
-  background: rgba(168, 196, 212, 0.14);
-}
-.cal-cell.mig  { background: #9b7acc; }
-.cal-cell.head { background: #4a8abf; }
-
-.cal-letter {
-  font-size: 10.5px;
-  line-height: 1;
-  letter-spacing: 0;
-}
-
-.cal-cell.impacted::after {
-  content: '';
-  position: absolute;
-  bottom: 2px;
-  left: 50%;
-  width: 4px;
-  height: 4px;
-  margin-left: -2px;
-  border-radius: 50%;
-  background: #e8a547;
-  box-shadow: 0 0 0 1px rgba(0,0,0,0.4);
-}
-
-.cal-cell.period::before {
-  content: '';
-  position: absolute;
-  top: 2px;
-  right: 2px;
-  width: 3.5px;
-  height: 3.5px;
-  border-radius: 50%;
-  background: #d8a3b3;
-  box-shadow: 0 0 0 1px rgba(0,0,0,0.4);
-}
-
-.cal-cell.mig:hover, .cal-cell.head:hover {
-  transform: scale(1.45);
-  z-index: 5;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.6);
-}
-
-/* Mobile: switch to horizontal heatmap strips. each day is a thin
-   vertical slice of color within a per-month ribbon. */
-@media (max-width: 767px) {
-  .cal-axis { display: none; }
-  .cal-row {
-    grid-template-columns: 44px repeat(31, 1fr);
-    gap: 1px;
-    margin-bottom: 4px;
-  }
-  .cal-month-label { font-size: 10px; }
-  .cal-cell {
-    aspect-ratio: auto;
-    height: 16px;
-    border-radius: 2px;
-  }
-  .cal-letter { display: none; }
-  .cal-cell.impacted::after,
-  .cal-cell.period::before { display: none; }
-  .cal-cell.mig:hover, .cal-cell.head:hover { transform: none; box-shadow: none; }
-}
-@media (max-width: 420px) {
-  .cal-row {
-    grid-template-columns: 38px repeat(31, 1fr);
-    gap: 1px;
-  }
-  .cal-cell { height: 14px; }
-  .cal-month-label { font-size: 9.5px; }
-}
-
-.cal-legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 18px;
-  align-items: center;
-  margin-top: 22px;
-  padding-top: 22px;
-  border-top: 1px solid rgba(196, 181, 160, 0.08);
-  font-size: 11.5px;
-  color: #8a847b;
-}
-.cal-legend-item { display: inline-flex; align-items: center; gap: 7px; }
-.cal-legend-swatch {
-  width: 12px;
-  height: 12px;
-  border-radius: 3px;
-  flex-shrink: 0;
-}
-.cal-legend-swatch--mig   { background: #9b7acc; }
-.cal-legend-swatch--head  { background: #4a8abf; }
-.cal-legend-swatch--clear { background: rgba(168, 196, 212, 0.55); }
-.cal-legend-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  flex-shrink: 0;
-  margin: 0 3px;
-}
-.cal-legend-dot--imp { background: #e8a547; }
-.cal-legend-dot--per { background: #d8a3b3; }
-
-@media (max-width: 480px) {
-  .cal-legend { gap: 10px 14px; font-size: 10.5px; }
-}
-</style>
-
-<script>
-(function() {
-  const root = document.getElementById('emberCalendar');
-  if (!root) return;
-  const axisEl = root.querySelector('.cal-axis');
-  const rowsEl = root.querySelector('.cal-rows');
-
-  // [monthKey, day, type, severity, meds[], impacted?]
-  const data = [
-    ['feb', 1, 'M', 'mod', ['Ub']],
-    ['feb', 3, 'M', 'sev', ['Mx'], true],
-    ['feb', 6, 'H', 'mild'],
-    ['feb', 7, 'H', 'mod'],
-    ['feb', 10, 'M', 'mod', ['Ub']],
-    ['feb', 11, 'M', 'sev', ['Ub'], true],
-    ['feb', 12, 'H', 'mild'],
-    ['feb', 13, 'H', 'mod', ['Ib']],
-    ['feb', 14, 'M', 'sev', ['Mx'], true],
-    ['feb', 15, 'M', 'mod', ['Mx']],
-    ['feb', 16, 'M', 'sev', ['Ub'], true],
-    ['feb', 17, 'H', 'mod', ['Ib']],
-    ['feb', 18, 'M', 'mod', ['Ub']],
-    ['feb', 19, 'M', 'sev', ['Mx'], true],
-    ['feb', 20, 'H', 'mild'],
-    ['feb', 21, 'H', 'mod', ['Ib']],
-    ['feb', 25, 'H', 'mod', ['Ib']],
-    ['feb', 27, 'M', 'sev', ['Ub'], true],
-    ['feb', 28, 'M', 'mod', ['Ub']],
-
-    ['mar', 1, 'M', 'sev', ['Mx'], true],
-    ['mar', 2, 'M', 'mod', ['Ub']],
-    ['mar', 3, 'M', 'mod', ['Ub']],
-    ['mar', 5, 'H', 'mild'],
-    ['mar', 8, 'M', 'mod', ['Ub']],
-    ['mar', 10, 'H', 'mod', ['Ib']],
-    ['mar', 11, 'H', 'mild', ['Ib']],
-    ['mar', 12, 'M', 'mod', ['Ub']],
-    ['mar', 16, 'H', 'mod', ['Ib']],
-    ['mar', 17, 'M', 'sev', ['Ub'], true],
-    ['mar', 20, 'M', 'mod', ['Mx']],
-    ['mar', 24, 'H', 'mild'],
-    ['mar', 25, 'H', 'mild'],
-    ['mar', 26, 'M', 'mod', ['Mx']],
-    ['mar', 27, 'M', 'sev', ['Ub'], true],
-    ['mar', 29, 'M', 'mod', ['Ub']],
-    ['mar', 30, 'M', 'sev', ['Ib'], true],
-    ['mar', 31, 'M', 'sev', ['Mx', 'Ub'], true],
-
-    ['apr', 1, 'H', 'mild'],
-    ['apr', 2, 'M', 'sev', ['Mx'], true],
-    ['apr', 4, 'M', 'mod', ['Mx']],
-    ['apr', 8, 'M', 'mod', ['Ub']],
-    ['apr', 9, 'M', 'mod', ['Mx']],
-    ['apr', 12, 'H', 'mild'],
-    ['apr', 14, 'M', 'mod', ['Ub']],
-    ['apr', 18, 'H', 'mod', ['Ib']],
-    ['apr', 20, 'H', 'mild'],
-    ['apr', 24, 'M', 'mod', ['Ub']],
-    ['apr', 25, 'M', 'sev', ['Ub'], true],
-    ['apr', 28, 'M', 'mild'],
-    ['apr', 30, 'M', 'mod', ['Ub']]
-  ];
-
-  const dayMap = {};
-  data.forEach(d => { dayMap[d[0] + '-' + d[1]] = d; });
-
-  const periodDays = new Set([
-    'feb-8','feb-9','feb-10','feb-11','feb-12',
-    'mar-7','mar-8','mar-9','mar-10','mar-11',
-    'apr-5','apr-6','apr-7','apr-8','apr-9'
-  ]);
-
-  const months = [
-    { key: 'feb', label: "Feb '26", days: 28 },
-    { key: 'mar', label: "Mar '26", days: 31 },
-    { key: 'apr', label: "Apr '26", days: 30 }
-  ];
-
-  const monthName = { feb:'Feb', mar:'Mar', apr:'Apr' };
-  const showAxis  = new Set([1, 5, 10, 15, 20, 25, 30]);
-
-  axisEl.innerHTML = '';
-  axisEl.appendChild(document.createElement('span'));
-  for (let i = 1; i <= 31; i++) {
-    const span = document.createElement('span');
-    span.className = 'cal-axis-num';
-    span.textContent = showAxis.has(i) ? i : '';
-    axisEl.appendChild(span);
-  }
-
-  rowsEl.innerHTML = '';
-  months.forEach(m => {
-    const row = document.createElement('div');
-    row.className = 'cal-row';
-
-    const lbl = document.createElement('span');
-    lbl.className = 'cal-month-label';
-    lbl.textContent = m.label;
-    row.appendChild(lbl);
-
-    for (let day = 1; day <= 31; day++) {
-      const cell = document.createElement('div');
-      const key = m.key + '-' + day;
-
-      if (day > m.days) {
-        cell.className = 'cal-cell empty';
-        row.appendChild(cell);
-        continue;
-      }
-
-      const d = dayMap[key];
-      const classes = ['cal-cell'];
-      let letter = '';
-
-      if (d) {
-        classes.push(d[2] === 'M' ? 'mig' : 'head');
-        if (d[5]) classes.push('impacted');
-        letter = d[2];
-      } else {
-        classes.push('clear');
-      }
-
-      if (periodDays.has(key)) classes.push('period');
-
-      cell.className = classes.join(' ');
-
-      if (letter) {
-        const lEl = document.createElement('span');
-        lEl.className = 'cal-letter';
-        lEl.textContent = letter;
-        cell.appendChild(lEl);
-      }
-
-      let tip = monthName[m.key] + ' ' + day + ': ';
-      if (d) {
-        tip += (d[2] === 'M' ? 'Migraine day' : 'Headache day');
-        if (d[5]) tip += ' · Impacted activity';
-      } else {
-        tip += 'Clear day';
-      }
-      if (periodDays.has(key)) tip += ' · Period';
-      cell.title = tip;
-
-      row.appendChild(cell);
-    }
-
-    rowsEl.appendChild(row);
-  });
-})();
-</script>
-
-<!-- ─── §3  Your data stays on your phone (centered band) ─ -->
-<section class="band band--tight">
+<!-- privacy band -->
+<section class="band" style="--thread: var(--clear)">
   <div class="wrap band-inner">
-    <div class="privacy-mark" aria-hidden="true">
-      <svg class="privacy-mark__svg" width="56" height="72" viewBox="0 0 56 72" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+    <div class="band-mark" aria-hidden="true">
+      <svg width="44" height="58" viewBox="0 0 56 72" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
         <rect x="6" y="3" width="44" height="66" rx="7" />
         <path d="M24 64h8" />
         <path d="M22 31v-5a6 6 0 0 1 12 0v5" />
-        <rect x="18" y="31" width="20" height="16" rx="2.5" fill="rgba(232,165,71,0.10)" />
+        <rect x="18" y="31" width="20" height="16" rx="2.5" fill="rgba(168,196,212,0.08)" />
         <circle cx="28" cy="39" r="1.5" fill="currentColor" stroke="none" />
         <path d="M28 40.5v3" />
       </svg>
     </div>
-    <h2 class="feat-title"><span class="text-accent">Nothing</span> leaves your phone.</h2>
-    <p class="feat-body band-body">
-      Ember has no cloud database for health data. What you log
-      stays on your device until you decide to share it.
+    <h2 class="feat-title reveal">Your health data stays on your phone.</h2>
+    <p class="feat-body reveal reveal--d1">
+      Ember has no cloud database for health data, and your account holds nothing
+      but the email you sign in with. What you log stays on your device until
+      you choose to share it.
     </p>
   </div>
 </section>
 
-<!-- ─── Closing ────────────────────────────────────────── -->
+<div class="wrap"><hr class="rule"></div>
+
+<!-- closing -->
 <section class="closing">
   <div class="wrap closing-inner">
-    <p class="closing-quote">
-      Patients needed a tracker they would actually like.<br>Clinicians needed one that was actually useful.<br>
+    <h2 class="feat-title reveal">Bring Ember to your next appointment.</h2>
+    <p class="feat-body reveal reveal--d1">
+      Ember helps illuminate your patterns and figure out what's working and what's not.
+      We promise your doctor will be impressed.
     </p>
-    <p class="closing-quote closing-quote--last text-accent" style="font-weight: 600;">So we built Ember.</p>
-
-    <div class="cta-row cta-row--center">
-      <a href="https://apps.apple.com/us/app/ember-migraine-tracker/id6762041852" class="btn-primary" target="_blank" rel="noopener">
-        Download on the App Store
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    <div class="cta-row cta-row--center reveal reveal--d1">
+      <a href="https://apps.apple.com/us/app/ember-migraine-tracker/id6762041852" class="app-badge" target="_blank" rel="noopener">
+        <img src="assets/app-store-badge.svg" alt="Download on the App Store" width="168" height="56">
       </a>
     </div>
-    <p class="cta-caption cta-caption--center">
-      Ember is free because we believe migraine tracking should be accessible for everyone.
-    </p>
   </div>
 </section>
 
 </main>
 
-<!-- ─── Footer ─────────────────────────────────────────── -->
 <footer class="footer">
   <div class="wrap footer-inner">
     <div class="footer-brand">
@@ -596,11 +338,12 @@
         <span class="brand-orb" aria-hidden="true"></span>
         <span class="brand-name">Ember</span>
       </div>
-      <p class="footer-tag">A better migraine and headache tracker for iPhone.</p>
+      <p class="footer-tag">A migraine and headache tracker built by a headache specialist.</p>
+      <p class="footer-note">Ember helps you track and organize what you experience. It doesn't diagnose, and it isn't a substitute for care from your clinician.</p>
     </div>
     <nav class="footer-links" aria-label="Footer">
       <a href="/">Why Ember</a>
-      <a href="providers/">For Providers</a>
+      <a href="providers/">For providers</a>
       <a href="contact/">Contact</a>
       <a href="references/">References</a>
       <a href="privacy/">Privacy</a>
@@ -609,9 +352,10 @@
   </div>
   <div class="wrap footer-bottom">
     <span>© 2026 Cascade Headache, PLLC</span>
+    <span>embertracker.app</span>
   </div>
 </footer>
 
-<script src="assets/site.js"></script>
+<script src="assets/site.js?v=8"></script>
 </body>
 </html>

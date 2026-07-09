@@ -116,8 +116,7 @@ a {
   width: 42px;
   height: 42px;
   flex: none;
-  background: url("ember-orb.png?v=2") center / contain no-repeat;
-  filter: drop-shadow(0 0 14px rgba(232, 165, 71, 0.42));
+  background: url("adaptive-icon.png") center / contain no-repeat;
 }
 
 .brand-name {
@@ -1223,3 +1222,26 @@ a {
     grid-template-columns: 1fr;
   }
 }
+
+/* ─── chrome alignment with the 2026 site redesign ───────────
+   Appended overrides only; tool styles above are untouched. */
+.brand-orb {
+  border-radius: 0 !important;
+  background: url("adaptive-icon.png") center / contain no-repeat !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+.nav.scrolled {
+  background: rgba(10, 10, 10, 0.78) !important;
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-bottom-color: rgba(232, 230, 227, 0.08) !important;
+}
+.nav-cta {
+  background: #ddc09a !important;
+  color: #191512 !important;
+  border-radius: 999px !important;
+  font-weight: 700 !important;
+}
+.nav-cta:hover { background: #e6c8a0 !important; }
+.footer { border-top: 1px solid rgba(232, 230, 227, 0.08) !important; }
