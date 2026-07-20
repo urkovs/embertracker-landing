@@ -59,6 +59,11 @@ original round-2 spec. Check `git status`/`git log` for anything newer.
 - `provider-handoff/` — functional in-browser tool with its own CSS and JS.
   Only the appended "chrome alignment" block at the end of
   `assets/provider-handoff.css` is fair game for styling.
+- `clinic/cascade-headache/` — unlinked, noindex fallback for the clinic QR.
+  Universal/App Links normally open Ember directly; this page offers the
+  `ember://clinic/cascade-headache` button when platform handoff falls back to
+  the browser. `.well-known/apple-app-site-association` and
+  `.well-known/assetlinks.json` are production link-verification contracts.
 - `beta/ provider-update/` — legacy one-off pages, self-contained. Leave alone.
 - Keep the favicon files and the App Store link (`id6762041852`) intact.
 - `<title>` patterns in use: brand-first with a hyphen for main pages

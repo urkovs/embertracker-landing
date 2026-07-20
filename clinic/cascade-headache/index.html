@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <title>Open Ember | Ember Migraine Tracker</title>
+  <link rel="icon" href="../../favicon.png" />
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0a0a0a;
+      --card: #151515;
+      --border: #2a2a2a;
+      --text: #e8e6e3;
+      --body: #c9c5c0;
+      --muted: #8a847b;
+      --ember: #ecaa68;
+      --button: #ddcfba;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--body);
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+    main {
+      width: min(100%, 440px);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 30px 24px 24px;
+      text-align: center;
+    }
+    .mark {
+      width: 52px;
+      height: 52px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--ember);
+      background: rgba(236, 170, 104, 0.12);
+      font-size: 28px;
+    }
+    h1 {
+      margin: 0;
+      color: var(--text);
+      font: 600 30px/1.15 Georgia, "Times New Roman", serif;
+    }
+    p { margin: 14px auto 0; max-width: 34ch; font-size: 16px; line-height: 1.55; }
+    .clinic { color: var(--muted); font-size: 14px; }
+    .button {
+      width: 100%;
+      min-height: 52px;
+      margin-top: 26px;
+      border: 0;
+      border-radius: 10px;
+      background: var(--button);
+      color: var(--bg);
+      font: 700 17px/1 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      cursor: pointer;
+    }
+    .note { color: var(--muted); font-size: 13px; line-height: 1.45; }
+    a { color: var(--ember); }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="mark" aria-hidden="true">♨</div>
+    <h1>Open Ember</h1>
+    <p>Open Ember to prepare your migraine calendar and Provider Chart Note for check-in.</p>
+    <p class="clinic">Cascade Headache</p>
+    <button class="button" id="open-ember" type="button">Open Ember</button>
+    <p class="note" id="open-note">Nothing is sent until you review the email and tap Send.</p>
+    <p class="note">If Ember is not installed, <a href="https://apps.apple.com/app/id6762041852">download it from the App Store</a>.</p>
+  </main>
+  <script>
+    const button = document.getElementById('open-ember');
+    const note = document.getElementById('open-note');
+    button.addEventListener('click', () => {
+      note.textContent = 'Opening Ember…';
+      window.location.href = 'ember://clinic/cascade-headache';
+      window.setTimeout(() => {
+        if (document.visibilityState === 'visible') {
+          note.textContent = 'If Ember did not open, make sure it is installed and try again.';
+        }
+      }, 1400);
+    });
+  </script>
+</body>
+</html>

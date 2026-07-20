@@ -1,0 +1,16 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": [
+          "PU7JY99RX7.com.cascadeheadache.ember"
+        ],
+        "components": [
+          {
+            "/": "/clinic/*"
+          }
+        ]
+      }
+    ]
+  }
+}

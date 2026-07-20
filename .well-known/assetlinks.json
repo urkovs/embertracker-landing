@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.cascadeheadache.ember",
+      "sha256_cert_fingerprints": [
+        "EE:30:BB:C9:B4:82:2E:4E:62:67:ED:E4:81:4F:1C:EE:A3:C9:E2:6F:AE:DC:1B:AE:1E:5A:1C:99:2C:72:3E:6E"
+      ]
+    }
+  }
+]

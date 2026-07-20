@@ -14,8 +14,9 @@ of truth for product claims) is `~/Code/headache-tracker-final`.
 
 Two real pages: `index.html` (patient landing) and `providers/index.html`
 (clinician). Plus `contact/`, `privacy/`, `terms/`, `references/`,
-`provider-handoff/` (functional in-browser tool, its own CSS/JS), and legacy
-`beta/` + `provider-update/` (leave alone).
+`provider-handoff/` (functional in-browser tool, its own CSS/JS),
+`clinic/cascade-headache/` (unlinked QR fallback plus platform association
+files), and legacy `beta/` + `provider-update/` (leave alone).
 
 ## Deploy / preview
 
