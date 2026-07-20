@@ -64,6 +64,8 @@ original round-2 spec. Check `git status`/`git log` for anything newer.
   `ember://clinic/cascade-headache` button when platform handoff falls back to
   the browser. `.well-known/apple-app-site-association` and
   `.well-known/assetlinks.json` are production link-verification contracts.
+  Asset Links keeps both the Google Play app-signing certificate and the EAS
+  upload certificate so Play installs and direct preview installs both verify.
 - `beta/ provider-update/` — legacy one-off pages, self-contained. Leave alone.
 - Keep the favicon files and the App Store link (`id6762041852`) intact.
 - `<title>` patterns in use: brand-first with a hyphen for main pages
