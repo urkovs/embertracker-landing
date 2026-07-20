@@ -39,27 +39,30 @@
       text-align: center;
     }
     .mark {
-      width: 52px;
-      height: 52px;
-      margin: 0 auto 20px;
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 18px;
       border-radius: 50%;
-      display: grid;
-      place-items: center;
-      color: var(--ember);
-      background: rgba(236, 170, 104, 0.12);
-      font-size: 28px;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(236, 170, 104, 0.18);
+    }
+    .mark img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transform: scale(1.55);
     }
     h1 {
       margin: 0;
       color: var(--text);
       font: 600 30px/1.15 Georgia, "Times New Roman", serif;
     }
-    p { margin: 14px auto 0; max-width: 34ch; font-size: 16px; line-height: 1.55; }
-    .clinic { color: var(--muted); font-size: 14px; }
+    p { margin: 12px auto 0; max-width: 34ch; font-size: 16px; line-height: 1.5; }
     .button {
       width: 100%;
       min-height: 52px;
-      margin-top: 26px;
+      margin-top: 24px;
       border: 0;
       border-radius: 10px;
       background: var(--button);
@@ -73,13 +76,14 @@
 </head>
 <body>
   <main>
-    <div class="mark" aria-hidden="true">♨</div>
+    <div class="mark" aria-hidden="true">
+      <img src="../../assets/onboarding-ember.png" alt="" />
+    </div>
     <h1>Open Ember</h1>
-    <p>Open Ember to prepare your migraine calendar and Provider Chart Note for check-in.</p>
-    <p class="clinic">Cascade Headache</p>
+    <p>Prepare your report for Cascade Headache.</p>
     <button class="button" id="open-ember" type="button">Open Ember</button>
-    <p class="note" id="open-note">Nothing is sent until you review the email and tap Send.</p>
-    <p class="note">If Ember is not installed, <a href="https://apps.apple.com/app/id6762041852">download it from the App Store</a>.</p>
+    <p class="note" id="open-note">Review before sending.</p>
+    <p class="note"><a href="https://apps.apple.com/app/id6762041852">Get Ember on the App Store</a></p>
   </main>
   <script>
     const button = document.getElementById('open-ember');

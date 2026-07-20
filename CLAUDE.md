@@ -62,7 +62,8 @@ original round-2 spec. Check `git status`/`git log` for anything newer.
 - `clinic/cascade-headache/` — unlinked, noindex fallback for the clinic QR.
   Universal/App Links normally open Ember directly; this page offers the
   `ember://clinic/cascade-headache` button when platform handoff falls back to
-  the browser. `.well-known/apple-app-site-association` and
+  the browser and uses the real Ember orb from `assets/onboarding-ember.png`.
+  `.well-known/apple-app-site-association` and
   `.well-known/assetlinks.json` are production link-verification contracts.
   Asset Links keeps both the Google Play app-signing certificate and the EAS
   upload certificate so Play installs and direct preview installs both verify.
@@ -146,8 +147,7 @@ explicit pivot from Sam, not drift to correct back.
   Logged! screen renders a broken orb in the simulator. A physical-phone
   re-record can restore the full flow as a drop-in swap. Ship optimized
   `.mp4` only; raw `.mov` recordings stay untracked (see `.gitignore`).
-- `assets/onboarding-ember.png` is currently unused (byte-identical leftover
-  of the old orb image, kept under a new name — not wired into any page).
+- `assets/onboarding-ember.png` is the Ember orb used by the clinic QR fallback.
 - Old April assets (`assets/screens/`, `daily-entry-flow.mp4`, etc.) are
   unused by current pages, kept as legacy-page insurance. Check `beta/` and
   `provider-update/` references before deleting.
