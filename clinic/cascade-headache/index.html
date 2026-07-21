@@ -7,6 +7,19 @@
   <meta name="theme-color" content="#0a0a0a" />
   <title>Send To Provider | Ember Migraine Tracker</title>
   <link rel="icon" href="../../favicon.png" />
+  <link rel="canonical" href="https://embertracker.app/clinic/cascade-headache/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Ember" />
+  <meta property="og:title" content="Send to provider · Ember" />
+  <meta property="og:description" content="Scan with your phone or tap to open Ember." />
+  <meta property="og:url" content="https://embertracker.app/clinic/cascade-headache/" />
+  <meta property="og:image" content="https://embertracker.app/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Send to provider · Ember" />
+  <meta name="twitter:description" content="Scan with your phone or tap to open Ember." />
+  <meta name="twitter:image" content="https://embertracker.app/assets/og-image.png" />
   <style>
     :root {
       color-scheme: dark;
@@ -69,7 +82,7 @@
       background: #f6f2ea;
       box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
     }
-    .qr img { width: 100%; display: block; }
+    .qr img { width: 100%; height: auto; display: block; }
     .button {
       width: 100%;
       min-height: 52px;
@@ -99,12 +112,12 @@
 <body>
   <main>
     <div class="mark" aria-hidden="true">
-      <img src="../../assets/onboarding-ember.png" alt="" />
+      <img src="../../assets/onboarding-ember.png" alt="" width="1024" height="1024" />
     </div>
     <h1>Send To Provider</h1>
     <p>Scan with your phone or tap below.</p>
     <div class="qr">
-      <img src="../../assets/clinic-cascade-headache-qr.svg" alt="QR code to open Ember directly for Cascade Headache" />
+      <img src="../../assets/clinic-cascade-headache-qr.svg" alt="QR code to open Ember directly for Cascade Headache" width="37" height="37" />
     </div>
     <button class="button" id="open-ember" type="button">Open Ember</button>
     <p class="note" id="open-note">Review before sending.</p>
