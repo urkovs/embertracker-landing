@@ -61,6 +61,15 @@
       font: 600 30px/1.15 Georgia, "Times New Roman", serif;
     }
     p { margin: 12px auto 0; max-width: 34ch; font-size: 16px; line-height: 1.5; }
+    .qr {
+      width: min(100%, 214px);
+      margin: 20px auto 0;
+      padding: 10px;
+      border-radius: 16px;
+      background: #f6f2ea;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+    }
+    .qr img { width: 100%; display: block; }
     .button {
       width: 100%;
       min-height: 52px;
@@ -78,6 +87,13 @@
     .button:focus-visible { outline: 3px solid var(--ember); outline-offset: 3px; }
     .note { color: var(--muted); font-size: 13px; line-height: 1.45; }
     a { color: var(--ember); }
+    @media print {
+      body { display: block; padding: 0; background: #fbfaf7; color: #17120d; }
+      main { margin: 0 auto; border: 0; background: #fbfaf7; }
+      h1 { color: #17120d; }
+      .qr { box-shadow: none; border: 1px solid #d9d1c5; }
+      .button, .note { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -86,7 +102,10 @@
       <img src="../../assets/onboarding-ember.png" alt="" />
     </div>
     <h1>Send To Provider</h1>
-    <p>Prepare your report for Cascade Headache.</p>
+    <p>Scan with your phone or tap below.</p>
+    <div class="qr">
+      <img src="../../assets/clinic-cascade-headache-qr.svg" alt="QR code to open Ember for Cascade Headache" />
+    </div>
     <button class="button" id="open-ember" type="button">Open Ember</button>
     <p class="note" id="open-note">Review before sending.</p>
     <p class="note"><a href="https://apps.apple.com/app/id6762041852">Get Ember on the App Store</a></p>
