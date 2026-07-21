@@ -62,8 +62,9 @@ original round-2 spec. Check `git status`/`git log` for anything newer.
 - `clinic/cascade-headache/` — unlinked, noindex fallback for the clinic QR.
   Universal/App Links normally open Ember directly; this page offers the
   `ember://clinic/cascade-headache` button when platform handoff falls back to
-  the browser, displays a printable QR for the verified HTTPS link, and uses the
-  real Ember orb from `assets/onboarding-ember.png`.
+  the browser, displays a printable QR that invokes the same
+  `ember://clinic/cascade-headache` app action directly, and uses the real Ember
+  orb from `assets/onboarding-ember.png`.
   `.well-known/apple-app-site-association` and
   `.well-known/assetlinks.json` are production link-verification contracts.
   Asset Links keeps both the Google Play app-signing certificate and the EAS
