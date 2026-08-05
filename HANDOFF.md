@@ -6,7 +6,7 @@ current-state layer on top of those.
 
 ## What this is
 
-Static marketing site for **Ember** (iOS migraine tracker) on GitHub Pages.
+Static marketing site for **Ember** (iOS and Android migraine tracker) on GitHub Pages.
 Repo `urkovs/embertracker-landing`, domain `embertracker.app` (CNAME).
 **No build step, no framework.** Plain HTML + one shared stylesheet
 (`assets/site.css`) + minimal vanilla JS (`assets/site.js`). App repo (source
@@ -65,8 +65,8 @@ verified in the browser**. Summary:
 **Landing (`index.html`)**
 - Hero: eyebrow "A better migraine tracker", H1 "Migraine tracking, without the
   headache.", warm sub "Finally, a better way to track your migraines. Built by
-  a headache specialist who actually gets it, and free to use.", official Apple
-  App Store badge (`assets/app-store-badge.svg`).
+  a headache specialist who actually gets it, and free to use.", plus official
+  App Store and Google Play badges.
 - "Why track" 3-icon row.
 - **Feature carousel** (`.fcards`, center-focus coverflow): 6 cards
   (daily-check-in video, Auto classification, Calendar, Head map, Treatment

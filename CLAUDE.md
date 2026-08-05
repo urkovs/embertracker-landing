@@ -1,6 +1,6 @@
 # CLAUDE.md — embertracker.app landing site
 
-Static marketing site for Ember (iOS migraine tracker) on GitHub Pages.
+Static marketing site for Ember (iOS and Android migraine tracker) on GitHub Pages.
 Repo `urkovs/embertracker-landing`, domain `embertracker.app` (CNAME).
 **No build step, no frameworks, no tests.** Plain HTML per directory, shared
 styles in `assets/site.css`, shared JS in `assets/site.js`. The provider-handoff
@@ -41,7 +41,7 @@ original round-2 spec. Check `git status`/`git log` for anything newer.
 ## Page map
 
 - `index.html` — patient landing. Round 2 makes this brief and visual:
-  short hero with the official App Store badge, three "why track" mini-cards,
+  short hero with official App Store and Google Play badges, three "why track" mini-cards,
   a one-line-per-feature overview (carousel on mobile), CTA band, report
   showcase, privacy band, big closing CTA.
 - `providers/index.html` — clinician page. Report hero, the interactive
@@ -153,8 +153,9 @@ explicit pivot from Sam, not drift to correct back.
 - Old April assets (`assets/screens/`, `daily-entry-flow.mp4`, etc.) are
   unused by current pages, kept as legacy-page insurance. Check `beta/` and
   `provider-update/` references before deleting.
-- The official Apple App Store badge comes from Apple's badge service
-  (tools.applemediaservices.com); never hand-draw an imitation.
+- The official Apple App Store badge is stored in `assets/app-store-badge.svg`;
+  the official Google Play badge loads from Google's badge service. Never
+  hand-draw an imitation of either badge.
 
 ## Working on it
 
