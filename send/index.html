@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Open Send to Provider · Ember</title>
+  <meta name="description" content="Open Ember and prepare your headache report for your healthcare provider." />
+  <link rel="canonical" href="https://embertracker.app/send" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Ember" />
+  <meta property="og:title" content="Prepare your provider report · Ember" />
+  <meta property="og:description" content="Open Ember and prepare your headache report for your healthcare provider." />
+  <meta property="og:url" content="https://embertracker.app/send" />
+  <meta property="og:image" content="https://embertracker.app/assets/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <link rel="icon" type="image/png" href="../favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/site.css?v=8" />
+  <style>
+    :root { color-scheme: dark; }
+    body { min-height: 100vh; }
+    .send-page {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 32px 20px;
+    }
+    .send-card {
+      width: min(100%, 560px);
+      text-align: center;
+      padding: clamp(34px, 7vw, 58px) clamp(24px, 6vw, 48px);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: var(--bg-lift);
+      box-shadow: 0 24px 80px rgba(0,0,0,.28);
+    }
+    .send-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 34px;
+      color: var(--ink-hi);
+      text-decoration: none;
+    }
+    .send-brand .brand-name { font-size: 20px; }
+    .send-eyebrow {
+      margin: 0 0 12px;
+      color: var(--ember);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(34px, 8vw, 52px);
+      font-weight: 500;
+      line-height: 1.05;
+      color: var(--ink-hi);
+    }
+    .send-copy {
+      max-width: 42ch;
+      margin: 18px auto 0;
+      color: var(--ink-mid);
+      font-size: 17px;
+      line-height: 1.6;
+    }
+    .send-actions {
+      display: grid;
+      gap: 12px;
+      margin-top: 30px;
+    }
+    .send-button {
+      display: inline-flex;
+      min-height: 54px;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 20px;
+      border: 1px solid var(--ember);
+      border-radius: 14px;
+      background: var(--ember);
+      color: #15110d;
+      font: 600 16px/1.2 var(--sans);
+      text-decoration: none;
+      transition: transform .15s ease, opacity .2s ease;
+    }
+    .send-button:hover { opacity: .9; }
+    .send-button:active { transform: scale(.98); }
+    .send-button--secondary {
+      border-color: var(--line);
+      background: transparent;
+      color: var(--ink-hi);
+    }
+    .send-help {
+      margin: 22px 0 0;
+      color: var(--ink-mut);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .send-home {
+      display: inline-block;
+      margin-top: 24px;
+      color: var(--ink-mut);
+      font-size: 14px;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    @media (max-width: 480px) {
+      .send-page { padding: 18px; }
+      .send-card { border-radius: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="send-page">
+    <section class="send-card" aria-labelledby="send-title">
+      <a class="send-brand" href="/" aria-label="Ember home">
+        <span class="brand-orb" aria-hidden="true"></span>
+        <span class="brand-name">Ember</span>
+      </a>
+
+      <p class="send-eyebrow">For your appointment</p>
+      <h1 id="send-title">Prepare your provider report.</h1>
+      <p class="send-copy">Open Ember, review your headache summary, and prepare a report to share with your healthcare provider.</p>
+
+      <div class="send-actions" id="send-actions">
+        <a class="send-button" id="ios-link" href="https://apps.apple.com/us/app/ember-migraine-tracker/id6762041852">Open Ember on iPhone</a>
+        <a class="send-button" id="android-link" href="https://play.google.com/store/apps/details?id=com.cascadeheadache.ember">Open Ember on Android</a>
+      </div>
+
+      <p class="send-help">Already have Ember? After deep-link support is enabled in the app, this page will open directly to Send to Provider. Until then, use the button for your device and open Send to Provider from inside Ember.</p>
+      <a class="send-home" href="/">Learn more about Ember</a>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      var ua = navigator.userAgent || navigator.vendor || window.opera;
+      var ios = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+      var android = /android/i.test(ua);
+      var iosLink = document.getElementById('ios-link');
+      var androidLink = document.getElementById('android-link');
+
+      if (ios) {
+        androidLink.hidden = true;
+        iosLink.textContent = 'Open Ember';
+      } else if (android) {
+        iosLink.hidden = true;
+        androidLink.textContent = 'Open Ember';
+      }
+    }());
+  </script>
+</body>
+</html>
