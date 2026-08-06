@@ -59,13 +59,18 @@ original round-2 spec. Check `git status`/`git log` for anything newer.
 - `provider-handoff/` — functional in-browser tool with its own CSS and JS.
   Only the appended "chrome alignment" block at the end of
   `assets/provider-handoff.css` is fair game for styling.
+- `send/` — unlinked patient utility route for the generic provider-report
+  handoff. Keep the page task-focused: exact heading "Send your provider your
+  report.", an `ember://send` installed-app action, platform store fallbacks,
+  and no implementation-status or deep-link explainer copy.
 - `clinic/cascade-headache/` — unlinked, noindex fallback for the clinic QR.
   Universal/App Links normally open Ember directly; this page offers the
   `ember://clinic/cascade-headache` button when platform handoff falls back to
   the browser, displays a printable QR that invokes the same
   `ember://clinic/cascade-headache` app action directly, and uses the real Ember
   orb from `assets/onboarding-ember.png`.
-  `.well-known/apple-app-site-association` and
+  `/send` and `/clinic/*` are allowlisted in the mirrored root and
+  `.well-known/apple-app-site-association` files. Those files and
   `.well-known/assetlinks.json` are production link-verification contracts.
   Asset Links keeps both the Google Play app-signing certificate and the EAS
   upload certificate so Play installs and direct preview installs both verify.

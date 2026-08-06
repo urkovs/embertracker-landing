@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Open Send to Provider · Ember</title>
-  <meta name="description" content="Open Ember and prepare your headache report for your healthcare provider." />
+  <title>Send your provider your report | Ember Migraine Tracker</title>
+  <meta name="description" content="Send your provider your Ember report." />
   <link rel="canonical" href="https://embertracker.app/send" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Ember" />
-  <meta property="og:title" content="Prepare your provider report · Ember" />
-  <meta property="og:description" content="Open Ember and prepare your headache report for your healthcare provider." />
+  <meta property="og:title" content="Send your provider your report · Ember" />
+  <meta property="og:description" content="Send your provider your Ember report." />
   <meta property="og:url" content="https://embertracker.app/send" />
   <meta property="og:image" content="https://embertracker.app/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -62,13 +62,6 @@
       line-height: 1.05;
       color: var(--ink-hi);
     }
-    .send-copy {
-      max-width: 42ch;
-      margin: 18px auto 0;
-      color: var(--ink-mid);
-      font-size: 17px;
-      line-height: 1.6;
-    }
     .send-actions {
       display: grid;
       gap: 12px;
@@ -95,12 +88,6 @@
       background: transparent;
       color: var(--ink-hi);
     }
-    .send-help {
-      margin: 22px 0 0;
-      color: var(--ink-mut);
-      font-size: 13px;
-      line-height: 1.5;
-    }
     .send-home {
       display: inline-block;
       margin-top: 24px;
@@ -124,15 +111,14 @@
       </a>
 
       <p class="send-eyebrow">For your appointment</p>
-      <h1 id="send-title">Prepare your provider report.</h1>
-      <p class="send-copy">Open Ember, review your headache summary, and prepare a report to share with your healthcare provider.</p>
+      <h1 id="send-title">Send your provider your report.</h1>
 
       <div class="send-actions" id="send-actions">
-        <a class="send-button" id="ios-link" href="https://apps.apple.com/us/app/ember-migraine-tracker/id6762041852">Open Ember on iPhone</a>
-        <a class="send-button" id="android-link" href="https://play.google.com/store/apps/details?id=com.cascadeheadache.ember">Open Ember on Android</a>
+        <a class="send-button" id="open-ember" href="ember://send">Open Ember</a>
+        <a class="send-button send-button--secondary" id="ios-link" href="https://apps.apple.com/us/app/ember-migraine-tracker/id6762041852">Get Ember for iPhone</a>
+        <a class="send-button send-button--secondary" id="android-link" href="https://play.google.com/store/apps/details?id=com.cascadeheadache.ember">Get Ember for Android</a>
       </div>
 
-      <p class="send-help">Already have Ember? After deep-link support is enabled in the app, this page will open directly to Send to Provider. Until then, use the button for your device and open Send to Provider from inside Ember.</p>
       <a class="send-home" href="/">Learn more about Ember</a>
     </section>
   </main>
@@ -147,10 +133,10 @@
 
       if (ios) {
         androidLink.hidden = true;
-        iosLink.textContent = 'Open Ember';
+        iosLink.textContent = 'Get Ember';
       } else if (android) {
         iosLink.hidden = true;
-        androidLink.textContent = 'Open Ember';
+        androidLink.textContent = 'Get Ember';
       }
     }());
   </script>
