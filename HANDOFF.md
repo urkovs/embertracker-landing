@@ -14,7 +14,8 @@ of truth for product claims) is `~/Code/headache-tracker-final`.
 
 Two real pages: `index.html` (patient landing) and `providers/index.html`
 (clinician). Plus `contact/`, `privacy/`, `terms/`, `references/`,
-`provider-handoff/` (functional in-browser tool, its own CSS/JS),
+`provider-handoff/` (full New handoff plus patch-only Follow-up workflow, its
+own CSS/JS),
 `clinic/cascade-headache/` (unlinked QR fallback plus platform association
 files), and legacy `beta/` + `provider-update/` (leave alone).
 
@@ -28,12 +29,12 @@ files), and legacy `beta/` + `provider-update/` (leave alone).
 
 ## ⚠️ Cache-busting (important)
 
-CSS/JS are linked with a version query: `assets/site.css?v=8`,
-`assets/site.js?v=8` (and `provider-handoff.css?v=8` etc.). **The dev server
-sends no cache headers, so browsers hard-cache `site.css`/`site.js`.** After
-ANY edit to site.css or site.js you MUST bump the version across all HTML or
-neither you nor the user will see the change on reload. Current version is
-**v=8**. Bump with:
+CSS/JS are linked with version queries. The provider-handoff assets are now
+`v=9`; shared site assets retain their own current versions. **The dev server
+sends no cache headers, so browsers hard-cache these files.** After editing
+provider-handoff CSS or its entry script, bump both links in
+`provider-handoff/index.html` together. Shared-asset bumps still require every
+page that references that shared asset to advance together.
 ```
 for f in index.html providers/index.html contact/index.html privacy/index.html terms/index.html references/index.html provider-handoff/index.html; do
   sed -i '' -E 's#\?v=8"#?v=9"#g' "$f"

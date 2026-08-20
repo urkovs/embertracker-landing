@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/provider-handoff.css?v=8" />
+<link rel="stylesheet" href="../assets/provider-handoff.css?v=9" />
 </head>
 <body class="handoff">
 
@@ -63,7 +63,17 @@
         <span>Generated locally in this browser. Nothing is uploaded. Saved provider defaults stay in browser storage on this device.</span>
       </div>
 
-      <form class="generator-grid" id="provider-handoff-form" novalidate>
+      <div class="workflow-switch reveal reveal--d1" role="tablist" aria-label="Provider Handoff workflow">
+        <button class="workflow-tab is-active" id="workflow-new-tab" type="button" role="tab" aria-selected="true" aria-controls="new-handoff-workflow" data-workflow="new">
+          New handoff
+        </button>
+        <button class="workflow-tab" id="workflow-followup-tab" type="button" role="tab" aria-selected="false" aria-controls="followup-handoff-workflow" data-workflow="followup">
+          Follow-up handoff
+        </button>
+      </div>
+
+      <section id="new-handoff-workflow" role="tabpanel" aria-labelledby="workflow-new-tab">
+      <form class="generator-grid" id="provider-update-form" novalidate>
         <div class="form-flow">
           <section class="panel defaults-panel" id="provider-defaults-panel">
             <div class="panel-head">
@@ -82,24 +92,24 @@
             <div class="field-grid">
               <label class="field">
                 <span class="field-label">Provider name <b aria-hidden="true">*</b></span>
-                <input class="input" id="providerName" name="providerName" type="text" autocomplete="name" required />
+                <input class="input" id="providerName" name="providerName" type="text" autocomplete="name" placeholder="Clinician name" required />
               </label>
 
               <label class="field">
                 <span class="field-label">Clinic or practice <b aria-hidden="true">*</b></span>
-                <input class="input" id="clinicName" name="clinicName" type="text" autocomplete="organization" required />
+                <input class="input" id="clinicName" name="clinicName" type="text" autocomplete="organization" placeholder="Clinic or practice" required />
               </label>
 
               <label class="field">
                 <span class="field-label">Phone <b aria-hidden="true">*</b></span>
-                <input class="input" id="phone" name="phone" type="tel" autocomplete="tel" required />
+                <input class="input" id="phone" name="phone" type="tel" autocomplete="tel" placeholder="206-555-0138" required />
               </label>
             </div>
 
             <div class="defaults-row">
               <div>
                 <p class="defaults-title">Local provider defaults</p>
-                <p class="defaults-copy">Press Save once to reuse these details next time on this device. They stay in this browser only.</p>
+                <p class="defaults-copy">Saves your provider details and usual acute limits in this browser. They load automatically next time on this device.</p>
               </div>
               <div class="defaults-actions">
                 <button class="btn-secondary btn-save-defaults" id="save-defaults" type="button">Save my defaults here</button>
@@ -151,7 +161,7 @@
               </div>
               <div class="suggestion-menu" id="nonPharmaSuggestions" role="listbox" aria-label="Non-pharma treatment matches" hidden></div>
               <div class="selected-chip-list" id="nonPharmaSelected" aria-label="Selected non-pharma treatments"></div>
-              <span class="field-help">Start typing, then choose the correct treatment from the list.</span>
+              <span class="field-help">Start typing, then choose the matching Ember treatment.</span>
             </div>
           </section>
 
@@ -159,6 +169,22 @@
             <div class="panel-head">
               <div>
                 <p class="section-kicker">Step 3</p>
+                <h2>Temporary treatments</h2>
+              </div>
+              <span class="panel-meta">Optional</span>
+            </div>
+
+            <p class="panel-copy">Start a time-limited clinician plan, such as a Steroid pack. Ember keeps it separate from the patient’s regular preventive and as-needed medications.</p>
+            <div class="temporary-treatment-list" id="initial-temporary-treatment-list" tabindex="-1" hidden></div>
+            <div class="panel-actions">
+              <button class="btn-secondary" id="add-initial-temporary-treatment" type="button">Add temporary treatment</button>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <p class="section-kicker">Step 4</p>
                 <h2>Acute medication monthly limits</h2>
               </div>
             </div>
@@ -251,6 +277,10 @@
                 <span>Non-pharma</span>
               </div>
               <div>
+                <strong id="summary-temporary">0</strong>
+                <span>Temporary</span>
+              </div>
+              <div>
                 <strong id="summary-limits">6</strong>
                 <span>Limit buckets</span>
               </div>
@@ -277,6 +307,127 @@
           </div>
         </aside>
       </form>
+      </section>
+
+      <section id="followup-handoff-workflow" role="tabpanel" aria-labelledby="workflow-followup-tab" hidden>
+        <div class="followup-flow">
+          <section class="panel" id="followup-avs-panel">
+            <div class="panel-head">
+              <div>
+                <p class="section-kicker">Step 1</p>
+                <h2>Paste today’s instructions</h2>
+              </div>
+              <span class="schema-pill" id="loaded-handoff-summary">No prior file needed</span>
+            </div>
+
+            <p class="panel-copy">Ember will create an update file containing only the changes you approve. When the patient imports it, medications and treatments not named here stay exactly as they are.</p>
+
+            <div class="copy-boundary-note" role="note">
+              <strong>Copy boundary</strong>
+              <span>Copy your Patient Instructions beginning with <b>BEGIN EMBER UPDATE</b> and paste them below. You can include the marker itself. Ember ignores it and anything before it.</span>
+            </div>
+
+            <label class="field followup-date-field">
+              <span class="field-label">Encounter date <b aria-hidden="true">*</b></span>
+              <input class="input input-date" id="followup-encounter-date" type="date" required />
+              <span class="field-help">Start and stop events use this date.</span>
+            </label>
+
+            <label class="field">
+              <span class="field-label">Patient Instructions / AVS <span>optional when adding only a temporary treatment</span></span>
+              <textarea class="textarea avs-textarea" id="followup-avs-text" placeholder="BEGIN EMBER UPDATE&#10;STOP Emgality due to lack of efficacy&#10;START Qulipta 60 mg once daily"></textarea>
+            </label>
+
+            <details class="optional-context" id="followup-context-details">
+              <summary>Optional: add the current handoff for extra cross-checks</summary>
+              <p class="field-help">This can identify restarts and state conflicts, but it is never required to create an update.</p>
+              <div class="handoff-load-grid">
+                <div class="load-choice">
+                  <span class="field-label">Current handoff file</span>
+                  <input class="visually-hidden" id="followup-handoff-file" type="file" accept="application/json,.json,text/plain" />
+                  <label class="btn-secondary file-picker-button" for="followup-handoff-file">Choose handoff file</label>
+                  <span class="field-help" id="followup-file-name">No file chosen</span>
+                </div>
+
+                <div class="load-divider" aria-hidden="true"><span>or</span></div>
+
+                <label class="field">
+                  <span class="field-label">Current handoff text</span>
+                  <textarea class="textarea textarea-compact" id="followup-handoff-text" placeholder="Paste the complete Ember handoff text"></textarea>
+                </label>
+              </div>
+              <div class="panel-actions followup-load-actions">
+                <button class="btn-secondary" id="load-followup-handoff" type="button">Use for cross-checks</button>
+                <button class="btn-ghost" id="clear-followup-handoff" type="button" hidden>Remove current handoff</button>
+              </div>
+              <p class="inline-status" id="followup-load-status" role="status" aria-live="polite"></p>
+            </details>
+
+            <div class="panel-actions followup-avs-actions">
+              <button class="btn-primary" id="review-followup-changes" type="button">Review changes</button>
+            </div>
+            <p class="inline-status" id="followup-parse-status" role="status" aria-live="polite"></p>
+          </section>
+
+          <section class="panel followup-review-panel" id="followup-review-panel" hidden>
+            <div class="panel-head">
+              <div>
+                <p class="section-kicker">Step 2</p>
+                <h2>Review today’s changes</h2>
+              </div>
+              <span class="schema-pill" id="followup-change-count">0 changes</span>
+            </div>
+            <p class="panel-copy">Obvious instructions are included. Anything uncertain stays unselected until you resolve or ignore it.</p>
+
+            <div class="review-notices" id="followup-review-notices" aria-live="polite"></div>
+            <div class="change-list" id="followup-change-list"></div>
+            <button class="btn-secondary add-manual-change" id="add-manual-followup-change" type="button">Add a missed change</button>
+
+            <div class="review-subsection">
+              <div class="review-subsection-head">
+                <div>
+                  <span class="field-label">Temporary treatments</span>
+                  <p class="field-help">Start a time-limited plan such as a Steroid pack. This is separate from regular medications.</p>
+                </div>
+                <button class="btn-secondary" id="add-followup-temporary-treatment" type="button">Add temporary treatment</button>
+              </div>
+              <div class="temporary-treatment-list" id="followup-temporary-treatment-list"></div>
+            </div>
+
+            <div class="apply-bar">
+              <div>
+                <strong id="followup-ready-title">Review each uncertain instruction</strong>
+                <span id="followup-ready-detail">The handoff has not been changed.</span>
+              </div>
+              <button class="btn-primary" id="apply-followup-changes" type="button" disabled>Create Ember update</button>
+            </div>
+            <p class="inline-status" id="followup-apply-status" role="status" aria-live="polite"></p>
+          </section>
+
+          <section class="panel followup-export-panel" id="followup-export-panel" hidden>
+            <div class="panel-head">
+              <div>
+                <p class="section-kicker">Updated</p>
+                <h2>Update ready</h2>
+              </div>
+              <span class="schema-pill">Patch only</span>
+            </div>
+            <div class="status-box is-ready" role="status">
+              <span class="status-dot" aria-hidden="true"></span>
+              <span>Only the approved changes are in this file. Everything else in the patient’s app will stay unchanged.</span>
+            </div>
+            <div class="export-actions followup-export-actions">
+              <button class="btn-primary" id="export-updated-handoff" type="button">Export Ember update file</button>
+              <button class="btn-secondary" id="copy-updated-handoff" type="button">Copy Ember update text</button>
+            </div>
+            <p class="review-foot" id="followup-export-status">The pasted AVS is no longer needed and is not included in the file.</p>
+            <details class="handoff-preview-details">
+              <summary>Show update text</summary>
+              <pre class="json-preview" id="followup-json-preview" tabindex="0" aria-label="Ember update text preview"></pre>
+            </details>
+          </section>
+        </div>
+      </section>
     </div>
   </section>
 </main>
@@ -305,6 +456,7 @@
   </div>
 </footer>
 
-<script src="../assets/provider-handoff.js?v=8"></script>
+<script type="module" src="../assets/provider-handoff.js?v=9"></script>
+<script type="module" src="../assets/provider-handoff-follow-up.js?v=9"></script>
 </body>
 </html>

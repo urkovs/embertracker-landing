@@ -1,5 +1,14 @@
 /* Ember provider handoff generator.
    Client-only: no network requests, no server persistence. */
+import { TREATMENTS as SHARED_TREATMENTS } from './provider-handoff-taxonomy.js';
+import {
+  PROVIDER_HANDOFF_VERSION,
+  TEMPORARY_TREATMENT_PRESETS,
+  buildInitialMedicationHistory,
+  temporaryTreatmentFromPreset,
+  validateProviderTemporaryTreatment
+} from './provider-handoff-core.js';
+
 (function () {
   const STORAGE_KEY = 'ember.provider_handoff.defaults.v2';
   const LEGACY_STORAGE_KEYS = [
@@ -15,96 +24,7 @@
     butalbital: 9
   };
 
-  const TREATMENTS = {
-    preventive: [
-      item('aimovig', 'Aimovig', 'Aimovig (erenumab)', 'CGRP mAb', ['erenumab']),
-      item('ajovy', 'Ajovy', 'Ajovy (fremanezumab)', 'CGRP mAb', ['fremanezumab']),
-      item('emgality', 'Emgality', 'Emgality (galcanezumab)', 'CGRP mAb', ['galcanezumab']),
-      item('vyepti', 'Vyepti', 'Vyepti (eptinezumab)', 'CGRP mAb', ['eptinezumab']),
-      item('qulipta', 'Qulipta', 'Qulipta (atogepant)', 'Preventive gepant', ['atogepant']),
-      item('nurtec_prev', 'Nurtec (preventive)', 'Nurtec (rimegepant, preventive)', 'Preventive gepant', ['nurtec', 'rimegepant']),
-      item('botox', 'Botox', 'Botox (onabotulinumtoxinA)', 'Botulinum toxin', ['onabotulinumtoxina', 'onabotulinumtoxin a']),
-      item('topamax', 'Topamax (topiramate)', 'Topamax (topiramate)', 'Anti-epileptic', ['topamax', 'topiramate']),
-      item('depakote', 'Depakote (valproic acid)', 'Depakote (valproic acid)', 'Anti-epileptic', ['depakote', 'valproic acid', 'valproate']),
-      item('oxcarbazepine', 'Trileptal (oxcarbazepine)', 'Trileptal (oxcarbazepine)', 'Anti-epileptic', ['trileptal', 'oxcarbazepine'], ['Trileptal', 'oxcarbazepine']),
-      item('tegretol', 'Tegretol (carbamazepine)', 'Tegretol (carbamazepine)', 'Anti-epileptic', ['tegretol', 'carbamazepine'], ['Tegretol', 'carbamazepine']),
-      item('gabapentin', 'Gabapentin', 'Gabapentin', 'Anti-epileptic', ['neurontin']),
-      item('pregabalin', 'Lyrica (pregabalin)', 'Lyrica (pregabalin)', 'Anti-epileptic', ['lyrica', 'pregabalin'], ['Lyrica', 'pregabalin']),
-      item('amitriptyline', 'Elavil (amitriptyline)', 'Elavil (amitriptyline)', 'Anti-depressant', ['elavil', 'amitriptyline'], ['Elavil', 'amitriptyline']),
-      item('nortriptyline', 'Pamelor (nortriptyline)', 'Pamelor (nortriptyline)', 'Anti-depressant', ['pamelor', 'nortriptyline'], ['Pamelor', 'nortriptyline']),
-      item('venlafaxine', 'Effexor (venlafaxine)', 'Effexor (venlafaxine)', 'Anti-depressant', ['effexor', 'venlafaxine'], ['Effexor', 'venlafaxine']),
-      item('duloxetine', 'Cymbalta (duloxetine)', 'Cymbalta (duloxetine)', 'Anti-depressant', ['cymbalta', 'duloxetine'], ['Cymbalta', 'duloxetine']),
-      item('propranolol', 'Inderal (propranolol)', 'Inderal (propranolol)', 'Anti-hypertensive', ['inderal', 'propranolol'], ['Inderal', 'propranolol']),
-      item('metoprolol', 'Metoprolol', 'Metoprolol', 'Anti-hypertensive', ['toprol', 'toprol xl', 'lopressor']),
-      item('candesartan', 'Candesartan', 'Candesartan', 'Anti-hypertensive', ['atacand']),
-      item('verapamil', 'Verapamil', 'Verapamil', 'Anti-hypertensive', []),
-      item('riboflavin', 'Riboflavin (Vitamin B2)', 'Riboflavin (Vitamin B2)', 'Supplement', ['b2', 'vitamin b2']),
-      item('magnesium', 'Magnesium', 'Magnesium', 'Supplement', []),
-      item('coq10', 'CoQ10 (Coenzyme Q10)', 'CoQ10 (Coenzyme Q10)', 'Supplement', ['coenzyme q10']),
-      item('memantine', 'Namenda (memantine)', 'Namenda (memantine)', 'Other', ['namenda', 'memantine'], ['Namenda', 'memantine'])
-    ],
-    acute: [
-      item('imitrex', 'Imitrex (sumatriptan)', 'Imitrex (sumatriptan)', 'Triptan', ['imitrex', 'sumatriptan'], ['Imitrex', 'sumatriptan']),
-      item('maxalt', 'Maxalt (rizatriptan)', 'Maxalt (rizatriptan)', 'Triptan', ['maxalt', 'rizatriptan'], ['Maxalt', 'rizatriptan']),
-      item('zomig', 'Zomig (zolmitriptan)', 'Zomig (zolmitriptan)', 'Triptan', ['zomig', 'zolmitriptan'], ['Zomig', 'zolmitriptan']),
-      item('relpax', 'Relpax (eletriptan)', 'Relpax (eletriptan)', 'Triptan', ['relpax', 'eletriptan'], ['Relpax', 'eletriptan']),
-      item('amerge', 'Amerge (naratriptan)', 'Amerge (naratriptan)', 'Triptan', ['amerge', 'naratriptan'], ['Amerge', 'naratriptan']),
-      item('axert', 'Axert (almotriptan)', 'Axert (almotriptan)', 'Triptan', ['axert', 'almotriptan'], ['Axert', 'almotriptan']),
-      item('frova', 'Frova (frovatriptan)', 'Frova (frovatriptan)', 'Triptan', ['frova', 'frovatriptan'], ['Frova', 'frovatriptan']),
-      item('treximet', 'Treximet', 'Treximet (sumatriptan/naproxen)', 'Triptan + NSAID', ['sumatriptan naproxen']),
-      item('symbravo', 'Symbravo', 'Symbravo (meloxicam/rizatriptan)', 'Triptan + NSAID', ['meloxicam rizatriptan']),
-      item('onzetra', 'Onzetra', 'Onzetra Xsail (sumatriptan)', 'Triptan', ['onzetra xsail', 'sumatriptan powder']),
-      item('tosymra', 'Tosymra', 'Tosymra (sumatriptan)', 'Triptan', ['sumatriptan nasal']),
-      item('zembrace', 'Zembrace', 'Zembrace SymTouch (sumatriptan)', 'Triptan', ['sumatriptan injection']),
-      item('ubrelvy', 'Ubrelvy', 'Ubrelvy (ubrogepant)', 'Gepant', ['ubrogepant']),
-      item('zavzpret', 'Zavzpret', 'Zavzpret (zavegepant)', 'Gepant', ['zavegepant']),
-      item('nurtec', 'Nurtec ODT', 'Nurtec ODT (rimegepant)', 'Gepant', ['nurtec', 'rimegepant']),
-      item('advil', 'Advil / Motrin (ibuprofen)', 'Advil / Motrin (ibuprofen)', 'NSAID', ['advil', 'motrin', 'ibuprofen'], ['Advil', 'Motrin', 'ibuprofen']),
-      item('aleve', 'Aleve (naproxen)', 'Aleve (naproxen)', 'NSAID', ['aleve', 'naproxen'], ['Aleve', 'naproxen']),
-      item('aspirin', 'Aspirin', 'Aspirin', 'NSAID', []),
-      item('cambia', 'Cambia (diclofenac)', 'Cambia (diclofenac)', 'NSAID', ['cambia', 'diclofenac'], ['Cambia', 'diclofenac']),
-      item('toradol', 'Toradol (ketorolac)', 'Toradol (ketorolac)', 'NSAID', ['toradol', 'ketorolac'], ['Toradol', 'ketorolac']),
-      item('indomethacin', 'Indomethacin', 'Indomethacin', 'NSAID', []),
-      item('celebrex', 'Celebrex (celecoxib)', 'Celebrex (celecoxib)', 'NSAID', ['celebrex', 'celecoxib'], ['Celebrex', 'celecoxib']),
-      item('meloxicam', 'Meloxicam', 'Meloxicam', 'NSAID', []),
-      item('tylenol', 'Tylenol (acetaminophen)', 'Tylenol (acetaminophen)', 'Tylenol', ['tylenol', 'acetaminophen', 'paracetamol'], ['Tylenol', 'acetaminophen']),
-      item('excedrin', 'Excedrin', 'Excedrin Migraine', 'Combination', ['excedrin migraine']),
-      item('fioricet', 'Fioricet (butalbital/acetaminophen/caffeine)', 'Fioricet (butalbital/acetaminophen/caffeine)', 'Butalbital', ['fioricet', 'butalbital'], ['Fioricet', 'butalbital']),
-      item('opioid', 'Opioid pain medication', 'Opioid pain medication', 'Opioid', ['hydrocodone', 'oxycodone', 'tramadol', 'codeine']),
-      item('dhe45', 'D.H.E. 45', 'D.H.E. 45 (dihydroergotamine injection)', 'Ergot', ['dhe 45', 'dihydroergotamine injection']),
-      item('migranal', 'Migranal', 'Migranal (DHE nasal spray)', 'Ergot', ['dhe nasal spray', 'dihydroergotamine nasal spray']),
-      item('trudhesa', 'Trudhesa', 'Trudhesa (DHE nasal spray)', 'Ergot', ['dhe nasal spray']),
-      item('atzumi', 'Atzumi', 'Atzumi (DHE nasal powder)', 'Ergot', ['dhe nasal powder']),
-      item('brekiya', 'Brekiya', 'Brekiya (DHE autoinjector)', 'Ergot', ['dhe autoinjector']),
-      item('cafergot', 'Cafergot', 'Cafergot (ergotamine + caffeine)', 'Ergot', ['ergotamine caffeine']),
-      item('reglan', 'Reglan (metoclopramide)', 'Reglan (metoclopramide)', 'Anti-nausea', ['reglan', 'metoclopramide'], ['Reglan', 'metoclopramide']),
-      item('compazine', 'Compazine (prochlorperazine)', 'Compazine (prochlorperazine)', 'Anti-nausea', ['compazine', 'prochlorperazine'], ['Compazine', 'prochlorperazine']),
-      item('zofran', 'Zofran (ondansetron)', 'Zofran (ondansetron)', 'Anti-nausea', ['zofran', 'ondansetron'], ['Zofran', 'ondansetron']),
-      item('phenergan', 'Phenergan (promethazine)', 'Phenergan (promethazine)', 'Anti-nausea', ['phenergan', 'promethazine'], ['Phenergan', 'promethazine']),
-      item('lidocaine', 'Lidocaine nasal spray', 'Lidocaine nasal spray', 'Other', ['lidocaine']),
-      item('timolol', 'Timolol eye drops', 'Timolol eye drops', 'Other', ['timolol'])
-    ],
-    nonPharma: [
-      item('dark-room', 'Dark room', 'Dark room', 'During an attack', []),
-      item('heat', 'Heat', 'Heat', 'During an attack', []),
-      item('ice', 'Ice', 'Ice', 'During an attack', ['ice pack']),
-      item('nap', 'Nap', 'Nap', 'During an attack', []),
-      item('physical-therapy', 'Physical therapy', 'Physical therapy', 'Ongoing practice', ['pt']),
-      item('massage', 'Massage', 'Massage', 'Ongoing practice', []),
-      item('acupuncture', 'Acupuncture / dry needling', 'Acupuncture / dry needling', 'Ongoing practice', ['acupuncture', 'dry needling']),
-      item('biofeedback', 'Biofeedback', 'Biofeedback', 'Ongoing practice', []),
-      item('cbt', 'CBT / mindfulness', 'CBT / mindfulness', 'Ongoing practice', ['cbt', 'mindfulness']),
-      item('yoga', 'Yoga, meditation, or breathwork', 'Yoga, meditation, or breathwork', 'Ongoing practice', ['yoga', 'meditation', 'breathwork']),
-      item('diet', 'Dietary changes', 'Dietary changes', 'Ongoing practice', []),
-      item('cefaly', 'Cefaly', 'Cefaly', 'Device', ['neuromodulation']),
-      item('nerivio', 'Nerivio', 'Nerivio', 'Device', ['neuromodulation']),
-      item('gammacore', 'gammaCore', 'gammaCore', 'Device', ['vagus nerve stimulator']),
-      item('relivion', 'Relivion', 'Relivion', 'Device', []),
-      item('nerve-blocks', 'Nerve blocks', 'Nerve blocks', 'In-office procedure', ['occipital nerve block']),
-      item('trigger-point', 'Trigger point injections', 'Trigger point injections', 'In-office procedure', []),
-      item('spg', 'SPG block (Sphenocath)', 'SPG block (Sphenocath)', 'In-office procedure', ['sphenocath'])
-    ]
-  };
+  const TREATMENTS = SHARED_TREATMENTS;
 
   const BUCKETS = Object.keys(DEFAULT_LIMITS);
   const FIELD_IDS = [
@@ -119,9 +39,10 @@
     acute: [],
     nonPharma: []
   };
+  const initialTemporaryTreatments = [];
 
   const $ = (id) => document.getElementById(id);
-  const form = $('provider-handoff-form');
+  const form = $('provider-update-form');
   const preview = $('json-preview');
   const statusBox = $('validation-status');
   const exportButton = $('export-json');
@@ -130,10 +51,6 @@
   const defaultsPanel = $('provider-defaults-panel');
   const patientPlanPanel = $('patient-plan-panel');
   let showValidationMarkers = false;
-
-  function item(key, display, value, meta, aliases) {
-    return { key, display, value, meta, aliases: aliases || [] };
-  }
 
   if (!form || !preview || !statusBox || !exportButton || !copyButton || !lastAction) {
     return;
@@ -203,17 +120,22 @@
 
   function buildPayload(createdAt) {
     const timestamp = createdAt || new Date().toISOString();
+    const preventiveMedications = selectedValues('preventive');
+    const acuteMedications = selectedValues('acute');
     return {
       schema: 'ember.provider_handoff',
-      version: 1,
+      version: PROVIDER_HANDOFF_VERSION,
       createdAt: timestamp,
       createdBy: readProviderFields(),
       patientPlan: {
         nextAppointment: fieldValue('nextAppointment') || null,
-        preventiveMedications: selectedValues('preventive'),
-        acuteMedications: selectedValues('acute'),
+        preventiveMedications,
+        acuteMedications,
         nonPharmaTreatments: selectedValues('nonPharma'),
-        acuteLimitOverrides: readLimitOverrides(timestamp)
+        acuteLimitOverrides: readLimitOverrides(timestamp),
+        medicationHistory: buildInitialMedicationHistory(preventiveMedications, acuteMedications),
+        followUpHistory: [],
+        temporaryTreatments: initialTemporaryTreatments.map((entry) => JSON.parse(JSON.stringify(entry.plan)))
       }
     };
   }
@@ -247,6 +169,13 @@
       }
     });
 
+    const temporaryError = payload.patientPlan.temporaryTreatments
+      .flatMap((treatment) => validateProviderTemporaryTreatment(treatment))[0];
+    if (temporaryError) {
+      errors.push(temporaryError);
+      byId['initial-temporary-treatment-list'] = true;
+    }
+
     return { ok: errors.length === 0, errors, byId };
   }
 
@@ -259,6 +188,7 @@
       const el = $(`limit-${bucket}`);
       if (el) el.removeAttribute('aria-invalid');
     });
+    $('initial-temporary-treatment-list')?.removeAttribute('aria-invalid');
   }
 
   function markInvalid(byId) {
@@ -286,9 +216,9 @@
     if (!defaultsPanel) return;
     defaultsPanel.classList.add('is-collapsed');
     if (options && options.scroll && patientPlanPanel) {
-      const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       patientPlanPanel.scrollIntoView({
-        behavior: prefersReducedMotion ? 'auto' : 'smooth',
+        behavior: reduceMotion ? 'auto' : 'smooth',
         block: 'start'
       });
     }
@@ -306,10 +236,12 @@
     const acutes = $('summary-acutes');
     const nonPharma = $('summary-nonpharma');
     const limits = $('summary-limits');
+    const temporary = $('summary-temporary');
     if (preventives) preventives.textContent = String(payload.patientPlan.preventiveMedications.length);
     if (acutes) acutes.textContent = String(payload.patientPlan.acuteMedications.length);
     if (nonPharma) nonPharma.textContent = String(payload.patientPlan.nonPharmaTreatments.length);
     if (limits) limits.textContent = String(BUCKETS.length);
+    if (temporary) temporary.textContent = String(payload.patientPlan.temporaryTreatments.length);
   }
 
   function render() {
@@ -597,6 +529,141 @@
     });
   }
 
+  function temporaryPresetOptions(selectedId) {
+    return TEMPORARY_TREATMENT_PRESETS.map((preset) => (
+      `<option value="${escapeHtml(preset.id)}"${preset.id === selectedId ? ' selected' : ''}>${escapeHtml(preset.label)}</option>`
+    )).join('') + `<option value="custom"${selectedId === 'custom' ? ' selected' : ''}>Something else</option>`;
+  }
+
+  function temporaryScheduleOptions(selected) {
+    const options = [
+      ['as_directed', 'As directed'],
+      ['one_time', 'One time'],
+      ['once_daily', 'Once daily'],
+      ['twice_daily', 'Twice daily'],
+      ['three_times_daily', 'Three times daily'],
+      ['taper', 'Taper']
+    ];
+    return options.map(([value, label]) => (
+      `<option value="${value}"${value === selected ? ' selected' : ''}>${label}</option>`
+    )).join('');
+  }
+
+  function renderInitialTemporaryTreatments() {
+    const target = $('initial-temporary-treatment-list');
+    if (!target) return;
+    target.innerHTML = initialTemporaryTreatments.map((entry, index) => {
+      const plan = entry.plan;
+      return `
+        <article class="temporary-treatment-row" data-initial-temporary-index="${index}">
+          <div class="temporary-treatment-row-head">
+            <strong>Temporary treatment ${index + 1}</strong>
+            <button class="btn-ghost btn-compact" type="button" data-remove-initial-temporary="${index}">Remove</button>
+          </div>
+          <div class="temporary-treatment-grid">
+            <label class="field">
+              <span class="field-label">Treatment</span>
+              <select class="input" data-initial-temporary-preset="${index}">${temporaryPresetOptions(entry.presetId)}</select>
+            </label>
+            <label class="field">
+              <span class="field-label">Name</span>
+              <input class="input" data-initial-temporary-title="${index}" value="${escapeHtml(plan.title)}" />
+            </label>
+            <label class="field">
+              <span class="field-label">Start</span>
+              <input class="input input-date" data-initial-temporary-start="${index}" type="date" value="${escapeHtml(plan.plannedStartDate)}" />
+            </label>
+            <label class="field">
+              <span class="field-label">End</span>
+              <input class="input input-date" data-initial-temporary-end="${index}" type="date" value="${escapeHtml(plan.plannedEndDate)}" />
+            </label>
+            <label class="field">
+              <span class="field-label">Schedule</span>
+              <select class="input" data-initial-temporary-schedule="${index}">${temporaryScheduleOptions(plan.schedule)}</select>
+            </label>
+          </div>
+        </article>`;
+    }).join('');
+    target.hidden = initialTemporaryTreatments.length === 0;
+  }
+
+  function addInitialTemporaryTreatment() {
+    const plan = temporaryTreatmentFromPreset('steroid_pack', localDateString());
+    if (!plan) return;
+    initialTemporaryTreatments.push({ presetId: 'steroid_pack', plan });
+    renderInitialTemporaryTreatments();
+    render();
+  }
+
+  function updateInitialTemporaryTreatment(index, field, value) {
+    const entry = initialTemporaryTreatments[index];
+    if (!entry) return;
+    if (field === 'preset') {
+      entry.presetId = value;
+      if (value === 'custom') {
+        entry.plan = {
+          title: '',
+          kind: 'other',
+          components: [{ kind: 'other', labelSnapshot: '' }],
+          plannedStartDate: entry.plan.plannedStartDate || localDateString(),
+          plannedEndDate: entry.plan.plannedStartDate || localDateString(),
+          schedule: 'as_directed'
+        };
+      } else {
+        const plan = temporaryTreatmentFromPreset(value, entry.plan.plannedStartDate || localDateString());
+        if (plan) entry.plan = plan;
+      }
+      renderInitialTemporaryTreatments();
+      render();
+      return;
+    }
+    if (field === 'title') {
+      entry.plan.title = value;
+      entry.plan.components = [{ kind: entry.plan.kind === 'procedure' ? 'procedure' : 'other', labelSnapshot: value }];
+    } else if (field === 'start') {
+      const preset = TEMPORARY_TREATMENT_PRESETS.find((item) => item.id === entry.presetId);
+      const replacement = preset ? temporaryTreatmentFromPreset(preset.id, value) : null;
+      if (replacement) entry.plan = replacement;
+      else entry.plan.plannedStartDate = value;
+      renderInitialTemporaryTreatments();
+    } else if (field === 'end') entry.plan.plannedEndDate = value;
+    else if (field === 'schedule') entry.plan.schedule = value;
+    render();
+  }
+
+  function initInitialTemporaryTreatments() {
+    $('add-initial-temporary-treatment')?.addEventListener('click', addInitialTemporaryTreatment);
+    $('initial-temporary-treatment-list')?.addEventListener('input', (event) => {
+      const target = event.target;
+      const mappings = [
+        ['initialTemporaryTitle', 'title'],
+        ['initialTemporaryStart', 'start'],
+        ['initialTemporaryEnd', 'end'],
+        ['initialTemporarySchedule', 'schedule']
+      ];
+      for (const [datasetKey, field] of mappings) {
+        if (target.dataset?.[datasetKey] !== undefined) {
+          updateInitialTemporaryTreatment(Number(target.dataset[datasetKey]), field, target.value);
+          return;
+        }
+      }
+    });
+    $('initial-temporary-treatment-list')?.addEventListener('change', (event) => {
+      const target = event.target;
+      if (target.dataset?.initialTemporaryPreset !== undefined) {
+        updateInitialTemporaryTreatment(Number(target.dataset.initialTemporaryPreset), 'preset', target.value);
+      }
+    });
+    $('initial-temporary-treatment-list')?.addEventListener('click', (event) => {
+      const button = event.target.closest('[data-remove-initial-temporary]');
+      if (!button) return;
+      initialTemporaryTreatments.splice(Number(button.dataset.removeInitialTemporary), 1);
+      renderInitialTemporaryTreatments();
+      render();
+    });
+    renderInitialTemporaryTreatments();
+  }
+
   function levenshtein(a, b) {
     const prev = Array.from({ length: b.length + 1 }, (_, i) => i);
     const curr = Array.from({ length: b.length + 1 }, () => 0);
@@ -712,7 +779,8 @@
   }
 
   function loadSavedDefaults() {
-    const raw = localStorage.getItem(STORAGE_KEY);
+    const raw = localStorage.getItem(STORAGE_KEY)
+      || LEGACY_STORAGE_KEYS.map((key) => localStorage.getItem(key)).find(Boolean);
     if (!raw) return false;
 
     try {
@@ -785,6 +853,7 @@
   copyButton.addEventListener('click', copyHandoffText);
 
   initTreatmentPickers();
+  initInitialTemporaryTreatments();
   initNav();
   initReveal();
   loadSavedDefaults();

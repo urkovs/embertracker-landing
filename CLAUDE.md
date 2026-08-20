@@ -57,8 +57,12 @@ original round-2 spec. Check `git status`/`git log` for anything newer.
   the substantive content of `/privacy` or `/terms` → update their "Last
   updated" date.
 - `provider-handoff/` — functional in-browser tool with its own CSS and JS.
-  Only the appended "chrome alignment" block at the end of
-  `assets/provider-handoff.css` is fair game for styling.
+  `New handoff` creates a full initial plan; `Follow-up handoff` parses pasted
+  Patient Instructions/AVS locally and exports only approved named changes.
+  A prior handoff is optional cross-check context, never required. Both flows
+  can add dated temporary treatments, including the six-day Medrol Dosepak
+  shortcut. Raw AVS text is discarded and never included in the update file.
+  Preserve the appended chrome-alignment block in `assets/provider-handoff.css`.
 - `send/` — unlinked patient utility route for the generic provider-report
   handoff. Keep the page task-focused: exact heading "Send your provider your
   report.", an `ember://send` installed-app action, platform store fallbacks,
