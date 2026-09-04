@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Clinic direct send pilot | Ember Migraine Tracker</title>
+<meta name="description" content="Learn how to add your clinic's approved report inbox to Ember's patient-controlled direct send list." />
+<link rel="canonical" href="https://embertracker.app/providers/join/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Ember" />
+<meta property="og:title" content="Clinic direct send pilot | Ember Migraine Tracker" />
+<meta property="og:description" content="A practical setup path for clinics that want patient-initiated Ember reports delivered to an approved inbox." />
+<meta property="og:url" content="https://embertracker.app/providers/join/" />
+<meta property="og:image" content="https://embertracker.app/assets/og-image.png" />
+<meta name="theme-color" content="#0a0a0a" />
+<link rel="icon" type="image/png" href="../../favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css?v=9">
+<noscript><style>.reveal{opacity:1!important;transform:none!important;}</style></noscript>
+<style>
+.join-hero { padding: clamp(52px, 9vw, 96px) 0 clamp(46px, 7vw, 76px); position: relative; overflow: hidden; }
+.join-hero::before { content: ""; position: absolute; inset: -60% -15% auto; height: 120%; background: radial-gradient(ellipse 56% 52% at 22% 8%, rgba(236,170,104,0.14), transparent 72%); pointer-events: none; }
+.join-hero-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(280px, .7fr); gap: clamp(38px, 7vw, 92px); align-items: end; }
+.join-hero h1 { font-size: clamp(36px, 6.8vw, 60px); line-height: 1.06; max-width: 13ch; margin-bottom: 20px; }
+.join-hero .hero-sub { margin-bottom: 28px; }
+.pilot-note { border-top: 1px solid var(--line-strong); padding-top: 20px; }
+.pilot-note strong { display: block; color: var(--ink-hi); font-family: var(--serif); font-size: 22px; font-weight: 500; margin-bottom: 6px; }
+.pilot-note p { color: var(--ink-mut); font-size: 14px; line-height: 1.55; margin: 0; }
+.join-section { padding-block: calc(var(--sect) / 1.7); }
+.join-heading { max-width: 760px; margin-bottom: clamp(30px, 5vw, 50px); }
+.join-grid { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: clamp(34px, 7vw, 86px); align-items: start; }
+.join-grid > * { min-width: 0; }
+.fact-list { border-top: 1px solid var(--line-strong); }
+.fact-row { display: grid; grid-template-columns: 38px minmax(0, 1fr); gap: 14px; padding: 20px 0; border-bottom: 1px solid var(--line); }
+.fact-number { color: var(--ember); font-family: var(--mono); font-size: 12px; padding-top: 3px; }
+.fact-row h3 { font-family: var(--sans); font-size: 16px; font-weight: 600; letter-spacing: 0; margin-bottom: 5px; }
+.fact-row p { margin: 0; color: var(--ink-mut); font-size: 14.5px; line-height: 1.55; }
+.measure-block { border-left: 2px solid var(--sea); padding-left: clamp(20px, 4vw, 34px); }
+.measure-block h3 { font-size: clamp(25px, 4vw, 34px); margin-bottom: 14px; }
+.measure-block p { margin: 0 0 14px; max-width: 58ch; }
+.measure-definition { margin: 24px 0; padding: 18px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.measure-definition span { display: block; color: var(--sea); font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 7px; }
+.measure-definition strong { color: var(--ink-hi); font-weight: 500; }
+.evidence-note { color: var(--ink-dim); font-size: 13px; line-height: 1.55; }
+.setup-shell { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, .72fr); gap: clamp(34px, 7vw, 80px); align-items: start; }
+.checklist { counter-reset: setup; border-top: 1px solid var(--line-strong); }
+.checklist-item { counter-increment: setup; display: grid; grid-template-columns: 42px minmax(0, 1fr); gap: 14px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+.checklist-item::before { content: counter(setup, decimal-leading-zero); color: var(--amber); font-family: var(--mono); font-size: 12px; padding-top: 3px; }
+.checklist-item h3 { font-family: var(--sans); font-size: 16px; font-weight: 600; letter-spacing: 0; margin-bottom: 6px; }
+.checklist-item p { margin: 0; color: var(--ink-mut); font-size: 14.5px; line-height: 1.55; }
+.inquiry { background: var(--surface); border: 1px solid var(--line-strong); border-radius: 18px; padding: clamp(22px, 4vw, 30px); position: sticky; top: 88px; }
+.inquiry h2 { font-size: 27px; line-height: 1.15; margin-bottom: 12px; }
+.inquiry p { margin: 0 0 20px; color: var(--ink-mut); font-size: 14.5px; }
+.inquiry ul { list-style: none; padding: 0; margin: 0 0 24px; }
+.inquiry li { color: var(--ink-mid); font-size: 14px; padding: 9px 0; border-bottom: 1px solid var(--line); }
+.inquiry .btn-primary { width: 100%; justify-content: center; }
+.privacy-band { background: color-mix(in srgb, var(--clear) 7%, var(--bg)); border-block: 1px solid color-mix(in srgb, var(--clear) 20%, transparent); }
+.source-links { display: flex; gap: 10px 24px; flex-wrap: wrap; margin-top: 22px; }
+.source-links a { color: var(--ink-mut); font-size: 13px; text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 800px) {
+  .join-hero-grid, .join-grid, .setup-shell { grid-template-columns: 1fr; }
+  .join-hero h1 { max-width: 15ch; }
+  .inquiry { position: static; }
+}
+</style>
+</head>
+<body>
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="../../" aria-label="Ember home">
+      <span class="brand-orb" aria-hidden="true"></span>
+      <span class="brand-name">Ember</span>
+      <span class="brand-divider" aria-hidden="true"></span>
+      <span class="brand-context">For clinicians</span>
+    </a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="../" class="nav-link">Report</a>
+      <a href="../../references/" class="nav-link nav-link--secondary">References</a>
+      <a href="../../contact/" class="nav-cta">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="join-hero">
+    <div class="wrap join-hero-grid">
+      <div>
+        <p class="eyebrow reveal">Clinic direct send</p>
+        <h1 class="reveal reveal--d1">Bring Ember direct send to your clinic.</h1>
+        <p class="hero-sub reveal reveal--d2">
+          Patients can already export their report anywhere. When a clinic joins,
+          Ember can add its approved report inbox to the in-app clinic list so the
+          patient can prepare an addressed report.
+        </p>
+        <div class="cta-row reveal reveal--d2">
+          <a href="#setup" class="btn-primary">See the setup steps</a>
+          <a href="../#report" class="btn-ghost">Review the report</a>
+        </div>
+      </div>
+      <aside class="pilot-note reveal reveal--d2">
+        <strong>The current clinic pilot is free.</strong>
+        <p>If pricing is introduced later, participating clinics will see the terms before anything changes.</p>
+      </aside>
+    </div>
+  </section>
+
+  <div class="wrap"><hr class="rule"></div>
+
+  <section class="join-section" style="--thread: var(--sea)">
+    <div class="wrap">
+      <div class="join-heading">
+        <p class="eyebrow reveal">What changes for the clinic</p>
+        <h2 class="feat-title reveal">A consistent report reaches the inbox your team approves.</h2>
+      </div>
+      <div class="join-grid">
+        <div class="fact-list reveal">
+          <div class="fact-row">
+            <span class="fact-number">01</span>
+            <div><h3>The patient starts every send</h3><p>Ember does not transmit reports in the background. The patient reviews their name, prepares the PDF, chooses the email app, and sends it.</p></div>
+          </div>
+          <div class="fact-row">
+            <span class="fact-number">02</span>
+            <div><h3>Your approved inbox is allowlisted</h3><p>The app resolves a clinic name to an Ember-owned destination. A link cannot substitute another recipient address.</p></div>
+          </div>
+          <div class="fact-row">
+            <span class="fact-number">03</span>
+            <div><h3>The PDF is ready to review</h3><p>The attachment combines the 90-day calendar and chart-style summary, including diary completeness and treatment context.</p></div>
+          </div>
+        </div>
+        <div class="measure-block reveal reveal--d1">
+          <p class="eyebrow">A useful companion measure</p>
+          <h3>Why Impacted Days sits beside frequency and MIDAS.</h3>
+          <p>Frequency can improve while meaningful activity limits remain. Ember keeps a dated count of functional impact so a clinician can see burden across the treatment window, including partial limitation that may not appear as a fully missed day.</p>
+          <div class="measure-definition">
+            <span>Ember definition</span>
+            <strong>An Impacted Day is a logged day when headache or migraine symptoms limited usual activity or prevented it.</strong>
+          </div>
+          <p>Impacted Days is an Ember-defined longitudinal metric. It has not been independently validated and does not replace MIDAS, another validated instrument, or clinical judgment. It adds day-level context that may support documentation for treatment review and payer requests without guaranteeing coverage.</p>
+          <p>For an active Botox cycle, Ember schedules its MIDAS reminder six weeks after the most recently logged injection. This places the assessment at the midpoint of the FDA-labeled 12-week retreatment schedule instead of relying only on the end-of-cycle visit. MIDAS still asks about the prior three months, so the score does not isolate Botox response by itself.</p>
+          <p class="evidence-note">Ember reports the source and completeness of the underlying daily logs so clinicians can decide how much weight to place on each trend.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="join-section privacy-band" id="setup" style="--thread: var(--clear)">
+    <div class="wrap setup-shell">
+      <div>
+        <p class="eyebrow reveal">Clinic setup</p>
+        <h2 class="feat-title reveal">A short operational checklist.</h2>
+        <div class="checklist reveal reveal--d1">
+          <div class="checklist-item"><div><h3>Choose the report inbox</h3><p>Ask your IT or compliance team for a monitored address under clinic control. Decide who reviews messages and where the PDF belongs in the chart.</p></div></div>
+          <div class="checklist-item"><div><h3>Send Ember the routing details</h3><p>Provide the clinic display name, report address, operational contact, and confirmation that the inbox is approved for patient-submitted health information. Do not include patient information.</p></div></div>
+          <div class="checklist-item"><div><h3>Test the patient flow</h3><p>Ember adds the clinic to its allowlist and coordinates a test from supported devices. Your team confirms receipt, attachment handling, and internal routing.</p></div></div>
+          <div class="checklist-item"><div><h3>Share the workflow with staff</h3><p>Give scheduling and clinical teams the clinic's report instructions. Patients remain able to save or send their report manually if direct send is unavailable.</p></div></div>
+        </div>
+      </div>
+      <aside class="inquiry reveal reveal--d1">
+        <p class="eyebrow">Start the pilot</p>
+        <h2>Request clinic setup.</h2>
+        <p>The first email should contain operational details only.</p>
+        <ul>
+          <li>Clinic display name</li>
+          <li>Approved report inbox</li>
+          <li>Operational contact</li>
+          <li>Preferred test platform</li>
+        </ul>
+        <a class="btn-primary" href="mailto:hello@cascadeheadache.com?subject=Ember%20clinic%20direct%20send%20pilot&amp;body=Clinic%20display%20name%3A%0AApproved%20report%20inbox%3A%0AOperational%20contact%3A%0APreferred%20test%20platform%3A%0A%0APlease%20do%20not%20include%20patient%20information.">Email the setup request</a>
+      </aside>
+    </div>
+  </section>
+
+  <section class="join-section" style="--thread: var(--amber)">
+    <div class="wrap" style="max-width: 800px;">
+      <p class="eyebrow reveal">Privacy boundaries</p>
+      <h2 class="feat-title reveal">The report stays under patient control until they share it.</h2>
+      <p class="feat-body reveal reveal--d1">Health data remains on the patient's device while Ember generates the report. Ember does not receive or retain the PDF when the patient sends it.</p>
+      <p class="feat-body reveal reveal--d1">Each clinic remains responsible for its inbox, workforce access, retention, and legal review. HIPAA obligations depend on the actual relationship and data flow, so clinic counsel or compliance staff should evaluate the workflow rather than rely on a blanket BAA statement.</p>
+      <div class="source-links reveal reveal--d1" aria-label="Supporting sources">
+        <a href="https://www.hhs.gov/hipaa/for-professionals/privacy/guidance/access-right-health-apps-apis/index.html" target="_blank" rel="noopener">HHS guidance on health apps and business associates</a>
+        <a href="https://headachejournal.onlinelibrary.wiley.com/doi/10.1111/j.1526-4610.2001.01156.x" target="_blank" rel="noopener">MIDAS clinical utility study</a>
+        <a href="https://www.accessdata.fda.gov/drugsatfda_docs/label/2023/103000s5327lbl.pdf" target="_blank" rel="noopener">FDA Botox prescribing information</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <div class="brand"><span class="brand-orb" aria-hidden="true"></span><span class="brand-name">Ember</span></div>
+      <p class="footer-tag">A migraine and headache tracker built by a headache specialist.</p>
+      <p class="footer-note">Ember helps patients track and organize what they experience. It doesn't diagnose, and it isn't a substitute for clinical care.</p>
+    </div>
+    <nav class="footer-links" aria-label="Footer">
+      <a href="../../">Why Ember</a>
+      <a href="../" class="is-current">For providers</a>
+      <a href="../../contact/">Contact</a>
+      <a href="../../references/">References</a>
+      <a href="../../privacy/">Privacy</a>
+      <a href="../../terms/">Terms</a>
+    </nav>
+    <div class="footer-meta"><a href="mailto:hello@cascadeheadache.com">hello@cascadeheadache.com</a></div>
+  </div>
+  <div class="wrap footer-bottom"><span>© 2026 Cascade Headache, PLLC</span><span>embertracker.app</span></div>
+</footer>
+<script src="../../assets/site.js?v=9"></script>
+</body>
+</html>
