@@ -97,13 +97,14 @@ h1, h2, h3 { margin: 0; font-family: var(--serif); font-weight: 500; color: var(
 .nav-link { font-size: 14px; color: var(--ink-mut); transition: color 0.2s ease; white-space: nowrap; }
 .nav-link:hover { color: var(--ink-hi); }
 .nav-cta {
-  font-size: 14px; font-weight: 700; color: var(--btn-ink);
-  background: color-mix(in srgb, var(--ember) 34%, var(--btn));
-  padding: 8px 17px; border-radius: 999px;
+  font-size: 14px; font-weight: 600; color: var(--ember);
+  background: rgba(236, 170, 104, .14);
+  border: 1px solid rgba(236, 170, 104, .38);
+  padding: 7px 16px; border-radius: 999px;
   transition: background 0.2s ease;
   white-space: nowrap;
 }
-.nav-cta:hover { background: color-mix(in srgb, var(--ember) 50%, var(--btn)); }
+.nav-cta:hover { background: rgba(236, 170, 104, .22); border-color: var(--ember); }
 @media (max-width: 560px) {
   .brand-divider, .brand-context { display: none; }
   .nav-link { font-size: 13px; }

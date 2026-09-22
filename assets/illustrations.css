@@ -1,0 +1,12 @@
+/* Small, purposeful illustrations using Ember's established SVG palette. */
+.site-illustration { display: block; width: min(100%, 320px); height: auto; margin: 0 auto 24px; }
+.site-illustration--compact { width: min(100%, 210px); margin-bottom: 20px; }
+.pilot-note .site-illustration { width: min(100%, 300px); margin-bottom: 16px; }
+@media (max-width: 560px) {
+ .site-illustration { max-width: 260px; margin-bottom: 20px; }
+ .site-illustration--compact { max-width: 160px; margin-bottom: 16px; }
+}
+@media (max-width: 560px) {
+ .nav-inner { min-height: 62px; height: auto; flex-wrap: wrap; padding-block: 10px; }
+ .nav-links { flex-wrap: wrap; }
+}

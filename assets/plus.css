@@ -1,0 +1,121 @@
+/* Plus marketing extension. Uses the existing Ember site tokens. */
+.plus-label { color: var(--ember); font-size: 14px; font-weight: 500; margin: 0 0 20px; }
+.plus-status { display: inline-block; font-family: var(--sans); color: var(--ink-mid); font-size: 12px; border: 1px solid var(--line-strong); border-radius: 99px; padding: 4px 11px; margin-left: 10px; vertical-align: middle; }
+.plus-intro { padding-block: clamp(64px, 10vw, 120px); }
+.plus-intro-grid { display: grid; grid-template-columns: 1.3fr .7fr; align-items: center; gap: 40px; }
+.plus-intro-grid > *, .plus-feature > *, .plus-free > * { min-width: 0; }
+.plus-intro h1 { font-size: clamp(42px, 6vw, 70px); line-height: 1.08; max-width: 14ch; letter-spacing: -.035em; }
+.plus-intro .lead { font-size: clamp(17px, 2vw, 20px); line-height: 1.65; max-width: 43ch; margin: 26px 0; }
+.plus-orb { width: 100%; max-width: 350px; aspect-ratio: 1; height: auto; object-fit: contain; margin-inline: auto; }
+.plus-intro .availability { font-size: 14px; color: var(--ink-mid); margin-top: 22px; max-width: 49ch; }
+.plus-section { padding-block: clamp(60px, 8vw, 100px); scroll-margin-top: 100px; }
+.plus-section h2, .plus-home h2 { font-size: clamp(30px, 4vw, 44px); line-height: 1.18; max-width: 21ch; }
+.plus-section-intro { max-width: 56ch; margin: 20px 0 45px; }
+.plus-feature { display: grid; grid-template-columns: .9fr 1.1fr; gap: 28px 70px; padding-block: 32px; border-top: 1px solid var(--line-strong); }
+.plus-feature h3 { font-size: clamp(23px, 3vw, 30px); line-height: 1.25; }
+.plus-feature p { margin: 0; max-width: 54ch; }
+.plus-feature .feature-detail { margin-top: 10px; font-size: 14px; color: var(--ink-mid); }
+.plus-free-band { background: var(--bg-lift); border-block: 1px solid var(--line); }
+.plus-free { display: grid; grid-template-columns: 1fr 1fr; gap: 36px 80px; }
+.plus-free p { max-width: 45ch; }
+.plus-free ul { margin: 0; padding-left: 21px; }
+.plus-free li { padding: 8px 0; color: var(--ink-hi); }
+.plus-faq { max-width: 760px; }
+.plus-faq h2 { margin-bottom: 30px; }
+.plus-faq details { border-bottom: 1px solid var(--line-strong); }
+.plus-faq summary { cursor: pointer; padding: 22px 0; font-size: 17px; color: var(--ink-hi); }
+.plus-faq details p { max-width: 65ch; padding: 0 0 24px; margin: 0; }
+.plus-closing { border-top: 1px solid var(--line-strong); padding-top: 50px; margin-top: 56px; }
+.plus-closing p { max-width: 55ch; }
+.plus-home { padding-block: clamp(60px, 8vw, 100px); background: var(--bg-lift); border-block: 1px solid var(--line); }
+.plus-home-grid { display: grid; grid-template-columns: 1fr 240px; align-items: center; gap: 40px; }
+.plus-home p:not(.plus-label) { max-width: 51ch; margin-block: 20px 26px; }
+.plus-home .plus-orb { max-width: 240px; }
+.plus-hero-link { margin-top: 20px; font-size: 14px; }
+.plus-hero-link a { color: var(--ember); }
+.plus-skip { position: absolute; left: 20px; top: -80px; padding: 10px 18px; background: var(--btn); color: var(--btn-ink); z-index: 100; }
+.plus-skip:focus { top: 12px; }
+@media (max-width: 760px) {
+ .plus-intro-grid { grid-template-columns: 1fr 150px; gap: 16px; }
+ .plus-intro h1 { font-size: clamp(38px, 7vw, 54px); }
+ .plus-feature { grid-template-columns: 1fr; gap: 14px; }
+ .plus-free { grid-template-columns: 1fr; gap: 24px; }
+ .plus-home-grid { grid-template-columns: 1fr 130px; gap: 16px; }
+}
+@media (max-width: 560px) {
+ .plus-intro-grid { grid-template-columns: 1fr; }
+ .plus-intro-art { grid-row: 1; }
+ .plus-intro .plus-orb { width: 130px; margin: 0; }
+ .plus-intro { padding-top: 28px; }
+ .plus-home-grid { grid-template-columns: 1fr; }
+ .plus-home-art { display: none; }
+ .nav-inner { height: auto; min-height: 62px; flex-wrap: wrap; padding-block: 10px; gap: 6px 14px; }
+ .nav-links { flex-wrap: wrap; gap: 4px 14px; }
+ .nav-link { min-height: 44px; display: inline-flex; align-items: center; }
+ .nav-link--secondary { display: none; }
+ }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* Illustrated feature stories, September refinement. */
+.plus-intro { padding-block: clamp(48px, 7vw, 88px); }
+.plus-stories { padding-top: 24px; }
+.plus-feature { align-items: center; grid-template-columns: 1.1fr 1fr; gap: clamp(28px, 6vw, 80px); padding-block: clamp(24px, 4vw, 48px); border: 0; }
+.plus-feature-art img { width: 100%; height: auto; }
+.plus-feature-copy h2 { font-size: clamp(29px, 3.5vw, 42px); max-width: 16ch; }
+.plus-feature-copy p { margin-top: 20px; max-width: 33ch; font-size: 17px; }
+.plus-feature--reverse .plus-feature-art { order: 2; }
+.plus-illustration-note { font-size: 12px; color: var(--ink-mid); text-align: center; margin: 32px 0 0; }
+.plus-free-note { align-self: center; border: 1px solid var(--line-strong); padding: 28px; border-radius: 16px; }
+.plus-free-note p { font-family: var(--serif); color: var(--ink-hi); font-size: 26px; margin: 0 0 10px; }
+.plus-free-note span { font-size: 15px; }
+@media (max-width: 760px) {
+ .plus-feature { grid-template-columns: 1fr 1fr; gap: 22px; }
+ .plus-feature-copy p { font-size: 16px; }
+}
+@media (max-width: 560px) {
+ .plus-feature { grid-template-columns: 1fr; gap: 4px; padding-block: 20px 36px; }
+ .plus-feature--reverse .plus-feature-art { order: 0; }
+ .plus-feature-art { max-width: 380px; width: 100%; margin-inline: auto; }
+ .plus-feature-copy h2 { max-width: 19ch; }
+ .plus-feature-copy p { margin-top: 12px; }
+ .plus-intro { padding-top: 28px; }
+ .plus-stories { padding-top: 0; }
+}
+
+/* Optional feature detail stays within its illustrated section. */
+.plus-feature-copy .plus-feature-kicker { color: var(--ember); font-size: 13px; margin: 0 0 12px; }
+.plus-detail { margin-top: 16px; max-width: 42ch; }
+.plus-detail summary { color: var(--ember); font-size: 14px; cursor: pointer; padding-block: 12px; min-height: 44px; }
+.plus-detail summary:hover { color: var(--ink-hi); }
+.plus-detail[open] summary { border-bottom: 1px solid var(--line-strong); }
+.plus-feature-copy .plus-detail-body p { font-size: 14px; line-height: 1.65; max-width: none; margin: 16px 0 0; }
+.plus-feature-copy .plus-detail-body .plus-detail-note { color: var(--ink-mid); font-size: 12px; }
+.plus-alert-example { background: var(--surface); border: 1px solid var(--line-strong); border-radius: 14px; padding: 18px; margin-top: 20px; }
+.plus-example-label { display: block; color: var(--ink-mid); font-size: 11px; margin-bottom: 10px; }
+.plus-alert-example strong { display: block; font-size: 14px; font-weight: 500; color: var(--ink-hi); }
+.plus-feature-copy .plus-alert-example p { margin-top: 6px; font-size: 13px; }
+.plus-device-list { display: grid; gap: 18px; margin-top: 22px; }
+.plus-device-list > div { display: flex; gap: 15px; align-items: center; }
+.plus-device-list svg { width: 30px; height: 38px; flex: 0 0 30px; fill: none; stroke: var(--sea); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.plus-device-list strong, .plus-device-list span { display: block; font-size: 14px; }
+.plus-device-list strong { color: var(--ink-hi); font-weight: 500; margin-bottom: 3px; }
+.plus-device-list span { font-size: 13px; }
+.plus-feature:has(.plus-detail[open]) { align-items: start; }
+
+/* Give the upcoming Plus release a clear place in the primary navigation. */
+.nav-links .nav-plus {
+ display: inline-flex; align-items: center; gap: 8px;
+ color: var(--ember); font-weight: 600;
+ background: rgba(236, 170, 104, .20);
+ border: 1px solid rgba(236, 170, 104, .48);
+ border-radius: 999px; padding: 7px 11px; min-height: 0;
+}
+
+.nav-links .nav-plus:hover, .nav-links .nav-plus[aria-current="page"] {
+ background: rgba(236, 170, 104, .27); border-color: var(--ember); color: var(--ember);
+}
+@media (max-width: 560px) {
+ .nav-links { gap: 4px 10px; }
+ .nav-links .nav-plus { padding-inline: 10px; gap: 5px; }
+ .nav-cta { padding-inline: 12px; }
+}
