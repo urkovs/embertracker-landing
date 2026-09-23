@@ -38,6 +38,8 @@ original round-2 spec. Check `git status`/`git log` for anything newer.
   diagnosis claims (the "doesn't diagnose, isn't a substitute for care" footer
   line stays); no colorblind report version (removed July 2026); pattern
   insights use observation language, never "predict."
+- Homepage H1 is Sam's: "Migraine tracking, without the headache." Do not
+  rewrite it (a Sept 2026 replacement was rejected and reverted).
 - Do not invent clinical or demo-data details (sample adverse effects, med
   codes, dosages). Pull example data from what's already on the site or ask.
 
