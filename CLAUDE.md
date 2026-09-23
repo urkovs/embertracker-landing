@@ -17,10 +17,13 @@ original round-2 spec. Check `git status`/`git log` for anything newer.
 
 - Legal entity is **Cascade Headache, PLLC** (not "LLC"). It appears in every
   footer and throughout `/privacy` and `/terms`.
-- Classification claims: **deterministic, hardcoded ICHD-3 rules — no AI, no
-  black box**. Never describe the engine as AI-powered or interpretive. Approved
-  line: "Every classification follows deterministic ICHD-3 rules. No AI
-  guesses, no black box." Never "rules a headache specialist wrote."
+- Classification claims: **fixed, hardcoded rules built on ICHD-3 criteria — no
+  AI, no black box**. Never describe the engine as AI-powered or interpretive,
+  and never claim strict ICHD-3 conformance (the app's migraine-day-without-
+  headache rule is gated on functional impact, not the 2-feature threshold).
+  Approved line (Sept 2026): "Every classification follows fixed rules built on
+  ICHD-3 criteria. No AI guesses, no black box." Never "rules a headache
+  specialist wrote."
 - The app is **free** (no "free right now" / launch-window framing); "free to
   use" is the only pricing message.
 - **No personal names anywhere** — site copy, meta tags, or rendered artifacts
