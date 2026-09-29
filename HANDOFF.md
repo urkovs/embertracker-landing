@@ -185,3 +185,13 @@ clinical-artifact/figure labels only.
 - Engine demo: all 5 scenarios still run on the providers page.
 - No horizontal page overflow at 375px and 1280px.
 - Copy scan: no em-dashes, no AI-slop, sentence case.
+
+## Local recent-diary pattern update — September 29, 2026
+
+Sam subsequently authorized committing the completed website candidate with its preserved Plus layout, copy and artwork. The commit stays on `codex/plus-comparison-20260927`; website `main` and GitHub Pages are not updated. The separate app delivery is authorized for internal TestFlight only.
+
+This Plus checkout (`codex/plus-comparison-20260927`) received a narrow update to the existing personal-pattern section and `references/index.html`, alongside preserved pre-existing uncommitted Plus layout/artwork changes. “See what’s changing.” introduces diary-only recent comparisons. The disclosure retains supported connected comparisons, explains local calculation, and links to `#longitudinal-patterns`. The reference distinguishes Ember's product-defined display rules from the Rabany study and its machine-learning model; metadata and last-updated date were corrected. Coming soon, prices and store/download routes remain unchanged. No publishing occurred.
+
+Local Chrome checks passed at 375/768/1440, including keyboard disclosure, no-JavaScript reading, anchor visibility under the fixed mobile header, metadata agreement and text contrast. App implementation, exact tests, synthetic component captures, website captures and a task-only website patch are in the app checkout's `docs/TEMPORAL_PATTERNS_2026-09-29.md` and `docs/temporal-patterns-review/`.
+
+Launch review still needs to reconcile existing privacy-page absolute local-only claims with optional backup and patient sharing, and the older classification-reference wording with Ember's actual day-classification rules. Those unrelated paragraphs were left intact. Public availability and physical-device acceptance remain unverified/held.

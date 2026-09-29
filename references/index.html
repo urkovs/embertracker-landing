@@ -4,19 +4,19 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Ember. Clinical references</title>
-<meta name="description" content="Every clinical decision in Ember has a source. Ember organizes data; it does not interpret it." />
+<meta name="description" content="Clinical guidance and published research inform Ember’s tracking and summaries. Ember’s own calculation and display rules are identified separately." />
 <link rel="canonical" href="https://embertracker.app/references/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Ember" />
 <meta property="og:title" content="Ember. Clinical references" />
-<meta property="og:description" content="Every clinical decision in Ember has a source. Ember organizes data; it does not interpret it." />
+<meta property="og:description" content="Clinical guidance and published research inform Ember’s tracking and summaries. Ember’s own calculation and display rules are identified separately." />
 <meta property="og:url" content="https://embertracker.app/references/" />
 <meta property="og:image" content="https://embertracker.app/assets/og-image.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Ember. Clinical references" />
-<meta name="twitter:description" content="Every clinical decision in Ember has a source. Ember organizes data; it does not interpret it." />
+<meta name="twitter:description" content="Clinical guidance and published research inform Ember’s tracking and summaries. Ember’s own calculation and display rules are identified separately." />
 <meta name="twitter:image" content="https://embertracker.app/assets/og-image.png" />
 <meta name="theme-color" content="#0a0a0a" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,6 +24,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/site.css?v=10">
 <link rel="stylesheet" href="/assets/plus.css?v=6">
+<style>
+/* Keep the linked research heading clear of the wrapped mobile header. */
+#longitudinal-patterns { scroll-margin-top: 180px; }
+@media (min-width: 768px) { #longitudinal-patterns { scroll-margin-top: 110px; } }
+</style>
 </head>
 <body>
 
@@ -50,15 +55,25 @@
 
     <p class="legal-kicker">Cascade Headache</p>
     <h1>Clinical references</h1>
-    <p class="legal-meta">Last updated April 29, 2026</p>
+    <p class="legal-meta">Last updated September 29, 2026</p>
 
     <div class="legal-callout">
-      <strong>Ember structures data; it does not interpret it.</strong>
-      Every classification, threshold, and calculation in the app
-      follows a published source. They are listed below. If you find
+      <strong>The sources behind Ember.</strong>
+      Clinical guidance and published research inform Ember’s tracking and summaries.
+      Where Ember uses its own calculation or display rules, we explain that distinction below.
+      If you find
       an inconsistency or think a decision is wrong, please tell us:
       <a href="mailto:hello@cascadeheadache.com">hello@cascadeheadache.com</a>.
     </div>
+
+    <section id="longitudinal-patterns" aria-labelledby="longitudinal-patterns-title">
+      <h2 id="longitudinal-patterns-title">Longitudinal migraine patterns</h2>
+      <p>Research on migraine diaries informed Ember’s use of historical patterns. Ember’s recent-change summaries use its own transparent calculations, not the study’s machine-learning model.</p>
+      <p>The study did not test or validate Ember. Display thresholds are Ember product rules.</p>
+      <p>Source: Rabany L, Markina A, Cowan RP, et al. <em>Machine Learning Assessment of Next-Day Migraine Likelihood Using Data From 53,000 App Users Living With Migraine.</em> <em>Neurology Open Access.</em> 2026;2(3):e000144. Published online August 21, 2026.
+        <a href="https://www.neurology.org/doi/10.1212/WN9.0000000000000144">doi:10.1212/WN9.0000000000000144</a>.
+      </p>
+    </section>
 
     <h2>Migraine and headache classification</h2>
     <p>
