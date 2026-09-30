@@ -404,6 +404,7 @@ select.input {
   transition: background 0.2s ease;
 }
 .form-submit:hover { background: var(--btn-hover); }
+a.form-submit { display: inline-block; text-decoration: none; margin-bottom: 12px; }
 .form-submit:disabled { opacity: 0.6; cursor: default; }
 .form-status { font-size: 14px; margin: 12px 0 0; min-height: 1em; }
 .form-status--ok { color: var(--sea); }
