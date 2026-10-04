@@ -185,3 +185,7 @@ clinical-artifact/figure labels only.
 - Engine demo: all 5 scenarios still run on the providers page.
 - No horizontal page overflow at 375px and 1280px.
 - Copy scan: no em-dashes, no AI-slop, sentence case.
+
+### October 4, 2026 — Navigation Atlas entry
+
+`/atlas/` redirects to the separately hosted Firebase operator dashboard at `https://ember-navigation-atlas.web.app/`. GitHub Pages hosts only this static entry; no sign-in transaction, private counts or credentials are stored here. The collector independently requires the designated Firebase operator and mobile collection remains disabled. The public patient navigation is unchanged.
