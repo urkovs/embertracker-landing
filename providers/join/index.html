@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Join clinic direct send | Ember Migraine Tracker</title>
+<title>Add your clinic to Ember</title>
 <meta name="description" content="Join Ember direct send. Add your clinic-approved secure email inbox so patients can choose to send their report." />
 <link rel="canonical" href="https://embertracker.app/providers/join/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Ember" />
-<meta property="og:title" content="Join clinic direct send | Ember Migraine Tracker" />
+<meta property="og:title" content="Add your clinic to Ember" />
 <meta property="og:description" content="Add your clinic-approved secure email inbox so patients can choose to send their Ember report." />
 <meta property="og:url" content="https://embertracker.app/providers/join/" />
 <meta property="og:image" content="https://embertracker.app/assets/og-image.png" />
@@ -20,37 +20,19 @@
 <link rel="stylesheet" href="../../assets/site.css?v=10">
 <noscript><style>.reveal{opacity:1!important;transform:none!important;}</style></noscript>
 <style>
-.join-hero { padding: clamp(54px, 9vw, 92px) 0 clamp(42px, 7vw, 68px); position: relative; overflow: hidden; }
-.join-hero::before { content: ""; position: absolute; inset: -60% -15% auto; height: 120%; background: radial-gradient(ellipse 56% 52% at 22% 8%, rgba(236,170,104,0.14), transparent 72%); pointer-events: none; }
-.join-hero-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(260px, .8fr); gap: clamp(36px, 7vw, 84px); align-items: center; }
-.join-hero h1 { font-size: clamp(38px, 6.8vw, 62px); line-height: 1.06; max-width: 12ch; margin-bottom: 18px; }
-.join-hero .hero-sub { margin-bottom: 26px; max-width: 54ch; }
-.join-aside { border: 1px solid var(--line-strong); border-radius: 18px; padding: clamp(18px, 3vw, 26px); background: linear-gradient(145deg, rgba(127,192,168,.08), rgba(21,21,21,.7)); }
-.join-aside .site-illustration { margin: 0 auto 12px; }
-.join-aside strong { display: block; color: var(--ink-hi); font: 500 22px/1.25 var(--serif); margin-bottom: 7px; }
-.join-aside p { margin: 0; color: var(--ink-mut); font-size: 14px; line-height: 1.55; }
-.join-section { padding-block: clamp(44px, 7vw, 72px); }
-.join-heading { max-width: 700px; margin-bottom: clamp(24px, 4vw, 38px); }
-.join-benefits { max-width: 900px; border-top: 1px solid var(--line-strong); }
-.join-benefit { display: grid; grid-template-columns: minmax(150px, .42fr) minmax(0, 1fr); gap: 24px; padding: 17px 0; border-bottom: 1px solid var(--line); }
-.join-benefit h3 { font: 500 19px/1.3 var(--serif); color: var(--ink-hi); margin: 0; }
-.join-benefit p { margin: 0; color: var(--ink-mut); font-size: 14px; line-height: 1.6; }
-.setup-shell { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, .72fr); gap: clamp(30px, 6vw, 72px); align-items: start; }
-.checklist { counter-reset: setup; border-top: 1px solid var(--line-strong); }
-.checklist-item { counter-increment: setup; display: grid; grid-template-columns: 38px minmax(0, 1fr); gap: 12px; padding: 18px 0; border-bottom: 1px solid var(--line); }
-.checklist-item::before { content: counter(setup, decimal-leading-zero); color: var(--amber); font: 12px var(--mono); padding-top: 3px; }
-.checklist-item h3 { font: 600 15px/1.4 var(--sans); letter-spacing: 0; margin: 0 0 4px; }
-.checklist-item p { margin: 0; color: var(--ink-mut); font-size: 14px; line-height: 1.55; }
-.inquiry { background: var(--surface); border: 1px solid var(--line-strong); border-radius: 18px; padding: clamp(22px, 4vw, 30px); }
-.inquiry h2 { font-size: 27px; line-height: 1.15; margin-bottom: 10px; }
-.inquiry p { margin: 0 0 18px; color: var(--ink-mut); font-size: 14px; }
-.inquiry .btn-primary { width: 100%; justify-content: center; }
-.privacy-note { max-width: 760px; border-left: 2px solid var(--clear); padding-left: 20px; }
-.privacy-note p { color: var(--ink-mut); font-size: 14px; line-height: 1.6; margin: 0; }
-@media (max-width: 800px) { .join-hero-grid, .setup-shell { grid-template-columns: 1fr; } .join-hero h1 { max-width: 15ch; } }
-@media (max-width: 560px) { .join-benefit { grid-template-columns: 1fr; gap: 5px; } }
+.clinic-setup { padding-block: clamp(44px, 7vw, 80px); }
+.clinic-setup-grid { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(30px,6vw,76px); align-items:start; }
+.clinic-intro h1 { font-size:clamp(36px,5.3vw,56px); line-height:1.1; max-width:14ch; margin-bottom:22px; }
+.clinic-intro p { max-width:46ch; color:var(--ink-mut); line-height:1.65; }
+.clinic-intro .hero-sub { margin-bottom:22px; }
+.clinic-intro strong { color:var(--ink-hi); font-weight:500; }
+.clinic-intro .sample-link { display:inline-block; margin-top:24px; color:var(--ink-mid); text-underline-offset:4px; }
+.clinic-setup .form-card { margin:0; }
+@media(max-width:760px) { .clinic-setup-grid { grid-template-columns:1fr; } .clinic-intro h1 { max-width:none; } }
 </style>
 <link rel="stylesheet" href="/assets/illustrations.css?v=1">
+<link rel="stylesheet" href="/assets/web-form.css?v=1">
+<script src="/assets/web-form.js?v=1" defer></script>
 </head>
 <body>
 <header class="nav" id="nav">
@@ -70,66 +52,29 @@
 </header>
 
 <main>
-  <section class="join-hero">
-    <div class="wrap join-hero-grid">
-      <div>
-        <p class="eyebrow reveal">Clinic direct send</p>
-        <h1 class="reveal reveal--d1">Send Ember reports to your clinic.</h1>
-        <p class="hero-sub reveal reveal--d2">Add your clinic’s approved secure email address to Ember. Patients choose when to review and send their report.</p>
-        <div class="cta-row reveal reveal--d2">
-          <a href="#setup" class="btn-primary">Set up free direct send</a>
-          <a href="../#report" class="btn-ghost">See a sample report</a>
-        </div>
-      </div>
-      <aside class="join-aside reveal reveal--d2">
-        <img class="site-illustration" src="/assets/illustrations/delivery.svg" alt="A patient shares a report from their phone to the clinic inbox." width="480" height="260">
-        <strong>Free for clinics</strong>
-        <p>Patients keep control of every report they send.</p>
-      </aside>
-    </div>
-  </section>
-
-  <div class="wrap"><hr class="rule"></div>
-
-  <section class="join-section" style="--thread: var(--sea)">
-    <div class="wrap">
-      <div class="join-heading">
-        <p class="eyebrow reveal">Why join</p>
-        <h2 class="feat-title reveal">A clearer starting point for the visit.</h2>
-      </div>
-      <div class="join-benefits reveal reveal--d1">
-        <div class="join-benefit"><h3>Ready for the visit</h3><p>A 90-day calendar and concise clinical summary bring daily history into one view.</p></div>
-        <div class="join-benefit"><h3>Free for patients</h3><p>Ember is a complete app, free forever. Tracking and reports need no subscription. Plus adds optional extras.</p></div>
-        <div class="join-benefit"><h3>Patient choice</h3><p>Patients review each report and choose whether to send it.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="join-section privacy-band" id="setup" style="--thread: var(--clear)">
-    <div class="wrap setup-shell">
-      <div>
-        <p class="eyebrow reveal">Three steps</p>
-        <h2 class="feat-title reveal">Set up your clinic.</h2>
-        <div class="checklist reveal reveal--d1">
-          <div class="checklist-item"><div><h3>Choose an approved inbox</h3><p>Use a monitored clinic email address your compliance team approves for patient reports.</p></div></div>
-          <div class="checklist-item"><div><h3>Send the clinic details</h3><p>Email us the clinic name, approved inbox, and setup contact. Do not include patient information.</p></div></div>
-          <div class="checklist-item"><div><h3>Confirm a test report</h3><p>We’ll add your clinic to Ember and arrange a test so your team can check delivery.</p></div></div>
-        </div>
-      </div>
-      <aside class="inquiry reveal reveal--d1">
-        <p class="eyebrow">Join direct send</p>
-        <h2>Request clinic setup.</h2>
-        <p>Use your clinic-approved secure email address for patient reports.</p>
-        <a class="btn-primary" href="mailto:hello@cascadeheadache.com?subject=Ember%20clinic%20direct%20send&amp;body=Clinic%20name%3A%0AApproved%20report%20inbox%3A%0ASetup%20contact%3A%0A%0APlease%20do%20not%20include%20patient%20information.">Email the setup request</a>
-      </aside>
-    </div>
-  </section>
-
-  <section class="join-section" style="--thread: var(--amber)">
-    <div class="wrap privacy-note reveal">
-      <p>Patients send reports from their own email app. Ember does not receive the PDF. Your clinic is responsible for approving the inbox and handling reports under its policies.</p>
-    </div>
-  </section>
+<section class="clinic-setup">
+<div class="wrap clinic-setup-grid">
+<div class="clinic-intro">
+<h1>Add your clinic to Ember</h1>
+<p class="hero-sub">Let your patients send their Ember reports directly to your clinic. Free for you and your patients.</p>
+<p><strong>You supply the secure email inbox.</strong> Patients send reports from their own phones. Reports do not pass through Ember’s servers.</p>
+<a class="sample-link" href="/assets/sample-calendar.pdf" target="_blank" rel="noopener">View a sample report</a>
+</div>
+<form class="form-card" data-ember-form="clinic" method="post" action="https://ember-clinic-delivery-m7tqb7cmgq-uc.a.run.app/v1/web-contact">
+<div class="form-row"><label class="form-label" for="clinic-name">Clinic name</label><input class="input" id="clinic-name" name="clinic" autocomplete="organization" maxlength="160" required></div>
+<div class="form-row"><label class="form-label" for="clinic-inbox">Secure email for patient reports</label><input class="input" id="clinic-inbox" name="inbox" type="email" maxlength="254" autocomplete="off" required></div>
+<div class="form-row"><label class="form-label" for="contact-name">Your name</label><input class="input" id="contact-name" name="name" autocomplete="name" maxlength="100" required></div>
+<div class="form-row"><label class="form-label" for="contact-email">Your email</label><input class="input" id="contact-email" name="email" type="email" autocomplete="email" maxlength="254" required></div>
+<label class="form-check"><input type="checkbox" name="approved" required><span>My clinic approves this inbox for patient reports.</span></label>
+<div class="form-trap" aria-hidden="true"><label>Leave this empty<input name="website" tabindex="-1" autocomplete="off"></label></div>
+<p class="form-note">Please don’t include patient information. <a href="/privacy/#website-contact">How we handle your request</a></p>
+<button class="form-submit" type="submit" disabled>Request clinic setup</button>
+<p class="form-status" role="status" aria-live="polite" tabindex="-1"></p>
+<noscript><p>Enable JavaScript to send this form.</p></noscript>
+<p class="form-next">We’ll contact you to confirm the inbox and arrange a test report.</p>
+</form>
+</div>
+</section>
 </main>
 
 <footer class="footer">

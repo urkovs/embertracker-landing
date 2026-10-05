@@ -26,6 +26,8 @@
   <link rel="stylesheet" href="../assets/site.css?v=11">
 <link rel="stylesheet" href="/assets/plus.css?v=6">
 <link rel="stylesheet" href="/assets/illustrations.css?v=1">
+<link rel="stylesheet" href="/assets/web-form.css?v=1">
+<script src="/assets/web-form.js?v=1" defer></script>
 </head>
 <body>
 
@@ -45,26 +47,22 @@
 </header>
 
 <main>
-  <section class="contact-section contact-section--page">
-    <div class="wrap contact-inner">
-<img class="site-illustration site-illustration--compact" src="/assets/illustrations/contact.svg" alt="" width="480" height="260" loading="lazy">
-      <p class="eyebrow reveal">Contact</p>
-      <h1 class="feat-title reveal reveal--d1">Questions, ideas, or something we should look at?</h1>
-      <p class="feat-body reveal reveal--d2">
-        Send product ideas, app questions, professional inquiries, or notes about something that feels off.
-      </p>
-
-      <div class="form-card reveal reveal--d2">
-        <a class="form-submit" href="mailto:hello@cascadeheadache.com">Email Ember</a>
-        <p class="feat-body">hello@cascadeheadache.com</p>
-        <p class="feat-body">For privacy requests, include the action you want us to take and your account email. Do not include a password, recovery code, or diary.</p>
-      </div>
-
-      <p class="contact-privacy-note">
-        Please do not send urgent medical issues or detailed personal health information here. For medical care, contact your clinician.
-      </p>
-    </div>
-  </section>
+<section class="contact-section contact-section--page">
+<div class="wrap contact-inner">
+<h1 class="feat-title">Contact Ember</h1>
+<form class="form-card" data-ember-form="contact" method="post" action="https://ember-clinic-delivery-m7tqb7cmgq-uc.a.run.app/v1/web-contact">
+<div class="form-row"><label class="form-label" for="contact-name">Your name</label><input class="input" id="contact-name" name="name" autocomplete="name" maxlength="100" required></div>
+<div class="form-row"><label class="form-label" for="contact-email">Your email</label><input class="input" id="contact-email" name="email" type="email" autocomplete="email" maxlength="254" required></div>
+<div class="form-row"><label class="form-label" for="contact-message">Message</label><textarea class="textarea" id="contact-message" name="message" rows="5" maxlength="4000" required></textarea></div>
+<div class="form-trap" aria-hidden="true"><label>Leave this empty<input name="website" tabindex="-1" autocomplete="off"></label></div>
+<p class="form-note">Please don’t include patient information. <a href="/privacy/#website-contact">How we handle your request</a></p>
+<button class="form-submit" type="submit" disabled>Send message</button>
+<p class="form-status" role="status" aria-live="polite" tabindex="-1"></p>
+<noscript><p>Enable JavaScript to send this form.</p></noscript>
+</form>
+<p class="contact-privacy-note">For medical care, contact your clinician.</p>
+</div>
+</section>
 </main>
 
 <footer class="footer">
