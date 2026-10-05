@@ -86,8 +86,8 @@
 .plus-detail[open] summary { border-bottom: 1px solid var(--line-strong); }
 .plus-feature-copy .plus-detail-body p { font-size: 14px; line-height: 1.65; max-width: none; margin: 16px 0 0; }
 .plus-feature-copy .plus-detail-body .plus-detail-note { color: var(--ink-mid); font-size: 12px; }
-.plus-alert-example { background: var(--surface); border: 1px solid var(--line-strong); border-radius: 14px; padding: 18px; margin-top: 20px; }
-.plus-example-label { display: block; color: var(--ink-mid); font-size: 11px; margin-bottom: 10px; }
+.plus-alert-example { background: rgba(236,170,104,.07); border: 1px solid rgba(236,170,104,.26); border-radius: 14px; padding: 18px; margin-top: 20px; }
+.plus-example-label { display: block; color: var(--ember); font-size: 11px; font-weight: 600; margin-bottom: 10px; }
 .plus-alert-example strong { display: block; font-size: 14px; font-weight: 500; color: var(--ink-hi); }
 .plus-feature-copy .plus-alert-example p { margin-top: 6px; font-size: 13px; }
 .plus-device-list { display: grid; gap: 18px; margin-top: 22px; }
@@ -97,3 +97,42 @@
 .plus-device-list strong { color: var(--ink-hi); font-weight: 500; margin-bottom: 3px; }
 .plus-device-list span { font-size: 13px; }
 .plus-feature:has(.plus-detail[open]) { align-items: start; }
+
+
+/* Plus pricing comparison + store badges. */
+.plus-pricing { background: var(--bg-lift); border-block: 1px solid var(--line); }
+.plus-pricing h2 { max-width: 18ch; margin-bottom: 34px; }
+.plus-pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-items: stretch; }
+.plus-plan-card { background: var(--surface); border: 1px solid var(--line-strong); border-radius: 20px; padding: clamp(24px, 4vw, 34px); }
+.plus-plan-card--plus { border-color: rgba(236,170,104,.38); box-shadow: inset 0 0 0 1px rgba(236,170,104,.04); }
+.plus-plan-head { display: flex; justify-content: space-between; gap: 24px; align-items: flex-start; padding-bottom: 24px; margin-bottom: 10px; border-bottom: 1px solid var(--line); }
+.plus-plan-name { margin: 0; color: var(--ink-hi); font-family: var(--serif); font-size: 28px; line-height: 1.15; }
+.plus-plan-sub { margin: 9px 0 0; max-width: 31ch; font-size: 14px; line-height: 1.55; }
+.plus-plan-badge { display: inline-block; margin-left: 7px; padding: 4px 8px; border-radius: 99px; background: rgba(236,170,104,.09); border: 1px solid rgba(236,170,104,.24); color: var(--ember); font-family: var(--sans); font-size: 10px; font-weight: 600; vertical-align: middle; white-space: nowrap; }
+.plus-price { flex: 0 0 auto; margin: 0; text-align: right; color: var(--ink-hi); }
+.plus-price span { display: block; font-family: var(--serif); font-size: 32px; line-height: 1; }
+.plus-price small { display: block; margin-top: 5px; color: var(--ink-mid); font-size: 12px; font-weight: 400; }
+.plus-price em { display: block; margin-top: 8px; color: var(--ember); font-size: 12px; font-style: normal; white-space: nowrap; }
+.plus-feature-list { list-style: none; margin: 20px 0 0; padding: 0; }
+.plus-feature-list li { position: relative; padding: 10px 0 10px 27px; border-bottom: 1px solid var(--line); color: var(--ink); font-size: 14px; line-height: 1.45; }
+.plus-feature-list li:last-child { border-bottom: 0; }
+.plus-feature-list li::before { content: "✓"; position: absolute; left: 0; top: 10px; color: var(--ember); font-weight: 600; }
+.store-badges { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 22px; }
+.app-badge { display: inline-flex; width: 168px; height: 56px; overflow: hidden; border-radius: 10px; transition: opacity .2s ease, transform .15s ease; }
+.app-badge:hover { opacity: .86; }
+.app-badge:active { transform: scale(.97); }
+.app-badge img { display: block; width: 168px; height: auto; }
+.app-badge--play { display: block; width: 190px; height: 58px; }
+.app-badge--play img { width: 215px; max-width: none; margin: -13px 0 0 -13px; }
+
+@media (max-width: 760px) {
+ .plus-pricing-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+ .plus-plan-head { display: block; }
+ .plus-price { text-align: left; margin-top: 20px; }
+ .plus-price span, .plus-price small { display: inline; }
+ .plus-price small { margin-left: 5px; }
+ .plus-price em { margin-top: 6px; }
+ .store-badges { flex-direction: column; align-items: flex-start; gap: 10px; }
+}
