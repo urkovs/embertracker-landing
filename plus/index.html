@@ -3,20 +3,20 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Ember Plus · More context for your migraine days</title>
-<meta name="description" content="Ember Plus is coming soon: optional weather, health connections, personal comparisons, and encrypted backup. Everyday migraine tracking stays free." />
+<title>Ember Plus · More insight. Less effort.</title>
+<meta name="description" content="Apple Watch logging, workouts, personal experiments, clearer migraine patterns, and encrypted backups. Explore what's coming with Ember Plus." />
 <link rel="canonical" href="https://embertracker.app/plus/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Ember" />
-<meta property="og:title" content="Ember Plus · More context for your migraine days" />
-<meta property="og:description" content="Ember Plus is coming soon: optional weather, health connections, personal comparisons, and encrypted backup. Everyday migraine tracking stays free." />
+<meta property="og:title" content="Ember Plus · More insight. Less effort." />
+<meta property="og:description" content="Apple Watch logging, workouts, personal experiments, clearer migraine patterns, and encrypted backups. Explore what's coming with Ember Plus." />
 <meta property="og:url" content="https://embertracker.app/plus/" />
 <meta property="og:image" content="https://embertracker.app/assets/og-image.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Ember Plus · More context for your migraine days" />
-<meta name="twitter:description" content="Ember Plus is coming soon: optional weather, health connections, personal comparisons, and encrypted backup. Everyday migraine tracking stays free." />
+<meta name="twitter:title" content="Ember Plus · More insight. Less effort." />
+<meta name="twitter:description" content="Apple Watch logging, workouts, personal experiments, clearer migraine patterns, and encrypted backups. Explore what's coming with Ember Plus." />
 <meta name="twitter:image" content="https://embertracker.app/assets/og-image.png" />
 <meta name="theme-color" content="#0a0a0a" />
 <link rel="icon" type="image/png" href="/favicon.png">
@@ -24,11 +24,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css?v=20261005-pills">
+<link rel="stylesheet" href="/assets/plus.css?v=20261005-feedback1">
+<link rel="stylesheet" href="/assets/plus-refresh.css?v=20261005-visual2">
 <link rel="preload" as="image" href="/assets/onboarding-ember.png">
 <noscript><style>.reveal{opacity:1!important;transform:none!important;}</style></noscript>
-<link rel="stylesheet" href="/assets/plus.css?v=20261005-feedback1">
 </head>
-<body class="plus-page">
+<body class="plus-page plus-page--refresh">
 <a href="#main" class="plus-skip">Skip to content</a>
 <header class="nav" id="nav">
   <div class="wrap nav-inner">
@@ -45,101 +46,138 @@
   </div>
 </header>
 
+<svg class="plus-symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+ <defs>
+  <symbol id="plus-icon-watch" viewBox="0 0 24 24"><rect x="5" y="6" width="14" height="12" rx="4"/><path d="M8 6V2h8v4M8 18v4h8v-4m3-8h1v4h-1m-10-2 2 2 4-4"/></symbol>
+  <symbol id="plus-icon-workout" viewBox="0 0 24 24"><path d="M7 5H4v14h3V5Zm13 0h-3v14h3V5ZM7 12h10M1 9v6m22-6v6"/></symbol>
+  <symbol id="plus-icon-experiment" viewBox="0 0 24 24"><path d="M4 6h5m4 0h7M4 12h10m4 0h2M4 18h2m4 0h10"/><circle cx="11" cy="6" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="8" cy="18" r="2"/></symbol>
+  <symbol id="plus-icon-pattern" viewBox="0 0 24 24"><path d="M3 3v18h18M6 15l4-5 4 3 6-7"/><path d="M16 6h4v4"/></symbol>
+  <symbol id="plus-icon-weather" viewBox="0 0 24 24"><path d="M7 18h11a4 4 0 0 0 .6-8 6 6 0 0 0-11.3-1.8A5 5 0 0 0 7 18ZM7 21h10"/><path d="M4 2v2M1 7h2m2-3L3.5 2.5"/></symbol>
+  <symbol id="plus-icon-device" viewBox="0 0 24 24"><path d="M12 20 3.8 12A5.2 5.2 0 0 1 12 5.5 5.2 5.2 0 0 1 20.2 12L12 20Z"/><path d="M5 11h4l2-3 2 6 2-3h4"/></symbol>
+  <symbol id="plus-icon-send" viewBox="0 0 24 24"><path d="m21 3-7 18-4-7-7-4 18-7ZM10 14 21 3"/></symbol>
+  <symbol id="plus-icon-backup" viewBox="0 0 24 24"><path d="M12 2 3 6v6c0 5 9 10 9 10s9-5 9-10V6l-9-4Z"/><path d="m8 12 3 3 5-6"/></symbol>
+  <symbol id="plus-icon-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+  <symbol id="plus-icon-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5"/></symbol>
+ </defs>
+</svg>
+
 <main id="main">
-<section class="plus-intro">
+<section class="plus-intro" aria-labelledby="plus-title">
  <div class="wrap plus-intro-grid">
-  <div>
+  <div class="plus-intro-copy">
    <p class="plus-label">Ember Plus <span class="plus-status">Coming soon</span></p>
-   <h1>More context for your migraine days.</h1>
-   <p class="lead">Weather, sleep, and movement alongside your migraine log. A fuller picture, with less to enter.</p>
-   <p class="availability">Coming soon. Get free Ember today.</p>
+   <h1 id="plus-title">More insight.<br><span>Less effort.</span></h1>
+   <p class="lead">Track workouts and try new routines, all in your migraine tracker.</p>
+   <div class="plus-intro-actions">
+    <a class="btn-primary" href="#features">Explore Plus <svg class="plus-icon" aria-hidden="true"><use href="#plus-icon-arrow"/></svg></a>
+    <a class="plus-text-link" href="#pricing">See pricing</a>
+   </div>
   </div>
   <div class="plus-intro-art" aria-hidden="true"><img class="plus-orb" src="/assets/onboarding-ember.png" alt="" width="350" height="350" fetchpriority="high"></div>
  </div>
 </section>
-<section id="features" class="plus-section plus-stories"><div class="wrap">
- <p class="plus-label">A look at what’s coming</p>
- <article class="plus-feature">
-  <div class="plus-feature-art"><img src="/assets/plus/weather.svg" alt="Weather and a barometer with a notification bell for pressure alerts." width="560" height="360" loading="lazy"></div>
-  <div class="plus-feature-copy"><p class="plus-feature-kicker">Weather &amp; barometer</p><h2>A heads-up for pressure changes.</h2><p>Get optional alerts when an upcoming pressure change matches a pattern in your own records.</p>
-   <details name="plus-details" class="plus-detail"><summary>How personal alerts work</summary><div class="plus-detail-body">
-    <p>See local weather and barometric pressure. With enough logged history, Ember can flag a forecast pressure change similar to ones linked with migraine or head pain in your records.</p>
-    <div class="plus-alert-example"><span class="plus-example-label">Example notification</span><strong>A familiar pressure pattern</strong><p>An upcoming pressure change matches a pattern in your records. Open Ember for the comparison.</p></div>
-       </div></details>
-  </div>
- </article>
- <article class="plus-feature plus-feature--reverse">
-  <div class="plus-feature-art"><img src="/assets/plus/health.svg" alt="Sleep, steps, and heart readings connected to one place." width="560" height="360" loading="lazy"></div>
-  <div class="plus-feature-copy"><h2>Device integrations.</h2><p>Automatically bring in sleep, movement, and heart readings through Apple Health or Android Health Connect.</p>
-   <details name="plus-details" class="plus-detail"><summary>See devices &amp; connections</summary><div class="plus-detail-body">
-    <div class="plus-device-list">
-     <div><svg viewBox="0 0 32 40" aria-hidden="true"><path d="M10 10V2h12v8m-12 20v8h12v-8"/><rect x="5" y="9" width="22" height="22" rx="6"/><path d="m10 20 4-4 4 8 4-4"/></svg><div><strong>Apple Watch</strong></div></div>
-     <div><svg viewBox="0 0 32 40" aria-hidden="true"><ellipse cx="16" cy="20" rx="12" ry="14"/><ellipse cx="16" cy="20" rx="8" ry="10"/></svg><div><strong>Oura Ring</strong></div></div>
-     <div><svg viewBox="0 0 32 40" aria-hidden="true"><path d="M10 9V2h12v7m-12 22v7h12v-7"/><circle cx="16" cy="20" r="12"/><path d="m16 12 1 8 5 3"/></svg><div><strong>Garmin</strong></div></div>
-    </div>
-    <p>All connect through Apple Health or Health Connect. Available readings depend on your device and sharing settings.</p>
-   </div></details>
-  </div>
- </article>
- <article class="plus-feature">
-  <div class="plus-feature-art"><img src="/assets/plus/patterns.svg" alt="A magnifying glass highlighting a pattern across calendar days." width="560" height="360" loading="lazy"></div>
-  <div class="plus-feature-copy"><h2>See your patterns more clearly.</h2><p>Plus automatically compares your migraine history with sleep, activity, weather, and pressure data for a deeper view of what tends to happen around your migraine days.</p><details name="plus-details" class="plus-detail"><summary>What Plus adds</summary><div class="plus-detail-body"><p>Free Ember already helps you see patterns in your migraine log. Plus adds another layer by automatically comparing your migraine days with imported sleep and activity data, weather, and barometric pressure over time—connections that can be difficult to spot by eye.</p><p>When enough relevant data is available, Ember surfaces the comparison and supporting numbers so you can decide what is worth paying attention to or discussing with your clinician.</p></div></details></div>
- </article>
- <article class="plus-feature plus-feature--reverse">
-  <div class="plus-feature-art"><img src="/assets/plus/backup.svg" alt="Records moving from a phone into a locked shield." width="560" height="360" loading="lazy"></div>
-  <div class="plus-feature-copy"><h2>Secure automatic backups.</h2><p>Never worry about losing your Ember history if your phone crashes, is lost, or needs to be replaced. Your automatic backup is encrypted and stored securely for recovery.</p><details name="plus-details" class="plus-detail"><summary>About your backup</summary><div class="plus-detail-body"><p>Once enabled, Ember keeps an encrypted backup of your records so you can restore them when you need to.</p></div></details></div>
- </article>
- <p class="plus-illustration-note">Feature illustrations. Availability will vary by device and service.</p>
-</div></section>
-<section id="pricing" class="plus-section plus-pricing">
+
+<section id="features" class="plus-section plus-showcase" aria-labelledby="plus-features-title">
  <div class="wrap">
-  <p class="plus-label">Simple pricing</p>
-  <h2>Choose how much context you want.</h2>
-  <div class="plus-pricing-grid">
-   <article class="plus-plan-card">
-    <div class="plus-plan-head">
-     <div><p class="plus-plan-name">Ember</p><p class="plus-plan-sub">Everything you need to track and share your migraine history.</p></div>
-     <p class="plus-price"><span>$0</span><small>Free</small></p>
-    </div>
-    <ul class="plus-feature-list">
-     <li>Daily migraine and headache logging</li>
-     <li>Automatic migraine vs. headache day classification</li>
-     <li>Calendar and history</li>
-     <li>Acute medication tracking</li>
-     <li>Preventive treatment tracking</li>
-     <li>Treatment response and baseline comparisons</li>
-     <li>Menstrual tracking, when enabled</li>
-     <li>Provider-ready reports and exports</li>
-     <li>Manual backup and restore</li>
-    </ul>
+  <div class="plus-section-heading"><p class="plus-label">A look at what’s coming</p><h2 id="plus-features-title">Built around your day.</h2></div>
+  <div class="plus-tool-grid">
+   <article class="plus-tool-card plus-tool-card--wide plus-tool-card--watch">
+    <div class="plus-tool-copy"><span class="plus-platform">iPhone + Apple Watch</span><h3>Apple Watch logging</h3><p>Log your day from your wrist.</p></div>
+    <div class="plus-tool-art" aria-hidden="true"><svg class="plus-icon"><use href="#plus-icon-watch"/></svg></div>
    </article>
-   <article class="plus-plan-card plus-plan-card--plus">
-    <div class="plus-plan-head">
-     <div><p class="plus-plan-name">Ember Plus <span class="plus-plan-badge">Coming soon</span></p><p class="plus-plan-sub">Everything in Ember, plus more automatic context around your migraine days.</p></div>
-     <p class="plus-price"><span>$7.99</span><small>/ month</small><em>$59.99 / year</em></p>
-    </div>
-    <ul class="plus-feature-list">
-     <li>Everything in free Ember</li>
-     <li>Local weather and barometric pressure</li>
-     <li>Optional personal pressure-pattern alerts</li>
-     <li>Apple Health and Android Health Connect imports</li>
-     <li>Automatic sleep and activity comparisons</li>
-     <li>Deeper personal pattern comparisons across health and environment data</li>
-     <li>Plus findings included in provider reports</li>
-     <li>Encrypted automatic backups</li>
-    </ul>
+   <article class="plus-tool-card plus-tool-card--wide plus-tool-card--workout">
+    <div class="plus-tool-copy"><span class="plus-platform">One app for both</span><h3>Workout tracking</h3><p>Your workout log and migraine tracker, together.</p></div>
+    <div class="plus-tool-art" aria-hidden="true"><svg class="plus-icon"><use href="#plus-icon-workout"/></svg></div>
+   </article>
+   <article class="plus-tool-card plus-tool-card--experiments">
+    <span class="plus-icon-tile" aria-hidden="true"><svg class="plus-icon"><use href="#plus-icon-experiment"/></svg></span>
+    <h3>Personal experiments</h3><p>Change one routine. See how your migraine days compare.</p>
+    <div class="plus-routine-labels" aria-label="Experiment routines"><span>Sleep schedule</span><span>Activity</span><span>Food</span></div>
+    <details name="plus-details" class="plus-detail"><summary>How it works</summary><div class="plus-detail-body"><p>Try a routine and compare your recorded migraine days before and during it.</p></div></details>
+   </article>
+   <article class="plus-tool-card plus-tool-card--patterns">
+    <span class="plus-icon-tile" aria-hidden="true"><svg class="plus-icon"><use href="#plus-icon-pattern"/></svg></span>
+    <h3>See your patterns more clearly.</h3><p>Compare migraine days with sleep, activity, and weather.</p>
+    <details name="plus-details" class="plus-detail"><summary>What Plus adds</summary><div class="plus-detail-body"><p>Plus builds on your diary insights with automatic health and weather comparisons, and the numbers behind each finding.</p></div></details>
+   </article>
+   <article class="plus-tool-card plus-tool-card--weather">
+    <span class="plus-icon-tile" aria-hidden="true"><svg class="plus-icon"><use href="#plus-icon-weather"/></svg></span>
+    <h3>Weather &amp; pressure</h3><p>See forecasts and get optional pressure-change alerts.</p>
+    <details name="plus-details" class="plus-detail"><summary>See an example</summary><div class="plus-detail-body"><div class="plus-alert-example"><span class="plus-example-label">Example notification</span><strong>A familiar pressure pattern</strong><p>An upcoming pressure change matches a pattern in your records.</p></div></div></details>
+   </article>
+   <article class="plus-tool-card plus-tool-card--devices">
+    <span class="plus-icon-tile" aria-hidden="true"><svg class="plus-icon"><use href="#plus-icon-device"/></svg></span>
+    <h3>Device integrations</h3><p>Import sleep, activity, and heart readings automatically.</p>
+    <details name="plus-details" class="plus-detail"><summary>Devices &amp; connections</summary><div class="plus-detail-body"><p>Apple Watch, Oura, and compatible wearables share readings through Apple Health or Health Connect. Availability depends on your device and sharing settings.</p></div></details>
+   </article>
+   <article class="plus-tool-card plus-tool-card--sharing">
+    <span class="plus-icon-tile" aria-hidden="true"><svg class="plus-icon"><use href="#plus-icon-send"/></svg></span>
+    <h3>One-tap provider sharing</h3><p>Send your report without writing an email.</p>
+    <details name="plus-details" class="plus-detail"><summary>About direct sharing</summary><div class="plus-detail-body"><p>After setup, send directly to a supported provider. Report creation and manual sharing stay in free Ember.</p></div></details>
+   </article>
+   <article class="plus-tool-card plus-tool-card--backup">
+    <span class="plus-icon-tile" aria-hidden="true"><svg class="plus-icon"><use href="#plus-icon-backup"/></svg></span>
+    <h3>Secure automatic backups</h3><p>Keep an encrypted copy if your phone is lost or replaced.</p>
+    <details name="plus-details" class="plus-detail"><summary>About recovery</summary><div class="plus-detail-body"><p>Enable backups and save your recovery code. You can restore an existing backup even after Plus ends.</p></div></details>
    </article>
   </div>
  </div>
 </section>
-<section id="questions" class="plus-section">
+
+<section id="pricing" class="plus-section plus-pricing" aria-labelledby="plus-pricing-title">
+ <div class="wrap">
+  <div class="plus-section-heading"><h2 id="plus-pricing-title">Simple pricing.</h2></div>
+  <div class="plus-pricing-grid">
+   <article class="plus-plan-card" aria-labelledby="ember-plan-title">
+    <div class="plus-plan-top"><h3 id="ember-plan-title">Ember</h3><span class="plus-plan-availability">Available now</span></div>
+    <p class="plus-plan-price"><strong>$0</strong><span>Free</span></p>
+    <p class="plus-plan-summary">Your everyday migraine tracker.</p>
+    <div class="plus-plan-group"><h4>Daily tracking</h4><ul class="plus-plan-features">
+     <li>Headache &amp; migraine log</li><li>Symptoms &amp; medications</li><li>Migraine &amp; headache counts</li><li>Menstrual tracking</li>
+    </ul></div>
+    <div class="plus-plan-group"><h4>Your progress</h4><ul class="plus-plan-features">
+     <li>Calendar &amp; patterns</li><li>Treatment tracking &amp; progress</li>
+    </ul></div>
+    <div class="plus-plan-group"><h4>Your records</h4><ul class="plus-plan-features">
+     <li>Provider reports &amp; exports</li><li>Manual backup &amp; restore</li>
+    </ul></div>
+   </article>
+   <article class="plus-plan-card plus-plan-card--plus" aria-labelledby="plus-plan-title">
+    <div class="plus-plan-top"><h3 id="plus-plan-title">Ember Plus</h3><span class="plus-plan-badge">Coming soon</span></div>
+    <p class="plus-plan-price"><strong>$7.99</strong><span>/ month</span></p>
+    <p class="plus-plan-annual">or <strong>$59.99 / year</strong></p>
+    <p class="plus-plan-summary plus-plan-summary--included"><svg class="plus-icon" aria-hidden="true"><use href="#plus-icon-check"/></svg>Everything in Ember, plus:</p>
+    <div class="plus-plan-group"><h4>Less effort</h4><ul class="plus-plan-features">
+     <li>Apple Watch daily logging</li><li>Device integrations</li><li>Workout tracking</li>
+    </ul></div>
+    <div class="plus-plan-group"><h4>More insight</h4><ul class="plus-plan-features">
+     <li>Personal experiments</li><li>Sleep &amp; activity patterns</li><li>Weather &amp; pressure alerts</li>
+    </ul></div>
+    <div class="plus-plan-group"><h4>Sharing &amp; backup</h4><ul class="plus-plan-features">
+     <li>One-tap provider sharing</li><li>Plus findings in reports</li><li>Encrypted automatic backups</li>
+    </ul></div>
+   </article>
+  </div>
+  <p class="plus-price-note">Prices in USD.</p>
+ </div>
+</section>
+
+<section id="questions" class="plus-section" aria-labelledby="plus-faq-title">
  <div class="wrap plus-faq">
-  <h2>A few things to know.</h2>
-  <details name="plus-details"><summary>When can I get Ember Plus?</summary><p>Ember Plus is coming soon. Pricing will be $7.99/month or $59.99/year.</p></details>
-  <details name="plus-details"><summary>Do I have to connect a wearable?</summary><p>No. Each connection is optional. Health imports depend on what your device or other apps make available through Apple Health or Health Connect.</p></details>
-  <details name="plus-details"><summary>Does Plus predict migraine attacks?</summary><p>No. Weather and personal comparisons offer context for your records. They do not diagnose migraine, establish a cause, or replace care from your clinician.</p></details>
-  <details name="plus-details"><summary>What changes about where my records are stored?</summary><p>The free app stores your health records on your phone. Ember Plus will include optional encrypted backup; turning it on stores an encrypted copy remotely for recovery. Weather and health connections are also optional.</p></details>
-  <div class="plus-closing"><h2>Start with your daily log.</h2><p>Free Ember is available now.</p><div class="store-badges" role="group" aria-label="Download Ember"><a href="https://apps.apple.com/us/app/ember-migraine-tracker/id6762041852" class="app-badge" target="_blank" rel="noopener"><img src="/assets/app-store-badge.svg" alt="Download on the App Store" width="168" height="56"></a><a href="https://play.google.com/store/apps/details?id=com.cascadeheadache.ember" class="app-badge app-badge--play" target="_blank" rel="noopener"><img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" width="646" height="250"></a></div></div>
+  <h2 id="plus-faq-title">Good to know.</h2>
+  <details name="plus-faq"><summary>When can I get Ember Plus?</summary><p>Plus is coming soon. The features above preview what’s planned.</p></details>
+  <details name="plus-faq"><summary>Do I need a wearable?</summary><p>No. Wearables are optional. Apple Watch logging requires an iPhone and Apple Watch.</p></details>
+  <details name="plus-faq"><summary>Does Plus predict migraine attacks?</summary><p>No. It shows patterns in your records, not predictions or proof of a cause.</p></details>
+  <details name="plus-faq"><summary>Where are my records stored?</summary><p>Your diary stays on your phone. Enabling automatic backup also stores an encrypted copy remotely.</p></details>
+ </div>
+</section>
+<section id="download" class="plus-section plus-download" aria-labelledby="plus-download-title">
+ <div class="wrap plus-download-inner">
+  <div><h2 id="plus-download-title">Get Ember.</h2><p>Available on iPhone and Android.</p></div>
+  <div class="store-badges" role="group" aria-label="Download Ember">
+   <a href="https://apps.apple.com/us/app/ember-migraine-tracker/id6762041852" class="app-badge" target="_blank" rel="noopener"><img src="/assets/app-store-badge.svg" alt="Download on the App Store" width="168" height="56" loading="lazy"></a>
+   <a href="https://play.google.com/store/apps/details?id=com.cascadeheadache.ember" class="app-badge app-badge--play" target="_blank" rel="noopener"><img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" width="646" height="250" loading="lazy"></a>
+  </div>
  </div>
 </section>
 </main>
@@ -168,7 +206,6 @@
     <span>embertracker.app</span>
   </div>
 </footer>
-
 <script src="/assets/site.js?v=8"></script>
 </body>
 </html>
