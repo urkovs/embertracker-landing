@@ -62,6 +62,10 @@
 <h2>3. Accounts and purchases</h2>
 <p>Firebase Authentication, provided by Google, processes your email address or Apple Sign-In identifier and authentication information to provide sign-in and account protection. Diary records are not uploaded to Firebase Authentication as part of sign-in.</p>
 <p>Apple or Google and RevenueCat process purchase, receipt, account and entitlement information for optional purchases and access management. We do not receive your full payment-card details. Core tracking remains free; Ember Plus is not currently offered for public purchase.</p>
+<h3>Optional clinic codes</h3>
+<p>If you choose a clinic code, Ember saves the clinic, offer version and confirmation date with an account reference on Google Cloud. RevenueCat sends purchase-status events so Ember can check offer eligibility. The clinic receives no payment, purchase information or diary data through the code. You choose whether to send each report.</p>
+<p>Clinic offers provide eligible accounts with a one-time Plus trial and a discount for the first paid year. Starting a trial does not start a paid subscription. Free tracking and reports remain free.</p>
+<p>Deleting your Ember account queues removal of clinic-code associations and eligibility records. A deletion marker lasts 30 days to block delayed events; webhook deduplication records expire after 400 days. Expiry cleanup is asynchronous. Database recovery can retain prior versions for seven days. Clinic HTTP request logs are excluded; application and cloud audit logs follow the service providers’ retention settings. Store subscriptions must be canceled separately.</p>
 <h2>4. Weather and approximate location</h2>
 <p>If you use weather features, Ember sends your selected city or approximate coordinates, with the relevant device permission, through Ember's weather relay to Visual Crossing. Weather requests do not include your diary or medication records. You can choose a city instead of device location and change location permission in device settings.</p>
 <h2>Optional navigation sharing</h2>
