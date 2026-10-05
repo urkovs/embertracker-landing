@@ -99,12 +99,10 @@
   <div class="wrap">
     <div class="prov-hero-copy">
       <p class="eyebrow reveal">Ember for clinicians</p>
-      <h1 class="reveal reveal--d1">Your patient walks in with ninety days of structured history.</h1>
+      <h1 class="reveal reveal--d1">A clearer picture before the visit.</h1>
       <p class="hero-sub reveal reveal--d2">
-        Ember is a patient-facing migraine diary built by a practicing
-        headache specialist. Patients log in seconds a day. What reaches you
-        is a one-page calendar and a chart-style note, readable in about a
-        minute.
+        Patients track their migraine days in Ember. You get a 90-day calendar
+        and a concise clinical summary, ready to review together.
       </p>
       <div class="cta-row reveal reveal--d2">
         <a href="../assets/sample-calendar.pdf" class="btn-ghost" target="_blank" rel="noopener">Open the sample PDF</a>
@@ -122,9 +120,8 @@
     <p class="eyebrow reveal">Provider handoff</p>
     <h2 class="feat-title reveal">Send a patient home with Ember already set up.</h2>
     <p class="feat-body reveal reveal--d1" style="margin-inline: auto;">
-      The handoff tool runs in your browser and exports a small file or text snippet
-      carrying your defaults and the patient's plan. Nothing uploads anywhere. The
-      patient imports it on first launch, and their medication list is waiting.
+      Prepare a setup file with the patient’s medication plan. They import it
+      into Ember to get started. The tool runs locally in your browser.
     </p>
     <div class="cta-row reveal reveal--d1" style="margin-top: 24px; justify-content: center;">
       <a href="../provider-handoff/" class="btn-primary">
@@ -140,9 +137,9 @@
 <!-- engine intro -->
 <section class="engine-intro" style="--thread: var(--ember)">
   <div class="wrap engine-intro-inner">
-    <p class="eyebrow reveal">The classification engine</p>
-    <h2 class="feat-title reveal">Look under the hood.</h2>
-    <p class="feat-body reveal reveal--d1">Every classification follows fixed rules built on ICHD-3 criteria. No AI guesses, no black box.</p>
+    <p class="eyebrow reveal">How days are counted</p>
+    <h2 class="feat-title reveal">See how Ember classifies a day.</h2>
+    <p class="feat-body reveal reveal--d1">Ember uses the symptoms and medications patients log. Explore a few examples.</p>
   </div>
 </section>
 
@@ -1021,14 +1018,13 @@
         <p class="eyebrow reveal">The chart note</p>
         <h2 class="feat-title reveal">Written like your chart note.</h2>
         <p class="feat-body reveal reveal--d1">
-          Ember generates the summary from minimal user input, using its fully
-          auditable logic layer. It reports:
+          A concise summary of the patient’s daily logs:
         </p>
         <ul class="note-list reveal reveal--d1">
-          <li>Diary compliance</li>
-          <li>Monthly frequencies against baseline</li>
+          <li>Days tracked</li>
+          <li>Migraine and headache days</li>
           <li>MIDAS</li>
-          <li>Acute-use counts against overuse thresholds</li>
+          <li>Acute medication use</li>
           <li>Treatment response per medication</li>
         </ul>
         <p class="feat-body reveal reveal--d1">
@@ -1074,15 +1070,12 @@ hormonal pattern, treatment response.</span></div>
   <div class="wrap feat-grid">
     <div class="feat-copy">
       <p class="eyebrow reveal">Where the data comes from</p>
-      <h2 class="feat-title reveal">Quick daily check-ins take 10 to 20 seconds.</h2>
+      <h2 class="feat-title reveal">A few taps each day.</h2>
       <p class="feat-body reveal reveal--d1">
-        Severity, symptoms, medications, and impact are tap targets on one
-        screen. Ember classifies each day from what was logged, based on
-        programmed ICHD-3 criteria, and displays its reasoning.
+        Patients log symptoms, severity, medications and impact in one place.
       </p>
       <p class="feat-body reveal reveal--d1">
-        Reporting compliance is printed on the chart note output, so you know
-        how much weight the data deserves before you read further.
+        Each report shows how many days were tracked.
       </p>
     </div>
     <figure class="shot reveal reveal--d1">
@@ -1103,15 +1096,12 @@ hormonal pattern, treatment response.</span></div>
   <div class="wrap feat-grid">
     <div class="feat-copy">
       <p class="eyebrow reveal">Safety flags</p>
-      <h2 class="feat-title reveal">Nonjudgmental warning flags.</h2>
+      <h2 class="feat-title reveal">Medication use, easier to review.</h2>
       <p class="feat-body reveal reveal--d1">
-        Acute days are counted per medication against overuse thresholds.
-        Patients see a gentle nudge first, then a firmer warning, and the
-        chart note carries a risk-flag section when a month crosses the line.
+        Ember flags frequent acute medication use in the app and clinical summary.
       </p>
       <p class="feat-body reveal reveal--d1">
-        Attacks with unilateral weakness are called out in the generated
-        chart note as well.
+        Reported attacks with one-sided weakness are also highlighted.
       </p>
     </div>
     <figure class="shot reveal reveal--d1">
@@ -1127,16 +1117,14 @@ hormonal pattern, treatment response.</span></div>
   <div class="wrap feat-grid">
     <div class="feat-copy">
       <p class="eyebrow reveal">Treatment response</p>
-      <h2 class="feat-title reveal">Baselines are captured before treatment starts.</h2>
+      <h2 class="feat-title reveal">See the treatment timeline.</h2>
       <p class="feat-body reveal reveal--d1">
-        When a patient begins any preventive treatment, Ember captures the
-        baseline first, before it takes effect. For patients on multiple
-        preventives, it reports the response each one has on its own, and combined.
+        Review treatment dates alongside recorded migraine days and impact.
+        Comparisons use daily logs or clearly labeled patient estimates.
       </p>
       <p class="feat-body reveal reveal--d1">
-        That can help you make the case to payers for reauthorizations or prior
-        authorizations, or give you the data to make clinically sound decisions
-        about switching or discontinuing a regimen.
+        The report identifies gaps and overlapping treatments to help you
+        interpret changes.
       </p>
     </div>
     <figure class="shot reveal reveal--d1">
@@ -1150,11 +1138,10 @@ hormonal pattern, treatment response.</span></div>
 <!-- data practices -->
 <section class="band" style="--thread: var(--clear)">
   <div class="wrap band-inner">
-    <h2 class="feat-title reveal">It reports what they logged. Nothing more.</h2>
+    <h2 class="feat-title reveal">Patient-owned history. Shared by choice.</h2>
     <p class="feat-body reveal reveal--d1">
-      Diary records are stored on the patient's phone. Patients choose when to
-      share reports or enable an available encrypted backup. Reports summarize
-      recorded information and calculated observations; clinicians interpret them.
+      Diary records stay on the patient’s phone, with optional encrypted backup.
+      Patients choose when to share a report. You interpret it in clinical context.
     </p>
     <p class="feat-body reveal reveal--d1" style="margin-top: 16px;">
       <a href="../references/">See the clinical references</a>.
