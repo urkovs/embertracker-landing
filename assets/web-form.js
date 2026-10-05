@@ -50,6 +50,7 @@
           const values = { kind: form.dataset.emberForm, name: String(data.get('name') || '').trim(), email: String(data.get('email') || '').trim(), website: String(data.get('website') || '') };
           if (values.kind === 'clinic') Object.assign(values, { clinic: String(data.get('clinic') || '').trim(), inbox: String(data.get('inbox') || '').trim(), approved: data.get('approved') === 'on' });
           else values.message = String(data.get('message') || '').trim();
+          lockFields(true);
           payload = { ...values, token: await prepare() };
         }
         lockFields(true);
@@ -70,6 +71,7 @@
           payload = null; token = null; lockFields(false);
           message(error.message === 'RATE_LIMIT' ? 'The form is temporarily busy. Your details are still here; please try again later.' : error.message === 'INVALID_REQUEST' ? 'Check your details and try again. Nothing was sent.' : 'Please try again. Your details are still here.', true);
         } else {
+          if (!payload) lockFields(false);
           message(payload ? 'We couldn’t confirm your message. Check again; this won’t send a duplicate.' : 'Couldn’t connect. Your details are still here; please try again.', true);
         }
       } finally {
