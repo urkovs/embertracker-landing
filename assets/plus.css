@@ -49,10 +49,6 @@
  .plus-intro { padding-top: 28px; }
  .plus-home-grid { grid-template-columns: 1fr; }
  .plus-home-art { display: none; }
- .nav-inner { height: auto; min-height: 62px; flex-wrap: wrap; padding-block: 10px; gap: 6px 14px; }
- .nav-links { flex-wrap: wrap; gap: 4px 14px; }
- .nav-link { min-height: 44px; display: inline-flex; align-items: center; }
- .nav-link--secondary { display: none; }
  }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
@@ -101,21 +97,3 @@
 .plus-device-list strong { color: var(--ink-hi); font-weight: 500; margin-bottom: 3px; }
 .plus-device-list span { font-size: 13px; }
 .plus-feature:has(.plus-detail[open]) { align-items: start; }
-
-/* Give the upcoming Plus release a clear place in the primary navigation. */
-.nav-links .nav-plus {
- display: inline-flex; align-items: center; gap: 8px;
- color: var(--ember); font-weight: 600;
- background: rgba(236, 170, 104, .20);
- border: 1px solid rgba(236, 170, 104, .48);
- border-radius: 999px; padding: 7px 11px; min-height: 0;
-}
-
-.nav-links .nav-plus:hover, .nav-links .nav-plus[aria-current="page"] {
- background: rgba(236, 170, 104, .27); border-color: var(--ember); color: var(--ember);
-}
-@media (max-width: 560px) {
- .nav-links { gap: 4px 10px; }
- .nav-links .nav-plus { padding-inline: 10px; gap: 5px; }
- .nav-cta { padding-inline: 12px; }
-}
