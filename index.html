@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=20261005-pills">
+<link rel="stylesheet" href="assets/site.css?v=20261007-mobile">
 <link rel="preload" as="image" href="assets/screens2/today-entry.jpg" fetchpriority="high">
 <noscript><style>.reveal{opacity:1!important;transform:none!important;}</style></noscript>
 <script type="application/ld+json">
@@ -139,6 +139,54 @@
 .report-provider-link { text-align: center; margin-top: 18px; font-size: 14.5px; }
 .report-provider-link a { color: var(--ink-mut); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(236,170,104,0.4); }
 .report-provider-link a:hover { color: var(--ink-hi); }
+
+/* Homepage: concise first screen, instead of a long mobile poster. */
+.fov-intro { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; padding-bottom: 14px; }
+.fov-intro h2 { font-family: var(--serif); font-size: clamp(24px, 3.5vw, 30px); line-height: 1.2; }
+.fov-intro p { margin: 0; color: var(--ink-mut); font-size: 13px; white-space: nowrap; }
+@media (min-width: 768px) { .fov-intro p { display: none; } }
+@media (max-width: 767px) {
+  .home .hero { padding: 26px 0 0; }
+  .home .hero-grid { gap: 17px; }
+  .home .hero-eyebrow { margin-bottom: 11px; }
+  .home .hero h1 { font-size: clamp(36px, 9.8vw, 42px); line-height: 1.08; margin-bottom: 15px; }
+  .home .hero-sub { font-size: 15.5px; line-height: 1.55; margin-bottom: 20px; max-width: 38ch; }
+  .home .hero .store-badges {
+    display: grid; grid-template-columns: minmax(0, 168fr) minmax(0, 190fr);
+    align-items: center; gap: 8px; width: min(100%, 366px); margin-top: 0;
+  }
+  .home .hero .app-badge { width: 100%; height: auto; aspect-ratio: 168 / 56; }
+  .home .hero .app-badge img { width: 100%; height: auto; }
+  .home .hero .app-badge--play { aspect-ratio: 190 / 58; }
+  .home .hero .app-badge--play img { width: 113.16%; max-width: none; margin: -6.84% 0 0 -6.84%; }
+  .home .hero-phone {
+    display: flex; justify-content: center; align-items: flex-start;
+    width: 100%; height: min(270px, 36vh); position: relative;
+    overflow: hidden; margin-top: 7px;
+  }
+  .home .hero-phone .phone--lg { width: min(275px, 70vw); }
+  .home .hero-phone::after {
+    content: ""; position: absolute; inset: auto 0 0;
+    height: 78px; background: linear-gradient(to bottom, transparent, var(--bg));
+    pointer-events: none;
+  }
+  .home .why-row { padding-top: 28px; }
+  .home .why-grid { max-width: 440px; gap: 20px; }
+  .home .why-card {
+    display: grid; grid-template-columns: 32px minmax(0, 1fr);
+    column-gap: 14px; text-align: left;
+  }
+  .home .why-icon { grid-row: span 2; margin: 2px 0 0; }
+  .home .why-icon svg { width: 30px; height: 30px; }
+  .home .why-title { font-size: 17px; margin: 0; }
+  .home .why-body { font-size: 13.5px; max-width: none; margin: 3px 0 0; }
+  .home .fov { padding-block: 42px; }
+  .home .fov .fcard .phone { width: min(244px, 68vw); }
+  .zoom-label-desktop { display: none; }
+}
+@media (min-width: 768px) { .zoom-label-mobile { display: none; } }
+@media (max-width: 360px) { .fov-intro { flex-wrap: wrap; gap: 4px; } }
+
 </style>
 <link rel="stylesheet" href="/assets/plus.css?v=20261005-pills">
 </head>
@@ -230,6 +278,7 @@
 <!-- feature carousel -->
 <section class="fov">
   <div class="wrap">
+    <div class="fov-intro"><h2>See Ember in action.</h2><p>Swipe to explore →</p></div>
     <div class="carousel" data-carousel>
       <button type="button" class="carousel-arrow carousel-arrow--prev" data-carousel-prev aria-label="Previous screens">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
@@ -336,7 +385,7 @@
         <img src="assets/report-full.jpg" alt="Ember's calendar report on a warm cream page: one month per row with day types, impact, medications taken, and menstrual timing, plus totals and a legend." width="1840" height="1421" loading="lazy">
         <span class="zoom-hint" aria-hidden="true">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35M8 11h6M11 8v6"/></svg>
-          Click to enlarge
+          <span class="zoom-label-desktop">Click to enlarge</span><span class="zoom-label-mobile">Tap to enlarge</span>
         </span>
       </button>
     </div>
@@ -432,6 +481,6 @@
   </div>
 </footer>
 
-<script src="assets/site.js?v=8"></script>
+<script src="assets/site.js?v=10"></script>
 </body>
 </html>
