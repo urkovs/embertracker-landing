@@ -11,6 +11,48 @@
     onScroll();
   }
 
+
+  // Keep the mobile header compact while preserving the regular links if JS is off.
+  const navInner = nav && nav.querySelector('.nav-inner');
+  const navLinks = nav && nav.querySelector('.nav-links');
+  const regularDownload = navLinks && navLinks.querySelector('.nav-cta');
+  if (navInner && navLinks && regularDownload) {
+    const mobileDownload = regularDownload.cloneNode(true);
+    mobileDownload.className = 'mobile-download';
+    const menuButton = document.createElement('button');
+    menuButton.type = 'button';
+    menuButton.className = 'nav-menu-toggle';
+    menuButton.setAttribute('aria-label', 'Open navigation menu');
+    menuButton.setAttribute('aria-expanded', 'false');
+    menuButton.innerHTML = '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>';
+    navLinks.id = navLinks.id || 'mobile-nav-links';
+    menuButton.setAttribute('aria-controls', navLinks.id);
+    navInner.append(mobileDownload, menuButton);
+    nav.classList.add('nav-enhanced');
+
+    const setMenuOpen = (open) => {
+      nav.classList.toggle('menu-open', open);
+      menuButton.setAttribute('aria-expanded', String(open));
+      menuButton.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+    };
+    menuButton.addEventListener('click', () => setMenuOpen(!nav.classList.contains('menu-open')));
+    navLinks.addEventListener('click', (event) => {
+      if (event.target.closest('a')) setMenuOpen(false);
+    });
+    document.addEventListener('click', (event) => {
+      if (!nav.contains(event.target)) setMenuOpen(false);
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && nav.classList.contains('menu-open')) {
+        setMenuOpen(false);
+        menuButton.focus();
+      }
+    });
+    window.matchMedia('(min-width: 621px)').addEventListener('change', (event) => {
+      if (event.matches) setMenuOpen(false);
+    });
+  }
+
   // Reveal-on-scroll for marked elements
   const targets = document.querySelectorAll('.reveal');
   if (targets.length && 'IntersectionObserver' in window) {
