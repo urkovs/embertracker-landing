@@ -48,7 +48,7 @@
         menuButton.focus();
       }
     });
-    window.matchMedia('(min-width: 621px)').addEventListener('change', (event) => {
+    window.matchMedia('(min-width: 768px)').addEventListener('change', (event) => {
       if (event.matches) setMenuOpen(false);
     });
   }
