@@ -128,7 +128,7 @@ h1, h2, h3 { margin: 0; font-family: var(--serif); font-weight: 500; color: var(
 
 /* Mobile navigation: one-row header, with a progressively enhanced menu. */
 .nav .mobile-download, .nav .nav-menu-toggle { display: none; }
-@media (max-width: 620px) {
+@media (max-width: 767px) {
   .nav.nav-enhanced { background: rgba(10,10,10,.96); border-bottom-color: var(--line); }
   .nav.nav-enhanced .nav-inner {
     position: relative; flex-wrap: nowrap; gap: 9px;
