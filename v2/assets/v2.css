@@ -95,6 +95,9 @@ p { text-wrap: pretty; }
 .store-row { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
 .app-store-badge { width: 10.5rem; min-height: 3.5rem; display: inline-flex; align-items: center; }
 .app-store-badge img { width: 10.5rem; }
+.google-play-badge { display: block; width: 11.875rem; max-width: 100%; aspect-ratio: 190 / 58; overflow: hidden; }
+.google-play-badge img { width: 113.1579%; max-width: none; margin: -6.8421% 0 0 -6.8421%; }
+.store-row-center { justify-content: center; }
 .text-link { min-height: 2.75rem; display: inline-flex; align-items: center; color: var(--ink-mid); font-size: .875rem; }
 .button {
   min-height: 2.75rem; display: inline-flex; align-items: center; justify-content: center;
