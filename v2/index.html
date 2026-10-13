@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/v2/assets/v2.css?v=2">
+<link rel="stylesheet" href="/v2/assets/v2.css?v=3">
 <noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
 </head>
 <body>
@@ -38,14 +38,12 @@
   <section class="hero" id="download">
     <div class="wrap hero-grid">
       <div class="hero-copy">
-        <p class="eyebrow reveal">A better migraine tracker</p>
         <h1 class="display reveal">Migraine tracking, without the headache.</h1>
-        <p class="lead reveal">Log your day. See your patterns. Bring a clear record to your next appointment.</p>
+        <p class="lead reveal">Record headache days, symptoms, and treatments, then bring a clear report to your next appointment.</p>
         <div class="store-row reveal" role="group" aria-label="Download Ember">
           <a class="app-store-badge" href="https://apps.apple.com/us/app/ember-migraine-tracker/id6762041852" target="_blank" rel="noopener"><img src="/v2/assets/app-store-badge.svg" alt="Download on the App Store" width="168" height="56"></a>
           <a class="google-play-badge" href="https://play.google.com/store/apps/details?id=com.cascadeheadache.ember" target="_blank" rel="noopener"><img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" width="646" height="250"></a>
         </div>
-        <p class="evidence-line reveal">Core tracking and provider reports are free.</p>
       </div>
       <div class="phone-shell reveal">
         <img src="/v2/assets/ui/today-entry.jpg" alt="Ember Today screen with pain, symptoms, medications, and impact" width="860" height="1868" fetchpriority="high">
@@ -55,34 +53,30 @@
 
   <section class="section" aria-labelledby="flow-title">
     <div class="wrap">
-      <div class="section-head">
-        <h2 class="display reveal" id="flow-title">One day becomes a useful record.</h2>
-        <p class="reveal">Sample screens and reports from earlier versions of Ember.</p>
-      </div>
-      <div class="route">
-        <article class="step reveal">
-          <div class="step-head"><span class="step-number">01</span><h3>Log the details that matter.</h3></div>
-          <div class="artifact artifact-phone"><img src="/v2/assets/ui/today-entry.jpg" alt="Daily entry with pain, symptoms, medications, and impact" width="860" height="1868" loading="lazy"></div>
-          <p class="artifact-caption"><strong>Daily entry</strong><br>Pain, symptoms, medications, and impact.</p>
-        </article>
-        <article class="step reveal">
-          <div class="step-head"><span class="step-number">02</span><h3>See how the day was counted.</h3></div>
-          <div class="artifact artifact-phone"><img src="/v2/assets/ui/today-classified.jpg" alt="Completed entry classified as a Migraine day because Ubrelvy was used and three migraine features were detected" width="860" height="1868" loading="lazy"></div>
-          <p class="artifact-caption"><strong>Recorded result</strong><br>The day type and reason stay visible.</p>
-        </article>
-        <article class="step reveal">
-          <div class="step-head"><span class="step-number">03</span><h3>See days and treatments together.</h3></div>
-          <div class="artifact artifact-calendar">
-            <img src="/v2/assets/ui/calendar-impact.jpg" alt="Calendar with recorded day types and impact" width="860" height="1868" loading="lazy">
-            <div class="treatment-inset"><img src="/v2/assets/ui/treatment-story.jpg" alt="Historical real Treatment Story screen with clearly labeled sample data" width="1179" height="2556" loading="lazy"></div>
-          </div>
-          <p class="artifact-caption"><strong>Calendar and Treatment Story</strong><br>History stays connected to its dates.</p>
-        </article>
-        <article class="step reveal">
-          <div class="step-head"><span class="step-number">04</span><h3>Bring the record to your appointment.</h3></div>
-          <div class="artifact artifact-report"><img src="/v2/assets/report-full.jpg" alt="Sample Ember report with a day grid, totals, and legend" width="1840" height="1421" loading="lazy"></div>
-          <p class="artifact-caption"><strong>Provider report</strong><br>You review it and choose when to share.</p>
-        </article>
+      <h2 class="display journey-title reveal" id="flow-title">From daily entry to provider report.</h2>
+      <div class="entry-journey reveal" data-tabs>
+        <div class="journey-choices" role="tablist" aria-label="Explore the daily log to report flow">
+          <button class="journey-tab" type="button" id="journey-entry-tab" role="tab" aria-selected="true" aria-controls="journey-entry" tabindex="0"><span class="step-number">01</span>Daily entry</button>
+          <button class="journey-tab" type="button" id="journey-result-tab" role="tab" aria-selected="false" aria-controls="journey-result" tabindex="-1"><span class="step-number">02</span>Day result</button>
+          <button class="journey-tab" type="button" id="journey-calendar-tab" role="tab" aria-selected="false" aria-controls="journey-calendar" tabindex="-1"><span class="step-number">03</span>Calendar</button>
+          <button class="journey-tab" type="button" id="journey-report-tab" role="tab" aria-selected="false" aria-controls="journey-report" tabindex="-1"><span class="step-number">04</span>Provider report</button>
+        </div>
+        <div class="journey-panel" id="journey-entry" role="tabpanel" tabindex="0" aria-labelledby="journey-entry-tab">
+          <div class="journey-copy"><h3>Record the day.</h3><p>Pain, symptoms, medications, and impact.</p></div>
+          <figure class="journey-visual"><div class="artifact artifact-phone"><img src="/v2/assets/ui/today-entry.jpg" alt="Daily entry with pain, symptoms, medications, and impact" width="860" height="1868" loading="lazy"></div><figcaption class="sample-caption">Sample screen · previous version</figcaption></figure>
+        </div>
+        <div class="journey-panel" id="journey-result" role="tabpanel" tabindex="0" aria-labelledby="journey-result-tab" hidden>
+          <div class="journey-copy"><h3>See how the day was counted.</h3><p>The day type and the rule stay visible.</p></div>
+          <figure class="journey-visual"><div class="artifact artifact-phone"><img src="/v2/assets/ui/today-classified.jpg" alt="Completed entry classified as a Migraine day because Ubrelvy was used and three migraine features were detected" width="860" height="1868" loading="lazy"></div><figcaption class="sample-caption">Sample screen · previous version</figcaption></figure>
+        </div>
+        <div class="journey-panel" id="journey-calendar" role="tabpanel" tabindex="0" aria-labelledby="journey-calendar-tab" hidden>
+          <div class="journey-copy"><h3>Review days and treatments.</h3><p>See headache days, impact, and treatment history by date.</p></div>
+          <figure class="journey-visual"><div class="artifact artifact-calendar"><img src="/v2/assets/ui/calendar-impact.jpg" alt="Calendar with recorded day types and impact" width="860" height="1868" loading="lazy"><div class="treatment-inset"><img src="/v2/assets/ui/treatment-story.jpg" alt="Historical real Treatment Story screen with clearly labeled sample data" width="1179" height="2556" loading="lazy"></div></div><figcaption class="sample-caption">Sample screen · previous version</figcaption></figure>
+        </div>
+        <div class="journey-panel" id="journey-report" role="tabpanel" tabindex="0" aria-labelledby="journey-report-tab" hidden>
+          <div class="journey-copy"><h3>Bring a clear report.</h3><p>You review it and choose when to share.</p></div>
+          <figure class="journey-visual"><div class="artifact artifact-report"><img src="/v2/assets/report-full.jpg" alt="Sample Ember report with a day grid, totals, and legend" width="1840" height="1421" loading="lazy"></div><figcaption class="sample-caption">Sample report · fictional data</figcaption></figure>
+        </div>
       </div>
       <div class="route-action"><a class="text-link" href="/v2/assets/sample-calendar.pdf" target="_blank" rel="noopener">Open the sample report</a></div>
     </div>
@@ -91,7 +85,7 @@
   <section class="boundary" aria-label="Free features and privacy">
     <div class="wrap boundary-inner">
       <span class="boundary-mark" aria-hidden="true">✓</span>
-      <p><strong>Free Ember stays useful on its own.</strong> Daily logging, Calendar, treatment history, core reports, and manual backup stay free. Health records are stored on your device; you choose when to export or share them.</p>
+      <p><strong>Core tracking and reports are free.</strong> Your health records stay on your device unless you choose to back up or share them.</p>
       <a href="/privacy/">How Ember handles data</a>
     </div>
   </section>
@@ -99,25 +93,38 @@
   <section class="plus-teaser" aria-labelledby="plus-title">
     <div class="wrap">
       <div class="plus-teaser-inner">
-        <div class="plus-teaser-copy reveal">
-          <p class="eyebrow">Ember Plus <span class="status">Coming soon</span></p>
-          <h2 class="display" id="plus-title">Optional depth, when you want it.</h2>
-          <p>Planned weather, health, and backup tools can add context and continuity. Free tracking and reports stay free.</p>
-          <a class="text-link" href="/v2/plus/">See what is planned</a>
+        <header class="plus-teaser-header reveal">
+          <p class="eyebrow"><span class="status">Coming soon</span></p>
+          <h2 class="display" id="plus-title">Ember Plus</h2>
+          <a class="text-link" href="/v2/plus/">Explore Plus</a>
+        </header>
+        <div class="plus-preview reveal" data-tabs>
+          <div class="feature-choices" role="tablist" aria-label="Explore planned Plus features">
+            <button class="feature-tab" type="button" id="preview-watch-tab" role="tab" aria-selected="true" aria-controls="preview-watch" tabindex="0">Apple Watch</button>
+            <button class="feature-tab" type="button" id="preview-patterns-tab" role="tab" aria-selected="false" aria-controls="preview-patterns" tabindex="-1">Weather &amp; Health</button>
+            <button class="feature-tab" type="button" id="preview-backup-tab" role="tab" aria-selected="false" aria-controls="preview-backup" tabindex="-1">Automatic backup</button>
+          </div>
+          <div class="feature-panel" id="preview-watch" role="tabpanel" tabindex="0" aria-labelledby="preview-watch-tab">
+            <div class="feature-copy"><h3>Log on your wrist.</h3><p>Review the day on your iPhone.</p></div>
+            <div class="preview-watch"><div class="watch-housing"><div class="watch-screen"><img src="/v2/assets/ui/watch-home.png" alt="Sample Ember Apple Watch screen for planned wrist logging" width="416" height="496" loading="lazy"></div></div></div>
+          </div>
+          <div class="feature-panel" id="preview-patterns" role="tabpanel" tabindex="0" aria-labelledby="preview-patterns-tab" hidden>
+            <div class="feature-copy"><h3>Compare your recorded days.</h3><p>See sleep, activity, and weather beside your headache log.</p></div>
+            <div class="preview-capture preview-patterns"><img src="/v2/assets/ui/patterns.png" alt="Sample Ember Patterns screen showing a sleep comparison" width="1206" height="2622" loading="lazy"></div>
+          </div>
+          <div class="feature-panel" id="preview-backup" role="tabpanel" tabindex="0" aria-labelledby="preview-backup-tab" hidden>
+            <div class="feature-copy"><h3>Keep an encrypted backup.</h3><p>Restore your records with a saved key or code.</p></div>
+            <div class="preview-capture preview-backup"><img src="/v2/assets/ui/backup.png" alt="Sample Ember backup screen for encrypted automatic backup and recovery" width="1206" height="2622" loading="lazy"></div>
+          </div>
         </div>
-        <div class="mini-paths reveal" aria-label="Three planned Ember Plus flows">
-          <div class="mini-path"><span>01</span><p>Log with less effort.<small>Planned Watch entries, same Calendar.</small></p></div>
-          <div class="mini-path"><span>02</span><p>Add context.<small>Weather and Health beside your logs.</small></p></div>
-          <div class="mini-path"><span>03</span><p>Protect continuity.<small>An encrypted copy you can recover.</small></p></div>
-        </div>
+        <p class="sample-caption">Sample screens · previous versions</p>
       </div>
     </div>
   </section>
 
   <section class="closing" aria-labelledby="closing-title">
     <div class="wrap">
-      <h2 class="display reveal" id="closing-title">Bring a clearer record to your next appointment.</h2>
-      <p class="reveal">Start with one day. Ember keeps the rest organized.</p>
+      <h2 class="display reveal" id="closing-title">A better migraine tracker.</h2>
       <div class="store-row store-row-center reveal" role="group" aria-label="Download Ember">
         <a class="app-store-badge" href="https://apps.apple.com/us/app/ember-migraine-tracker/id6762041852" target="_blank" rel="noopener"><img src="/v2/assets/app-store-badge.svg" alt="Download on the App Store" width="168" height="56"></a>
         <a class="google-play-badge" href="https://play.google.com/store/apps/details?id=com.cascadeheadache.ember" target="_blank" rel="noopener"><img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" width="646" height="250" loading="lazy"></a>
@@ -135,6 +142,6 @@
   </div>
   <div class="wrap footer-bottom"><span>© 2026 Cascade Headache, PLLC</span><a href="/">Current live site</a></div>
 </footer>
-<script src="/v2/assets/v2.js?v=1"></script>
+<script src="/v2/assets/v2.js?v=3"></script>
 </body>
 </html>

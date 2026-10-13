@@ -77,6 +77,63 @@
     });
   });
 
+  document.querySelectorAll('[data-watch-demo]').forEach((demo) => {
+    const steps = [...demo.querySelectorAll('[data-demo-step]')];
+    const play = demo.querySelector('[data-play-flow]');
+    const playLabel = play.querySelector('span');
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const timers = new Set();
+    let playing = false;
+
+    function stop() {
+      timers.forEach((timer) => clearTimeout(timer));
+      timers.clear();
+      playing = false;
+      playLabel.textContent = 'Replay flow';
+      play.setAttribute('aria-label', 'Replay the Watch walkthrough');
+    }
+
+    function selectStep(index) {
+      demo.dataset.step = String(index);
+      steps.forEach((button, i) => button.setAttribute('aria-pressed', String(i === index)));
+      demo.querySelector('.watch-home').setAttribute('aria-hidden', String(index !== 0));
+      demo.querySelector('.watch-entry').setAttribute('aria-hidden', String(index === 0));
+    }
+
+    function schedule(fn, delay) {
+      const timer = setTimeout(() => { timers.delete(timer); fn(); }, delay);
+      timers.add(timer);
+    }
+
+    steps.forEach((button, index) => {
+      button.addEventListener('click', () => { stop(); selectStep(index); });
+      button.addEventListener('keydown', (event) => {
+        const direction = event.key === 'ArrowRight' ? 1 : event.key === 'ArrowLeft' ? -1 : 0;
+        if (!direction) return;
+        event.preventDefault();
+        const next = (index + direction + steps.length) % steps.length;
+        stop(); selectStep(next); steps[next].focus();
+      });
+    });
+
+    play.addEventListener('click', () => {
+      if (playing) { stop(); return; }
+      stop();
+      if (motion.matches) { selectStep(2); return; }
+      selectStep(0);
+      playing = true;
+      playLabel.textContent = 'Pause flow';
+      play.setAttribute('aria-label', 'Pause the Watch walkthrough');
+      schedule(() => selectStep(1), 1000);
+      schedule(() => selectStep(2), 2200);
+      schedule(stop, 3200);
+    });
+    demo.addEventListener('keydown', (event) => { if (event.key === 'Escape' && playing) stop(); });
+    document.addEventListener('visibilitychange', () => { if (document.hidden && playing) stop(); });
+    motion.addEventListener('change', () => { if (playing) stop(); });
+    selectStep(0);
+  });
+
   document.querySelectorAll('[data-classifier]').forEach((classifier) => {
     const buttons = [...classifier.querySelectorAll('[data-scenario]')];
     const label = classifier.querySelector('[data-output-label]');

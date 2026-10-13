@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/v2/assets/v2.css?v=2">
+<link rel="stylesheet" href="/v2/assets/v2.css?v=3">
 <noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
 </head>
 <body>
@@ -32,56 +32,58 @@
   <section class="page-hero">
     <div class="wrap page-hero-inner">
       <div class="page-hero-copy">
-        <p class="eyebrow reveal">Ember Plus <span class="status">Coming soon</span></p>
-        <h1 class="display reveal">Optional tools for more context, easier logging, and recovery.</h1>
-        <p class="lead reveal">Ember Plus is a planned expansion. Free daily logging, Calendar, Treatments, reports, and manual backup remain available without Plus.</p>
-        <a class="button reveal" href="/v2/">Start with free Ember</a>
+        <p class="eyebrow reveal"><span class="status">Coming soon</span></p>
+        <h1 class="display reveal">Ember Plus</h1>
+        <p class="lead reveal">Add Apple Watch logging, weather and Health comparisons, and encrypted backup.</p>
+        <a class="button reveal" href="#watch-flow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m10 8 6 4-6 4Z"/></svg>See the Watch flow</a>
       </div>
-      <div class="orb-stage reveal" aria-hidden="true"><img src="/v2/assets/plus/patterns.svg" alt="" width="560" height="360"></div>
+      <figure class="plus-hero-visual reveal"><div class="hero-capture"><img src="/v2/assets/ui/patterns.png" alt="Sample Ember Patterns screen showing a sleep comparison" width="1206" height="2622" fetchpriority="high"></div><figcaption class="sample-caption">Sample screen · previous version</figcaption></figure>
     </div>
   </section>
 
   <section class="free-strip" aria-label="Free Ember features">
-    <div class="wrap free-strip-inner"><strong>Free Ember, available now</strong><span>Daily log</span><span>Calendar</span><span>Treatments</span><span>Reports</span><span>Manual backup</span></div>
+    <div class="wrap free-strip-inner"><p>Daily logging, Calendar, treatment history, provider reports, and manual backup are free.</p></div>
   </section>
 
   <section aria-label="Planned Ember Plus flows">
     <div class="wrap plus-flows">
-      <article class="plus-flow">
-        <div class="flow-copy reveal"><p class="eyebrow">01 · Less effort</p><h2 class="display">Log from your wrist.</h2><p>Planned Apple Watch logging lets you record the day on your wrist, then review it in the same Calendar on your phone.</p></div>
-        <div class="flow-art reveal"><img src="/v2/assets/plus/watch-flow.svg" alt="Concept of planned Apple Watch entries reaching the Calendar on a phone" width="560" height="360" loading="lazy"><div class="flow-sequence" aria-label="Planned Apple Watch flow"><span>Log on Apple Watch</span><span>Record the day</span><span>Review on iPhone</span></div></div>
+      <article class="plus-flow" id="watch-flow">
+        <div class="flow-copy reveal"><p class="eyebrow">Apple Watch</p><h2 class="display">Log on your wrist.</h2><p>Record the day on Apple Watch. Review it in the same Calendar on your iPhone.</p></div>
+        <div class="product-demo watch-demo reveal" data-watch-demo data-step="0">
+          <div class="watch-demo-stage">
+            <div class="watch-housing"><div class="watch-screen"><img class="watch-home" src="/v2/assets/ui/watch-home.png" alt="Sample Ember Watch home screen with Log your day" width="416" height="496" loading="lazy"><img class="watch-entry" src="/v2/assets/ui/watch-entry.png" alt="Sample Ember Watch entry asking about head pain" width="416" height="496" loading="lazy"></div></div>
+            <div class="device-link" aria-hidden="true"><span class="link-line"></span><span class="link-arrow">›</span><span class="link-signal"></span></div>
+            <div class="demo-phone"><img src="/v2/assets/ui/calendar-impact.jpg" alt="Sample Ember Calendar on iPhone" width="860" height="1868" loading="lazy"></div>
+          </div>
+          <div class="demo-steps" role="group" aria-label="Watch walkthrough steps"><button type="button" data-demo-step="0" aria-pressed="true"><span>1</span>Open Ember</button><button type="button" data-demo-step="1" aria-pressed="false"><span>2</span>Log the day</button><button type="button" data-demo-step="2" aria-pressed="false"><span>3</span>See Calendar</button></div>
+          <div class="demo-footer"><p class="sample-caption">Planned Watch flow · earlier sample screens</p><button class="play-flow" type="button" data-play-flow><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m8 5 11 7-11 7Z"/></svg><span>Play flow</span></button></div>
+        </div>
       </article>
       <article class="plus-flow">
-        <div class="flow-copy reveal"><p class="eyebrow">02 · More context</p><h2 class="display">Put chosen readings beside your logs.</h2><p>Choose a weather location or connect Apple Health. Ember can place supported readings beside your headache logs so you can compare recorded days.</p></div>
-        <div class="flow-art reveal"><img src="/v2/assets/plus/weather.svg" alt="Concept illustration of weather and health readings beside a recorded day" width="560" height="360" loading="lazy"><div class="flow-sequence" aria-label="Planned context flow"><span>Choose weather or health</span><span>See readings by logs</span><span>Compare recorded days</span></div></div>
+        <div class="flow-copy reveal"><p class="eyebrow">Weather &amp; Health</p><h2 class="display">Compare your recorded days.</h2><p>See sleep, activity, and weather beside your headache log. Comparisons use recorded days and supported readings.</p></div>
+        <div class="product-demo readings-demo reveal" data-tabs>
+          <div class="feature-choices" role="tablist" aria-label="Sample Health and Patterns screens"><button class="feature-tab" type="button" role="tab" id="health-demo-tab" aria-controls="health-demo-panel" aria-selected="true" tabindex="0">Health connection</button><button class="feature-tab" type="button" role="tab" id="pattern-demo-tab" aria-controls="pattern-demo-panel" aria-selected="false" tabindex="-1">Recorded pattern</button></div>
+          <div class="readings-panel" id="health-demo-panel" role="tabpanel" aria-labelledby="health-demo-tab" tabindex="0"><div class="readings-capture capture-health"><img src="/v2/assets/ui/health.png" alt="Sample native Connections screen showing Apple Health connected" width="1206" height="2622" loading="lazy"></div></div>
+          <div class="readings-panel" id="pattern-demo-panel" role="tabpanel" aria-labelledby="pattern-demo-tab" tabindex="0" hidden><div class="readings-capture capture-pattern"><img src="/v2/assets/ui/patterns.png" alt="Sample native Patterns screen showing an observed sleep comparison" width="1206" height="2622" loading="lazy"></div></div>
+          <p class="sample-caption">Previous version · fictional data</p>
+        </div>
       </article>
       <article class="plus-flow">
-        <div class="flow-copy reveal"><p class="eyebrow">03 · Continuity</p><h2 class="display">Opt in to encrypted automatic backup.</h2><p>Backups are encrypted before they leave your phone. Keep your recovery code or key somewhere safe, then use it to restore your records when needed.</p></div>
-        <div class="flow-art reveal"><img src="/v2/assets/plus/backup.svg" alt="Concept illustration of an encrypted backup moving between a phone and protected storage" width="560" height="360" loading="lazy"><div class="flow-sequence" aria-label="Planned backup flow"><span>Opt in</span><span>Keep your code or key</span><span>Restore your records</span></div></div>
+        <div class="flow-copy reveal"><p class="eyebrow">Automatic backup</p><h2 class="display">Keep an encrypted backup.</h2><p>Your backup is encrypted before it leaves your phone. Keep its recovery key in iCloud Keychain or your Google account, or save a recovery code yourself.</p></div>
+        <figure class="product-demo backup-demo reveal"><div class="backup-capture"><img src="/v2/assets/ui/backup.png" alt="Sample native Automatic backup screen showing a backed-up state" width="1206" height="2622" loading="lazy"></div><figcaption class="sample-caption">Previous version · fictional data</figcaption></figure>
       </article>
     </div>
     <div class="wrap companion-tools">
-      <details><summary>More planned Plus tools</summary><p>Patterns and a concise Ember Brief can bring your recorded history together. Optional workout, sleep, and personal experiment tools can help you compare routines when supported data is available.</p></details>
-    </div>
-  </section>
-
-  <section class="availability" aria-labelledby="availability-title">
-    <div class="wrap">
-      <h2 class="display" id="availability-title">Free now. Plus coming soon.</h2>
-      <div class="availability-grid">
-        <div class="availability-column"><p class="eyebrow">Free Ember · Available</p><h3>Your everyday migraine tracker.</h3><p>Use the core app without a Plus subscription.</p><ul><li>Daily logging and Calendar</li><li>Treatment history</li><li>Core provider reports</li><li>Manual backup and restore</li></ul></div>
-        <div class="availability-column"><p class="eyebrow">Ember Plus · Coming soon</p><h3>Optional context and continuity.</h3><p>Final scope and store availability will be confirmed before release.</p><ul><li>Apple Watch daily logging</li><li>Weather and Apple Health readings</li><li>Patterns and descriptive comparisons</li><li>Encrypted automatic backup</li></ul></div>
-      </div>
+      <details><summary>See Ember Brief and other Plus tools</summary><div class="more-tools-content"><div><p>Ember Brief gathers recent findings in one view. Workouts, sleep, and personal experiments compare recorded routines.</p></div><div class="brief-capture"><img src="/v2/assets/ui/brief.png" alt="Earlier sample Ember Brief showing fictional migraine-day counts" width="1206" height="2622" loading="lazy"></div></div></details>
     </div>
   </section>
 
   <section class="faq" aria-labelledby="faq-title">
-    <h2 class="display" id="faq-title">Good to know.</h2>
-    <details><summary>When will Ember Plus be available?</summary><p>Plus is coming soon. Availability will be posted after the public app and supported services are verified.</p></details>
-    <details><summary>Can I use Ember without Plus?</summary><p>Yes. Daily logging, Calendar, treatment history, core reports, and manual backup stay free.</p></details>
-    <details><summary>Does Plus predict migraine attacks?</summary><p>No. Planned tools show observations and descriptive comparisons. They do not predict attacks or prove that one factor caused them.</p></details>
-    <details><summary>What do weather and health comparisons need?</summary><p>You choose the permissions and sources. Comparisons appear only when enough recorded days and supported readings are available; missing readings stay missing.</p></details>
-    <details><summary>Where are my records stored?</summary><p>Core health records are stored on your device. Optional automatic backups are encrypted before leaving your phone. Free manual backup stays separate, and you can recover an existing automatic backup after Plus access ends.</p></details>
+    <h2 class="display" id="faq-title">Questions about Plus.</h2>
+    <details><summary>When will Ember Plus be available?</summary><p>Plus is coming soon. A release date has not been announced.</p></details>
+    <details><summary>Does Plus predict migraine attacks?</summary><p>No. It compares recorded observations. A comparison does not establish a cause.</p></details>
+    <details><summary>What do weather and Health comparisons need?</summary><p>You choose the sources and permissions. Comparisons need enough recorded days and supported readings; missing data stays missing.</p></details>
+    <details><summary>Where are my records stored?</summary><p>Health records stay on your device unless you choose to back up or share them. Automatic backups are encrypted before leaving your phone, and recovery remains available after Plus ends.</p></details>
   </section>
 </main>
 
@@ -89,6 +91,6 @@
   <div class="wrap footer-inner"><div><div class="brand"><span class="brand-orb" aria-hidden="true"></span>Ember</div><p class="footer-tag">A migraine and headache tracker built by a practicing headache specialist. Ember does not diagnose or replace clinical care.</p></div><nav class="footer-links" aria-label="Footer"><a href="/v2/">For patients</a><a href="/v2/providers/">For clinicians</a><a href="/contact/">Contact</a><a href="/references/">References</a><a href="/privacy/">Privacy</a><a href="/consumer-health/">Consumer health privacy</a><a href="/terms/">Terms</a></nav></div>
   <div class="wrap footer-bottom"><span>© 2026 Cascade Headache, PLLC</span><a href="/plus/">Current live Plus page</a></div>
 </footer>
-<script src="/v2/assets/v2.js?v=1"></script>
+<script src="/v2/assets/v2.js?v=3"></script>
 </body>
 </html>
