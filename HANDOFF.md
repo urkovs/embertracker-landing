@@ -189,3 +189,16 @@ clinical-artifact/figure labels only.
 ### October 4, 2026 — Navigation Atlas entry
 
 `/atlas/` redirects to the separately hosted Firebase operator dashboard at `https://ember-navigation-atlas.web.app/`. GitHub Pages hosts only this static entry; no sign-in transaction, private counts or credentials are stored here. The collector independently requires the designated Firebase operator and mobile collection remains disabled. The public patient navigation is unchanged.
+
+## V3 draft (2026-10-14, branch `claude/website-v3`, not pushed)
+
+- `v3/index.html` (patients) and `v3/providers/index.html` (clinicians), own CSS/JS in
+  `v3/assets/`. Dark editorial panels: one serif statement plus one object each (orb,
+  real month, head wireframe drawn from the app's head-map geometry, report). Patient
+  page has a "Try a day" classifier mirroring `src/utils/classification.ts` for pain,
+  symptoms and impact (medication rules left out) and a phone-only sticky download bar.
+  Providers page carries the classification engine block over byte-for-byte.
+- `get/index.html`: smart store redirect for social bios. `PT` (App Store Connect
+  provider token) is blank on purpose until Sam generates a campaign link.
+- All new wording awaits Sam's approval. Kept Sam's H1. Not linked from the live site;
+  `noindex`. Review link and the launch playbook are in the session summary.
