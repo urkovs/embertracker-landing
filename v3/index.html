@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ember · Migraine tracking, without the headache</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="A free migraine tracker built by a practicing headache specialist. Log a day in seconds and bring your doctor a report they can read in a minute.">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..600;1,8..60,300..500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/v3.css?v=1">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="draft-strip">V3 draft for review. <a href="https://embertracker.app/">See the live site</a></div>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="./" aria-label="Ember home"><img src="assets/orb.webp" alt="" width="30" height="30">Ember</a>
+    <nav class="nav-links" aria-label="Main">
+      <a class="hide-sm" href="#plus">Ember Plus</a>
+      <a href="providers/">For clinicians</a>
+      <a class="btn" data-get href="#get">Download</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- 1. Hero -->
+<section class="hero" data-hero>
+  <div class="wrap">
+    <p class="eyebrow">Built by a headache specialist</p>
+    <h1 class="display">Migraine tracking, without the headache.</h1>
+    <p class="lede">Log your day in seconds. Bring your doctor a report they can read in a minute.</p>
+    <div class="badges">
+      <a href="https://apps.apple.com/us/app/ember-migraine-tracker/id6762041852" target="_blank" rel="noopener"><img src="assets/app-store-badge.svg" alt="Download on the App Store" width="144" height="48"></a>
+      <a class="play" href="https://play.google.com/store/apps/details?id=com.cascadeheadache.ember" target="_blank" rel="noopener"><img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" width="646" height="250" onerror="this.parentElement.classList.add('nobadge')"><span class="badge-fallback">Get it on Google Play</span></a>
+    </div>
+    <p class="free">Free to use on iPhone and Android.</p>
+  </div>
+  <div class="hero-stage" aria-hidden="false">
+    <div class="hero-glow"></div>
+    <img class="hero-orb" src="assets/orb.webp" alt="" width="900" height="900">
+    <div class="note-tag note-b">
+      <span class="tag">Time to log a day</span>
+      <span class="val num">10 to 20 seconds</span>
+    </div>
+    <div class="hero-phone">
+      <div class="phone"><img src="assets/screen-today.webp" alt="Ember's Today screen: head pain set to mild, with neck pain, nausea and brain fog selected." width="760" height="1650"></div>
+    </div>
+    <div class="note-tag note-a">
+      <span class="tag">Today</span>
+      <span class="val"><span class="dot-type" style="background:var(--mig);box-shadow:0 0 10px var(--mig)"></span>Migraine day</span>
+      <span class="sub">2 migraine features</span>
+    </div>
+    <div class="hero-fade"></div>
+  </div>
+</section>
+
+<!-- 2. Know your number -->
+<section class="panel" style="--accent: var(--mig)">
+  <div class="wrap split">
+    <div class="copy">
+      <p class="eyebrow">The first question</p>
+      <h2 class="h2">“How many migraine days did you have last month?”</h2>
+      <p class="lede">It’s the first question at most headache visits, and the hardest one to answer from memory. Ember keeps the count.</p>
+    </div>
+    <div class="stage" style="--atmo: rgba(155,122,204,.16)">
+      <div class="month" role="img" aria-label="Example month in Ember's calendar: May 2026 with 13 migraine days, 7 headache days, 3 symptom days and 8 clear days.">
+        <div class="month-head">
+          <span class="h3">May 2026</span>
+          <span class="tag">Day type</span>
+        </div>
+        <div class="month-grid" id="month"></div>
+        <div class="totals">
+          <div class="t-m"><b>13</b><span>migraine</span></div>
+          <div class="t-h"><b>7</b><span>headache</span></div>
+          <div class="t-s"><b>3</b><span>symptom</span></div>
+          <div class="t-c"><b>8</b><span>clear</span></div>
+        </div>
+      </div>
+      <p class="caption">Example month. Shaded days mark a period.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 3. Every day gets a name -->
+<section class="panel" style="--accent: var(--ember)">
+  <div class="wrap split flip">
+    <div class="copy">
+      <p class="eyebrow">Automatic</p>
+      <h2 class="h2">Every day gets a name.</h2>
+      <p class="lede">Every classification follows fixed rules built on ICHD-3 criteria. No AI guesses, no black box.</p>
+      <p class="small">Try it. Tap a few answers and watch the day change.</p>
+    </div>
+    <div class="stage" style="--atmo: rgba(236,170,104,.10)">
+      <div class="try" data-try>
+        <div class="try-row pain" data-group="pain">
+          <span class="tag">Any head pain today?</span>
+          <div class="chips">
+            <button class="chip" type="button" data-v="none">No pain</button>
+            <button class="chip" type="button" data-v="mild">Mild</button>
+            <button class="chip" type="button" data-v="moderate">Moderate</button>
+            <button class="chip" type="button" data-v="severe">Severe</button>
+          </div>
+        </div>
+        <div class="try-row" data-group="sym">
+          <span class="tag">Symptoms</span>
+          <div class="chips">
+            <button class="chip" type="button" data-v="light">Light sensitivity</button>
+            <button class="chip" type="button" data-v="sound">Sound sensitivity</button>
+            <button class="chip" type="button" data-v="nausea">Nausea</button>
+            <button class="chip" type="button" data-v="neck">Neck pain</button>
+            <button class="chip" type="button" data-v="aura">Aura</button>
+            <button class="chip" type="button" data-v="fog">Brain fog</button>
+          </div>
+        </div>
+        <div class="try-row" data-group="impact">
+          <span class="tag">Impact</span>
+          <div class="chips">
+            <button class="chip" type="button" data-v="none">None</button>
+            <button class="chip" type="button" data-v="limited">Limited</button>
+            <button class="chip" type="button" data-v="severe">Severe</button>
+          </div>
+        </div>
+        <div class="result" aria-live="polite">
+          <div class="rt">Migraine day</div>
+          <div class="rs">2 qualifying features → Migraine day</div>
+          <div class="rf"></div>
+        </div>
+      </div>
+      <p class="caption">A full day logged in ten to twenty seconds.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Head map -->
+<section class="panel" style="--accent: var(--ember)">
+  <div class="wrap split">
+    <div class="copy">
+      <p class="eyebrow">Pain location</p>
+      <h2 class="h2">Show where it hurts.</h2>
+      <p class="lede">Tap the spots on the front or back of your head. Ember saves them with the day.</p>
+    </div>
+    <div class="stage" style="--atmo: rgba(236,170,104,.13)">
+      <div class="head-wrap">
+        <svg class="head-svg" viewBox="-4 18 336 286" role="img" aria-label="Ember's head map, front view, with the right temple and behind the right eye marked.">
+          <defs>
+            <clipPath id="headClip"><path d="M57 132 C57 66 90 32 130 32 C170 32 203 66 203 132 C203 163 197 186 183 205 C169 224 151 240 130 240 C109 240 91 224 77 205 C63 186 57 163 57 132 Z"/></clipPath>
+            <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+              <stop offset="0" stop-color="#ecaa68" stop-opacity=".85"/>
+              <stop offset=".45" stop-color="#c96a3a" stop-opacity=".35"/>
+              <stop offset="1" stop-color="#c96a3a" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="lead" x1="0" x2="1">
+              <stop offset="0" stop-color="#d8c8b0" stop-opacity=".7"/>
+              <stop offset="1" stop-color="#d8c8b0" stop-opacity=".15"/>
+            </linearGradient>
+          </defs>
+          <!-- wireframe -->
+          <g clip-path="url(#headClip)" fill="none" stroke="#d8c8b0" stroke-opacity=".11" stroke-width=".7">
+            <ellipse cx="130" cy="136" rx="19" ry="104"/>
+            <ellipse cx="130" cy="136" rx="37" ry="104"/>
+            <ellipse cx="130" cy="136" rx="52" ry="104"/>
+            <ellipse cx="130" cy="136" rx="63" ry="104"/>
+            <ellipse cx="130" cy="136" rx="70.5" ry="104"/>
+            <path d="M130 30 V242"/>
+            <path d="M48 50 Q130 59 212 50"/><path d="M48 68 Q130 77 212 68"/><path d="M48 86 Q130 95 212 86"/>
+            <path d="M48 104 Q130 113 212 104"/><path d="M48 122 Q130 131 212 122"/><path d="M48 140 Q130 149 212 140"/>
+            <path d="M48 158 Q130 167 212 158"/><path d="M48 176 Q130 185 212 176"/><path d="M48 194 Q130 203 212 194"/>
+            <path d="M48 212 Q130 221 212 212"/><path d="M48 230 Q130 239 212 230"/>
+          </g>
+          <!-- glows -->
+          <ellipse cx="188" cy="114" rx="30" ry="32" fill="url(#glow)"/>
+          <ellipse cx="161" cy="154" rx="25" ry="23" fill="url(#glow)"/>
+          <!-- outline (app geometry) -->
+          <g fill="none" stroke="#d8c8b0" stroke-opacity=".6" stroke-width="1.3" stroke-linecap="round">
+            <path d="M57 132 C57 66 90 32 130 32 C170 32 203 66 203 132 C203 163 197 186 183 205 C169 224 151 240 130 240 C109 240 91 224 77 205 C63 186 57 163 57 132 Z"/>
+            <path d="M57 128 C48 122 44 138 53 152 C55 155 58 156 60 154"/>
+            <path d="M203 128 C212 122 216 138 207 152 C205 155 202 156 200 154"/>
+            <path d="M103 238 C102 254 100 268 96 284"/>
+            <path d="M157 238 C158 254 160 268 164 284"/>
+            <path d="M86 150 C92 157 102 157 108 150 M152 150 C158 157 168 157 174 150" stroke-opacity=".45"/>
+            <path d="M130 160 C127 170 125 177 130 181" stroke-opacity=".4"/>
+          </g>
+          <!-- region dots -->
+          <g fill="#6e685f">
+            <circle cx="130" cy="52" r="2.6"/><circle cx="130" cy="104" r="2.6"/>
+            <circle cx="72" cy="114" r="2.6"/><circle cx="99" cy="154" r="2.6"/>
+          </g>
+          <g fill="#ecaa68">
+            <circle cx="188" cy="114" r="4"/><circle cx="161" cy="154" r="4"/>
+          </g>
+          <!-- annotations -->
+          <path d="M193 112 L240 96" stroke="url(#lead)" stroke-width=".8" fill="none"/>
+          <path d="M166 157 L240 178" stroke="url(#lead)" stroke-width=".8" fill="none"/>
+          <text x="244" y="91" font-family="-apple-system, system-ui, sans-serif" font-size="8.5" font-weight="600" letter-spacing="1.5" fill="#8a847b">RIGHT</text>
+          <text x="244" y="105" font-family="Source Serif 4, Georgia, serif" font-size="13.5" fill="#e8e6e3">Temple</text>
+          <text x="244" y="176" font-family="-apple-system, system-ui, sans-serif" font-size="8.5" font-weight="600" letter-spacing="1.5" fill="#8a847b">BEHIND RIGHT</text>
+          <text x="244" y="190" font-family="Source Serif 4, Georgia, serif" font-size="13.5" fill="#e8e6e3">Eye</text>
+          <text x="130" y="300" text-anchor="middle" font-family="-apple-system, system-ui, sans-serif" font-size="8.5" letter-spacing="1.2" fill="#6e685f">FRONT · BACK</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. Treatments and rebound -->
+<section class="panel" style="--accent: var(--mig)">
+  <div class="wrap split flip">
+    <div class="copy">
+      <p class="eyebrow">Treatments</p>
+      <h2 class="h2">See if your treatment is working.</h2>
+      <p class="lede">Ember lines up your migraine days against the date you started each treatment.</p>
+    </div>
+    <div class="stage" style="--atmo: rgba(155,122,204,.13)">
+      <div class="stack">
+        <div class="ui-card base"><img src="assets/card-baseline.webp" alt="Baseline comparison: migraine days 33% lower, headache days 17% lower, impacted days 50% lower than before treatment." width="760" height="836" loading="lazy"></div>
+        <div class="ui-card story"><img src="assets/card-story.webp" alt="Treatment story chart: migraine days fell from 18 to 11 a month after starting Botox, then held at 11 after adding Emgality." width="760" height="576" loading="lazy"></div>
+      </div>
+      <p class="caption">Example data.</p>
+    </div>
+  </div>
+</section>
+
+<section class="panel" style="--accent: #d68c48">
+  <div class="wrap split">
+    <div class="copy">
+      <p class="eyebrow">Medication safety</p>
+      <h2 class="h2">A heads-up before rebound.</h2>
+      <p class="lede">Taking as-needed medicine too often can make headaches worse. Ember counts your days and tells you when they add up.</p>
+    </div>
+    <div class="stage" style="--atmo: rgba(214,140,72,.12)">
+      <div class="safety-demo">
+        <div class="med-chips" aria-hidden="true"><span>Ubrelvy</span><span class="on">Maxalt</span><span>Advil</span></div>
+        <div class="nudge">
+          <p>Maxalt has been logged 4 days in the past week. Repeated use this often can raise rebound risk, so it’s worth mentioning to your provider.</p>
+          <div class="row"><span class="small">In Today, under your medicines</span><span class="got">Got it</span></div>
+        </div>
+      </div>
+      <p class="caption">Example. Gepants like Ubrelvy never count toward rebound.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 6. The report -->
+<section class="panel" style="--accent: var(--ember)">
+  <div class="wrap">
+    <div class="report-head center">
+      <p class="eyebrow">For your appointments</p>
+      <h2 class="h2">Walk in with the whole story on one page.</h2>
+      <p class="lede">Ember builds a 90-day calendar your provider can read in about a minute. A chart note goes with it, written the way clinics write.</p>
+    </div>
+    <div class="stage" style="--atmo: rgba(246,242,234,.07)">
+      <div class="paper-stage">
+        <a class="paper" href="assets/sample-calendar.pdf" target="_blank" rel="noopener" aria-label="Open the sample report (PDF)"><img src="assets/report.webp" alt="Ember's 90-day calendar report: monthly strips of migraine, headache and clear days with medication marks and totals." width="1600" height="1235" loading="lazy"></a>
+      </div>
+    </div>
+    <div class="report-meta">
+      <div><b>90 days</b><span>on one page</span></div>
+      <div><b>MIDAS</b><span>scored for you</span></div>
+      <div><b>Every med</b><span>on the day you took it</span></div>
+    </div>
+    <p class="center" style="margin-top:28px"><a class="link" href="assets/sample-calendar.pdf" target="_blank" rel="noopener">Open the sample report</a></p>
+  </div>
+</section>
+
+<!-- 7. Ember Plus: pressure -->
+<section class="panel" id="plus" style="--accent: var(--clear)">
+  <div class="wrap split">
+    <div class="copy">
+      <p class="eyebrow plus-pill">Ember Plus <span class="pill">Coming soon</span></p>
+      <h2 class="h2">Pressure, checked against your own history.</h2>
+      <p class="lede">Ember Plus shows the pressure forecast and alerts you when a coming change matches a pattern in your records.</p>
+    </div>
+    <div class="stage" style="--atmo: rgba(168,196,212,.11)">
+      <div class="pressure">
+        <svg viewBox="0 0 600 330" role="img" aria-label="Example pressure forecast falling from 1018 to 1011 hectopascals between Wednesday and Friday.">
+          <defs>
+            <linearGradient id="pline" x1="0" x2="1">
+              <stop offset="0" stop-color="#8a847b"/>
+              <stop offset=".45" stop-color="#ecaa68"/>
+              <stop offset="1" stop-color="#c96a3a"/>
+            </linearGradient>
+            <radialGradient id="pglow" cx="50%" cy="50%" r="50%">
+              <stop offset="0" stop-color="#ecaa68" stop-opacity=".38"/>
+              <stop offset="1" stop-color="#ecaa68" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <ellipse cx="300" cy="150" rx="150" ry="110" fill="url(#pglow)"/>
+          <text x="34" y="58" font-family="Source Serif 4, Georgia, serif" font-size="40" fill="#ecaa68" letter-spacing="-1">1018</text>
+          <text x="124" y="58" font-family="-apple-system, system-ui, sans-serif" font-size="14" fill="#c9905a">hPa</text>
+          <path d="M30 96 C120 86 196 84 250 104 C300 124 330 196 400 220 C450 236 520 240 570 238" fill="none" stroke="url(#pline)" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M562 232 L572 238 L562 244" fill="none" stroke="#c96a3a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="262" cy="111" r="6" fill="#0a0a0a" stroke="#ecaa68" stroke-width="2.4"/>
+          <circle cx="262" cy="111" r="16" fill="#ecaa68" fill-opacity=".14"/>
+          <text x="566" y="206" text-anchor="end" font-family="Source Serif 4, Georgia, serif" font-size="34" fill="#ecaa68" letter-spacing="-1">↓ 1011</text>
+          <text x="566" y="222" text-anchor="end" font-family="-apple-system, system-ui, sans-serif" font-size="12" fill="#c9905a">hPa</text>
+          <g stroke="#6e685f" stroke-width="1">
+            <path d="M30 292 V300 M48 292 V296 M66 292 V296 M84 292 V296 M102 292 V296 M120 292 V296 M138 292 V296 M156 292 V296 M174 292 V296 M192 292 V296 M210 292 V300 M228 292 V296 M246 292 V296 M264 292 V296 M282 292 V296 M300 292 V296 M318 292 V296 M336 292 V296 M354 292 V296 M372 292 V296 M390 292 V300 M408 292 V296 M426 292 V296 M444 292 V296 M462 292 V296 M480 292 V296 M498 292 V296 M516 292 V296 M534 292 V296 M552 292 V296 M570 292 V300"/>
+          </g>
+          <path d="M262 124 V304" stroke="#ecaa68" stroke-width="1.4" stroke-dasharray="2 4"/>
+          <g font-family="-apple-system, system-ui, sans-serif" font-size="12.5" fill="#8a847b" text-anchor="middle">
+            <text x="120" y="320">Wed</text><text x="262" y="320" fill="#d8c8b0">Thu 4 PM</text><text x="480" y="320">Fri</text>
+          </g>
+        </svg>
+        <div class="notif" aria-label="Example notification">
+          <img src="assets/orb.webp" alt="" width="38" height="38">
+          <div class="top"><span>EMBER</span><span>now</span></div>
+          <b>Pressure drop ahead</b>
+          <p>This matches one of your Ember patterns. It starts Thu 4:00 PM.</p>
+        </div>
+      </div>
+      <p class="caption">Example forecast and alert.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 8. More in Plus -->
+<section class="panel" style="--accent: var(--ember)">
+  <div class="wrap">
+    <div class="copy" style="max-width:640px">
+      <h2 class="h2">More with Ember Plus.</h2>
+      <p class="lede">Optional extras for people who want more. Your daily log, treatment tracking and provider reports stay free.</p>
+    </div>
+    <div class="tiles">
+      <div class="tile">
+        <h3 class="h3">Your patterns</h3>
+        <p class="small">Sleep, activity and weather beside your migraine days.</p>
+        <div class="art"><div class="ui-card"><img src="assets/card-pattern.webp" alt="Your patterns card: migraine days were more common after nights when you slept less than usual." width="760" height="547" loading="lazy"></div></div>
+      </div>
+      <div class="tile">
+        <h3 class="h3">Ember Brief</h3>
+        <p class="small">What changed this month, in one line.</p>
+        <div class="art"><div class="ui-card"><img src="assets/card-brief.webp" alt="Ember Brief: 9 migraine days in the last 30 days, compared with 11 in the previous 30." width="760" height="497" loading="lazy"></div></div>
+      </div>
+      <div class="tile">
+        <h3 class="h3">Apple Watch</h3>
+        <p class="small">Log your day from your wrist.</p>
+        <div class="art"><div class="watch"><img src="assets/watch.webp" alt="Ember on Apple Watch with a Log your day button." width="416" height="496" loading="lazy"></div></div>
+      </div>
+    </div>
+    <div class="price-row">
+      <p class="price num">$7.99 a month or $59.99 a year<span>Also includes automatic encrypted backup and Apple Health connections.</span></p>
+      <a class="btn btn--ghost" href="https://embertracker.app/plus/" target="_blank" rel="noopener">Explore Ember Plus</a>
+    </div>
+  </div>
+</section>
+
+<!-- 9. Privacy -->
+<section class="panel">
+  <div class="wrap privacy">
+    <div class="lock" aria-hidden="true">
+      <svg viewBox="0 0 48 48" fill="none" stroke="#ecaa68" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="11" y="21" width="26" height="20" rx="5"/><path d="M16 21v-5a8 8 0 0 1 16 0v5"/><circle cx="24" cy="31" r="2" fill="#ecaa68"/></svg>
+    </div>
+    <div class="copy" style="gap:12px">
+      <h2 class="h3" style="font-size:clamp(28px,3.4vw,40px)">Your diary stays on your phone.</h2>
+      <p class="lede">We don’t sell health data or use it for ads. You decide when a report leaves your phone.</p>
+    </div>
+    <a class="link" href="https://embertracker.app/privacy/" target="_blank" rel="noopener">How Ember handles data</a>
+  </div>
+</section>
+
+<!-- 10. Closing -->
+<section class="panel closing" id="get">
+  <div class="wrap">
+    <img class="closing-orb" src="assets/orb-rays.webp" alt="" width="1000" height="1000" loading="lazy">
+    <h2 class="h2">Bring Ember to your next appointment.</h2>
+    <p class="lede">We promise your doctor will be impressed.</p>
+    <div class="badges">
+      <a href="https://apps.apple.com/us/app/ember-migraine-tracker/id6762041852" target="_blank" rel="noopener"><img src="assets/app-store-badge.svg" alt="Download on the App Store" width="144" height="48"></a>
+      <a class="play" href="https://play.google.com/store/apps/details?id=com.cascadeheadache.ember" target="_blank" rel="noopener"><img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" width="646" height="250" loading="lazy" onerror="this.parentElement.classList.add('nobadge')"><span class="badge-fallback">Get it on Google Play</span></a>
+    </div>
+    <div class="qr">
+      <div class="code" aria-hidden="true"><svg viewBox="0 0 29 29" xmlns="http://www.w3.org/2000/svg"><path d="M2,2H3V3H2zM3,2H4V3H3zM4,2H5V3H4zM5,2H6V3H5zM6,2H7V3H6zM7,2H8V3H7zM8,2H9V3H8zM10,2H11V3H10zM11,2H12V3H11zM12,2H13V3H12zM13,2H14V3H13zM16,2H17V3H16zM20,2H21V3H20zM21,2H22V3H21zM22,2H23V3H22zM23,2H24V3H23zM24,2H25V3H24zM25,2H26V3H25zM26,2H27V3H26zM2,3H3V4H2zM8,3H9V4H8zM10,3H11V4H10zM12,3H13V4H12zM16,3H17V4H16zM18,3H19V4H18zM20,3H21V4H20zM26,3H27V4H26zM2,4H3V5H2zM4,4H5V5H4zM5,4H6V5H5zM6,4H7V5H6zM8,4H9V5H8zM10,4H11V5H10zM11,4H12V5H11zM12,4H13V5H12zM13,4H14V5H13zM15,4H16V5H15zM16,4H17V5H16zM18,4H19V5H18zM20,4H21V5H20zM22,4H23V5H22zM23,4H24V5H23zM24,4H25V5H24zM26,4H27V5H26zM2,5H3V6H2zM4,5H5V6H4zM5,5H6V6H5zM6,5H7V6H6zM8,5H9V6H8zM11,5H12V6H11zM13,5H14V6H13zM14,5H15V6H14zM15,5H16V6H15zM18,5H19V6H18zM20,5H21V6H20zM22,5H23V6H22zM23,5H24V6H23zM24,5H25V6H24zM26,5H27V6H26zM2,6H3V7H2zM4,6H5V7H4zM5,6H6V7H5zM6,6H7V7H6zM8,6H9V7H8zM10,6H11V7H10zM11,6H12V7H11zM16,6H17V7H16zM18,6H19V7H18zM20,6H21V7H20zM22,6H23V7H22zM23,6H24V7H23zM24,6H25V7H24zM26,6H27V7H26zM2,7H3V8H2zM8,7H9V8H8zM11,7H12V8H11zM12,7H13V8H12zM13,7H14V8H13zM14,7H15V8H14zM16,7H17V8H16zM20,7H21V8H20zM26,7H27V8H26zM2,8H3V9H2zM3,8H4V9H3zM4,8H5V9H4zM5,8H6V9H5zM6,8H7V9H6zM7,8H8V9H7zM8,8H9V9H8zM10,8H11V9H10zM12,8H13V9H12zM14,8H15V9H14zM16,8H17V9H16zM18,8H19V9H18zM20,8H21V9H20zM21,8H22V9H21zM22,8H23V9H22zM23,8H24V9H23zM24,8H25V9H24zM25,8H26V9H25zM26,8H27V9H26zM14,9H15V10H14zM15,9H16V10H15zM2,10H3V11H2zM5,10H6V11H5zM6,10H7V11H6zM7,10H8V11H7zM8,10H9V11H8zM9,10H10V11H9zM10,10H11V11H10zM14,10H15V11H14zM16,10H17V11H16zM17,10H18V11H17zM18,10H19V11H18zM19,10H20V11H19zM22,10H23V11H22zM24,10H25V11H24zM25,10H26V11H25zM26,10H27V11H26zM3,11H4V12H3zM6,11H7V12H6zM10,11H11V12H10zM11,11H12V12H11zM12,11H13V12H12zM13,11H14V12H13zM14,11H15V12H14zM17,11H18V12H17zM21,11H22V12H21zM22,11H23V12H22zM23,11H24V12H23zM24,11H25V12H24zM25,11H26V12H25zM3,12H4V13H3zM4,12H5V13H4zM6,12H7V13H6zM8,12H9V13H8zM12,12H13V13H12zM15,12H16V13H15zM16,12H17V13H16zM17,12H18V13H17zM21,12H22V13H21zM22,12H23V13H22zM23,12H24V13H23zM26,12H27V13H26zM2,13H3V14H2zM3,13H4V14H3zM4,13H5V14H4zM6,13H7V14H6zM10,13H11V14H10zM12,13H13V14H12zM17,13H18V14H17zM18,13H19V14H18zM20,13H21V14H20zM21,13H22V14H21zM23,13H24V14H23zM24,13H25V14H24zM25,13H26V14H25zM26,13H27V14H26zM3,14H4V15H3zM7,14H8V15H7zM8,14H9V15H8zM9,14H10V15H9zM11,14H12V15H11zM13,14H14V15H13zM14,14H15V15H14zM16,14H17V15H16zM17,14H18V15H17zM20,14H21V15H20zM21,14H22V15H21zM26,14H27V15H26zM2,15H3V16H2zM4,15H5V16H4zM9,15H10V16H9zM12,15H13V16H12zM16,15H17V16H16zM17,15H18V16H17zM18,15H19V16H18zM22,15H23V16H22zM25,15H26V16H25zM2,16H3V17H2zM3,16H4V17H3zM6,16H7V17H6zM7,16H8V17H7zM8,16H9V17H8zM9,16H10V17H9zM11,16H12V17H11zM13,16H14V17H13zM14,16H15V17H14zM16,16H17V17H16zM17,16H18V17H17zM18,16H19V17H18zM20,16H21V17H20zM22,16H23V17H22zM23,16H24V17H23zM24,16H25V17H24zM25,16H26V17H25zM26,16H27V17H26zM2,17H3V18H2zM4,17H5V18H4zM6,17H7V18H6zM10,17H11V18H10zM11,17H12V18H11zM12,17H13V18H12zM13,17H14V18H13zM16,17H17V18H16zM21,17H22V18H21zM23,17H24V18H23zM24,17H25V18H24zM26,17H27V18H26zM2,18H3V19H2zM5,18H6V19H5zM8,18H9V19H8zM9,18H10V19H9zM12,18H13V19H12zM14,18H15V19H14zM15,18H16V19H15zM17,18H18V19H17zM18,18H19V19H18zM19,18H20V19H19zM20,18H21V19H20zM21,18H22V19H21zM22,18H23V19H22zM24,18H25V19H24zM25,18H26V19H25zM10,19H11V20H10zM11,19H12V20H11zM13,19H14V20H13zM14,19H15V20H14zM17,19H18V20H17zM18,19H19V20H18zM22,19H23V20H22zM24,19H25V20H24zM25,19H26V20H25zM2,20H3V21H2zM3,20H4V21H3zM4,20H5V21H4zM5,20H6V21H5zM6,20H7V21H6zM7,20H8V21H7zM8,20H9V21H8zM10,20H11V21H10zM11,20H12V21H11zM12,20H13V21H12zM13,20H14V21H13zM15,20H16V21H15zM16,20H17V21H16zM18,20H19V21H18zM20,20H21V21H20zM22,20H23V21H22zM26,20H27V21H26zM2,21H3V22H2zM8,21H9V22H8zM10,21H11V22H10zM11,21H12V22H11zM12,21H13V22H12zM13,21H14V22H13zM15,21H16V22H15zM17,21H18V22H17zM18,21H19V22H18zM22,21H23V22H22zM25,21H26V22H25zM26,21H27V22H26zM2,22H3V23H2zM4,22H5V23H4zM5,22H6V23H5zM6,22H7V23H6zM8,22H9V23H8zM10,22H11V23H10zM13,22H14V23H13zM14,22H15V23H14zM16,22H17V23H16zM17,22H18V23H17zM18,22H19V23H18zM19,22H20V23H19zM20,22H21V23H20zM21,22H22V23H21zM22,22H23V23H22zM2,23H3V24H2zM4,23H5V24H4zM5,23H6V24H5zM6,23H7V24H6zM8,23H9V24H8zM10,23H11V24H10zM11,23H12V24H11zM13,23H14V24H13zM14,23H15V24H14zM19,23H20V24H19zM20,23H21V24H20zM25,23H26V24H25zM26,23H27V24H26zM2,24H3V25H2zM4,24H5V25H4zM5,24H6V25H5zM6,24H7V25H6zM8,24H9V25H8zM11,24H12V25H11zM13,24H14V25H13zM14,24H15V25H14zM16,24H17V25H16zM17,24H18V25H17zM19,24H20V25H19zM22,24H23V25H22zM23,24H24V25H23zM24,24H25V25H24zM25,24H26V25H25zM26,24H27V25H26zM2,25H3V26H2zM8,25H9V26H8zM13,25H14V26H13zM14,25H15V26H14zM17,25H18V26H17zM20,25H21V26H20zM21,25H22V26H21zM22,25H23V26H22zM24,25H25V26H24zM25,25H26V26H25zM26,25H27V26H26zM2,26H3V27H2zM3,26H4V27H3zM4,26H5V27H4zM5,26H6V27H5zM6,26H7V27H6zM7,26H8V27H7zM8,26H9V27H8zM10,26H11V27H10zM11,26H12V27H11zM12,26H13V27H12zM13,26H14V27H13zM18,26H19V27H18zM20,26H21V27H20zM23,26H24V27H23zM26,26H27V27H26z"/></svg></div>
+      <p class="small">Scan with your phone<br>to get Ember.</p>
+    </div>
+    <div class="after">
+      <span>Switching from Migraine Buddy? Bring your history with you.</span>
+      <span>Clinician? <a class="link" href="providers/">See the report your patients bring</a></span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="./"><img src="assets/orb.webp" alt="" width="30" height="30">Ember</a>
+        <p>A migraine and headache tracker built by a headache specialist.</p>
+        <p>Ember helps you track and organize what you experience. It doesn’t diagnose, and it isn’t a substitute for care from your clinician.</p>
+      </div>
+      <nav aria-label="Footer">
+        <a href="https://embertracker.app/plus/">Ember Plus</a>
+        <a href="providers/">For clinicians</a>
+        <a href="https://embertracker.app/contact/">Contact</a>
+        <a href="https://embertracker.app/references/">References</a>
+        <a href="https://embertracker.app/privacy/">Privacy</a>
+        <a href="https://embertracker.app/terms/">Terms</a>
+      </nav>
+    </div>
+    <p class="legal">© 2026 Cascade Headache, PLLC</p>
+  </div>
+</footer>
+
+<div class="getbar" aria-hidden="false">
+  <img src="assets/orb.webp" alt="" width="38" height="38">
+  <div class="t"><b>Ember</b><span data-store-label>Free on iPhone and Android</span></div>
+  <a class="btn" data-get href="#get">Get the app</a>
+</div>
+
+<script>
+  // May 2026 from Ember's demo calendar: m migraine, h headache, s symptom, c clear; p = period
+  (function () {
+    var days = 'mhhmhmmmmmmhsmcsmcmhccchcchmcms';
+    var period = [8, 9, 10, 11, 12];
+    var el = document.getElementById('month');
+    if (!el) return;
+    var html = ['S','M','T','W','T','F','S'].map(function (d) { return '<span class="dow">' + d + '</span>'; }).join('');
+    for (var i = 0; i < 5; i++) html += '<span></span>'; // May 1, 2026 is a Friday
+    for (var d = 1; d <= 31; d++) {
+      var t = days[d - 1];
+      html += '<span class="d ' + t + (period.indexOf(d) > -1 ? ' p' : '') + '">' + d + '</span>';
+    }
+    el.innerHTML = html;
+  })();
+</script>
+<script src="assets/v3.js?v=1"></script>
+</body>
+</html>
