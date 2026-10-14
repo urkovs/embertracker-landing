@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Get Ember | Ember Migraine Tracker</title>
+<meta name="description" content="Download Ember, a free migraine tracker built by a practicing headache specialist.">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="icon" type="image/png" href="../favicon.png">
+<script>
+  // Phones go straight to their store. Campaign tags (?ct=tiktok etc.) pass through.
+  // PT is the App Store Connect provider token (App Analytics > Campaigns > Generate link).
+  // Until it is filled in, iOS installs are not attributed by campaign.
+  (function () {
+    var PT = '';
+    var ua = navigator.userAgent || '';
+    var ct = (location.search.match(/[?&]ct=([\w-]{1,40})/) || [])[1];
+    var ios = /iPhone|iPad|iPod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    if (ios) location.replace('https://apps.apple.com/us/app/ember-migraine-tracker/id6762041852' + (ct && PT ? '?pt=' + PT + '&ct=' + ct + '&mt=8' : ''));
+    else if (/Android/i.test(ua)) location.replace('https://play.google.com/store/apps/details?id=com.cascadeheadache.ember' + (ct ? '&referrer=utm_source%3D' + ct : ''));
+  })();
+</script>
+<style>
+  :root { color-scheme: dark; }
+  body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #0a0a0a; color: #d8c8b0; font: 400 16px/1.5 -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif; text-align: center; padding: 24px; box-sizing: border-box; }
+  img.orb { width: 96px; height: 96px; margin: 0 auto 18px; display: block; }
+  h1 { font: 400 34px/1.1 "Source Serif 4", Georgia, serif; color: #e8e6e3; margin: 0; }
+  p { margin: 10px 0 0; color: #8a847b; }
+  .badges { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 26px; }
+  .badges img { height: 48px; width: auto; display: block; }
+  .play { height: 48px; overflow: hidden; display: grid; place-items: center; }
+  .play img { height: 71px; margin: -11px -10px; }
+</style>
+</head>
+<body>
+<main>
+  <img class="orb" src="../assets/onboarding-ember.png" alt="">
+  <h1>Get Ember</h1>
+  <p>Free to use on iPhone and Android.</p>
+  <div class="badges">
+    <a href="https://apps.apple.com/us/app/ember-migraine-tracker/id6762041852"><img src="../assets/app-store-badge.svg" alt="Download on the App Store" width="144" height="48"></a>
+    <a class="play" href="https://play.google.com/store/apps/details?id=com.cascadeheadache.ember"><img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" width="646" height="250"></a>
+  </div>
+</main>
+</body>
+</html>
