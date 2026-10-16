@@ -200,38 +200,14 @@
 .nudge .fc-body { color: var(--ink-hi); }
 .nudge-got { margin-top: 10px; text-align: right; font-size: 14px; font-weight: 600; color: #d68c48; }
 
-/* Phone (360–599): landscape cards, copy left, the object right at full card
-   height, bleeding off the card's right and bottom edges. */
-@media (min-width: 360px) and (max-width: 599px) {
-  #features .tour-card {
-    display: grid; grid-template-columns: minmax(0, 1fr) 44%; grid-template-rows: auto 1fr;
-    column-gap: 12px; min-height: 176px; padding: 20px 0 20px 20px;
-  }
-  #features .tour-card > .t-h3 { grid-column: 1; grid-row: 1; font-size: 21px; }
-  #features .tour-card > .tour-cap { grid-column: 1; grid-row: 2; margin-top: 8px; }
-  /* contain: size keeps the object from setting the card's height; it fills the copy's height */
-  #features .tour-obj { grid-column: 2; grid-row: 1 / span 2; margin: -20px 0; padding: 0; min-height: 0; overflow: hidden; contain: size; }
-  /* head: the head alone, centered, neck cut by the card edge */
-  #features .head-obj { align-items: flex-end; justify-content: flex-start; }
-  #features .head-fig { position: absolute; width: 212px; max-width: none; left: calc(50% - 59px); bottom: -12px; }
-  #features .head-tag, #features .head-leader { display: none; }
-  /* preventives: the reminder needs its full width to show the refill
-     button, so this card stacks; the reminder is cut by the right and bottom edges */
-  #features .tour-card:has(.inj-obj) { display: flex; flex-direction: column; padding-bottom: 0; }
-  #features .tour-card:has(.inj-obj) > .tour-cap { margin-top: 8px; padding-right: 20px; }
-  #features .tour-card .inj-obj { flex: none; margin: 20px 0 0; contain: none; overflow: visible; align-items: flex-end; }
-  #features .inj-card { width: calc(100% + 24px); }
-  #features .inj-title { padding-right: 32px; }
-  /* treatment response: the redrawn chart, bottom-aligned */
-  #features .crop-obj { align-items: flex-end; padding-bottom: 8px; }
-  #features .story-img { display: none; }
-  #features .story-mini { display: block; width: 100%; height: auto; overflow: hidden; }
-  /* heads-up: the message alone, sliding in from the card's right edge */
-  #features .tour-card:has(.nudge-obj) { grid-template-columns: minmax(0, 1fr) 50%; }
-  #features .nudge-obj { justify-content: center; padding: 12px 0; }
-  #features .med-chips, #features .nudge-got { display: none; }
-  #features .nudge { padding: 12px 10px 12px 12px; border-right: 0; border-radius: 16px 0 0 16px; box-shadow: none; }
-  #features .nudge .fc-body { font-size: 14px; line-height: 1.35; }
+/* Phone: the four cards sit in one swipe row ("Swipe rows" at the end of
+   this file), each card upright like the tablet layout, so the section is
+   one card tall instead of four. */
+@media (max-width: 599px) {
+  #features .tour-card { padding: 20px 20px 0; }
+  #features .tour-obj { margin-top: 16px; flex-basis: 200px; }
+  #features .head-fig { max-width: 240px; }
+  #features .nudge-obj { padding-bottom: 16px; }
 }
 
 /* ── Report ─────────────────────────────────────────────── */
@@ -400,3 +376,39 @@
 .plus-tiles .t-h3 a { color: inherit; text-decoration: none; text-underline-offset: 4px; text-decoration-thickness: 1px; }
 .plus-tiles .t-h3 a::after { content: "›"; margin-left: 6px; color: var(--ink-mut); font-weight: 400; }
 .plus-tiles .t-h3 a:hover { text-decoration: underline; text-decoration-color: var(--ember); }
+
+/* ── Phone pass (Sam, Oct 16: too much text and space) ──── */
+/* Tighter section rhythm on phones only; tablet and desktop keep theirs. */
+@media (max-width: 599px) {
+  :root { --sec-y: 44px; --stack-gap: 24px; --strip-y: 40px; }
+  .hero + .sec { padding-top: 16px; }
+  .split-copy > .rule-line { margin-top: 16px; }
+  .report-copy > .send-steps { margin-top: 20px; }
+  .month-caps { margin-top: 16px; }
+  .plus-price { margin-top: 20px; }
+  .close .t-lead { margin-top: 12px; }
+  .close .badges { margin-top: 24px; }
+  .close .close-after { margin-top: 16px; }
+  .foot { padding-top: 40px; }
+}
+
+/* Swipe rows: the tour cards and the Plus tiles scroll sideways on phones,
+   one card at a time with the next card's edge showing. Native scroll and
+   snap, no script; the row bleeds to the screen edges and snaps cards to
+   the page gutter. */
+@media (max-width: 599px) {
+  #features .grid-4, .plus-tiles {
+    grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 86%;
+    overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory;
+    margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); scroll-padding-inline: var(--gutter);
+    scrollbar-width: none;
+  }
+  #features .grid-4::-webkit-scrollbar, .plus-tiles::-webkit-scrollbar { display: none; }
+  #features .grid-4 > *, .plus-tiles > * { scroll-snap-align: start; }
+  /* each swipe card is its title and its picture */
+  #features .tour-cap, .plus-tiles .tour-cap { display: none; }
+  .pattern-card .app-card-headline { font-size: 18px; }
+  /* the pressure tile has room for its chart again */
+  .pressure-obj .pressure-mini { display: block; }
+  .pressure-obj .float-card { margin-top: 8px; }
+}
