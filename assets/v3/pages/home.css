@@ -46,6 +46,28 @@
    "Mild" chip (207px down the stage, 52px left of center). */
 .hero-annot { top: 207px; translate: 0 -50%; right: calc(50% + 290px); --leader: 222px; }
 
+/* Sam, Oct 16: the phone and the annotation were hard to see against the orb.
+   A soft dark halo sits behind the phone (the orb stays bright around it), the
+   screenshot is lifted a little, and the annotation gets brighter text with a
+   dark glow and a leader with a thin dark edge so it reads over the orange. */
+.hero-phone::before {
+  content: ""; position: absolute; z-index: -1; pointer-events: none;
+  left: 50%; top: -4%; width: 380px; height: 108%;
+  transform: translateX(-50%);
+  background: radial-gradient(closest-side, rgba(10, 10, 10, .62), rgba(10, 10, 10, .3) 62%, transparent);
+}
+@media (min-width: 600px) { .hero-phone::before { width: 460px; } }
+@media (min-width: 1024px) { .hero-phone::before { width: 520px; } }
+.hero-phone .phone {
+  border-color: rgba(232, 230, 227, .2);
+  box-shadow: 0 40px 90px rgba(0, 0, 0, .7), 0 0 0 1px rgba(232, 230, 227, .08), 0 0 0 10px rgba(10, 10, 10, .3);
+}
+/* the screenshot itself is lifted (screen-today-lift.webp: gamma .78, whites unchanged) */
+.hero-annot { text-shadow: 0 0 16px rgba(10, 10, 10, .95), 0 0 4px rgba(10, 10, 10, .9); }
+.hero-annot .annot-label, .hero-annot .annot-sub { color: var(--ink); }
+.hero-annot::after { height: 1.5px; background: rgba(232, 230, 227, .72); box-shadow: 0 0 0 1px rgba(10, 10, 10, .45); }
+.hero-annot::before { background: var(--ink-hi); box-shadow: 0 0 0 2px rgba(10, 10, 10, .55); }
+
 /* the hero fades into the page, so the next section needs less top room */
 .hero + .sec { padding-top: 32px; }
 @media (min-width: 600px) { .hero + .sec { padding-top: 48px; } }
