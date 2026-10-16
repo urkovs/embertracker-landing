@@ -13,6 +13,9 @@
    [data-reveal], [data-reveal-group], [data-draw]
                         rise / draw once on first view (round 3; CSS §20)
    [data-orb-path]      scroll orb along a winding path (round 3; CSS §22)
+   [data-orb-mark="k-…"] a ring on the path beside this element's kicker, in its color
+   [data-orb-days="mhsc…"] on a [data-orb-gap]: a month of day types along that crossing
+                        (m migraine, h headache, s symptom, c clear); both light as the orb passes
    window.EmberV3       { orb: { refresh(), check(), geometry }, reveal: { scan(), play(el) } }
 
    Forms are not handled here. Contact and clinic forms load the live
@@ -298,7 +301,7 @@
       const sides = host.dataset.orbPath === 'right' ? [vw - lane, lane] : [lane, vw - lane];
       const bands = gaps.map(g => {
         const pad = parseFloat(g.dataset.orbGap) || 24, prev = prevRendered(g);
-        return { t: (prev ? content(prev).b : docRect(g).t) + pad, b: content(g).t - pad };
+        return { t: (prev ? content(prev).b : docRect(g).t) + pad, b: content(g).t - pad, el: g };
       });
       bands[0].t = S.y;                       // first crossing leaves the start point
       bands[bands.length - 1].b = E.y;        // last crossing lands on the end point
@@ -345,6 +348,27 @@
       const d = 'M' + geo.pts.map(p => `${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join('L');
       trail.setAttribute('d', d);
       trail.style.strokeDasharray = `${geo.len} ${geo.len + 2}`;
+      // Section rings and a month of days, drawn on the path. update() lights
+      // each once the orb has passed it: a color change, never movement.
+      layer.querySelectorAll('.orb-mark, .orb-day').forEach(n => n.remove());
+      geo.lights = [];
+      const light = (cls, p, r) => {
+        const c = document.createElementNS(SVG, 'circle');
+        c.setAttribute('class', cls); c.setAttribute('cx', p.x.toFixed(1)); c.setAttribute('cy', p.y.toFixed(1)); c.setAttribute('r', r);
+        layer.append(c); geo.lights.push({ c, l: p.l });
+      };
+      document.querySelectorAll('[data-orb-mark]').forEach(el => {
+        if (!rendered(el)) return;
+        const k = el.querySelector('.kicker'), r = docRect(k || el), y = k ? r.t + r.h / 2 : r.t;
+        if (y > geo.S.y && y < geo.E.y) light(`orb-mark ${el.dataset.orbMark}`, at(y), 4.5);
+      });
+      const kinds = { m: 'mig', h: 'head', s: 'sym', c: 'clear' };
+      geo.bands.forEach(b => {
+        const days = [...(b.el.dataset.orbDays || '')].filter(c => kinds[c]);
+        if (!days.length) return;
+        const inset = 28, l0 = at(b.t + inset).l, l1 = at(b.b - inset).l;
+        days.forEach((c, i) => light(`orb-day orb-day--${kinds[c]}`, atL(l0 + (l1 - l0) * (i + .5) / days.length), c === 'c' ? 2.5 : 3.5));
+      });
       if ('orbDebug' in host.dataset) {
         geo.bands.forEach(b => { const r = document.createElementNS(SVG, 'rect'); r.setAttribute('class', 'orb-debug-band'); r.setAttribute('x', 0); r.setAttribute('y', b.t); r.setAttribute('width', geo.vw); r.setAttribute('height', Math.max(1, b.b - b.t)); layer.prepend(r); });
         const ahead = document.createElementNS(SVG, 'path'); ahead.setAttribute('class', 'orb-debug-path'); ahead.setAttribute('d', d); layer.append(ahead);
@@ -369,6 +393,15 @@
       const a = p[lo], b = p[hi], u = b.y > a.y ? (y - a.y) / (b.y - a.y) : 1;
       return { x: a.x + (b.x - a.x) * u, y, l: a.l + (b.l - a.l) * u };
     };
+    // the path point at arc length l (the days are spaced evenly along the path)
+    const atL = l => {
+      const p = geo.pts; let lo = 0, hi = p.length - 1;
+      if (l <= 0) return p[0];
+      if (l >= p[hi].l) return p[hi];
+      while (hi - lo > 1) { const mid = (lo + hi) >> 1; if (p[mid].l <= l) lo = mid; else hi = mid; }
+      const a = p[lo], b = p[hi], u = (l - a.l) / ((b.l - a.l) || 1);
+      return { x: a.x + (b.x - a.x) * u, y: a.y + (b.y - a.y) * u, l };
+    };
     const update = () => {
       ticking = false;
       if (!geo) return;
@@ -378,6 +411,7 @@
       dot.style.opacity = (fadeIn * merge).toFixed(3);
       dot.style.transform = `translate3d(${p.x.toFixed(1)}px, ${(p.y - window.scrollY).toFixed(1)}px, 0) scale(${(.55 + .45 * merge).toFixed(3)})`;
       trail.style.strokeDashoffset = (geo.len - (y <= geo.S.y ? 0 : p.l)).toFixed(1);
+      if (geo.lights) geo.lights.forEach(o => o.c.classList.toggle('is-lit', y > geo.S.y && p.l >= o.l));
       geo.end.classList.toggle('is-orb-arrived', merge < .15);
     };
     const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };

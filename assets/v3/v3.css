@@ -1188,6 +1188,17 @@ button { font: inherit; color: inherit; }
    the pointer and never affect layout. */
 .orb-layer { position: absolute; left: 0; top: 0; z-index: 2; pointer-events: none; overflow: visible; }
 .orb-trail { fill: none; stroke: var(--ember); stroke-opacity: .18; stroke-width: 1.25; stroke-linecap: round; stroke-linejoin: round; }
+/* [data-orb-mark] rings sit beside each section's kicker in its color;
+   [data-orb-days] lays a month of day types along a crossing. Each lights
+   once the orb has passed it: fill and opacity only, no movement. */
+.orb-mark { fill: var(--bg); stroke: var(--k, var(--ember)); stroke-opacity: .5; stroke-width: 1.25; transition: fill 240ms var(--ease), stroke-opacity 240ms var(--ease); }
+.orb-mark.is-lit { fill: var(--k, var(--ember)); stroke-opacity: 1; }
+.orb-day { color: var(--sym); fill: var(--bg); stroke: currentColor; stroke-opacity: .45; stroke-width: 1.25; transition: fill 200ms var(--ease), stroke-opacity 200ms var(--ease), fill-opacity 200ms var(--ease); }
+.orb-day--mig { color: var(--mig); }
+.orb-day--head { color: var(--head); }
+.orb-day--clear { color: var(--clear); stroke: none; fill: currentColor; fill-opacity: .25; }
+.orb-day.is-lit { fill: currentColor; stroke-opacity: 1; }
+.orb-day--clear.is-lit { fill-opacity: .7; }
 .orb-debug-path { fill: none; stroke: #54ccc5; stroke-opacity: .6; stroke-width: 1; stroke-dasharray: 4 4; }
 .orb-debug-band { fill: rgba(84, 204, 197, .06); stroke: rgba(84, 204, 197, .35); stroke-width: 1; }
 .orb-dot {
