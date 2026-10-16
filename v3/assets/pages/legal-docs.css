@@ -60,4 +60,5 @@
   .prose code { background: none; border-color: #ccc; }
   .legal-callout a[href^="mailto:"]::after { content: none; }
   .toc { max-height: none; overflow: visible; }
+  .legal-head .kicker { color: #000 !important; }
 }

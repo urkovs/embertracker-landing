@@ -25,8 +25,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300..600&display=swap">
-<link rel="stylesheet" href="../assets/v3.css?v=3">
-<link rel="stylesheet" href="../assets/pages/providers.css?v=10">
+<link rel="stylesheet" href="../assets/v3.css?v=6">
+<link rel="stylesheet" href="../assets/pages/providers.css?v=13">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -46,44 +46,169 @@
 
 <main id="main">
 
-<!-- 1 Hero: the report is the pitch -->
+<!-- 1 Hero, then the report explorer: one part of the report on stage at a
+     time (ARIA tabs, wired by the script at the end of the page). Without JS
+     the tab row stays hidden and the four parts simply stack. -->
 <section class="sec pro-hero" aria-labelledby="hero-title">
   <div class="wrap">
-    <p class="label">For clinicians</p>
-    <h1 class="t-display" id="hero-title">Your patient’s last 90&nbsp;days, on one page.</h1>
-    <p class="t-lead">Ember is a free migraine tracker made by a practicing headache specialist. Patients send or bring this calendar and a chart note you can read in about a minute.</p>
-    <div class="actions">
-      <a class="btn" href="../assets/sample-calendar.pdf">Open the sample report (PDF)</a>
-      <a class="btn btn--ghost" href="join/">Add your clinic</a>
+    <div class="pro-hero-head">
+      <p class="kicker k-ember">For clinicians</p>
+      <h1 class="t-display" id="hero-title">Your patient’s last 90&nbsp;days, on one page.</h1>
+      <p class="t-lead">Ember is a free migraine tracker made by a practicing headache specialist. Patients send or bring this calendar and a chart note you can read in about a minute.</p>
+      <div class="actions">
+        <a class="btn" href="../assets/ember-report.pdf">See the calendar (PDF)</a>
+        <a class="btn btn--ghost" href="join/">Add your clinic</a>
+      </div>
     </div>
 
-    <div class="hero-report">
-      <figure class="report has-glow" id="report">
-        <div class="glow" aria-hidden="true"></div>
-        <a class="report-paper report-paper--flat" href="../assets/sample-calendar.pdf">
-          <img src="../assets/report.webp" srcset="../assets/report.webp 1600w, ../assets/report-2400.webp 2400w" sizes="(min-width: 1180px) 1100px, 100vw" alt="Sample Ember report (PDF) covering 51 days: 18 migraine days, 5 headache days, 18 impacted days and 19 clear days." width="1600" height="1235" fetchpriority="high">
-          <span class="marker" style="left:5.4%;top:15.6%" aria-hidden="true">1</span>
-          <span class="marker" style="left:18.9%;top:49%" aria-hidden="true">2</span>
-          <span class="marker" style="left:5.4%;top:56%" aria-hidden="true">3</span>
-          <span class="marker" style="left:61.6%;top:73.6%" aria-hidden="true">4</span>
-        </a>
-        <figcaption class="caption">Sample report. The fictional patient started logging May 20.</figcaption>
-      </figure>
-      <ol class="marker-legend">
-        <li><span class="marker marker--inline" aria-hidden="true">1</span><b>Day totals</b><span>Migraine, headache, impacted and clear days out of the days covered.</span></li>
-        <li><span class="marker marker--inline" aria-hidden="true">2</span><b>Treatment markers</b><span>Injection and device days marked on the date logged.</span></li>
-        <li><span class="marker marker--inline" aria-hidden="true">3</span><b>Each date</b><span>Period, day type, impact and acute medication in one column.</span></li>
-        <li><span class="marker marker--inline" aria-hidden="true">4</span><b>Medication days</b><span>Acute medications and the number of days each was taken.</span></li>
-      </ol>
-    </div>
+    <div class="rx" id="report" data-rx>
+      <div class="rx-tabs" role="tablist" aria-label="Parts of the report" hidden>
+        <button class="rx-tab k-sky" type="button" role="tab" id="rx-tab-cal" aria-controls="rx-cal" aria-selected="true">Calendar</button>
+        <button class="rx-tab k-ember" type="button" role="tab" id="rx-tab-note" aria-controls="rx-note" aria-selected="false" tabindex="-1">Chart note</button>
+        <button class="rx-tab k-mig" type="button" role="tab" id="rx-tab-treat" aria-controls="rx-treat" aria-selected="false" tabindex="-1"><span>Treatment<span class="rx-long"> response</span></span></button>
+        <button class="rx-tab k-weather" type="button" role="tab" id="rx-tab-safety" aria-controls="rx-safety" aria-selected="false" tabindex="-1">Safety flags</button>
+      </div>
 
-    <nav class="chip-row chip-row--scroll on-page" aria-label="On this page">
-      <a class="chip chip--sm" href="#classification">Classification</a>
-      <a class="chip chip--sm" href="#chart-note">Chart note</a>
-      <a class="chip chip--sm" href="#treatment">Treatment response</a>
-      <a class="chip chip--sm" href="#setup">Clinic setup</a>
-      <a class="chip chip--sm" href="#questions">Questions</a>
-    </nav>
+      <div class="rx-stage">
+
+        <!-- Calendar: the real report page with its four numbered parts -->
+        <div class="rx-panel rx-panel--cal" id="rx-cal">
+          <div class="rx-head">
+            <h2 class="t-h3">Every logged day, colored by type.</h2>
+            <p>One column per date and one row per month, with the period’s totals at the top.</p>
+          </div>
+          <figure class="rx-visual report has-glow">
+            <div class="glow" aria-hidden="true"></div>
+            <a class="report-paper report-paper--flat" href="../assets/ember-report.pdf">
+              <img src="../assets/report.webp" srcset="../assets/report.webp 1600w, ../assets/report-2400.webp 2400w" sizes="(min-width: 1180px) 740px, (min-width: 1024px) 62vw, 100vw" alt="Ember report (PDF) covering 51 days: 18 migraine days, 5 headache days, 18 impacted days and 19 clear days." width="1600" height="1235" fetchpriority="high">
+              <span class="marker" style="left:5.4%;top:15.6%" aria-hidden="true">1</span>
+              <span class="marker" style="left:18.9%;top:49%" aria-hidden="true">2</span>
+              <span class="marker" style="left:5.4%;top:56%" aria-hidden="true">3</span>
+              <span class="marker" style="left:61.6%;top:73.6%" aria-hidden="true">4</span>
+            </a>
+          </figure>
+          <div class="rx-more">
+            <ol class="marker-legend">
+              <li><span class="marker marker--inline" aria-hidden="true">1</span><b>Day totals</b><span>Migraine, headache, impacted and clear days out of the days covered.</span></li>
+              <li><span class="marker marker--inline" aria-hidden="true">2</span><b>Treatment markers</b><span>Injection and device days marked on the date logged.</span></li>
+              <li><span class="marker marker--inline" aria-hidden="true">3</span><b>Each date</b><span>Period, day type, impact and acute medication in one column.</span></li>
+              <li><span class="marker marker--inline" aria-hidden="true">4</span><b>Medication days</b><span>Acute medications and the number of days each was taken.</span></li>
+            </ol>
+            <button class="rx-next tlink tlink--sm" type="button" data-rx-next="rx-tab-note" hidden>Next: chart note</button>
+          </div>
+        </div>
+
+        <!-- Chart note: a short excerpt of the app's note for the same patient
+             (buildProviderChartNoteFromData over the demo data, Jul 7, 2026).
+             Qualifiers are left out on purpose (Sam, Oct 15); the numbers match
+             the treatment chart and the impact-days chart below. -->
+        <div class="rx-panel rx-panel--note" id="rx-note">
+          <div class="rx-head">
+            <h2 class="t-h3">Ready to paste into the chart.</h2>
+            <p>Each monthly rate is shown with its baseline and the change in percent.</p>
+          </div>
+          <figure class="rx-visual note-fig">
+            <div class="note" data-copylint="app" role="group" aria-label="Chart note excerpt">
+              <p class="nh">HEADACHE LOG SUMMARY</p>
+              <p>Apr 9 to Jul 7, 2026 (90 days)</p>
+              <p class="nh">DATA THIS 90 DAY PERIOD</p>
+              <dl class="nrows">
+                <div><dt>Migraine days</dt><dd><span class="nv">18/mo <i>→</i> 11/mo</span> <span class="ng">(39% reduction)</span></dd></div>
+                <div><dt>Total HA days</dt><dd><span class="nv">24/mo <i>→</i> 17/mo</span> <span class="ng">(30% reduction)</span></dd></div>
+                <div><dt>Impacted days</dt><dd><span class="nv">18/mo <i>→</i> 7/mo</span> <span class="ng">(62% reduction)</span></dd></div>
+                <div><dt>Avg severity</dt><dd><span class="nv">7/10 <i>→</i> 4/10</span> <span class="ng">(43% reduction)</span></dd></div>
+                <div><dt>MIDAS</dt><dd><span class="nv">42 <i>→</i> 9</span> <span>(Grade IV <i>→</i> II)</span></dd></div>
+              </dl>
+              <p class="nh">TREATMENT RESPONSE</p>
+              <p class="nb">Botox (started Feb 2026)</p>
+              <dl class="nrows">
+                <div><dt>Migraine days</dt><dd><span class="nv">18 <i>→</i> 11/mo</span> <span class="ng">(39% reduction)</span></dd></div>
+                <div><dt>MIDAS</dt><dd><span class="nv">42 <i>→</i> 9</span> <span class="ng">(79% reduction)</span></dd></div>
+              </dl>
+              <p class="nd">The full note adds current preventives, acute medication use, Botox interval, menstrual timing and response beyond frequency.</p>
+            </div>
+          </figure>
+          <div class="rx-more">
+            <button class="rx-next tlink tlink--sm" type="button" data-rx-next="rx-tab-treat" hidden>Next: treatment response</button>
+          </div>
+        </div>
+
+        <!-- Treatment response: the app's treatment chart (ClinicalDataScreen
+             TreatmentChart), redrawn as vector with HTML labels so the text
+             stays at the site's sizes at every width. Same demo data. -->
+        <div class="rx-panel rx-panel--treat" id="rx-treat">
+          <div class="rx-head">
+            <h2 class="t-h3">Migraine days before and after each preventive.</h2>
+            <p>Each start date is marked on the chart, including add-on treatments.</p>
+          </div>
+          <figure class="rx-visual">
+            <div class="tchart" data-draw data-copylint="app" role="img" aria-label="Treatment chart: migraine days went from 18 a month at baseline to 11 after Botox started in February 2026, and stayed at 11 after Emgality was added in May 2026.">
+              <p class="tchart-title" aria-hidden="true">Migraine days per month</p>
+              <div class="tchart-plot" aria-hidden="true">
+                <svg viewBox="0 0 600 200">
+                  <line class="tc-base" x1="30" y1="200" x2="570" y2="200"/>
+                  <path class="tc-area draw-fill" d="M90 200V56L300 112L510 112V200Z"/>
+                  <path class="tc-line draw" pathLength="1" d="M90 56L300 112L510 112"/>
+                </svg>
+                <span class="tc-dot tc-dot--open" style="--x:90;--y:56"></span>
+                <span class="tc-dot draw-after" style="--x:300;--y:112"></span>
+                <span class="tc-dot tc-dot--end draw-after" style="--x:510;--y:112"></span>
+                <span class="tc-val" style="--x:90;--y:56">18</span>
+                <span class="tc-val tc-val--mig draw-after" style="--x:300;--y:112">11</span>
+                <span class="tc-val tc-val--mig draw-after" style="--x:510;--y:112">11</span>
+                <span class="tc-delta draw-after" style="--x:195;--y:84">−7</span>
+              </div>
+              <div class="tchart-marks" aria-hidden="true">
+                <span class="tc-mark" style="--x:90"><span class="tc-pill">Baseline</span></span>
+                <span class="tc-mark tc-mark--tick" style="--x:300"><span class="tc-pill tc-pill--botox">+ Botox</span><span class="tc-date">Feb 2026</span></span>
+                <span class="tc-mark tc-mark--tick" style="--x:510"><span class="tc-pill tc-pill--emg">+ Emgality</span><span class="tc-date">May 2026</span></span>
+              </div>
+            </div>
+          </figure>
+          <div class="rx-more">
+            <button class="rx-next tlink tlink--sm" type="button" data-rx-next="rx-tab-safety" hidden>Next: safety flags</button>
+          </div>
+        </div>
+
+        <!-- Safety flags: the ACUTE MEDICATION USE rows are the app's own
+             demo chart note (buildProviderChartNoteFromData over
+             generateDemoData, Jul 7, 2026: "Triptans: 4 days/mo", "NSAIDs:
+             5 days/mo", gepant exposure "avg 10 days/mo", MOH-exempt). The
+             HEMIPLEGIC VARIANT lines are the live V1 excerpt's. -->
+        <div class="rx-panel rx-panel--safety" id="rx-safety">
+          <div class="rx-head">
+            <h2 class="t-h3">Flags appear only when they apply.</h2>
+            <p>Patients get the same warnings in the app.</p>
+          </div>
+          <figure class="rx-visual note-fig">
+            <div class="note note--safety" data-copylint="app" role="group" aria-label="Chart note excerpt: acute medication use and hemiplegic variant">
+              <p class="nh">ACUTE MEDICATION USE</p>
+              <dl class="nrows">
+                <div><dt>Triptans</dt><dd><span class="nv">4 days/mo</span></dd></div>
+                <div><dt>NSAIDs</dt><dd><span class="nv">5 days/mo</span></dd></div>
+                <div><dt>Gepants</dt><dd><span class="nv">10 days/mo</span> <span class="nm">(MOH-exempt)</span></dd></div>
+              </dl>
+              <p class="nh nh--alert">HEMIPLEGIC VARIANT</p>
+              <p class="np">Patient reports 3 attacks with one-sided weakness in the past 90 days. Dates: Apr 20, May 10, Jun 10.</p>
+              <p class="np">Migraine-specific medications logged during these attacks: Maxalt.</p>
+            </div>
+          </figure>
+          <div class="rx-more">
+            <dl class="flags">
+              <div class="flag flag--moh">
+                <dt>Medication overuse</dt>
+                <dd>Acute medication days are counted by class against 9- or 14-day monthly limits. Gepants never count.</dd>
+              </div>
+              <div class="flag flag--weak">
+                <dt>One-sided weakness</dt>
+                <dd>Patients see a stroke-safety card first, and the note lists the attack dates.</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+
+      </div>
+    </div>
   </div>
 </section>
 
@@ -91,7 +216,8 @@
      live providers page; data-copylint="ignore" because its strings are frozen. -->
 <section class="sec" id="classification" aria-labelledby="classification-title">
   <div class="wrap">
-    <div class="center-head classify-head">
+    <div class="center-head classify-head" data-reveal>
+      <p class="kicker k-mig">Classification</p>
       <h2 class="t-h2" id="classification-title">How a day becomes a migraine day.</h2>
       <p class="t-lead">Every classification follows fixed rules built on ICHD-3 criteria. No AI guesses, no black box.</p>
       <a class="tlink" href="../references/">Clinical references</a>
@@ -920,85 +1046,62 @@
   </div>
 </section>
 
-<!-- 3 Chart note. The excerpt is real app output: buildProviderChartNoteFromData
-     over the app's demo data, dated Jul 7, 2026 (the run behind card-story.webp).
-     Rows are verbatim; sections in between are skipped (dotted gap). -->
-<section class="sec" id="chart-note" aria-labelledby="note-title">
-  <div class="wrap split split--mirror split--wide note-split">
-    <div class="split-copy">
-      <h2 class="t-h2" id="note-title">Ready to paste into the chart.</h2>
-      <p class="t-lead">The chart note shows migraine and headache days against the patient’s pre-treatment baseline, with logging coverage up top.</p>
+<!-- 3 Impact days. Same patient as the report explorer: baseline 18 a month,
+     last 90 days 11 migraine days and 7 impacted days a month (chart note
+     rows "Migraine days" and "Impacted days"). Impact levels and their
+     sublabels are the app's (dailyEntry/selectors.tsx buildFuncOptions). -->
+<section class="sec" id="impact" aria-labelledby="impact-title">
+  <div class="wrap split impact-split">
+    <div class="split-copy" data-reveal>
+      <p class="kicker k-impact">Impact days</p>
+      <h2 class="t-h2" id="impact-title">Ember counts function, too.</h2>
+      <p class="t-lead">Raw migraine-day counts don’t tell your patient’s full story. Ember gives you the data to make informed treatment decisions and to go to bat for your patients when they need you.</p>
+      <div class="levels-block">
+        <p class="t-line">Patients rate each day’s impact. Limited and severe days count as impacted.</p>
+        <ul class="levels" data-copylint="app">
+          <li><b>None</b><span>No impact on activities</span></li>
+          <li class="is-impact"><b>Limited</b><span>It slowed me down</span></li>
+          <li class="is-impact"><b>Severe</b><span>Mostly unable to function</span></li>
+        </ul>
+      </div>
     </div>
     <div class="split-object">
-      <figure class="note-fig">
-        <div class="note" data-copylint="app" role="group" aria-label="Chart note excerpt">
-          <div class="ln ln--h">HEADACHE LOG SUMMARY</div>
-          <div class="ln ln--wrap">Apr 9 to Jul 7, 2026 (90 days): 90 logged; 100% reporting compliance <span class="nw">— HIGH TRACKING COVERAGE</span></div>
-          <div class="ln ln--gap"></div>
-          <div class="ln ln--h">DATA THIS 90 DAY PERIOD</div>
-          <div class="ln ln--row">  Migraine days:      18/mo <span class="nw">(patient estimate)</span>  →  11/mo   <span class="nw">(39% reduction)</span></div>
-          <div class="ln ln--row">  Total HA days:      24/mo <span class="nw">(patient estimate)</span>  →  17/mo   <span class="nw">(30% reduction)</span></div>
-          <div class="ln ln--row">  Symptom days:       9 (3/mo)</div>
-          <div class="ln ln--row">  Clear days:         29</div>
-          <div class="ln ln--row">  Impacted days:      18/mo <span class="nw">(patient estimate)</span>  →  7/mo   <span class="nw">(62% reduction)</span></div>
-          <div class="ln ln--row">  Pain severity:      38 mild, 10 moderate, 0 severe days; average 4/10 (n=48); 7/10 recalled baseline, 43% reduction</div>
-          <div class="ln ln--row">  Pain rating (0-10): 4/10 (n=48)</div>
-          <div class="ln ln--row ln--annot">  MIDAS:              42  →  9 <span class="nw">(Grade IV → II, latest Jul 2, 2026)</span><span class="annot annot--right" style="--leader:64px" aria-hidden="true"><span class="annot-label">MIDAS</span><span class="annot-value">Score and grade over time</span></span></div>
-          <span class="note-gap" aria-hidden="true"></span>
-          <div class="ln ln--h">TREATMENT RESPONSE</div>
-          <div class="ln ln--block ln--annot">Botox (started Feb 2026)<span class="annot annot--right" style="--leader:64px" aria-hidden="true"><span class="annot-label">Preventives</span><span class="annot-value">Response from each start date</span></span></div>
-          <div class="ln ln--dash">- Baseline (patient estimate): 24 HA days/mo, severity 7/10</div>
-          <div class="ln ln--dash">- MIDAS: 42 → 9 <span class="nw">(79% reduction)</span></div>
-          <div class="ln ln--dash">- Average severity (mild/moderate/severe): 7/10 → 4/10 <span class="nw">(43% reduction)</span></div>
-          <div class="ln ln--dash">- Migraine days: 18 → 11/mo <span class="nw">(39% reduction)</span></div>
-          <div class="ln ln--dash">- Total HA days: 24 → 17/mo <span class="nw">(30% reduction)</span></div>
-          <div class="ln ln--gap"></div>
-          <div class="ln ln--block">Emgality (added May 2026, on Botox)</div>
-          <div class="ln ln--dash">- Pre-add logged Feb to May 2026 (n=81 days): 19 HA days/mo, average severity (mild/moderate/severe) 4/10</div>
+      <figure class="ichart" data-draw data-reveal>
+        <div class="ichart-card" role="img" aria-label="Per month: migraine days went from 18 at baseline to 11 in the last 90 days, a 39% drop. Impacted days went from 18 to 7, a 62% drop.">
+          <p class="tchart-title" aria-hidden="true">Days per month</p>
+          <div class="tchart-plot ichart-plot" aria-hidden="true">
+            <svg viewBox="0 0 600 260">
+              <line class="tc-base" x1="30" y1="250" x2="570" y2="250"/>
+              <path class="ic-gap draw-fill" d="M110 61L450 134.5V176.5Z"/>
+              <path class="tc-line draw" pathLength="1" d="M110 61L450 134.5"/>
+              <path class="tc-line ic-line--impact draw" pathLength="1" d="M110 61L450 176.5"/>
+            </svg>
+            <span class="tc-dot tc-dot--open" style="--x:110;--y:61"></span>
+            <span class="tc-dot tc-dot--end draw-after" style="--x:450;--y:134.5"></span>
+            <span class="tc-dot tc-dot--end ic-dot--impact draw-after" style="--x:450;--y:176.5"></span>
+            <span class="tc-val" style="--x:110;--y:61">18</span>
+            <span class="tc-val tc-val--side tc-val--mig draw-after" style="--x:450;--y:134.5">11</span>
+            <span class="tc-val tc-val--side tc-val--impact draw-after" style="--x:450;--y:176.5">7</span>
+          </div>
+          <div class="tchart-marks" aria-hidden="true">
+            <span class="tc-mark" style="--x:110"><span class="tc-pill">Baseline</span></span>
+            <span class="tc-mark" style="--x:450"><span class="tc-pill tc-pill--recent">Last 90 days</span></span>
+          </div>
+          <dl class="ichart-legend" aria-hidden="true">
+            <div class="il il--mig"><dt>Migraine days</dt><dd><span class="il-v">18 → 11</span><span class="il-p">39% fewer</span></dd></div>
+            <div class="il il--impact"><dt>Impacted days</dt><dd><span class="il-v">18 → 7</span><span class="il-p">62% fewer</span></dd></div>
+          </dl>
         </div>
-        <figcaption class="caption">Example data.</figcaption>
       </figure>
     </div>
   </div>
 </section>
 
-<!-- 4 Treatment response and safety -->
-<section class="sec" id="treatment" aria-labelledby="treatment-title">
-  <div class="wrap">
-    <div class="center-head">
-      <h2 class="t-h2" id="treatment-title">Migraine days before and after each preventive.</h2>
-    </div>
-    <div class="treat-grid">
-      <article class="tour-card tour-card--wide treat-card">
-        <h3 class="t-h3">Treatment response</h3>
-        <p class="tour-cap">Patient estimates are labeled, and overlapping treatments and logging gaps are marked.</p>
-        <figure class="treat-fig">
-          <img class="treat-img" src="../assets/crop-story-tabs.webp" alt="Treatment chart: migraine days fell from 18 to 11 a month after Botox started and stayed at 11 after Emgality was added." width="716" height="478" loading="lazy">
-          <figcaption class="caption">Example data.</figcaption>
-        </figure>
-      </article>
-      <article class="tour-card tour-card--wide treat-card">
-        <h3 class="t-h3">Safety flags</h3>
-        <p class="tour-cap">Both appear in the chart note only when they apply.</p>
-        <dl class="flags">
-          <div class="flag">
-            <dt>Medication overuse</dt>
-            <dd>Acute medication days are counted by class against 9- or 14-day monthly limits. Gepants never count.</dd>
-          </div>
-          <div class="flag">
-            <dt>One-sided weakness</dt>
-            <dd>Patients see a stroke-safety card first, and the note lists the attack dates.</dd>
-          </div>
-        </dl>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- 5 Clinic setup -->
+<!-- 4 Clinic setup -->
 <section class="sec" id="setup" aria-labelledby="setup-title">
   <div class="wrap split setup-split">
-    <div class="split-copy">
+    <div class="split-copy" data-reveal>
+      <p class="kicker k-sky">Clinic setup</p>
       <h2 class="t-h2" id="setup-title">Connect your clinic.</h2>
       <p class="t-lead">Ember is used in headache clinics. Patients review the report on their phone and send it to your secure inbox.</p>
       <ol class="steps">
@@ -1008,18 +1111,17 @@
         <li>Patients scan it, and Ember fills in your inbox.</li>
       </ol>
       <p class="t-small">Without setup, patients can still email the report to any provider.</p>
-      <figure class="lobby-fig">
+      <div class="lobby-fig">
         <div class="lobby-card lobby-card--sm" data-copylint="app">
           <span class="lobby-top"><img src="../assets/orb-120.webp" alt="" width="20" height="20" loading="lazy">Ember</span>
           <b class="lobby-title">Send to provider</b>
           <img class="qr" src="../assets/qr-home.svg" alt="" aria-hidden="true" width="132" height="132" loading="lazy">
           <span class="lobby-hint">Scan with your phone</span>
         </div>
-        <figcaption class="caption">Example lobby card.</figcaption>
-      </figure>
+      </div>
     </div>
     <div class="split-object">
-      <figure class="path-fig">
+      <figure class="path-fig" data-reveal>
         <div class="path" role="img" aria-label="Report path: the patient’s phone, then their email app, then your inbox. Ember’s servers are not in the path.">
           <div class="path-row" aria-hidden="true">
             <div class="path-node">
@@ -1067,10 +1169,13 @@
   </div>
 </section>
 
-<!-- 6 Questions -->
+<!-- 5 Questions -->
 <section class="sec sec--band" id="questions" aria-labelledby="q-title">
   <div class="wrap faq">
-    <h2 class="t-h2 faq-title" id="q-title">Questions from clinicians.</h2>
+    <div class="faq-head" data-reveal>
+      <p class="kicker k-teal">Workflow</p>
+      <h2 class="t-h2 faq-title" id="q-title">Questions from clinicians.</h2>
+    </div>
     <div class="faq-list">
       <details name="faq-pro" open>
         <summary>Who can see a patient’s report?</summary>
@@ -1082,7 +1187,7 @@
       </details>
       <details name="faq-pro">
         <summary>Does a patient need Ember Plus?</summary>
-        <div class="faq-a"><p>No. Logging and the report are free to use. Ember Plus is an optional subscription, and the report doesn’t need it.</p></div>
+        <div class="faq-a"><p>No. Logging and the report are free. Ember Plus is for patients who want to understand their migraines in more depth.</p></div>
       </details>
       <details name="faq-pro">
         <summary>What if a patient logs only some days?</summary>
@@ -1096,12 +1201,13 @@
   </div>
 </section>
 
-<!-- 7 Privacy strip -->
+<!-- 6 Privacy strip -->
 <section class="sec sec--compact strip-sec" id="privacy" aria-labelledby="privacy-title">
   <div class="wrap">
     <div class="strip">
       <span class="strip-icon" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="17.5" width="22" height="16" rx="4"/><path d="M13.5 17.5v-4a6.5 6.5 0 0 1 13 0v4"/><path d="M20 24v3.5"/></svg></span>
       <div>
+        <p class="kicker k-backup">Privacy</p>
         <h2 class="strip-title" id="privacy-title">Health records stay on the patient’s phone.</h2>
         <p class="strip-text">We don’t sell health data or use it for ads.</p>
       </div>
@@ -1110,7 +1216,7 @@
   </div>
 </section>
 
-<!-- 8 Closing -->
+<!-- 7 Closing -->
 <section class="sec close" id="get" aria-labelledby="get-title">
   <div class="wrap">
     <img class="close-orb close-orb--mark" src="../assets/orb-120.webp" alt="" aria-hidden="true" width="64" height="64" loading="lazy">
@@ -1172,6 +1278,77 @@
   </div>
 </footer>
 
-<script src="../assets/v3.js?v=3" defer></script>
+<script>
+/* Report explorer (hero). ARIA tabs with automatic activation: click, tap,
+   arrow keys, Home and End. One panel shows at a time; nothing auto-advances.
+   Without this script the tab row stays hidden and all four parts stack. */
+(() => {
+  const rx = document.querySelector('[data-rx]');
+  if (!rx) return;
+  const list = rx.querySelector('[role="tablist"]');
+  const tabs = [...list.querySelectorAll('[role="tab"]')];
+  const panels = tabs.map(t => document.getElementById(t.getAttribute('aria-controls')));
+  if (panels.some(p => !p)) return;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  let current = 0;
+
+  panels.forEach((p, i) => {
+    p.setAttribute('role', 'tabpanel');
+    p.setAttribute('aria-labelledby', tabs[i].id);
+    p.tabIndex = 0;
+    if (i !== current) p.classList.add('is-off');
+  });
+
+  const select = (i, focus) => {
+    if (i === current) { if (focus) tabs[i].focus(); return; }
+    tabs.forEach((t, j) => { t.setAttribute('aria-selected', String(j === i)); t.tabIndex = j === i ? 0 : -1; });
+    panels[current].classList.add('is-off');
+    panels[current].classList.remove('is-entering');
+    const next = panels[i];
+    next.classList.remove('is-off');
+    void next.offsetWidth;
+    next.classList.add('is-entering');
+    next.addEventListener('animationend', () => next.classList.remove('is-entering'), { once: true });
+    current = i;
+    // a chart in the panel draws its line once, now that it can be seen
+    const draw = next.querySelector('[data-draw]');
+    if (draw && window.EmberV3 && EmberV3.reveal) EmberV3.reveal.play(draw);
+    if (focus) tabs[i].focus({ preventScroll: true });
+  };
+
+  list.addEventListener('click', e => {
+    const t = e.target.closest('[role="tab"]');
+    if (t) select(tabs.indexOf(t), false);
+  });
+  list.addEventListener('keydown', e => {
+    const i = tabs.indexOf(e.target);
+    if (i < 0) return;
+    const n = tabs.length;
+    const to = { ArrowRight: (i + 1) % n, ArrowDown: (i + 1) % n, ArrowLeft: (i - 1 + n) % n, ArrowUp: (i - 1 + n) % n, Home: 0, End: n - 1 }[e.key];
+    if (to === undefined) return;
+    e.preventDefault();
+    select(to, true);
+  });
+
+  // "Next" links inside a panel: switch in place, then bring the tab row
+  // back into view only if it has scrolled off the top of the screen
+  rx.querySelectorAll('[data-rx-next]').forEach(b => {
+    const i = tabs.indexOf(document.getElementById(b.dataset.rxNext));
+    if (i < 0) return;
+    b.hidden = false;
+    b.addEventListener('click', () => {
+      select(i, true);
+      const top = list.getBoundingClientRect().top;
+      if (top < 72) window.scrollTo({ top: scrollY + top - 88, behavior: reduce.matches ? 'auto' : 'smooth' });
+    });
+  });
+
+  list.hidden = false;
+  rx.classList.add('is-tabbed');
+  // crossfades only after the first paint, so the closed panels never fade out on load
+  requestAnimationFrame(() => requestAnimationFrame(() => rx.classList.add('is-ready')));
+})();
+</script>
+<script src="../assets/v3.js?v=4" defer></script>
 </body>
 </html>

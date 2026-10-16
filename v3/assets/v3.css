@@ -23,7 +23,12 @@
    15 Utility card layout
    16 Footer
    17 Phone download bar
-   18 Motion, reduced motion, print */
+   18 Motion, reduced motion, print
+   Round 3 (Oct 15, evening)
+   19 Section kickers and color keys (.kicker, .k-*, .tint)
+   20 Reveal and draw-once motion ([data-reveal], [data-reveal-group], [data-draw])
+   21 Ember Brief card (.brief), matching src/plus/brief/BriefView + BriefLine
+   22 Scroll orb ([data-orb-path], drawn by v3.js) */
 
 /* ── 1 Tokens ───────────────────────────────────────────── */
 :root {
@@ -54,6 +59,18 @@
   --sym: #9a948a;
   --clear: #a8c4d4;
   --period: #cc7fa3;
+  --impact: #c48a4a;
+  --teal: #8fb8a8;     /* app softTeal: the Brief "Fewer" pill */
+  --green: #7fb08c;    /* reductions in chart notes */
+
+  /* the app's Plus feature colors (src/theme/tokens.ts PlusFeatureColors) */
+  --patterns: #e6b85c;
+  --weather: #f39a63;
+  --health: #e48ead;
+  --backup: #74c497;
+  --exp: #54ccc5;
+  --routines: #79a9f3;
+  --sleep: #b9b5ed;
 
   --ok: #8fc29e;
   --err: #ef8f86;
@@ -664,6 +681,26 @@ button { font: inherit; color: inherit; }
 @media (min-width: 768px) {
   .strip { grid-template-columns: auto minmax(0, 1fr) auto; gap: 24px; padding: 32px; }
 }
+/* Privacy band (round 3 rule: every privacy strip carries the green "Privacy"
+   kicker, <p class="kicker k-backup">Privacy</p> before .strip-title). The lock
+   takes the kicker's green and the kicker sits 8px above the title. Below
+   768px the lock shrinks to the kicker's size and takes the place of its dot,
+   so kicker, title, sentence and link share one left edge (the lock is drawn
+   from x 9 of its 40-unit box; the negative margin puts the drawn edge, not
+   the box, on that line). Same as home.css #privacy, for every page. */
+.strip:has(.kicker.k-backup) .strip-icon { color: var(--backup); }
+.strip .kicker + .strip-title { margin-top: 8px; }
+@media (max-width: 767px) {
+  .strip:has(> div > .kicker) { grid-template-columns: auto minmax(0, 1fr); gap: 0 4px; align-items: center; }
+  .strip:has(> div > .kicker) > div { display: contents; }
+  .strip:has(> div > .kicker) .strip-icon, .strip:has(> div > .kicker) .strip-icon svg { width: 26px; height: 26px; }
+  .strip:has(> div > .kicker) .strip-icon { grid-column: 1; grid-row: 1; margin: -4px 0 -4px calc(26px * -9 / 40); }
+  .strip:has(> div > .kicker) .kicker { grid-column: 2; grid-row: 1; }
+  .strip:has(> div > .kicker) .kicker::before { content: none; }
+  .strip:has(> div > .kicker) :is(.strip-title, .strip-text), .strip:has(> div > .kicker) > .tlink { grid-column: 1 / -1; }
+  .strip:has(> div > .kicker) .kicker + .strip-title { margin-top: 12px; }
+  .strip:has(> div > .kicker) > .tlink { justify-self: start; margin-top: 16px; }
+}
 
 .close { text-align: center; }
 .close-orb { width: 112px; height: auto; margin: 0 auto -8px; mix-blend-mode: screen; -webkit-mask-image: radial-gradient(closest-side, #000 62%, transparent); mask-image: radial-gradient(closest-side, #000 62%, transparent); }
@@ -877,6 +914,10 @@ button { font: inherit; color: inherit; }
 .util-orb { width: 120px; height: 120px; }
 .util-card .t-h2 { font-size: 34px; }
 @media (min-width: 600px) { .util-card .t-h2 { font-size: 40px; } }
+/* a kicker in the card sits 10px above its heading (the card's 16px gap − 6),
+   not 28px (16px gap + the usual 12px kicker step) */
+.util-card .kicker { margin-top: -4px; }
+.util-card .kicker + :is(h1, h2, .t-h2) { margin-top: -6px; }
 .util-card .btn { width: 100%; min-height: 52px; }
 .util-card .badges { justify-content: center; }
 .util-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 20px; }
@@ -886,36 +927,50 @@ button { font: inherit; color: inherit; }
 .util-qr img, .util-qr svg { width: 100%; height: auto; }
 
 /* ── 16 Footer ──────────────────────────────────────────── */
-.foot { padding-block: 64px 48px; }
-.foot-top { display: grid; gap: 40px; grid-template-columns: minmax(0, 1fr); }
-@media (max-width: 599px) { .foot { padding-block: 48px 40px; } .foot-top { gap: 24px; } .foot-bottom { margin-top: 32px; } }
-.foot-id .brand { min-height: 0; }
-.foot-tagline { margin-top: 12px; font-size: 15px; line-height: 1.5; color: var(--ink-mut); max-width: 22em; }
-.foot-groups { display: grid; gap: 24px; grid-template-columns: minmax(0, 1fr); }
-/* phone: two columns, Ember + Legal | Clinicians, 44px tap rows */
-@media (max-width: 599px) {
-  .foot-groups { grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr); gap: 24px 16px; align-items: start; }
-  .foot-group:nth-child(1) { grid-column: 1; grid-row: 1; }
-  .foot-group:nth-child(2) { grid-column: 2; grid-row: 1 / span 2; }
-  .foot-group:nth-child(3) { grid-column: 1; grid-row: 2; }
-  .foot-group a { line-height: 1.3; padding-block: 4px; }
+/* One centered composition (round 3): brand and tagline, then every footer
+   link in one centered row, then a hairline, the disclaimer and the © line,
+   all inside the page's content column (.wrap: 170–1270 at 1440). Same markup
+   on every page.
+   The ten links flow as one inline list with one even gap: the groups and
+   their lists are inline, so links wrap one at a time, never group by group,
+   and text-wrap: balance evens out the rows when one row doesn't fit (one row
+   from 1180px, two at 1024, three at 768, four at 375; no link alone on a
+   row). The gap is a margin on each item; the list's negative margin cancels
+   it at the row ends, so every row centers exactly. Font size 0 on the list
+   removes the source whitespace between items (it stays a wrap point).
+   The group labels ("Ember", "Clinicians", "Legal") stay for screen readers. */
+.foot { padding-block: 56px 40px; text-align: center; }
+.foot-top { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.foot-id { display: flex; flex-direction: column; align-items: center; }
+.foot-id .brand { min-height: 44px; }
+.foot-tagline { margin-top: 2px; font-size: 15px; line-height: 1.5; color: var(--ink-mut); text-wrap: balance; }
+.foot-groups {
+  --foot-gap: 22px;
+  align-self: stretch; margin-inline: calc(var(--foot-gap) / -2);
+  font-size: 0; line-height: 0; text-align: center; text-wrap: balance;
 }
-.foot-label { font-size: 14px; font-weight: 600; line-height: 1.3; color: var(--ink-mut); margin-bottom: 4px; }
+.foot-group, .foot-group ul, .foot-group li { display: inline; }
+.foot-label { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; font-size: 14px; line-height: 1; }
 .foot-group ul { list-style: none; padding: 0; margin: 0; }
-.foot-group a { display: flex; align-items: center; min-height: 44px; font-size: 15px; color: var(--ink); text-decoration: none; transition: color 160ms var(--ease-std); }
-.foot-group a:hover { color: var(--ink-hi); }
-.foot-group a[aria-current="page"] { color: var(--ink-hi); }
-.foot-bottom { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--hair); display: grid; gap: 8px; }
-.foot-disclaimer { font-size: 14px; line-height: 1.5; color: var(--ink-mut); max-width: 48em; }
-.foot-legal { font-size: 14px; color: var(--ink-mut); }
-@media (min-width: 600px) {
-  .foot-groups { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .foot-group a { min-height: 36px; }
+.foot-group li { margin-inline: calc(var(--foot-gap) / 2); }
+.foot-group a {
+  display: inline-flex; vertical-align: top; align-items: center; min-height: 44px; white-space: nowrap;
+  font-size: 15px; line-height: 1.3; color: var(--ink); text-decoration: none; transition: color 160ms var(--ease-std);
 }
+.foot-group a:hover { color: var(--ink-hi); text-decoration: underline; text-decoration-color: var(--hair-3); text-underline-offset: 4px; }
+.foot-group a[aria-current="page"] { color: var(--ink-hi); }
+.foot-bottom { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--hair); display: grid; gap: 6px; justify-items: center; }
+.foot-disclaimer { font-size: 14px; line-height: 1.5; color: var(--ink-mut); max-width: 72em; text-wrap: balance; }
+.foot-legal { font-size: 14px; color: var(--ink-mut); }
+@media (max-width: 599px) {
+  .foot { padding-block: 48px 36px; }
+  .foot-groups { --foot-gap: 18px; }
+}
+/* ≥1024: 14px links and a 20px gap put all ten in one row inside the 1100px
+   column (about 1070px measured with SF Pro; ~30px to spare for wider fonts) */
 @media (min-width: 1024px) {
-  .foot-top { grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; }
-  .foot-id { grid-column: 1 / span 4; }
-  .foot-groups { grid-column: 5 / span 8; grid-template-columns: 2fr 3fr 3fr; gap: 24px; }
+  .foot-groups { --foot-gap: 20px; }
+  .foot-group a { font-size: 14px; }
 }
 
 /* ── 17 Phone download bar (home only, <768px) ──────────── */
@@ -956,7 +1011,10 @@ button { font: inherit; color: inherit; }
   }
 }
 @media print {
-  :root { color-scheme: light; }
+  /* paper is white: the cream text tiers print dark, and kickers print black
+     (their sky, green and pink keys are too light on white) */
+  :root { color-scheme: light; --ink-hi: #000; --ink: #222; --ink-mut: #555; }
+  .kicker { color: #000 !important; }
   body { background: #fff; color: #000; font-size: 11pt; }
   .draft-strip, .nav, .foot, .getbar, .skip, .legal-rail, .toc-mobile, .no-print { display: none !important; }
   .t-legal-h1, .prose h2, .prose h3, .legal-updated, .legal-kicker, .prose, .legal-callout { color: #000 !important; }
@@ -967,4 +1025,183 @@ button { font: inherit; color: inherit; }
   .prose a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 9pt; }
   .prose th, .prose td { border-color: #ccc; }
   .legal { padding: 0; }
+}
+
+/* ══ Round 3 ═══════════════════════════════════════════════ */
+
+/* ── 19 Section kickers and color keys ──────────────────── */
+/* A short colored label above a section heading (1–3 words, sentence case,
+   adds information, never repeats the H2). Color comes from a key class:
+     <p class="kicker k-mig">Day types</p><h2 class="t-h2">…</h2>
+   Keys set --k; any element can carry one (.tint uses it for text).
+   Every key is ≥ 5:1 on --bg, --surface and --raised. */
+.k-ember { --k: var(--ember); }
+.k-mig { --k: var(--mig); }
+.k-head { --k: var(--head); }
+.k-sky { --k: var(--clear); }
+.k-pink { --k: var(--period); }
+.k-impact { --k: var(--impact); }
+.k-teal { --k: var(--teal); }
+.k-green { --k: var(--green); }
+.k-patterns { --k: var(--patterns); }
+.k-weather { --k: var(--weather); }
+.k-health { --k: var(--health); }
+.k-backup { --k: var(--backup); }
+.k-exp { --k: var(--exp); }
+.k-routines { --k: var(--routines); }
+.k-sleep { --k: var(--sleep); }
+.kicker {
+  display: flex; align-items: center; gap: 8px; width: fit-content; max-width: 100%;
+  font: 600 14px/1.3 var(--sans); letter-spacing: 0; color: var(--k, var(--ember));
+}
+.kicker::before { content: ""; width: 7px; height: 7px; flex: none; border-radius: 50%; background: currentColor; }
+.kicker--plain::before { content: none; }
+@media (min-width: 600px) { .kicker { font-size: 15px; } }
+.center-head > .kicker, .center > .kicker, .close .kicker, .kicker--center { margin-inline: auto; }
+/* kicker → heading is a tighter step than heading → lead */
+.kicker + :is(h1, h2, h3, .t-hero, .t-display, .t-h2, .t-h2-close, .t-h3) { margin-top: 12px; }
+.close .kicker + .t-h2-close { margin-top: 12px; }
+/* FAQ: wrap kicker + title in .faq-head so the title column stays one grid item */
+@media (min-width: 1024px) { .faq > .faq-head { grid-column: 1 / span 5; align-self: start; } }
+/* colored text inside a heading or label: <span class="tint k-pink">period</span> */
+.tint { color: var(--k, var(--ember)); }
+
+/* ── 20 Reveal and draw-once motion ─────────────────────── */
+/* Finite and vestibular-safe: each object rises 12px and fades in once, the
+   first time it enters the screen (320ms ease-out); lines draw once.
+   v3.js adds .js-motion to <html> only when it runs, IntersectionObserver
+   exists and Reduce Motion is off, so without JS (or with Reduce Motion)
+   everything is simply visible. Objects already on screen at load never hide.
+     [data-reveal]          the element itself rises
+     [data-reveal-group]    its direct children rise in turn (60ms apart, max 300ms)
+     [data-draw]            inside it, .draw strokes draw (needs pathLength="1"),
+                            .draw-fill fades in after 300ms, .draw-after after 450ms
+   Don't put these on the providers engine demo, on .rise, or inside a hidden
+   tab panel that you crossfade yourself. */
+@keyframes v3-reveal { from { opacity: 0; translate: 0 12px; } }
+@keyframes v3-draw { from { stroke-dashoffset: 1; } }
+@keyframes v3-fade { from { opacity: 0; } }
+.draw { stroke-dasharray: 1 1; }
+.js-motion [data-reveal]:not(.is-in),
+.js-motion [data-reveal-group]:not(.is-in) > * { opacity: 0; translate: 0 12px; }
+.js-motion [data-draw]:not(.is-in) .draw { stroke-dashoffset: 1; }
+.js-motion [data-draw]:not(.is-in) :is(.draw-fill, .draw-after) { opacity: 0; }
+.is-anim[data-reveal], .is-anim[data-reveal-group] > * { animation: v3-reveal 320ms cubic-bezier(.22, .7, .2, 1) backwards; }
+.is-anim[data-reveal-group] > :nth-child(2) { animation-delay: 60ms; }
+.is-anim[data-reveal-group] > :nth-child(3) { animation-delay: 120ms; }
+.is-anim[data-reveal-group] > :nth-child(4) { animation-delay: 180ms; }
+.is-anim[data-reveal-group] > :nth-child(5) { animation-delay: 240ms; }
+.is-anim[data-reveal-group] > :nth-child(n+6) { animation-delay: 300ms; }
+.is-anim[data-draw] .draw { animation: v3-draw 500ms cubic-bezier(.33, 1, .68, 1) backwards; }
+.is-anim[data-draw] .draw-fill { animation: v3-fade 380ms ease-out 300ms backwards; }
+.is-anim[data-draw] .draw-after { animation: v3-fade 230ms ease-out 450ms backwards; }
+
+/* ── 21 Ember Brief card ────────────────────────────────── */
+/* Matches the app's Brief (src/plus/brief/BriefView.tsx, BriefLine.tsx,
+   briefPresentation.ts): header, finding title + change pill, sentence, a
+   zero-based two-point line (Treatment Story style) with the change in a
+   chip, and the two date ranges underneath. Geometry is the app's (300px
+   plot, points 54px in, 34px headroom, baseline at 88). The app's 12–13px
+   pill, chip and date text are set at the site's 14px floor.
+   Markup (copy as is; strings are real app output, so data-copylint="app"):
+
+   <article class="brief" data-draw data-copylint="app" aria-label="Ember Brief">
+     <div class="brief-head"><p class="brief-title">Ember Brief</p><p class="brief-date">Oct 14</p></div>
+     <div class="brief-finding">
+       <div class="brief-row">
+         <div class="brief-text"><p class="brief-name">Migraine days</p>
+           <p class="brief-sentence">9 in the last 30 days, down from 11 in the 30 days before.</p></div>
+         <span class="brief-tab">Fewer</span>
+       </div>
+       <div class="brief-plot" role="img" aria-label="Migraine days: 11 from Aug 15 – Sep 13, then 9 from Sep 14 – Oct 13.">
+         <svg viewBox="0 0 300 96" aria-hidden="true">
+           <line class="brief-base" x1="14" y1="88" x2="286" y2="88"/>
+           <path class="brief-area draw-fill" d="M54 88V34L246 43.8V88Z"/>
+           <path class="brief-line draw" pathLength="1" d="M54 34L246 43.8"/>
+           <circle class="brief-dot" cx="54" cy="34" r="5"/>
+           <circle class="brief-dot brief-dot--end draw-after" cx="246" cy="43.8" r="6"/>
+         </svg>
+         <span class="brief-val" style="--y:34" aria-hidden="true">11 days</span>
+         <span class="brief-val brief-val--recent draw-after" style="--y:43.8" aria-hidden="true">9 days</span>
+         <span class="brief-chip draw-after" style="--y:38.9" aria-hidden="true">−2</span>
+       </div>
+       <div class="brief-pills" aria-hidden="true"><span class="brief-pill">Aug 15 – Sep 13</span><span class="brief-pill brief-pill--recent">Sep 14 – Oct 13</span></div>
+     </div>
+   </article>
+
+   Other values: y = 88 − 54 × value ÷ max(earlier, recent); the chip's --y is
+   the midpoint of the two. --brief-c sets the line color (default migraine);
+   .brief-tab--more is the app's amber "More" pill. */
+.brief {
+  --brief-c: var(--mig);
+  width: min(100%, 340px); padding: 16px 20px 18px; text-align: left;
+  background: #151515; border: 1px solid rgba(217, 138, 72, .5); border-top-width: 2px; border-radius: 18px;
+}
+.brief-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 2px; }
+.brief-title { font: 400 25px/32px var(--serif); color: var(--ink-hi); letter-spacing: -.005em; font-optical-sizing: auto; }
+.brief-date { flex: none; font-size: 14px; line-height: 18px; color: var(--ink-mut); }
+.brief-finding { padding-top: 16px; }
+/* title + pill share the first row, the sentence runs full width under them
+   (beside the pill, a card-width sentence wrapped to 3 short lines) */
+.brief-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 3px 10px; align-items: center; }
+.brief-text { display: contents; }
+.brief-name { grid-column: 1; grid-row: 1; font: 600 17px/22px var(--sans); color: var(--ink-hi); }
+.brief-sentence { grid-column: 1 / -1; grid-row: 2; font-size: 15px; line-height: 21px; color: var(--ink); text-wrap: pretty; }
+.brief-tab {
+  grid-column: 2; grid-row: 1; justify-self: end; padding: 3px 9px; border-radius: 8px;
+  border: 1px solid rgba(143, 184, 168, .5); background: rgba(143, 184, 168, .1);
+  font: 500 14px/16px var(--sans); color: var(--teal); white-space: nowrap;
+}
+.brief-tab--more { border-color: rgba(232, 165, 71, .5); background: rgba(232, 165, 71, .1); color: #e8a547; }
+.brief-plot { position: relative; margin-top: 8px; aspect-ratio: 300 / 96; }
+.brief-plot svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.brief-base { stroke: #2a2a2a; stroke-width: 1; }
+.brief-area { fill: var(--brief-c); fill-opacity: .1; }
+.brief-line { fill: none; stroke: var(--brief-c); stroke-width: 3; stroke-linecap: round; }
+.brief-dot { fill: var(--brief-c); stroke: #151515; stroke-width: 2; }
+/* value labels: the app centers each in a 150px box clamped to the plot,
+   which on a 300px plot is the left and right halves */
+.brief-val {
+  position: absolute; left: 0; width: 50%; bottom: calc((96 - var(--y)) / 96 * 100% + 9px);
+  font-size: 14px; line-height: 18px; color: var(--ink); text-align: center; font-variant-numeric: tabular-nums;
+}
+.brief-val--recent { left: auto; right: 0; bottom: calc((96 - var(--y)) / 96 * 100% + 10px); font-size: 15px; font-weight: 600; color: var(--ink-hi); }
+.brief-chip {
+  position: absolute; left: 50%; top: calc(var(--y) / 96 * 100% - 27px); translate: -50% 0;
+  min-width: 40px; height: 22px; padding: 0 6px; border-radius: 11px;
+  display: grid; place-items: center; background: #151515; border: 1px solid var(--brief-c);
+  font: 600 14px/1 var(--sans); color: var(--brief-c); font-variant-numeric: tabular-nums;
+}
+.brief-pills { display: flex; justify-content: space-between; gap: 8px; margin-top: 8px; }
+.brief-pill {
+  min-width: 108px; min-height: 26px; padding: 4px 10px; border-radius: 13px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid #2a2a2a; background: #1a1a1a;
+  font-size: 14px; line-height: 16px; color: var(--ink-mut); white-space: nowrap; font-variant-numeric: tabular-nums;
+}
+.brief-pill--recent { border-color: rgba(232, 230, 227, .15); color: var(--ink); }
+
+/* ── 22 Scroll orb ──────────────────────────────────────── */
+/* Drawn by v3.js on pages with [data-orb-path], Reduce Motion off, ≥1024px and
+   only where the margin lane is ≥ 40px (data-orb-min-lane; 1260px+ today).
+   .orb-trail is the path already traveled; .orb-dot is the ember. Both ignore
+   the pointer and never affect layout. */
+.orb-layer { position: absolute; left: 0; top: 0; z-index: 2; pointer-events: none; overflow: visible; }
+.orb-trail { fill: none; stroke: var(--ember); stroke-opacity: .18; stroke-width: 1.25; stroke-linecap: round; stroke-linejoin: round; }
+.orb-debug-path { fill: none; stroke: #54ccc5; stroke-opacity: .6; stroke-width: 1; stroke-dasharray: 4 4; }
+.orb-debug-band { fill: rgba(84, 204, 197, .06); stroke: rgba(84, 204, 197, .35); stroke-width: 1; }
+.orb-dot {
+  position: fixed; left: 0; top: 0; z-index: 2; pointer-events: none;
+  width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%;
+  background: radial-gradient(circle at 42% 38%, #f8d9b0 0%, #f5c58e 28%, #ecaa68 62%, #c96a3a 100%);
+  box-shadow: 0 0 10px 3px rgba(236, 170, 104, .38), 0 0 30px 10px rgba(201, 106, 58, .18);
+  opacity: 0; will-change: transform, opacity;
+}
+.orb-on [data-orb-end] { transition: filter 600ms var(--ease); }
+.orb-on [data-orb-end].is-orb-arrived { filter: brightness(1.1); }
+
+@media print {
+  .js-motion [data-reveal], .js-motion [data-reveal-group] > * { opacity: 1 !important; translate: none !important; }
+  .js-motion [data-draw] :is(.draw, .draw-fill, .draw-after) { opacity: 1 !important; stroke-dashoffset: 0 !important; }
+  .orb-layer, .orb-dot { display: none !important; }
 }

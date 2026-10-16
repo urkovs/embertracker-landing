@@ -12,7 +12,9 @@
 
 /* Stage: the orb disc rises behind the phone. --disc is the visible disc;
    the image is wider because the artwork carries its own glow. */
-.hero-stage { --disc: 340px; position: relative; height: 480px; margin-top: 0; }
+.hero-stage { --disc: 340px; position: relative; height: 480px; margin-top: 28px; }
+@media (min-width: 600px) { .hero-stage { margin-top: 44px; } }
+@media (min-width: 1024px) { .hero-stage { margin-top: 64px; } }
 @media (min-width: 600px) { .hero-stage { height: 600px; } }
 @media (min-width: 600px) { .hero-stage { --disc: 420px; } }
 @media (min-width: 1024px) { .hero-stage { --disc: 560px; height: 640px; } }
@@ -22,16 +24,19 @@
   top: calc(var(--disc) / .56 * -.218);
   transform: translateX(-50%);
   pointer-events: none;
-  opacity: .85;
+  /* dimmed for light-sensitive eyes (Sam, round 3): about 65% of the old
+     brightness, a little less saturated */
+  opacity: .6;
+  filter: saturate(.84);
 }
-@media (min-width: 600px) { .hero-orb { opacity: 1; } }
+@media (min-width: 600px) { .hero-orb { opacity: .7; } }
 .hero-glow { display: none; }
 @media (min-width: 600px) {
   .hero-glow {
     display: block; position: absolute; z-index: 0; pointer-events: none;
     left: 50%; top: calc(var(--disc) * -.15); width: calc(var(--disc) * 2.1); height: calc(var(--disc) * 1.6);
     transform: translateX(-50%);
-    background: radial-gradient(closest-side, rgba(236, 170, 104, .16), rgba(201, 106, 58, .05) 55%, transparent);
+    background: radial-gradient(closest-side, rgba(236, 170, 104, .085), rgba(201, 106, 58, .03) 55%, transparent);
   }
 }
 .hero-phone { position: relative; z-index: 2; display: flex; justify-content: center; padding-top: 32px; }
@@ -47,6 +52,16 @@
 @media (min-width: 1024px) { .hero + .sec { padding-top: 64px; } }
 
 /* ── Classify ───────────────────────────────────────────── */
+/* ≥1024 the copy takes column 7 too, so the H2 sets as its two sentences
+   (one per line); 1024–1199 also steps the H2 down from 56 to 50px to fit */
+@media (min-width: 1024px) { #classify .split--mirror > .split-copy { grid-column: 7 / span 6; } }
+@media (min-width: 1024px) and (max-width: 1199px) { #classify .t-h2 { font-size: 50px; } }
+@media (min-width: 1200px) { #classify .split--mirror > .split-copy { padding-left: 24px; } }
+/* the approved rule line, set off with a migraine-purple rule */
+.split-copy > .rule-line { margin-top: 24px; }
+.rule-line { max-width: 30em; padding-left: 16px; border-left: 2px solid var(--mig); font-size: 16px; line-height: 1.5; color: var(--ink-hi); text-wrap: pretty; }
+@media (min-width: 600px) { .rule-line { font-size: 17px; } }
+.split-copy > .rule-line + .t-small { margin-top: 24px; }
 .try { border: 1px solid var(--hair); border-radius: var(--radius-card); padding: var(--card-pad); display: grid; gap: 24px; }
 .try-row { display: grid; gap: 12px; }
 .try-label { font-size: 14px; font-weight: 500; line-height: 1.3; color: var(--ink-mut); }
@@ -91,9 +106,11 @@
 .mday--head { --ring: var(--head); color: var(--ink-hi); }
 .mday--sym { --ring: var(--sym); color: var(--ink-hi); }
 .mday--clear { color: var(--clear); }
-.mday.is-period::before { content: ""; position: absolute; z-index: -1; top: 1px; bottom: 1px; left: 0; right: 0; background: rgba(204, 127, 163, .13); border-top: 1px solid rgba(204, 127, 163, .45); border-bottom: 1px solid rgba(204, 127, 163, .45); }
-.mday.p-start::before { left: 2px; border-left: 1px solid rgba(204, 127, 163, .45); border-radius: 12px 0 0 12px; }
-.mday.p-end::before { right: 2px; border-right: 1px solid rgba(204, 127, 163, .45); border-radius: 0 12px 12px 0; }
+/* period shading: a 35% fill with a 90% edge so it reads pink, not mauve,
+   beside the purple migraine rings */
+.mday.is-period::before { content: ""; position: absolute; z-index: -1; top: 1px; bottom: 1px; left: 0; right: 0; background: rgba(204, 127, 163, .35); border-top: 1px solid rgba(204, 127, 163, .9); border-bottom: 1px solid rgba(204, 127, 163, .9); }
+.mday.p-start::before { left: 2px; border-left: 1px solid rgba(204, 127, 163, .9); border-radius: 12px 0 0 12px; }
+.mday.p-end::before { right: 2px; border-right: 1px solid rgba(204, 127, 163, .9); border-radius: 0 12px 12px 0; }
 @media (max-width: 599px) { .month-grid { row-gap: 4px; } }
 @media (max-width: 399px) { .mday::after { width: 32px; height: 32px; } .mday { height: 36px; font-size: 14px; } }
 /* Totals: one row of 4 under the calendar below 900px (compact stats on phone),
@@ -113,12 +130,18 @@
   .month-comp .t-num { font-size: 44px; }
 }
 @media (min-width: 1024px) { .month-comp .t-num { font-size: 56px; } }
-.month-caps { margin-top: var(--obj-cap); }
+.month-caps { margin-top: 20px; text-align: center; }
+@media (min-width: 1024px) { .month-caps { margin-top: 28px; } }
+/* the period legend: a swatch drawn like the calendar's shading */
+.period-key { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; line-height: 1.4; color: var(--ink-mut); }
+.period-swatch { width: 26px; height: 16px; flex: none; border-radius: 8px; background: rgba(204, 127, 163, .35); border: 1px solid rgba(204, 127, 163, .9); }
 /* Sam's line reads as a sentence, not fine print */
-.month-caps .month-note { max-width: 34em; margin-inline: auto; font-size: 15px; line-height: 1.5; color: var(--ink); }
-.month-caps .caption + .month-note { margin-top: 8px; }
+.month-caps .month-note { max-width: 34em; margin: 10px auto 0; font-size: 15px; line-height: 1.5; color: var(--ink); text-wrap: pretty; }
+@media (min-width: 600px) { .month-caps .month-note { font-size: 16px; } }
 
 /* ── Tour row ───────────────────────────────────────────── */
+/* each card's lead-in takes its key color (set on the card) */
+#features .tour-cap b { color: var(--k, var(--ink-hi)); }
 .head-obj { justify-content: center; padding-bottom: 16px; }
 .head-fig { position: relative; width: 100%; max-width: 280px; }
 /* ≥600 the head and its "Right temple" tag keep 16px from each card edge, so
@@ -143,9 +166,22 @@
 .inj-title { display: flex; align-items: flex-start; gap: 10px; padding: 14px 40px 14px 16px; font: 600 15px/1.35 var(--sans); color: var(--ink-hi); text-wrap: balance; }
 .inj-dot { width: 8px; height: 8px; margin-top: 6px; border-radius: 50%; background: #c48a4a; flex: none; }
 .inj-action { padding: 12px 16px; border-block: 1px solid #222; font-size: 14px; line-height: 1.3; color: #c4b5a0; }
+/* due-soon refill prompt (app: injRefillBlock / injRefillCallBtn, the
+   periwinkle action color on a slate tint) */
+/* right padding clears the 24px the card bleeds past the tour card, so the button reads whole */
+.inj-refill { padding: 12px 40px 14px 16px; border-top: 1px solid #222; }
+.inj-refill-body { font-size: 14px; line-height: 1.35; color: var(--ink-hi); }
+.inj-call {
+  display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 10px; min-height: 44px; padding: 0 12px;
+  border-radius: 8px; background: rgba(90, 122, 154, .13); border: 1px solid rgba(90, 122, 154, .3);
+  font: 600 14px/1.2 var(--sans); color: #9c9cff; white-space: nowrap;
+}
+.inj-call svg { flex: none; }
+.inj-refill + .inj-action { border-top: 1px solid #222; }
 @media (min-width: 600px) {
   .inj-title { font-size: 16px; padding-block: 16px; }
   .inj-action { font-size: 15px; padding-block: 14px; }
+  .inj-refill-body { font-size: 15px; }
 }
 .nudge-obj { flex-direction: column; align-items: stretch; justify-content: flex-end; gap: 12px; padding: 0 16px 20px; }
 .nudge-obj figure { display: grid; gap: 12px; width: 100%; }
@@ -171,8 +207,11 @@
   #features .head-obj { align-items: flex-end; justify-content: flex-start; }
   #features .head-fig { position: absolute; width: 212px; max-width: none; left: calc(50% - 59px); bottom: -12px; }
   #features .head-tag, #features .head-leader { display: none; }
-  /* injection card: anchored bottom-left, cut by the right and bottom edges */
-  #features .inj-obj { align-items: flex-end; }
+  /* preventives: the reminder needs its full width to show the refill
+     button, so this card stacks; the reminder is cut by the right and bottom edges */
+  #features .tour-card:has(.inj-obj) { display: flex; flex-direction: column; padding-bottom: 0; }
+  #features .tour-card:has(.inj-obj) > .tour-cap { margin-top: 8px; padding-right: 20px; }
+  #features .tour-card .inj-obj { flex: none; margin: 20px 0 0; contain: none; overflow: visible; align-items: flex-end; }
   #features .inj-card { width: calc(100% + 24px); }
   #features .inj-title { padding-right: 32px; }
   /* treatment response: the redrawn chart, bottom-aligned */
@@ -199,11 +238,32 @@
   .report-comp .lobby-card .lobby-top img { width: 20px; height: 20px; }
 }
 @media (min-width: 1024px) { .report-comp .lobby-card { left: -24px; transform: rotate(-3deg); } }
-.report-copy .t-line { margin-top: 24px; }
-.report-copy .t-small { margin-top: 12px; }
-.report-copy > .tlink { margin-top: 24px; }
+/* two steps with ember icons, joined by a short dashed rule */
+.report-copy > .send-steps { margin-top: 28px; }
+.send-steps { display: grid; gap: 14px; }
+.send-steps li { position: relative; display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 14px; align-items: center; }
+.send-steps li + li::before { content: ""; position: absolute; left: 21.5px; top: -14px; height: 14px; border-left: 1px dashed var(--ember-edge); }
+.send-icon { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--ember-tint); border: 1px solid var(--ember-edge); color: var(--ember); }
+.send-icon svg { width: 22px; height: 22px; }
+.send-text { display: grid; gap: 2px; }
+.send-text b { font-size: 16px; font-weight: 600; line-height: 1.35; color: var(--ink-hi); }
+.send-text span { font-size: 14px; line-height: 1.45; color: var(--ink-mut); }
+@media (min-width: 600px) { .send-text b { font-size: 17px; } }
+/* clinic callout, tinted with the section's sky key */
+.report-copy > .clinic-note { margin-top: 28px; }
+.clinic-note { display: grid; gap: 4px; justify-items: start; padding: 16px 18px 10px; border-radius: 16px; background: rgba(168, 196, 212, .06); border: 1px solid rgba(168, 196, 212, .2); }
+.clinic-note p { font-size: 15px; line-height: 1.5; color: var(--ink-hi); text-wrap: pretty; }
+.report-copy > .clinic-note + .tlink { margin-top: 20px; }
 
 /* ── Ember Plus band ────────────────────────────────────── */
+/* each tile carries its feature color the way the app's Plus tiles do: a
+   tinted edge, a faint wash at the top and a colored title */
+.plus-tiles .tile-card {
+  border-color: color-mix(in srgb, var(--k) 24%, transparent);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--k) 7%, var(--surface)), var(--surface) 42%);
+}
+.plus-tiles .tile-card > .t-h3 { color: var(--k); }
+.plus-tiles .brief { box-shadow: 0 18px 40px rgba(0, 0, 0, .45); }
 /* the H2 gets a wider measure than the lead so it holds one line from 1024px */
 #plus .center-head { max-width: 880px; }
 .plus-tiles .tile-obj { position: relative; margin-top: 24px; flex: 1 0 auto; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; padding-bottom: 20px; }
@@ -211,34 +271,58 @@
 .pressure-mini svg { width: 100%; height: auto; overflow: visible; }
 .pressure-obj .float-card { width: 100%; max-width: 320px; margin-top: 8px; }
 .plus-tiles .app-card { width: 100%; }
+.plus-tiles .brief { width: 100%; max-width: 340px; }
+
+/* Your patterns: two of the app's findings, each a small title over its
+   sentence, divided by a hairline. The card fills its tile's visual area,
+   so its bottom lines up with the Brief beside it. */
+.plus-tiles .tile-obj > .pattern-card { flex: 1 0 auto; }
+.pattern-obs { padding-top: 12px; }
+.pattern-obs + .pattern-obs { margin-top: 12px; border-top: 1px solid var(--hair); }
+.pattern-name { font-size: 14px; font-weight: 500; line-height: 18px; color: var(--ink-mut); }
+.pattern-card .app-card-headline { margin-top: 4px; font-size: 20px; line-height: 1.2; }
 
 /* Phone: the pressure tile shows the alert alone; objects stay compact. */
 @media (max-width: 599px) {
   .plus-tiles .tile-obj { margin-top: 16px; padding-bottom: 16px; }
   /* the tile's H3 already names the card, so the card drops its own label row */
   .plus-tiles .app-card-label { display: none; }
-  .plus-tiles .app-card-headline { margin-top: 0; }
+  .pattern-card .pattern-obs:first-of-type { padding-top: 0; }
   .plus-price { margin-top: 24px; }
   .plus-price .tlink { margin-top: 12px; }
   .pressure-obj .pressure-mini { display: none; }
   .pressure-obj .float-card { margin-top: 0; }
-  .plus-tiles .app-card-headline { font-size: 20px; }
 }
 /* 600–767: stacked full width; tiles fit their content instead of a 360px floor */
 @media (min-width: 600px) and (max-width: 767px) { .plus-tiles .tile-card { min-height: 0; } }
-/* 768–1279: pressure and patterns side by side, the Brief full width with its
-   card beside the copy, so the cards keep short wraps and the chart's labels
-   stay at 14px or more. 3 across from 1280. */
+/* 768–1279: two columns. Pressure and the Brief sit side by side (their
+   phone-width visuals fit a half tile, and the chart labels stay at 14px or
+   more); Your patterns runs full width below them, its two observations side
+   by side, so no tile is left with an empty half. 3 across from 1280. */
 @media (min-width: 768px) and (max-width: 1279px) {
   .plus-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .plus-tiles .tile-card:nth-child(3) {
-    grid-column: 1 / -1; min-height: 0;
-    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: auto 1fr; column-gap: 24px;
-    padding-bottom: var(--card-pad);
+  .plus-tiles .tile-card:nth-child(2) { order: 1; grid-column: 1 / -1; min-height: 0; }
+  .pattern-card { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 32px; align-content: start; }
+  .pattern-card .app-card-label { grid-column: 1 / -1; }
+  .pattern-obs + .pattern-obs { margin-top: 0; border-top: 0; }
+}
+
+/* Side by side (≥768): titles, captions and visuals share row lines across
+   the tiles in a row (subgrid), and every visual hangs from the top of its
+   row, so the pressure chart, the Brief and, 3 across from 1280, the
+   patterns card start level. Without subgrid the tiles keep their
+   bottom-anchored layout. */
+@supports (grid-template-rows: subgrid) {
+  @media (min-width: 768px) {
+    .plus-tiles { grid-template-rows: auto auto 1fr; }
+    .plus-tiles .tile-card:nth-child(odd) { display: grid; grid-row: 1 / span 3; grid-template-rows: subgrid; grid-template-columns: minmax(0, 1fr); row-gap: 0; }
+    .plus-tiles .tile-card:nth-child(odd) > .tile-obj { justify-content: flex-start; }
   }
-  .plus-tiles .tile-card:nth-child(3) > .t-h3 { grid-column: 1; grid-row: 1; }
-  .plus-tiles .tile-card:nth-child(3) > .tour-cap { grid-column: 1; grid-row: 2; align-self: start; }
-  .plus-tiles .tile-card:nth-child(3) > .tile-obj { grid-column: 2; grid-row: 1 / span 2; margin-top: 0; padding-bottom: 0; justify-content: center; }
+  @media (min-width: 768px) and (max-width: 1279px) { .plus-tiles .tile-card:nth-child(2) { grid-row: 4; } }
+  @media (min-width: 1280px) {
+    .plus-tiles .tile-card:nth-child(2) { display: grid; grid-row: 1 / span 3; grid-template-rows: subgrid; grid-template-columns: minmax(0, 1fr); row-gap: 0; }
+    .plus-tiles .tile-card:nth-child(2) > .tile-obj { justify-content: flex-start; }
+  }
 }
 
 .plus-price { margin-top: 32px; text-align: center; }
@@ -247,17 +331,59 @@
 .plus-price .tlink { margin-top: 16px; }
 
 /* ── Privacy strip ──────────────────────────────────────── */
-/* Below 768px the lock sits beside the headline (which holds 2 lines at 262px)
-   and the sentence and link run full width. */
+#privacy .strip-icon { color: var(--backup); }
+#privacy .kicker + .strip-title { margin-top: 8px; }
+/* Below 768px the lock shrinks to the kicker's size and takes the place of
+   its dot, so the kicker, headline, sentence and link share one left edge.
+   The lock is drawn from x 9 of its 40-unit box; the negative margin puts
+   the drawn edge, not the box, on that line. */
 @media (max-width: 767px) {
-  #privacy .strip { grid-template-columns: 32px minmax(0, 1fr); gap: 12px 14px; align-items: start; }
+  #privacy .strip { grid-template-columns: auto minmax(0, 1fr); gap: 0 4px; align-items: center; }
   #privacy .strip > div { display: contents; }
-  #privacy .strip-icon, #privacy .strip-icon svg { width: 32px; height: 32px; }
-  #privacy .strip-icon { margin-top: 1px; }
-  #privacy .strip-text, #privacy .strip > .tlink { grid-column: 1 / -1; }
-  #privacy .strip-text { margin-top: -4px; }
-  #privacy .strip > .tlink { justify-self: start; margin-top: 4px; }
+  #privacy .strip-icon, #privacy .strip-icon svg { width: 26px; height: 26px; }
+  #privacy .strip-icon { grid-column: 1; grid-row: 1; margin: -4px 0 -4px calc(26px * -9 / 40); }
+  #privacy .kicker { grid-column: 2; grid-row: 1; }
+  #privacy .kicker::before { content: none; }
+  #privacy .strip-title, #privacy .strip-text, #privacy .strip > .tlink { grid-column: 1 / -1; }
+  #privacy .kicker + .strip-title { margin-top: 12px; }
+  #privacy .strip > .tlink { justify-self: start; margin-top: 16px; }
 }
 
 /* ── Closing ────────────────────────────────────────────── */
-.close .t-lead { max-width: 24em; }
+/* room between each step: heading, promise, badges, import line, QR group */
+.close .t-h2-close { max-width: 14em; margin-inline: auto; }
+.close .t-lead { max-width: 24em; margin-top: 20px; }
+.close .badges { margin-top: 36px; }
+.close .close-after { margin-top: 24px; color: var(--ink-mut); }
+@media (min-width: 1024px) {
+  .close .badges { margin-top: 44px; }
+  .close .close-after { margin-top: 28px; }
+  /* QR above its one-line caption, centered as one group */
+  .close .qr-tile { flex-direction: column; gap: 12px; margin-top: 56px; text-align: center; }
+}
+
+/* ── Scroll orb ─────────────────────────────────────────── */
+/* v3.js shows the orb from 1260px (lane ≥ 40px) with Reduce Motion off. It
+   moves sideways only in the 3 [data-orb-gap] bands (index.html), on average
+   no faster than 2.4 times the scroll (each band at least 1/2.4 of its
+   sideways distance, plus 30px for the eased ends), so a wheel tick nudges
+   it instead of flinging it across. Lane = middle of the margin = 25vw − 275px:
+     hero rim → left lane   25vw + 75px  → band ≥ 10.4vw + 61px  (pad 12)
+     left → right lane      50vw + 550px → band ≥ 20.8vw + 259px (pad 1)
+     right lane → close orb 25vw + 275px → band ≥ 10.4vw + 145px (pad 1)
+   A band is the room between two sections minus its pad. Only the crossing
+   needs real extra room (about 560px of open page at 1440, which the orb
+   crosses); the other two grow a little on wide screens (the closing's top
+   by about 20px at 1440). Below 1260px or with Reduce Motion there is no
+   orb, so the page keeps its usual spacing. */
+@media (min-width: 1260px) and (prefers-reduced-motion: no-preference) {
+  .hero + .sec { padding-top: max(64px, calc(10.5vw - 86px)); }
+  #report { padding-top: calc(21vw + 130px); }
+  #get { padding-top: max(96px, calc(10.5vw - 36px)); }
+  /* above the hero's bottom fade, so the trail leaves the orb's rim unbroken;
+     it fades in over its first 50px. The start point (data-orb-start, the
+     disc's lower-left rim) rests at page y 1074 at every width from 1260, so
+     the mask's stops are page px; move them with it if the hero changes. */
+  .orb-layer { z-index: 3; -webkit-mask-image: linear-gradient(to bottom, transparent 1068px, #000 1124px); mask-image: linear-gradient(to bottom, transparent 1068px, #000 1124px); }
+  .orb-dot { z-index: 3; }
+}

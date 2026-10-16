@@ -10,6 +10,8 @@
 .join .form-copy > .t-lead + .list-title { margin-top: var(--lead-cta); }
 .join .list-title + .steps { margin-top: 16px; }
 .join .steps { max-width: 30em; }
+/* Round 3: the step numbers take the kicker's color key (sky), one accent for the column */
+.join .steps li::before { color: var(--clear); background: rgba(168, 196, 212, .14); }
 
 .join-after { margin-top: 48px; }
 @media (min-width: 1024px) { .join-after { margin-top: 64px; } }

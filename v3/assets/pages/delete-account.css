@@ -21,4 +21,5 @@
 
 @media print {
   .prose ol.app-steps li::before { background: none; border-color: #999; color: #000; }
+  .legal-head .kicker { color: #000 !important; }
 }

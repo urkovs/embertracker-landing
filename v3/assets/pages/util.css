@@ -24,6 +24,9 @@ body.util-page .util { flex: 1 0 auto; min-height: 0; }
 @media (max-width: 599px) { .util-orb { opacity: .85; } }
 
 .util-card .label { margin-top: -4px; }
+/* Round 3: /send/'s label is a colored kicker; keep it close to the H1 (16px card gap − 6 = 10px) */
+.util-card .kicker { margin-top: -4px; }
+.util-card .kicker + h1 { margin-top: -6px; }
 .util-card h1 { margin-inline: auto; }
 .util-line { font-size: 17px; line-height: 1.5; color: var(--ink); max-width: 24em; text-wrap: balance; }
 .util-card .btn, .util-card .badges { margin-top: 8px; }

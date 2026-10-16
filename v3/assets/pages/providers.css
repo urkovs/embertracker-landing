@@ -24,120 +24,198 @@
 /* ── 1 Hero ─────────────────────────────────────────────── */
 .pro-hero { padding-top: 32px; }
 @media (min-width: 600px) { .pro-hero { padding-top: 48px; } }
-.pro-hero .t-display { margin-top: 12px; max-width: 12em; }
-.pro-hero .t-lead { margin-top: var(--h2-lead); max-width: 34em; }
-.pro-hero .actions { margin-top: var(--lead-cta); }
+/* centered like home and Plus, so the wide screen has no empty right half
+   above the explorer */
+.pro-hero-head { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.pro-hero .t-display { max-width: 12em; }
+.pro-hero .t-lead { margin-top: var(--h2-lead); max-width: 34em; text-wrap: balance; }
+.pro-hero .actions { margin-top: var(--lead-cta); justify-content: center; }
+/* phone: the two buttons can't share a row, so they stack at one width */
+@media (max-width: 479px) {
+  .pro-hero .actions { flex-direction: column; align-items: stretch; width: min(100%, 300px); }
+}
 
-.hero-report { margin-top: 48px; }
-@media (min-width: 1024px) { .hero-report { margin-top: 64px; } }
-.hero-report .report { isolation: isolate; }
-.hero-report .glow { --glow: rgba(236, 170, 104, .10); width: 110%; aspect-ratio: 1.6; }
-.hero-report .report-paper { z-index: 1; }
-.hero-report .marker { z-index: 2; }
-@media (max-width: 599px) { .hero-report .report-paper { border-radius: 6px; } }
-.hero-report .marker-legend { margin-top: 32px; }
-/* v3.css gap: a stretched legend item spreads its spare height into row 1 */
-.marker-legend li { align-content: start; }
-.on-page { margin-top: 40px; }
+/* ── 1b Report explorer ─────────────────────────────────── */
+/* One part of the report on stage at a time. The page script adds .is-tabbed
+   and un-hides the tab row; without it the four parts stack in order.
+   Phone and tablet: the selected panel replaces the last one and fades in.
+   ≥1024: every panel shares one grid cell, so the stage keeps the height of
+   the tallest part and switching never moves the page; panels crossfade. */
+.rx { margin-top: 48px; }
+@media (min-width: 1024px) { .rx { margin-top: 72px; } }
+
+.rx-tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.rx-tabs[hidden] { display: none; }
+@media (min-width: 768px) {
+  .rx-tabs { display: flex; width: fit-content; margin-inline: auto; gap: 4px; padding: 4px; border-radius: 999px; background: var(--surface); border: 1px solid var(--hair); }
+}
+.rx-tab {
+  appearance: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 44px; padding: 0 10px; border-radius: 999px;
+  border: 1px solid var(--hair); background: var(--surface); color: var(--ink);
+  font: 500 15px/1.15 var(--sans); white-space: nowrap; cursor: pointer;
+  transition: background-color 180ms var(--ease-std), border-color 180ms var(--ease-std), color 180ms var(--ease-std);
+}
+@media (min-width: 768px) { .rx-tab { padding: 0 20px; border-color: transparent; background: transparent; } }
+.rx-tab::before { content: ""; width: 7px; height: 7px; flex: none; border-radius: 50%; background: var(--k); }
+.rx-tab:hover { color: var(--ink-hi); }
+.rx-tab[aria-selected="true"] { color: var(--ink-hi); background: var(--k-fill); border-color: var(--k-edge); }
+.rx-tab:focus-visible { outline: 2px solid var(--k); outline-offset: 2px; }
+.rx-tab.k-sky { --k-fill: rgba(168, 196, 212, .12); --k-edge: rgba(168, 196, 212, .45); }
+.rx-tab.k-ember { --k-fill: rgba(236, 170, 104, .13); --k-edge: rgba(236, 170, 104, .45); }
+.rx-tab.k-mig { --k-fill: rgba(155, 122, 204, .16); --k-edge: rgba(155, 122, 204, .55); }
+.rx-tab.k-weather { --k-fill: rgba(243, 154, 99, .12); --k-edge: rgba(243, 154, 99, .45); }
+/* phone: "Treatment" keeps the 2×2 tab grid on one line per tab */
+@media (max-width: 767px) { .rx-long { display: none; } }
+
+.rx-stage { margin-top: 28px; }
+@media (min-width: 1024px) { .rx-stage { margin-top: 40px; } }
+.rx-panel + .rx-panel { margin-top: 72px; }
+.is-tabbed .rx-panel + .rx-panel { margin-top: 0; }
+.is-tabbed .rx-panel.is-off { display: none; }
+.rx-panel.is-entering { animation: rx-in 200ms var(--ease-std) both; }
+@keyframes rx-in { from { opacity: 0; } }
+@media (min-width: 1024px) {
+  .is-tabbed .rx-stage { display: grid; }
+  .is-tabbed .rx-panel { grid-area: 1 / 1; }
+  .is-tabbed .rx-panel.is-off { display: grid; visibility: hidden; opacity: 0; }
+  .is-ready .rx-panel { transition: opacity 200ms var(--ease-std), visibility 0s; }
+  .is-ready .rx-panel.is-off { transition: opacity 200ms var(--ease-std), visibility 0s linear 200ms; }
+  .rx-panel.is-entering { animation: none; }
+}
+
+/* panel: title and line, the object, then its key (legend, flags, next) */
+.rx-panel { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-areas: "head" "visual" "more"; gap: 24px; align-content: start; }
+.rx-panel:focus-visible { outline: 2px solid var(--ember-edge); outline-offset: 8px; border-radius: 12px; }
+.rx-head { grid-area: head; }
+.rx-head p { margin-top: 8px; font-size: 16px; line-height: 1.5; color: var(--ink); max-width: 34em; text-wrap: pretty; }
+.rx-visual { grid-area: visual; margin: 0; min-width: 0; }
+.rx-more { grid-area: more; min-width: 0; }
+.rx-more:not(:has(> :not([hidden]))) { display: none; }
+.rx-next { margin-top: 4px; padding: 0; border: 0; background: none; font-family: inherit; cursor: pointer; }
+.rx-more > * + .rx-next { margin-top: 24px; }
+@media (min-width: 1024px) {
+  .rx-panel {
+    grid-template-columns: minmax(0, 1fr) 300px; grid-template-rows: auto auto 1fr;
+    grid-template-areas: "visual head" "visual more" "visual ."; column-gap: 56px; row-gap: 0; align-items: start;
+  }
+  .rx-head { padding-top: 4px; }
+  .rx-more { margin-top: 28px; }
+  .rx-more .marker-legend { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+}
+@media (min-width: 1180px) { .rx-panel { grid-template-columns: minmax(0, 1fr) 320px; column-gap: 64px; } }
+
+/* calendar: the report paper */
+.rx .report { isolation: isolate; }
+.rx .glow { --glow: rgba(236, 170, 104, .09); width: 110%; aspect-ratio: 1.6; }
+.rx .report-paper { z-index: 1; }
+.rx .marker { z-index: 2; }
+@media (max-width: 599px) { .rx .report-paper { border-radius: 6px; } }
+.rx-more .marker-legend { margin-top: 0; }
+
+/* chart note excerpt: the app's mono note, short and colored like the live
+   page's excerpt (headings ember, reductions green, the closing line muted) */
+.note {
+  padding: 20px; background: var(--surface); border: 1px solid var(--hair); border-radius: 20px;
+  font: 400 14px/1.6 var(--mono); color: var(--ink); font-variant-numeric: tabular-nums;
+}
+.note p { overflow-wrap: anywhere; }
+.note .nh { color: var(--ember); font-weight: 600; letter-spacing: .02em; }
+.note .nh:not(:first-child) { margin-top: 1.6em; }
+.note .nh--alert { color: #e8a0a0; }
+.note .nb { color: var(--ink-hi); font-weight: 600; }
+.note .nd { margin-top: 1.6em; color: var(--ink-mut); }
+.note .np + .np { margin-top: .5em; }
+.note i { font-style: normal; color: var(--ink-mut); }
+.note .nv { color: var(--ink-hi); }
+.note .ng { color: var(--green); }
+.note .nm { color: var(--ink-mut); }
+.nrows { margin: 0; }
+.nrows > div { display: grid; grid-template-columns: 15ch minmax(0, 1fr); column-gap: 1ch; }
+.nrows dt::after { content: ":"; }
+.nrows dd { margin: 0; display: flex; flex-wrap: wrap; column-gap: 1ch; }
+.nrows .nv { min-width: 14ch; }
+@media (min-width: 600px) { .note { padding: 24px 28px; font-size: 15px; } }
+@media (min-width: 1180px) { .note { padding: 28px 32px; } }
+
+/* treatment and impact charts: the app's two-point treatment chart, drawn in
+   SVG; dots and labels are HTML placed in viewBox units (--x of 600, --y of
+   --vh) so they stay round and at the site's type sizes at every width */
+.tchart, .ichart-card { background: #101010; border: 1px solid var(--hair); border-radius: 20px; padding: 20px 20px 24px; }
+@media (min-width: 600px) { .tchart, .ichart-card { padding: 24px 28px 28px; } }
+.tchart-title { font-size: 14px; line-height: 1.3; color: var(--ink-mut); }
+.tchart-plot { --vh: 200; position: relative; aspect-ratio: 600 / 200; margin-top: 40px; }
+.tchart-plot svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.tc-base { stroke: #2a2a2a; stroke-width: 1.5; }
+.tc-line { fill: none; stroke: var(--mig); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+@media (min-width: 600px) { .tc-line { stroke-width: 4; } }
+.tc-area { fill: var(--mig); fill-opacity: .08; }
+.tc-dot, .tc-val, .tc-delta { position: absolute; left: calc(var(--x) / 600 * 100%); top: calc(var(--y) / var(--vh) * 100%); }
+.tc-dot { width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%; background: var(--mig); }
+.tc-dot--open { background: #101010; border: 2px solid var(--mig); }
+.tc-dot--end { width: 16px; height: 16px; margin: -8px 0 0 -8px; }
+.tc-val { translate: -50% calc(-100% - 12px); font: 600 22px/1 var(--serif); color: var(--ink-mut); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.tc-val--mig { color: var(--mig); }
+.tc-delta { translate: -50% calc(-100% - 12px); font: 600 15px/1 var(--sans); color: var(--green); font-variant-numeric: tabular-nums; }
+@media (min-width: 600px) { .tc-val { font-size: 26px; } .tc-delta { font-size: 16px; } }
+.tchart-marks { position: relative; height: 66px; margin-top: 10px; }
+.tc-mark { position: absolute; top: 0; left: calc(var(--x) / 600 * 100%); translate: -50% 0; display: grid; justify-items: center; gap: 6px; }
+.tc-mark::before { content: ""; width: 1px; height: 8px; }
+.tc-mark--tick::before { background: #2a2a2a; }
+.tc-pill { display: inline-flex; align-items: center; min-height: 28px; padding: 4px 12px; border-radius: 14px; border: 1px solid #2a2a2a; background: #1a1a1a; font-size: 14px; line-height: 1.1; color: var(--ink-mut); white-space: nowrap; }
+.tc-pill--botox { border-color: #7a5a6a; background: #191619; color: var(--ink-hi); }
+.tc-pill--emg { border-color: #4f6478; background: #15181b; color: var(--ink-hi); }
+.tc-pill--recent { border-color: rgba(232, 230, 227, .18); color: var(--ink-hi); }
+.tc-date { font-size: 14px; line-height: 1.2; color: var(--ink-mut); white-space: nowrap; }
+
+/* safety flags */
+.flags { margin: 0; display: grid; gap: 12px; }
+.flag { background: var(--raised); border: 1px solid var(--hair); border-radius: 16px; padding: 16px 18px; display: grid; gap: 4px; align-content: start; }
+.flag dt { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 600; line-height: 1.35; color: var(--ink-hi); }
+.flag dt::before { content: ""; width: 8px; height: 8px; flex: none; border-radius: 50%; background: var(--fc); }
+.flag--moh { --fc: var(--weather); }
+.flag--weak { --fc: #e8a0a0; }
+.flag dd { margin: 0; font-size: 14px; line-height: 1.5; color: var(--ink-mut); text-wrap: pretty; }
+@media (min-width: 600px) and (max-width: 1023px) { .flags { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
 /* ── 2 Classification: the locked engine block sits in this container ── */
 .engine-host { max-width: calc(1100px + 2 * var(--gutter)); margin-top: var(--stack-gap); }
 .classify-head .tlink { margin-top: var(--lead-cta); }
 
-/* ── 3 Chart note ───────────────────────────────────────── */
-/* Copy right, note left (mirrored). The copy sits at the top so the two
-   desktop annotations can hang below it, level with their note lines. */
-.note-split { align-items: start; }
-@media (min-width: 1024px) { .note-split > .split-copy { padding-top: 8px; } }
+/* ── 3 Impact days ──────────────────────────────────────── */
+.impact-split { align-items: center; }
+.levels { display: grid; gap: 8px; margin-top: 16px; }
+.levels li { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 14px; padding: 12px 16px; border-radius: 14px; border: 1px solid var(--hair); background: var(--surface); }
+.levels b { min-width: 4.5em; font-size: 15px; font-weight: 600; color: var(--ink-hi); }
+.levels span { font-size: 15px; line-height: 1.4; color: var(--ink-mut); }
+.levels .is-impact { border-color: rgba(196, 138, 74, .42); background: rgba(196, 138, 74, .08); }
+.levels .is-impact b { color: var(--impact); }
+.levels .is-impact span { color: var(--ink); }
 
-.note-fig { position: relative; }
-.note {
-  --note-pad: 20px;
-  position: relative;
-  padding: var(--note-pad);
-  background: var(--surface);
-  border: 1px solid var(--hair);
-  border-radius: 20px;
-  font: 400 14px/1.55 var(--mono);
-  color: var(--ink);
-  font-variant-numeric: tabular-nums;
-}
-/* phone: plain wrapping text; the column padding doesn't fit, so spaces collapse */
-.note .ln { white-space: normal; padding-left: 2ch; text-indent: -2ch; overflow-wrap: anywhere; }
-.note .ln--row, .note .ln--dash { padding-left: 4ch; text-indent: -2ch; }
-.note .ln--gap { height: 1.55em; }
-.note .ln--h, .note .ln--block { color: var(--ink-hi); font-weight: 600; }
+.ichart { margin: 0; }
+.ichart-plot { --vh: 260; aspect-ratio: 600 / 260; }
+.ic-gap { fill: var(--impact); fill-opacity: .14; }
+.ic-line--impact { stroke: var(--impact); }
+.ic-dot--impact { background: var(--impact); }
+.tc-val--side { translate: 16px -50%; }
+.tc-val--impact { color: var(--impact); }
+.ichart-legend { margin: 8px 0 0; padding-top: 18px; border-top: 1px solid var(--hair); display: grid; gap: 12px; }
+.il { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 16px; }
+.il dt { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 600; color: var(--ink-hi); }
+.il dt::before { content: ""; width: 10px; height: 10px; flex: none; border-radius: 50%; background: var(--c); }
+.il--mig { --c: var(--mig); }
+.il--impact { --c: var(--impact); }
+.il dd { margin: 0; display: flex; align-items: center; gap: 12px; }
+.il-v { min-width: 4.6em; text-align: right; font-size: 15px; color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.il-p { padding: 3px 9px; border-radius: 8px; border: 1px solid rgba(127, 176, 140, .5); background: rgba(127, 176, 140, .1); font-size: 14px; font-weight: 600; line-height: 16px; color: var(--green); white-space: nowrap; }
 
-.note-gap { display: block; height: 1px; margin: 12px 0 14px; background-image: linear-gradient(to right, var(--hair-3) 40%, transparent 0); background-size: 6px 1px; }
-/* the excerpt continues past what is shown: fade the last lines into the card */
-.note::after {
-  content: ""; position: absolute; left: 1px; right: 1px; bottom: 1px; height: 80px;
-  border-radius: 0 0 19px 19px; pointer-events: none;
-  background: linear-gradient(to bottom, rgba(18, 17, 16, 0), var(--surface) 85%);
-}
-@media (max-width: 599px) {
-  .note { max-height: 580px; overflow: hidden; }
-}
-@media (min-width: 600px) {
-  .note { --note-pad: 24px; font-size: 15px; }
-  /* keep the app's column alignment; wrapped values continue under the value column */
-  .note .ln { white-space: pre-wrap; overflow-wrap: normal; padding-left: 0; text-indent: 0; }
-  .note .ln--row { padding-left: 22ch; text-indent: -22ch; }
-  .note .ln--dash { padding-left: 2ch; text-indent: -2ch; }
-  .note .ln--wrap { padding-left: 2ch; text-indent: -2ch; }
-  .note .nw { white-space: nowrap; }
-}
-/* annotations hang off the right edge of the note, at their line */
-.note .ln--annot { position: relative; }
-.note .annot { text-indent: 0; white-space: normal; font-family: var(--sans); user-select: none; -webkit-user-select: none; }
-.note .annot--right { top: 50%; transform: translateY(-50%); left: calc(100% + var(--note-pad) + 4px + var(--leader, 64px)); }
-.note .annot-value { font-variant-numeric: normal; }
-.note-fig .caption { text-align: left; }
-@media (min-width: 1024px) { .note-fig .caption { text-align: center; } }
-/* ≥1180 (the container is at its 1100px max): give the note 8 of 12 columns so
-   each 74-character data row holds one line at 15px. The copy takes 9–12 and
-   its left edge lines up with the annotations (note edge + 4 + 40px leader). */
-/* 1024–1179: the 7-column note is 541–631px, too narrow for the MIDAS row's
-   nowrap grade clause at 15px (it ran past the card edge at 1024) */
-@media (min-width: 1024px) and (max-width: 1179px) { .note { font-size: 14px; } }
-@media (min-width: 1180px) {
-  .note-split.split--wide > .split-object { grid-column: 1 / span 8; }
-  .note-split.split--wide > .split-copy { grid-column: 9 / span 4; padding-left: 20px; }
-  .note .annot--right { --leader: 40px !important; }
-}
-
-/* ── 4 Treatment response and safety ────────────────────── */
-.treat-grid { display: grid; gap: var(--grid-gap); grid-template-columns: minmax(0, 1fr); max-width: 1100px; margin-inline: auto; }
-@media (min-width: 1024px) { .treat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-.treat-card { padding-bottom: var(--card-pad); }
-.treat-card .tour-cap { max-width: 30em; }
-/* Treatment response: the app's tab row and chart, frameless (the app card's
-   background is mapped to --surface in the asset), "Example data." under it.
-   Only the bottom edge is a cut through the chart panel, so only it fades. */
-.treat-fig { margin: 24px 0 0; flex: 1 0 auto; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; }
-.treat-img { display: block; width: 100%; max-width: 600px; height: auto;
-  -webkit-mask-image: linear-gradient(to bottom, #000 90%, transparent);
-  mask-image: linear-gradient(to bottom, #000 90%, transparent); }
-.treat-fig .caption { margin-top: 4px; }
-@media (min-width: 1024px) { .treat-img { max-width: 420px; } }
-/* phone: the crop's side margins are already --surface, so let it run 14px into
-   the card padding for a slightly larger chart */
-@media (max-width: 599px) { .treat-fig { margin-inline: -14px; } }
-.flags { margin: 0; padding-top: 24px; display: grid; gap: 12px; }
-.flag { background: var(--raised); border: 1px solid var(--hair); border-radius: 16px; padding: 18px 20px; display: grid; gap: 4px; }
-.flag dt { font-size: 15px; font-weight: 600; line-height: 1.35; color: var(--ink-hi); }
-.flag dd { margin: 0; font-size: 14px; line-height: 1.5; color: var(--ink-mut); text-wrap: pretty; }
-@media (min-width: 1024px) { .flag { padding: 20px 22px; } }
-@media (max-width: 1023px) { .treat-card { min-height: 0; } .treat-fig { flex: none; } }
-
-/* ── 5 Clinic setup ─────────────────────────────────────── */
+/* ── 4 Clinic setup ─────────────────────────────────────── */
 .setup-split { align-items: start; }
 .setup-split .steps { margin-top: var(--lead-cta); }
 .setup-split .steps + .t-small { margin-top: 16px; }
-.lobby-fig { margin-top: 32px; display: flex; align-items: flex-end; gap: 16px; }
+.lobby-fig { margin-top: 32px; }
 .lobby-fig .lobby-card { box-shadow: 0 14px 32px rgba(0, 0, 0, .4); }
 .lobby-fig .lobby-hint { text-wrap: balance; }
-.lobby-fig figcaption { margin: 0; text-align: left; padding-bottom: 4px; }
 
 /* data-path diagram */
 .path-fig { margin: 0; }
@@ -184,17 +262,21 @@
   .connect-card .btn { align-self: center; margin-top: 0; flex: none; }
 }
 
-/* ── 7 Privacy strip after the FAQ band ─────────────────── */
+/* ── 6 Privacy strip after the FAQ band ─────────────────── */
 .strip-sec { padding-bottom: 0; }
 
-/* ── 8 Closing ──────────────────────────────────────────── */
+/* ── 7 Closing ──────────────────────────────────────────── */
 .close .t-lead { max-width: 32em; text-wrap: balance; }
 .close-contact { margin-top: 24px; }
 .close-contact .tlink { font-size: 15px; min-height: 44px; align-items: center; }
+@media (min-width: 1024px) {
+  /* QR above its one-line caption, centered as one group (as on home) */
+  .close .qr-tile { flex-direction: column; gap: 12px; margin-top: 48px; text-align: center; }
+  .close .qr-tile + .close-contact { margin-top: 28px; }
+}
 
 /* ── Hit areas (phone): 44px targets without changing the look ── */
-.on-page .chip, .classify-head .tlink, .strip .tlink, .close-contact .tlink { position: relative; }
-.on-page .chip::before { content: ""; position: absolute; inset: -4px 0; }
+.classify-head .tlink, .strip .tlink, .close-contact .tlink { position: relative; }
 .classify-head .tlink::before, .strip .tlink::before { content: ""; position: absolute; inset: -9px -6px; }
 
 /* the FAQ title is a grid item; keep it at its own height */

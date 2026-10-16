@@ -1,176 +1,292 @@
-/* Ember Plus page only (v3/plus/index.html). Shared components live in ../v3.css. */
+/* Ember Plus page only (v3/plus/index.html). Shared components live in ../v3.css.
+   Round 3: centered hero, a guided feature explorer (one feature on stage at a
+   time), one comparison table with the pricing band in its footer, FAQ, closing. */
 
-/* ── Hero ───────────────────────────────────────────────── */
-.plus-hero { padding-top: 32px; }
-@media (min-width: 600px) { .plus-hero { padding-top: 48px; } }
-@media (min-width: 1024px) { .plus-hero { padding-bottom: 64px; } }
-.plus-hero .split-copy > .status-soon + .t-display { margin-top: 12px; }
-@media (min-width: 600px) { .plus-hero .split-copy > .status-soon + .t-display { margin-top: 16px; } }
-.plus-hero .t-lead { max-width: 26em; }
-/* launch line under the buttons (data-plus-soon: hides at launch) */
-.plus-hero .split-copy > .plus-launch { margin-top: 16px; }
+/* ── Hero: the app's own Plus header (orb, "Ember Plus" with Plus in ember) ── */
+.plus-hero { padding-top: 40px; padding-bottom: 16px; }
+@media (min-width: 600px) { .plus-hero { padding-top: 56px; padding-bottom: 24px; } }
+@media (min-width: 1024px) { .plus-hero { padding-top: 72px; padding-bottom: 32px; } }
+.plus-hero-in { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.plus-orb { position: relative; width: 96px; }
+.plus-orb::before {
+  content: ""; position: absolute; inset: -60%; z-index: -1; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(236, 170, 104, .20), rgba(201, 106, 58, .06) 55%, transparent);
+}
+.plus-orb img { width: 100%; filter: brightness(.86) saturate(.9); }
+@media (min-width: 600px) { .plus-orb { width: 112px; } }
+@media (min-width: 1024px) { .plus-orb { width: 128px; } }
+.plus-hero .t-display { margin-top: 20px; }
+.plus-hero .t-lead { margin: 20px auto 0; max-width: 31em; text-wrap: balance; }
+.plus-hero .actions { justify-content: center; margin-top: var(--lead-cta); }
 
-/* Pressure composition: the real pattern alert arrives over the top of a
-   forecast card, the way a banner notification lands on a phone. */
-.press-comp { margin: 0; }
-.press-comp .glow { --glow: rgba(236, 170, 104, .16); width: 115%; top: 46%; }
-.press-stage { display: flex; flex-direction: column; }
-/* the alert's right edge stays on the card's edge, inside the grid */
+/* ── Feature explorer ───────────────────────────────────── */
+#features.fx-sec { padding-top: 56px; }
+@media (min-width: 1024px) { #features.fx-sec { padding-top: 72px; } }
+
+/* No JS: the tab list stays hidden and every panel shows in order. */
+.fx-list { display: none; }
+.fx-stage { display: grid; gap: var(--grid-gap); min-width: 0; }
+.fx--js .fx-list { display: flex; }
+.fx--js .fx-stage { display: block; }
+
+.fx-tab {
+  display: inline-flex; align-items: center; gap: 10px; flex: none;
+  min-height: 44px; padding: 0 16px 0 8px; border-radius: 999px; cursor: pointer;
+  background: var(--surface); border: 1px solid var(--hair-2);
+  font: 500 15px/1.25 var(--sans); color: var(--ink); text-align: left; white-space: nowrap;
+  transition: background-color 160ms var(--ease-std), border-color 160ms var(--ease-std), color 160ms var(--ease-std);
+}
+.fx-tab:hover { border-color: var(--hair-3); color: var(--ink-hi); }
+.fx-tab[aria-selected="true"] {
+  color: var(--ink-hi);
+  border-color: var(--hair-3);
+  border-color: color-mix(in srgb, var(--k) 55%, transparent);
+  background: color-mix(in srgb, var(--k) 12%, var(--surface));
+}
+.fx-ico {
+  display: grid; place-items: center; flex: none; width: 30px; height: 30px; border-radius: 50%;
+  color: var(--k); background: rgba(232, 230, 227, .06);
+  background: color-mix(in srgb, var(--k) 16%, transparent);
+}
+.fx-ico svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.fx-group { display: none; }
+
+/* Phone: one scrolling chip row above the stage */
+@media (max-width: 599px) {
+  .fx--js .fx-list {
+    flex-wrap: nowrap; gap: 8px; overflow-x: auto; scrollbar-width: none; overscroll-behavior-x: contain;
+    margin-inline: calc(var(--gutter) * -1); padding: 4px var(--gutter);
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 var(--gutter), #000 calc(100% - 28px), transparent);
+    mask-image: linear-gradient(to right, transparent, #000 var(--gutter), #000 calc(100% - 28px), transparent);
+  }
+  .fx--js .fx-list::-webkit-scrollbar { display: none; }
+}
+/* Tablet: the chips wrap into centered rows */
+@media (min-width: 600px) and (max-width: 1023px) {
+  .fx--js .fx-list { flex-wrap: wrap; justify-content: center; gap: 8px; padding-block: 4px; }
+}
+.fx--js .fx-list { position: relative; }
+.fx--js .fx-stage { margin-top: 20px; }
+
+/* Desktop: a grouped list on the left (cols 1–4), the stage on the right (5–12) */
+@media (min-width: 1024px) {
+  .fx--js { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; align-items: start; }
+  .fx--js .fx-list { grid-column: 1 / span 4; flex-direction: column; gap: 4px; }
+  .fx--js .fx-stage { grid-column: 5 / span 8; margin-top: 0; }
+  .fx-group {
+    display: flex; align-items: center; gap: 8px; margin: 22px 0 6px; padding-left: 12px;
+    font: 600 14px/1.3 var(--sans); color: var(--k);
+  }
+  .fx-group::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+  .fx-group:first-child { margin-top: 0; }
+  .fx-tab {
+    width: 100%; min-height: 56px; padding: 8px 14px 8px 10px; gap: 14px; border-radius: 16px;
+    background: transparent; border-color: transparent; font-size: 16px; white-space: normal;
+  }
+  .fx-tab:hover { background: var(--surface); border-color: var(--hair); }
+  .fx-tab[aria-selected="true"] { background: var(--surface); background: color-mix(in srgb, var(--k) 8%, var(--surface)); }
+  .fx-ico { width: 38px; height: 38px; border-radius: 12px; }
+  .fx-ico svg { width: 20px; height: 20px; }
+}
+
+/* Panels: one card each, tinted by the feature's color */
+.fx-panel {
+  position: relative; overflow: hidden; isolation: isolate;
+  display: flex; flex-direction: column;
+  background: var(--surface); border: 1px solid var(--hair); border-radius: var(--radius-card);
+  border-top: 2px solid var(--hair-2);
+  border-top-color: color-mix(in srgb, var(--k) 55%, transparent);
+  padding: var(--card-pad);
+}
+.fx-panel::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: radial-gradient(60% 55% at 50% 72%, color-mix(in srgb, var(--k) 14%, transparent), transparent 72%);
+}
+.fx-panel:focus-visible { outline-offset: -2px; }
+.fx-copy { max-width: 34em; }
+.fx-copy .t-h3 { color: var(--k); }
+.fx-copy p { margin-top: 8px; font-size: 16px; line-height: 1.55; color: var(--ink); text-wrap: pretty; }
+.fx-obj { position: relative; flex: 1 0 auto; display: flex; align-items: center; justify-content: center; margin-top: 28px; min-width: 0; }
+@media (min-width: 600px) { .fx--js .fx-panel { min-height: 520px; } .fx-obj { margin-top: 32px; } }
+@media (min-width: 1024px) {
+  .fx-panel { padding: 32px 36px 36px; }
+  .fx--js .fx-panel { min-height: 600px; }
+  .fx-copy p { font-size: 17px; }
+}
+@keyframes fx-in { from { opacity: 0; translate: 0 6px; } }
+.fx-panel.is-entering { animation: fx-in 180ms cubic-bezier(.22, .7, .2, 1); }
+
+/* Pressure: the real pattern alert lands over a forecast card */
+.press-comp { margin: 0; width: 100%; max-width: 540px; display: flex; flex-direction: column; }
 .press-notif { position: relative; z-index: 2; align-self: flex-end; width: min(100%, 320px); }
 .press-card {
   position: relative; z-index: 1;
-  margin-top: -20px; padding: 42px 22px 18px;
-  background: var(--surface); border: 1px solid var(--hair-2); border-radius: var(--radius-card);
+  margin-top: -20px; padding: 40px 18px 14px;
+  background: var(--bg); border: 1px solid var(--hair-2); border-radius: 20px;
 }
-@media (min-width: 600px) {
-  .press-card { margin-top: -44px; padding: 28px 28px 20px; }
-}
-
+@media (min-width: 600px) { .press-card { margin-top: -44px; padding: 28px 24px 16px; } }
 .press-plot {
-  position: relative; height: 176px;
-  /* faint value grid, decoration only */
+  position: relative; height: 168px;
   background: linear-gradient(to bottom, var(--hair) 1px, transparent 1px) 0 0 / 100% 25%;
 }
-@media (min-width: 600px) { .press-plot { height: 220px; } }
+@media (min-width: 600px) { .press-plot { height: 200px; } }
 .press-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .press-val { position: absolute; z-index: 1; display: flex; align-items: baseline; gap: 6px; font-size: 15px; line-height: 1; color: var(--ink-mut); white-space: nowrap; }
 .press-num { font: 400 30px/1 var(--serif); color: var(--ink-hi); letter-spacing: -.01em; font-variant-numeric: tabular-nums; font-optical-sizing: auto; }
 .press-val--hi { left: 0; top: 0; }
 .press-val--lo { right: 0; top: calc(78% + 10px); }
 @media (min-width: 600px) { .press-val--lo { top: calc(78% + 14px); } }
-.press-val--lo .press-num { font-size: 26px; }
-@media (min-width: 1024px) { .press-num { font-size: 36px; } .press-val--lo .press-num { font-size: 30px; } }
+.press-val--lo .press-num { font-size: 26px; color: var(--weather); }
 /* starts Thu 4:00 PM: x 55%, where the curve sits at 24% of the plot */
 .press-mark { position: absolute; left: 55%; top: 24%; bottom: 0; width: 0; border-left: 1.2px dashed rgba(236, 170, 104, .7); }
 .press-mark::before {
   content: ""; position: absolute; left: -6.5px; top: -6px; width: 12px; height: 12px; border-radius: 50%;
-  background: var(--surface); border: 2px solid var(--ember); box-sizing: border-box;
+  background: var(--bg); border: 2px solid var(--ember); box-sizing: border-box;
 }
-.press-axis { position: relative; display: flex; justify-content: space-between; height: 40px; padding-top: 14px; border-top: 1px solid var(--hair-2); font-size: 15px; line-height: 1; color: var(--ink-mut); font-variant-numeric: tabular-nums; }
+.press-axis { position: relative; display: flex; justify-content: space-between; height: 38px; padding-top: 12px; border-top: 1px solid var(--hair-2); font-size: 15px; line-height: 1; color: var(--ink-mut); font-variant-numeric: tabular-nums; }
 .press-now { position: absolute; left: 55%; transform: translateX(-50%); color: var(--ink); white-space: nowrap; }
-.press-comp .caption { margin-top: 20px; }
 
-/* ── What's included (bento) ────────────────────────────── */
-.bento { display: grid; gap: var(--grid-gap); grid-template-columns: minmax(0, 1fr); }
-@media (min-width: 600px) {
-  .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .bt--patterns { grid-column: 1 / -1; }
-}
-/* Desktop row 2: the Brief (span 3) beside the two text tiles stacked in one
-   span-3 column, so the short text tiles don't stretch to the Brief's height. */
-@media (min-width: 1024px) {
-  .bento { grid-template-columns: repeat(6, minmax(0, 1fr)); }
-  .bt--patterns { grid-column: span 4; }
-  .bt--watch { grid-column: span 2; }
-  .bt--brief { grid-column: 1 / span 3; grid-row: span 2; }
-  .bt--text { grid-column: 4 / span 3; }
-  .bt--crop { grid-column: span 3; }
-}
-.bt { min-height: 0; }
-.bento .tour-cap { text-wrap: pretty; }
-.bt-obj { position: relative; margin-top: 24px; flex: 1 0 auto; display: flex; align-items: flex-end; }
+/* Your patterns: the app's pattern card, large */
+.fx-pattern { width: 100%; max-width: 440px; border-color: rgba(230, 184, 92, .28); }
+.fx-pattern .app-card-headline { font-size: 24px; }
+@media (min-width: 600px) { .fx-pattern { padding: 20px 22px; } .fx-pattern .app-card-headline { font-size: 28px; } }
 
-/* app cards (pattern, Brief) sit on the tile's bottom padding */
-.bt-obj--card { justify-content: center; padding-bottom: var(--card-pad); }
-.bt-obj--card .app-card { width: 100%; max-width: 360px; }
-@media (min-width: 600px) { .bt--watch { min-height: 400px; } }
-/* tablet: Brief pairs with the Watch tile. Desktop: row 2 takes the Brief's own height. */
-@media (min-width: 600px) and (max-width: 1023px) { .bt--brief { min-height: 400px; } }
-/* desktop: the Brief card starts on the copy's edge and matches the Health
-   slice's width, so the left column lines up from row 2 to row 3 */
-@media (min-width: 1024px) {
-  .bt--brief .bt-obj--card { justify-content: flex-start; }
-  .bt--brief .app-card { max-width: 420px; }
-}
+/* Ember Brief: the shared card, a little wider here */
+.fx-obj .brief { width: min(100%, 380px); box-shadow: 0 18px 40px rgba(0, 0, 0, .45); }
 
-/* Your patterns: wide tile. Copy top left, the card bottom right. */
-@media (min-width: 600px) {
-  .bt--patterns { min-height: 340px; }
-  .bt--patterns .bt-obj--card { justify-content: flex-end; margin-top: 32px; }
-  .bt-obj--card .bt-pattern { max-width: 420px; }
-  .bt-pattern .app-card-headline { font-size: 26px; }
+/* Workouts: the app's weekly goal card and migraine-day card
+   (WorkoutHomeScreen goalCard, WorkoutStarterCards MigraineDayCard) */
+.wk { width: min(100%, 380px); display: grid; gap: 14px; text-align: left; }
+.wk-goal, .wk-card { border: 1px solid #2a2a2a; border-radius: 12px; padding: 16px; box-shadow: 0 18px 40px rgba(0, 0, 0, .35); }
+.wk-goal { background: #151515; }
+.wk-card { background: #1a1a1a; display: grid; gap: 10px; }
+.wk-goal-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.wk-eyebrow { font: 600 14px/1.3 var(--sans); color: #e8a547; }
+.wk-value { margin-top: 3px; font: 400 28px/1.15 var(--serif); color: var(--ink-hi); font-optical-sizing: auto; }
+.wk-icon { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; background: rgba(232, 165, 71, .12); border: 1px solid rgba(232, 165, 71, .45); color: #e8a547; }
+.wk-icon svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.wk-track { height: 7px; margin-top: 14px; border-radius: 4px; background: #222; overflow: hidden; }
+.wk-track span { display: block; height: 100%; border-radius: 4px; background: #e8a547; }
+.wk-title { font: 600 16px/1.35 var(--sans); color: var(--ink); }
+.wk-row { display: flex; gap: 8px; }
+@media (min-width: 1024px) { .wk { width: min(100%, 420px); gap: 16px; } .wk-goal, .wk-card { padding: 20px; } .wk-value { font-size: 32px; } }
+.wk-opt { flex: 1; display: grid; place-items: center; min-height: 44px; padding: 0 12px; border: 1px solid #2a2a2a; border-radius: 12px; font: 600 14px/1.2 var(--sans); color: var(--ink); white-space: nowrap; }
+
+/* Personal experiments: the app's step 1 category list (PersonalExperimentsScreen) */
+.xp { width: min(100%, 420px); display: grid; gap: 10px; text-align: left; }
+.xp li {
+  display: flex; align-items: center; gap: 13px; min-height: 76px; padding: 12px 14px;
+  border: 1px solid #2a2a2a; border-radius: 12px; background: #151515;
 }
-@media (min-width: 1024px) {
-  .bt-obj--card .bt-pattern { max-width: 460px; padding: 20px 22px; }
-  .bt-pattern .app-card-headline { font-size: 30px; }
+.xp li::after {
+  content: ""; flex: none; width: 8px; height: 8px; margin-left: auto; margin-right: 4px;
+  border-top: 1.5px solid var(--ink-dim); border-right: 1.5px solid var(--ink-dim); rotate: 45deg;
 }
-@media (min-width: 1024px) { .bt--patterns { min-height: 400px; } }
+.xp-ico { display: grid; place-items: center; flex: none; width: 46px; height: 46px; border-radius: 15px; color: var(--c); background: rgba(232, 230, 227, .06); background: color-mix(in srgb, var(--c) 10%, transparent); }
+.xp-ico svg { width: 23px; height: 23px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.xp b { display: block; font: 700 16px/1.3 var(--sans); color: var(--ink-hi); }
+.xp small { display: block; margin-top: 3px; font-size: 14px; line-height: 1.4; color: var(--ink-mut); }
+
+/* Health: a slice of the real screen rising from the panel's bottom edge */
+.fx-obj--crop { align-items: flex-end; margin-bottom: calc(var(--card-pad) * -1); }
+@media (min-width: 1024px) { .fx-obj--crop { margin-bottom: -36px; } }
+.fx-shot { width: 100%; max-width: 460px; border: 1px solid var(--hair-2); border-bottom: 0; border-radius: 20px 20px 0 0; }
 
 /* Apple Watch: the real Watch screens, the entry screen in front */
-.watch-pair { justify-content: center; margin-inline: calc(var(--card-pad) * -1); padding: 0 16px var(--card-pad); }
-.watch-face {
-  display: block; flex: none; overflow: hidden;
-  border-radius: 24%/20%; border: 1px solid var(--hair-2); background: #0a0a0a;
-}
+.watch-pair { display: flex; align-items: flex-end; justify-content: center; }
+.watch-face { display: block; flex: none; overflow: hidden; border-radius: 24%/20%; border: 1px solid var(--hair-2); background: #0a0a0a; }
 .watch-face img { width: 100%; }
 /* the entry capture ends mid-button; fade the list out the way watchOS scrolls it */
 .watch-face--front img { -webkit-mask-image: linear-gradient(to bottom, #000 64%, transparent 85%); mask-image: linear-gradient(to bottom, #000 64%, transparent 85%); }
-.watch-face--back { width: 148px; margin-bottom: 72px; }
-.watch-face--front { width: 184px; margin-left: -28px; box-shadow: 0 18px 40px rgba(0, 0, 0, .45); }
-@media (min-width: 1024px) { .watch-face--back { width: 150px; } .watch-face--front { width: 186px; } }
-/* Under 360px, and at 1024–1179 where the span-2 tile is about 300–350px,
-   the full-size pair runs past the tile's edges */
-@media (max-width: 359px), (min-width: 1024px) and (max-width: 1179px) {
-  .watch-face--back { width: 128px; margin-bottom: 62px; }
-  .watch-face--front { width: 160px; margin-left: -24px; }
-}
-
-/* Text tiles: the app's own feature glyph with the words right under it */
-.bt--text { padding-bottom: var(--card-pad); justify-content: flex-start; gap: 20px; }
-.bt-icon {
-  display: grid; place-items: center; width: 48px; height: 48px; flex: none;
-  border-radius: 14px; background: var(--raised); border: 1px solid var(--hair); color: var(--ink);
-}
-.bt-icon svg { width: 24px; height: 24px; }
-.bt-copy .t-h3 + .tour-cap { margin-top: 8px; }
-/* Desktop: a short row. The glyph sits left of the H3 and caption, and the
-   pair is centered in the tile's height. */
-@media (min-width: 1024px) {
-  .bt--text {
-    display: grid; grid-template-columns: 48px minmax(0, 1fr);
-    column-gap: 20px; align-content: center; align-items: start;
-  }
-}
-
-/* Health: a slice of the real screen rising from the tile's bottom edge,
-   fitted to the tile's width at every size */
-.bt-obj--crop { justify-content: flex-start; }
-.bt-shot {
-  width: 100%; max-width: 420px; flex: none;
-  border: 1px solid var(--hair-2); border-bottom: 0; border-radius: 20px 20px 0 0;
-}
-@media (min-width: 1024px) { .bt--crop { min-height: 440px; } }
+.watch-face--back { width: 140px; margin-bottom: 68px; }
+.watch-face--front { width: 176px; margin-left: -26px; box-shadow: 0 18px 40px rgba(0, 0, 0, .45); }
+@media (min-width: 600px) { .watch-face--back { width: 156px; margin-bottom: 76px; } .watch-face--front { width: 196px; margin-left: -30px; } }
+@media (max-width: 359px) { .watch-face--back { width: 124px; margin-bottom: 60px; } .watch-face--front { width: 156px; margin-left: -22px; } }
 
 /* Backup: the capture is already a card, so it is cut to that card's own edge
-   (x 41–798, y 23–566 of 840 × 585, corner radius 35) and floats like the
-   pattern and Brief cards. No second frame. Lighten drops the capture's
-   #0a0a0a corners into the tile. */
-.bt-obj--backup { justify-content: flex-start; }
-.bt-cardshot {
-  width: 100%; max-width: 380px; aspect-ratio: 758 / 544; overflow: hidden;
+   (x 41–798, y 23–566 of 840 × 585, corner radius 35). Lighten drops the
+   capture's #0a0a0a corners into the panel. */
+.fx-cardshot {
+  width: 100%; max-width: 400px; aspect-ratio: 758 / 544; overflow: hidden;
   border-radius: 4.6% / 6.4%; box-shadow: 0 18px 40px rgba(0, 0, 0, .45);
 }
-.bt-cardshot img {
+.fx-cardshot img {
   width: calc(100% * 840 / 758); max-width: none;
   margin: calc(-100% * 23 / 758) 0 0 calc(-100% * 41 / 758);
   mix-blend-mode: lighten;
 }
 
-/* ── Free and Plus ──────────────────────────────────────── */
-.plan-card .check-list { margin-top: 16px; }
+/* ── Compare: one table, the pricing band in its footer ─── */
+.cmp {
+  --c-free: 52px; --c-plus: 76px; --row-pad: 16px;
+  max-width: 880px; margin-inline: auto; overflow: hidden;
+  background: var(--surface); border: 1px solid var(--hair); border-radius: var(--radius-card);
+}
+@media (min-width: 600px) { .cmp { --c-free: 120px; --c-plus: 132px; --row-pad: 24px; } }
+@media (min-width: 1024px) { .cmp { --c-free: 160px; --c-plus: 168px; --row-pad: 32px; } }
+.cmp-table { position: relative; width: 100%; border-collapse: collapse; table-layout: fixed; }
+.cmp-col-free { width: var(--c-free); }
+.cmp-col-plus { width: var(--c-plus); }
+/* the Plus column: one continuous ember tint from the header to the last row */
+.cmp-table .cmp-plus { background: rgba(236, 170, 104, .06); }
+.cmp-group th { background: linear-gradient(to left, rgba(236, 170, 104, .06) var(--c-plus), transparent var(--c-plus)); }
+.cmp-table th, .cmp-table td { padding: 0; border-bottom: 1px solid var(--hair); vertical-align: middle; }
+.cmp-table thead th { height: 60px; font: 600 15px/1.2 var(--sans); color: var(--ink-hi); text-align: center; }
+.cmp-table thead th.cmp-plus { color: var(--ember); }
+.cmp-table thead th:first-child { text-align: left; }
+.cmp-table tbody th[scope="row"] {
+  height: 52px; padding: 6px 8px 6px var(--row-pad);
+  font: 500 15px/1.25 var(--sans); color: var(--ink-hi); text-align: left; text-wrap: balance;
+}
+.cmp-table tbody th small { font-size: 14px; font-weight: 400; color: var(--ink-mut); white-space: nowrap; }
+.cmp-table td { height: 52px; text-align: center; }
+.cmp-group th { padding: 22px var(--row-pad) 10px; text-align: left; }
+.cmp-group .kicker { font-size: 14px; }
+@media (min-width: 600px) { .cmp-table tbody th[scope="row"] { font-size: 16px; } }
 
-/* ── Pricing ────────────────────────────────────────────── */
-.pricing-card { text-align: left; }
-.price-tile { display: flex; flex-direction: column; }
-.price-tile .t-num { margin-bottom: 6px; }
-.price-terms { margin-top: 20px; display: grid; gap: 4px; }
-.price-terms .t-line + .t-small { margin-top: 4px; }
+.ck, .ck-no { display: inline-block; vertical-align: middle; }
+.ck {
+  width: 20px; height: 20px; background: var(--ember);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 10.5l4 3.8 8-8.6'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 10.5l4 3.8 8-8.6'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.ck--free { background: var(--clear); }
+.ck-no { width: 14px; height: 2px; border-radius: 1px; background: var(--ink-dim); }
+.cmp-word { font: 500 14px/1.2 var(--sans); color: var(--ink-mut); }
+.cmp-word--plus { font-weight: 600; color: var(--ember); }
+/* Phones: wider value columns with side padding, so Manual and Automatic
+   keep clear of the column edges */
+@media (max-width: 480px) {
+  .cmp { --c-free: 62px; --c-plus: 84px; }
+  .cmp-table td { padding-inline: 8px; }
+  .cmp-table tbody th[scope="row"] { padding-right: 4px; }
+  .cmp-word { font-size: 13px; }
+}
 
-/* ── Questions ──────────────────────────────────────────── */
-/* The approved title needs 5 columns to hold 2 lines at 56px. */
+/* Pricing band: yearly, monthly, then the terms and the action */
+.price-band {
+  display: grid; gap: 20px; padding: 20px var(--row-pad) 24px;
+  background: linear-gradient(to bottom, rgba(236, 170, 104, .08), rgba(236, 170, 104, .02));
+}
+.pb-tiles { display: grid; gap: 10px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.pb-tile { display: flex; flex-direction: column; gap: 4px; padding: 14px 16px; border-radius: 16px; background: var(--raised); border: 1px solid var(--hair); }
+.pb-tile--featured { border-color: var(--ember-edge); }
+.pb-label { font: 600 14px/1.3 var(--sans); color: var(--ink-mut); }
+.pb-tile--featured .pb-label { color: var(--ember); }
+.pb-price { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 6px; font-size: 15px; line-height: 1.3; color: var(--ink); }
+.pb-price .t-num { font-size: 30px; }
+.pb-note { font-size: 14px; line-height: 1.3; color: var(--ink-mut); }
+.pb-terms { display: grid; gap: 4px; justify-items: start; }
+.pb-trial { font: 600 17px/1.4 var(--sans); color: var(--ink-hi); }
+.pb-terms .btn { margin-top: 12px; }
+@media (max-width: 359px) { .pb-tiles { grid-template-columns: minmax(0, 1fr); } }
+@media (min-width: 600px) and (max-width: 1023px) {
+  .pb-terms { grid-template-columns: minmax(0, 1fr) auto; column-gap: 24px; align-items: center; }
+  .pb-terms .btn { grid-column: 2; grid-row: 1 / span 2; margin-top: 0; }
+}
 @media (min-width: 1024px) {
-  .faq-title { grid-column: 1 / span 5; align-self: start; }
-  .faq-list { grid-column: 6 / span 7; }
+  .price-band { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); align-items: center; gap: 28px; padding-block: 24px 28px; }
+  .pb-price .t-num { font-size: 34px; }
 }
 
 /* ── Closing ────────────────────────────────────────────── */
