@@ -3,8 +3,7 @@
    screen mockup (.ws), the experiment result (.wo-exp) and page spacing. */
 .wo-hero .t-display { margin-top: 16px; max-width: 16em; }
 .wo-hero .t-lead { margin-top: 16px; }
-.wo-list { margin: 0; padding-left: 1.1em; display: grid; gap: 10px; }
-.wo-list li::marker { color: var(--routines); }
+.split-copy > .wo-list { margin: var(--h2-lead) 0 0; padding: 0; list-style: none; display: grid; gap: 10px; }
 .split-copy > .t-body + .t-body { margin-top: 12px; }
 
 /* Workout screen: one exercise in a session, with the app's own strings */
