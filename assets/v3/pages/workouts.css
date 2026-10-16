@@ -1,7 +1,15 @@
 /* Ember website V3: /plus/workouts/ (reached from the Plus page's Workouts tab).
    Loads after plus.css and reuses its .wk-card / .wk-opt; adds the workout
    screenshot frames (.wo-shot), the experiment result (.wo-exp) and page spacing. */
-.wo-hero .t-display { margin-top: 16px; max-width: 16em; }
+/* Back to the Plus page's Workouts tab, where people come from; it stands in
+   for the hero's "Ember Plus" kicker. The nav hides Ember Plus on phones. */
+.wo-hero { padding-top: 8px; }
+.wo-crumb { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; font-size: 15px; font-weight: 500; color: var(--ink); text-decoration: none; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.wo-crumb::before { content: "‹"; font-size: 22px; line-height: 1; color: var(--ink-mut); transform: translateY(-1px); }
+.wo-crumb:hover { color: var(--ink-hi); text-decoration: underline; }
+.wo-hero .plus-hero-in { margin-top: 16px; }
+@media (min-width: 1024px) { .wo-hero { padding-top: 16px; } .wo-hero .plus-hero-in { margin-top: 32px; } }
+.wo-hero .t-display { margin-top: 0; max-width: 16em; }
 .wo-hero .t-lead { margin-top: 16px; }
 .split-copy > .wo-list { margin: var(--h2-lead) 0 0; padding: 0; list-style: none; display: grid; gap: 10px; }
 .split-copy > .t-body + .t-body { margin-top: 12px; }
