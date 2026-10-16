@@ -106,6 +106,7 @@
 .fx-copy { max-width: 34em; }
 .fx-copy .t-h3 { color: var(--k); }
 .fx-copy p { margin-top: 8px; font-size: 16px; line-height: 1.55; color: var(--ink); text-wrap: pretty; }
+.fx-copy .fx-more { margin-top: 12px; } /* a feature's own page, e.g. Workouts → workouts/ */
 .fx-obj { position: relative; flex: 1 0 auto; display: flex; align-items: center; justify-content: center; margin-top: 28px; min-width: 0; }
 @media (min-width: 600px) { .fx--js .fx-panel { min-height: 520px; } .fx-obj { margin-top: 32px; } }
 @media (min-width: 1024px) {

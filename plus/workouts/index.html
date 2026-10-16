@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta name="robots" content="noindex,nofollow"><!-- preview: remove when linked from /plus/ -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Workouts | Ember Plus</title>
@@ -27,7 +26,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300..600&display=swap">
 <link rel="stylesheet" href="../../assets/v3/v3.css?v=6">
 <link rel="stylesheet" href="../../assets/v3/pages/plus.css?v=6">
-<link rel="stylesheet" href="../../assets/v3/pages/workouts.css?v=2">
+<link rel="stylesheet" href="../../assets/v3/pages/workouts.css?v=4">
 <link rel="canonical" href="https://embertracker.app/plus/workouts/" />
 </head>
 <body>
@@ -49,12 +48,16 @@
 
 <!-- Workouts (Ember Plus), reached from the Plus page's Workouts tab. Every
      claim is true of app 1.2.0 (7eba5771): no rest timer, kg, Watch/Health
-     sync, guides or weekly goal for members. Mockups use the app's strings. -->
+     sync, guides or weekly goal for members. The two screenshots are Sam's
+     phone (Oct 16), cropped to leave out the status bar, the personal-only
+     weekly goal and the session header; the migraine-day and experiment cards
+     only appear in those states, so they are drawn with the app's strings. -->
 <section class="sec plus-hero wo-hero" aria-labelledby="wo-title">
   <div class="wrap plus-hero-in">
     <p class="kicker k-routines rise">Ember Plus</p>
     <h1 class="t-display rise" id="wo-title">Good enough to replace your workout app.</h1>
     <p class="t-lead rise">Log every set, with last time shown. On a migraine day, go lighter or skip.</p>
+    <figure class="wo-shot wo-shot--rotation rise"><img src="../../assets/v3/workouts/rotation.jpg" alt="Ember's Workout screen: Your rotation, with Workout 1 marked Next and a Start workout button on each workout." width="1040" height="984"></figure>
   </div>
 </section>
 
@@ -71,14 +74,7 @@
       </ul>
     </div>
     <div class="split-object" data-reveal>
-      <div class="ws" data-copylint="app" role="group" aria-label="Workout screen">
-        <p class="ws-name">Machine Chest Press</p>
-        <p class="ws-last">Last: 60×12 · 60×12 · est. 1RM 84 lb</p>
-        <p class="ws-hint">Suggested 65 lb: you reached the top of the range at 60 lb (12, 12).</p>
-        <p class="ws-head">Tap ✓ after the actual reps</p>
-        <div class="ws-set is-done"><span class="ws-n">1</span><span class="ws-f">65<small>lb</small></span><span class="ws-f">12<small>reps</small></span><span class="ws-check" aria-hidden="true">✓</span></div>
-        <div class="ws-set"><span class="ws-n">2</span><span class="ws-f">65<small>lb</small></span><span class="ws-f">10<small>reps</small></span><span class="ws-check" aria-hidden="true"></span></div>
-      </div>
+      <figure class="wo-shot wo-shot--session"><img src="../../assets/v3/workouts/session.jpg" alt="An exercise in a workout: Incline Dumbbell Press, the suggestion Keep 35 lb: last time was 10, 15, last time's sets, and two sets of 35 lb, the first checked off." width="800" height="1076" loading="lazy"></figure>
     </div>
   </div>
 </section>
@@ -112,7 +108,7 @@
     <div class="split-copy" data-reveal>
       <p class="kicker k-exp">Experiments</p>
       <h2 class="t-h2" id="wo-exp-title">Test a workout routine.</h2>
-      <p class="t-body">Pick how many workouts a week, for 2, 3 or 4 weeks. Ember compares your migraine days with the 4 weeks before and tells you what it saw, not why.</p>
+      <p class="t-body">Pick how many workouts a week, for 2, 3 or 4 weeks. Ember compares your migraine days with the 4 weeks before.</p>
     </div>
     <div class="split-object" data-reveal>
       <div class="wo-exp" data-copylint="app" role="group" aria-label="Experiment result">
