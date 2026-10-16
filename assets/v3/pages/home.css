@@ -395,3 +395,9 @@
   .orb-layer { z-index: 3; -webkit-mask-image: linear-gradient(to bottom, transparent 1068px, #000 1124px); mask-image: linear-gradient(to bottom, transparent 1068px, #000 1124px); }
   .orb-dot { z-index: 3; }
 }
+
+/* Plus tile titles open that feature's tab on /plus/ (#fx-…). The › marks them
+   as links on phones, where there's no hover; same chevron as .tlink. */
+.plus-tiles .t-h3 a { color: inherit; text-decoration: none; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+.plus-tiles .t-h3 a::after { content: "›"; margin-left: 6px; color: var(--ink-mut); font-weight: 400; }
+.plus-tiles .t-h3 a:hover { text-decoration: underline; text-decoration-color: var(--ember); }
