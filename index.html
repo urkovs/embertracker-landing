@@ -25,8 +25,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300..600&display=swap">
 <link rel="preload" as="image" href="assets/v3/orb.webp" fetchpriority="high">
-<link rel="stylesheet" href="assets/v3/v3.css?v=6">
-<link rel="stylesheet" href="assets/v3/pages/home.css?v=11">
+<link rel="stylesheet" href="assets/v3/v3.css?v=7">
+<link rel="stylesheet" href="assets/v3/pages/home.css?v=12">
 <link rel="canonical" href="https://embertracker.app/" />
 <script type="application/ld+json">
 {
@@ -72,7 +72,11 @@
 <!-- Scroll orb (v3.js, CSS §22; spacing in pages/home.css "Scroll orb"): it leaves the hero
      orb's lower-left rim, runs down the left margin, crosses the page once in
      the gap above the report, runs down the right margin and settles into the
-     closing orb. data-orb-gap marks the 3 bands where it moves sideways. -->
+     closing orb. data-orb-gap marks the 3 bands where it moves sideways.
+     data-orb-mark puts a ring in the section's kicker color beside its kicker;
+     data-orb-days lays the calendar's May 2026 (13 migraine, 7 headache,
+     3 symptom, 8 clear days, the same month as #month) along the crossing.
+     Both light as the orb passes. -->
 <main id="main" data-orb-path="left">
 
 <!-- 1 Hero -->
@@ -105,7 +109,7 @@
 </section>
 
 <!-- 2 Every day, classified -->
-<section class="sec" id="classify" data-orb-gap="12" aria-labelledby="classify-title">
+<section class="sec" id="classify" data-orb-mark="k-mig" data-orb-gap="12" aria-labelledby="classify-title">
   <div class="wrap split split--mirror split--keep">
     <div class="split-copy" data-reveal>
       <p class="kicker k-mig">Day types</p>
@@ -155,7 +159,7 @@
 </section>
 
 <!-- 3 Your month (raised band) -->
-<section class="sec sec--band" id="month" aria-labelledby="month-title">
+<section class="sec sec--band" id="month" data-orb-mark="k-pink" aria-labelledby="month-title">
   <div class="wrap">
     <div class="center-head" data-reveal>
       <p class="kicker k-pink">Your calendar</p>
@@ -192,7 +196,7 @@
 </section>
 
 <!-- 4 Tour row -->
-<section class="sec" id="features" aria-labelledby="features-title">
+<section class="sec" id="features" data-orb-mark="k-ember" aria-labelledby="features-title">
   <div class="wrap">
     <div class="center-head" data-reveal>
       <p class="kicker k-ember">Your daily log</p>
@@ -310,7 +314,7 @@
 </section>
 
 <!-- 5 The report -->
-<section class="sec" id="report" data-orb-gap="1" aria-labelledby="report-title">
+<section class="sec" id="report" data-orb-days="mhhmhmmmmmmhsmcsmcmhccchcchmcms" data-orb-gap="1" aria-labelledby="report-title">
   <div class="wrap split split--mirror split--wide">
     <div class="split-copy report-copy" data-reveal>
       <p class="kicker k-sky">For your doctor</p>
@@ -342,7 +346,7 @@
 </section>
 
 <!-- 6 Ember Plus -->
-<section class="sec" id="plus" aria-labelledby="plus-title">
+<section class="sec" id="plus" data-orb-mark="k-patterns" aria-labelledby="plus-title">
   <div class="wrap">
     <div class="center-head" data-reveal>
       <p class="kicker k-patterns">Ember Plus</p>
@@ -439,7 +443,7 @@
 </section>
 
 <!-- 6b Privacy strip -->
-<section class="sec sec--compact sec--tight-top" id="privacy" aria-labelledby="privacy-title">
+<section class="sec sec--compact sec--tight-top" id="privacy" data-orb-mark="k-backup" aria-labelledby="privacy-title">
   <div class="wrap">
     <div class="strip">
       <span class="strip-icon" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="17.5" width="22" height="16" rx="4"/><path d="M13.5 17.5v-4a6.5 6.5 0 0 1 13 0v4"/><path d="M20 24v3.5"/></svg></span>
@@ -521,6 +525,6 @@
   <a class="btn btn--sm" data-get href="#get">Get Ember</a>
 </div>
 
-<script src="assets/v3/v3.js?v=4" defer></script>
+<script src="assets/v3/v3.js?v=5" defer></script>
 </body>
 </html>

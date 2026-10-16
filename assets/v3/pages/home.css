@@ -373,20 +373,19 @@
 /* ── Scroll orb ─────────────────────────────────────────── */
 /* v3.js shows the orb from 1260px (lane ≥ 40px) with Reduce Motion off. It
    moves sideways only in the 3 [data-orb-gap] bands (index.html), on average
-   no faster than 2.4 times the scroll (each band at least 1/2.4 of its
-   sideways distance, plus 30px for the eased ends), so a wheel tick nudges
-   it instead of flinging it across. Lane = middle of the margin = 25vw − 275px:
+   about 2.1 times the scroll (Sam, Oct 16: the 2.8x crossing felt almost too
+   fast), so a wheel tick nudges it instead of flinging it across. Lane = middle of the margin = 25vw − 275px:
      hero rim → left lane   25vw + 75px  → band ≥ 10.4vw + 61px  (pad 12)
      left → right lane      50vw + 550px → band ≥ 20.8vw + 259px (pad 1)
      right lane → close orb 25vw + 275px → band ≥ 10.4vw + 145px (pad 1)
    A band is the room between two sections minus its pad. Only the crossing
-   needs real extra room (about 560px of open page at 1440, which the orb
-   crosses); the other two grow a little on wide screens (the closing's top
-   by about 20px at 1440). Below 1260px or with Reduce Motion there is no
+   needs real extra room (about 600px at 1440), and it carries the month of
+   days ([data-orb-days]) so it doesn't read as empty; the other two grow a
+   little on wide screens (the closing's top by about 20px at 1440). Below 1260px or with Reduce Motion there is no
    orb, so the page keeps its usual spacing. */
 @media (min-width: 1260px) and (prefers-reduced-motion: no-preference) {
   .hero + .sec { padding-top: max(64px, calc(10.5vw - 86px)); }
-  #report { padding-top: calc(16vw + 100px); } /* Sam, Oct 16: tighter gap; crossing averages about 2.8x scroll */
+  #report { padding-top: calc(16vw + 250px); } /* holds the month; crossing averages about 2.1x scroll */
   #get { padding-top: max(96px, calc(10.5vw - 36px)); }
   /* above the hero's bottom fade, so the trail leaves the orb's rim unbroken;
      it fades in over its first 50px. The start point (data-orb-start, the
