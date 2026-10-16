@@ -525,3 +525,25 @@ a { color: inherit; }
 .pro-card { border: 1px solid #24211d; border-radius: 22px; padding: clamp(22px, 3vw, 32px); background: linear-gradient(180deg, #121110, #0d0c0b); display: grid; gap: 14px; align-content: start; }
 .pro-card .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
 .three .small, .pro-card .small { font-size: 15.5px; color: var(--ink); }
+
+/* ── clinic panel: the report with the lobby QR card ──── */
+.clinic-comp { position: relative; width: min(100%, 660px); padding: 0 0 18% 0; perspective: 1600px; }
+.clinic-comp .paper { transform: rotateX(6deg) rotateZ(1.2deg); }
+.qr-card {
+  position: absolute; left: -2%; bottom: 0;
+  width: clamp(150px, 34%, 210px);
+  background: #e6dece; color: #2a241c;
+  border-radius: 16px; padding: 14px 14px 12px;
+  display: grid; justify-items: center; gap: 8px; text-align: center;
+  transform: rotateZ(-3deg);
+  box-shadow: 0 2px 0 rgba(255,255,255,.25) inset, 0 40px 80px -30px rgba(0,0,0,1), 0 14px 30px -14px rgba(0,0,0,.8);
+}
+.qr-card .qr-top { display: flex; align-items: center; gap: 6px; font: 400 15px/1 var(--serif); color: #2a241c; }
+.qr-card .qr-top img { width: 22px; height: 22px; }
+.qr-card b { font: 600 13.5px/1.2 var(--sans); letter-spacing: -.005em; }
+.qr-card .qr-code { width: 78%; height: auto; }
+.qr-card .qr-code path { fill: #1d1914; }
+.qr-card .qr-hint { font-size: 11.5px; color: #5d5446; }
+@media (max-width: 520px) { .qr-card { width: 44%; padding: 10px 10px 9px; border-radius: 12px; } .qr-card b { font-size: 12px; } }
+@media (prefers-reduced-motion: reduce) { .clinic-comp .paper, .qr-card { transform: none; } }
+.copy .steps { margin-top: 2px; }
