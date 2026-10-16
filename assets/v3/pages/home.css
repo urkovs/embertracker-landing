@@ -378,7 +378,7 @@
    orb, so the page keeps its usual spacing. */
 @media (min-width: 1260px) and (prefers-reduced-motion: no-preference) {
   .hero + .sec { padding-top: max(64px, calc(10.5vw - 86px)); }
-  #report { padding-top: calc(21vw + 130px); }
+  #report { padding-top: calc(16vw + 100px); } /* Sam, Oct 16: tighter gap; crossing averages about 2.8x scroll */
   #get { padding-top: max(96px, calc(10.5vw - 36px)); }
   /* above the hero's bottom fade, so the trail leaves the orb's rim unbroken;
      it fades in over its first 50px. The start point (data-orb-start, the

@@ -2,10 +2,17 @@
 
 Static marketing site for Ember (iOS and Android migraine tracker) on GitHub Pages.
 Repo `urkovs/embertracker-landing`, domain `embertracker.app` (CNAME).
-**No build step, no frameworks, no tests.** Plain HTML per directory, shared
-styles in `assets/site.css`, shared JS in `assets/site.js`. The provider-handoff
-page has its own `assets/provider-handoff.css` / `.js`. The app repo (source of
-truth for product claims) is `~/Code/headache-tracker-final`.
+**No build step, no frameworks, no tests.** Plain HTML per directory. Every
+page uses the V3 system: shared styles `assets/v3/v3.css`, page styles
+`assets/v3/pages/<page>.css`, shared JS `assets/v3/v3.js` (contents and API in
+the file headers). Forms load `/assets/web-form.js`; the provider-handoff tool
+loads `/assets/provider-handoff*.js`. `assets/site.css` and `site.js` are legacy
+(only `v2/` uses them). `v3/` holds redirects to the root pages. The app repo
+(source of truth for product claims) is `~/Code/ember`.
+
+**State (Oct 16, 2026):** the V3 redesign is live at the root (built by a
+multi-agent design and copy team; specs, voice guide and reviews in
+`~/Code/_archive/website-v3-team-20261015/`). Older July notes follow.
 
 **State (July 9, 2026):** rounds 1–2 of the redesign plus several refinement
 passes are built, verified in the browser, and committed/pushed live. `HANDOFF.md`
@@ -89,7 +96,14 @@ original round-2 spec. Check `git status`/`git log` for anything newer.
   ("Ember Migraine Tracker - Providers") or "Page | Ember Migraine Tracker"
   for utility pages.
 
-## Design system (`assets/site.css`)
+## Design system
+
+V3 (live): app tokens below; Source Serif 4 display with the system UI font for
+body; colored section kickers (`.kicker.k-*`); finite reveal motion gated by a
+JS class (content visible without JS, none with Reduce Motion); the home scroll
+orb (`[data-orb-path]`, wide screens only). The notes below are from V1; where
+they name `site.css`/`site.js` classes, V3 equivalents live in `assets/v3/`.
+
 
 - Tokens mirror the app: bg `#0a0a0a`, ember `#ecaa68`, button beige
   `#ddcfba`, data hues mig `#9b7acc` · head-blue `#4a8abf` · clear `#a8c4d4` ·
@@ -187,8 +201,8 @@ explicit pivot from Sam, not drift to correct back.
 
 ## Quick verify checklist when you change things
 
-- Bump `?v=` on `assets/site.css`/`site.js`/`provider-handoff.css` links
-  across every HTML file if you touched those files.
+- Bump `?v=` on `assets/v3/v3.css`/`v3.js` (and the page CSS you touched)
+  across every HTML file that links them.
 - `grep -ri urkov *.html assets` → must be empty; check report images
   visually too (no name).
 - Engine demo: all 5 scenarios still run on the providers page.

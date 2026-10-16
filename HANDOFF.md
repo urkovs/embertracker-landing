@@ -190,18 +190,15 @@ clinical-artifact/figure labels only.
 
 `/atlas/` redirects to the separately hosted Firebase operator dashboard at `https://ember-navigation-atlas.web.app/`. GitHub Pages hosts only this static entry; no sign-in transaction, private counts or credentials are stored here. The collector independently requires the designated Firebase operator and mobile collection remains disabled. The public patient navigation is unchanged.
 
-## V3 draft (2026-10-15, published at /v3/)
+## V3 is live (2026-10-16)
 
-- Every page has a V3 version under `v3/` (mirrors root paths: home, providers, providers/join,
-  plus, contact, privacy, consumer-health, terms, references, delete-account, send,
-  clinic/cascade-headache, get, provider-handoff, 404, atlas, creators, provider-update, beta).
-  All `noindex`, with a review strip linking to the live page. Shared system in
-  `v3/assets/v3.css` + `v3.js`; page CSS in `v3/assets/pages/`.
-- Built by a multi-agent team (design and copy research, master designer spec, copy chief
-  voice guide, marketer critique, developers, two review rounds). Forms on contact and join
-  post exactly what live posts and reuse the live `/assets/web-form.js`; the providers
-  classification engine block is byte-identical to live; provider-handoff reuses the live JS.
-- Positioning: Sam's H1 plus two proofs (made by a headache specialist; used in headache
-  clinics), each stated once. Plus shows a "Coming soon" pill until 1.2.0 is released.
-- All V3 wording awaits Sam's approval before it replaces the live pages. `v3/get/` keeps
-  the App Store provider token (`PT`) blank until Sam generates a campaign link.
+- V3 replaced V1 at the root on Sam's go. Pages kept their paths; assets moved to
+  `assets/v3/`; `v3/` now holds noindex redirects to the root pages. Robots tags
+  mirror what each V1 page had; the home page keeps V1's canonical and JSON-LD.
+- Forms (contact, providers/join) post exactly what V1 posted; the providers
+  classification engine block is byte-identical; provider-handoff reuses the live JS.
+- Release-day legal edits for Ember Plus (privacy, terms) were prepared on branch
+  `claude/plus-launch-live` against the V1 pages; port those sentence edits onto the
+  V3 pages when Plus is released. V3's delete-account page already has the
+  corrected steps.
+- Changed-wording tables for Sam: `~/Code/_archive/website-v3-team-20261015/`.

@@ -1,99 +1,122 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact | Ember Migraine Tracker</title>
-  <meta name="description" content="Contact Ember with product ideas, questions, professional inquiries, or website feedback." />
-  <link rel="canonical" href="https://embertracker.app/contact/" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Ember" />
-  <meta property="og:title" content="Contact | Ember Migraine Tracker" />
-  <meta property="og:description" content="Contact Ember with product ideas, questions, professional inquiries, or website feedback." />
-  <meta property="og:url" content="https://embertracker.app/contact/" />
-  <meta property="og:image" content="https://embertracker.app/assets/og-image.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Contact | Ember Migraine Tracker" />
-  <meta name="twitter:description" content="Contact Ember with product ideas, questions, professional inquiries, or website feedback." />
-  <meta name="twitter:image" content="https://embertracker.app/assets/og-image.png" />
-  <meta name="theme-color" content="#0a0a0a" />
-  <link rel="icon" type="image/png" href="../favicon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/site.css?v=20261007-mobile">
-<link rel="stylesheet" href="/assets/plus.css?v=20261005-pills">
-<link rel="stylesheet" href="/assets/illustrations.css?v=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Contact | Ember Migraine Tracker</title>
+<meta name="description" content="Write to the Ember team about the app or setting up a clinic. We reply by email.">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0a0a0a">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://embertracker.app/contact/">
+<meta property="og:title" content="Contact | Ember Migraine Tracker">
+<meta property="og:description" content="Write to the Ember team about the app or setting up a clinic. We reply by email.">
+<meta property="og:image" content="https://embertracker.app/assets/v3/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Ember orb beside the line Migraine tracking, without the headache.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Contact | Ember Migraine Tracker">
+<meta name="twitter:description" content="Write to the Ember team about the app or setting up a clinic. We reply by email.">
+<meta name="twitter:image" content="https://embertracker.app/assets/v3/og.png">
+<meta name="twitter:image:alt" content="The Ember orb beside the line Migraine tracking, without the headache.">
+<link rel="icon" type="image/png" href="../assets/v3/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300..600&display=swap">
 <link rel="stylesheet" href="/assets/web-form.css?v=1">
-<script src="/assets/web-form.js?v=2" defer></script>
+<link rel="stylesheet" href="../assets/v3/v3.css?v=6">
+<link rel="stylesheet" href="../assets/v3/pages/contact.css?v=2">
+<link rel="canonical" href="https://embertracker.app/contact/" />
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
+
 
 <header class="nav" id="nav">
   <div class="wrap nav-inner">
-    <a href="../" class="brand" aria-label="Ember home">
-      <span class="brand-orb" aria-hidden="true"></span>
-      <span class="brand-name">Ember</span>
-    </a>
-    <nav class="nav-links" aria-label="Primary">
-      <a href="/plus/" class="nav-link nav-plus"><svg class="nav-sparkle" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path fill="currentColor" d="M10 1.5 12.3 7.7 18.5 10 12.3 12.3 10 18.5 7.7 12.3 1.5 10 7.7 7.7Z"/></svg><span>Ember Plus</span></a>
-      <a href="../providers/" class="nav-link">For providers</a>
-      <a href="../contact/" class="nav-link nav-link--contact" aria-current="page">Contact</a>
-      <a href="/#download" class="nav-cta">Download</a>
+    <a class="brand" href="../" aria-label="Ember home"><img src="../assets/v3/orb-120.webp" alt="" width="30" height="30">Ember</a>
+    <nav class="nav-links" aria-label="Main">
+      <a class="nav-link hide-phone" href="../plus/">Ember Plus</a>
+      <a class="nav-link" href="../providers/">For clinicians</a>
+      <a class="btn btn--sm" data-get href="../#get">Get Ember</a>
     </nav>
   </div>
 </header>
 
-<main>
-<section class="contact-section contact-section--page">
-<div class="wrap contact-inner">
-<h1 class="feat-title">Contact Ember</h1>
+<main id="main">
+<section class="contact" aria-labelledby="contact-title">
+  <div class="wrap form-layout">
+    <div class="form-copy">
+      <p class="kicker k-ember">Support</p>
+      <h1 class="t-display" id="contact-title">Contact Ember</h1>
+      <p class="t-lead">Write to us about the app or the website. We reply by email.</p>
+      <ul class="route-list" aria-label="Other pages that may help">
+        <li><span class="t-label">Setting up a clinic</span><a class="tlink" href="../providers/join/">Add your clinic</a></li>
+        <li><span class="t-label">What happens to your data</span><a class="tlink" href="../privacy/">Privacy policy</a></li>
+        <li><span class="t-label">Closing your account</span><a class="tlink" href="../delete-account/">Delete your account</a></li>
+      </ul>
+    </div>
+    <div class="form-side">
 <form class="form-card" data-ember-form="contact" method="post" action="https://ember-clinic-delivery-m7tqb7cmgq-uc.a.run.app/v1/web-contact">
-<div class="form-row"><label class="form-label" for="contact-name">Your name</label><input class="input" id="contact-name" name="name" autocomplete="name" maxlength="100" required></div>
-<div class="form-row"><label class="form-label" for="contact-email">Your email</label><input class="input" id="contact-email" name="email" type="email" autocomplete="email" maxlength="254" required></div>
+<div class="form-row"><label class="form-label" for="contact-name">Name</label><input class="input" id="contact-name" name="name" autocomplete="name" maxlength="100" required></div>
+<div class="form-row"><label class="form-label" for="contact-email">Email</label><input class="input" id="contact-email" name="email" type="email" autocomplete="email" maxlength="254" required></div>
 <div class="form-row"><label class="form-label" for="contact-message">Message</label><textarea class="textarea" id="contact-message" name="message" rows="5" maxlength="4000" required></textarea></div>
 <div class="form-trap" aria-hidden="true"><label>Leave this empty<input name="website" tabindex="-1" autocomplete="off"></label></div>
-<p class="form-note">Please don’t include patient information. <a href="/privacy/#website-contact">How we handle your request</a></p>
+<p class="form-note">Don’t include patient information. <a href="../privacy/#website-contact">How we handle your request</a></p>
 <button class="form-submit" type="submit" disabled>Send message</button>
 <p class="form-status" role="status" aria-live="polite" tabindex="-1"></p>
-<noscript><p>Enable JavaScript to send this form.</p></noscript>
+<noscript><p>Turn on JavaScript to send this form, or email <a href="mailto:hello@cascadeheadache.com">hello@cascadeheadache.com</a>.</p></noscript>
 </form>
-<p class="contact-privacy-note">For medical care, contact your clinician.</p>
-</div>
+      <p class="form-after">For medical care, contact your clinician.</p>
+    </div>
+  </div>
 </section>
 </main>
 
-<footer class="footer">
-  <div class="wrap footer-inner">
-    <div class="footer-brand">
-      <div class="brand">
-        <span class="brand-orb" aria-hidden="true"></span>
-        <span class="brand-name">Ember</span>
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-id">
+        <a class="brand" href="../" aria-label="Ember home"><img src="../assets/v3/orb-120.webp" alt="" width="30" height="30" loading="lazy">Ember</a>
+        <p class="foot-tagline">Migraine and headache tracker for iPhone and Android.</p>
       </div>
-      <p class="footer-tag">A migraine and headache tracker built by a headache specialist.</p>
+      <nav class="foot-groups" aria-label="Footer">
+        <div class="foot-group">
+          <p class="foot-label">Ember</p>
+          <ul>
+            <li><a href="../plus/">Ember Plus</a></li>
+            <li><a href="./" aria-current="page">Contact</a></li>
+            <li><a href="../delete-account/">Delete account</a></li>
+          </ul>
+        </div>
+        <div class="foot-group">
+          <p class="foot-label">Clinicians</p>
+          <ul>
+            <li><a href="../providers/">For clinicians</a></li>
+            <li><a href="../providers/join/">Add your clinic</a></li>
+            <li><a href="../provider-handoff/">Provider Handoff</a></li>
+            <li><a href="../references/">Clinical references</a></li>
+          </ul>
+        </div>
+        <div class="foot-group">
+          <p class="foot-label">Legal</p>
+          <ul>
+            <li><a href="../privacy/">Privacy</a></li>
+            <li><a href="../consumer-health/">Consumer health privacy</a></li>
+            <li><a href="../terms/">Terms</a></li>
+          </ul>
+        </div>
+      </nav>
     </div>
-    <nav class="footer-links" aria-label="Footer">
-      <a href="/plus/">Ember Plus</a>
-      <a href="../">Why Ember</a>
-      <a href="../providers/">For providers</a>
-      <a href="../contact/" class="is-current" aria-current="page">Contact</a>
-      <a href="../references/">References</a>
-      <a href="../privacy/">Privacy</a>
-      <a href="/consumer-health/">Consumer health privacy</a>
-      <a href="../terms/">Terms</a>
-    </nav>
-    <div class="footer-meta">
-      <a href="mailto:hello@cascadeheadache.com">hello@cascadeheadache.com</a>
+    <div class="foot-bottom">
+      <p class="foot-disclaimer">Ember helps you track and organize what you experience. It doesn’t diagnose, and it isn’t a substitute for care from your clinician.</p>
+      <p class="foot-legal">© 2026 Cascade Headache, PLLC</p>
     </div>
-  </div>
-  <div class="wrap footer-bottom">
-    <span>© 2026 Cascade Headache, PLLC</span>
-    <span>embertracker.app</span>
   </div>
 </footer>
 
-<script src="../assets/site.js?v=10"></script>
+<script src="../assets/v3/v3.js?v=4" defer></script>
+<script src="/assets/web-form.js?v=2" defer></script>
 </body>
 </html>
