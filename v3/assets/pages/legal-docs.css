@@ -1,0 +1,63 @@
+/* Ember V3: legal and reference documents (privacy, consumer health, terms,
+   references). Loaded after v3.css; uses only its tokens. Layout is v3.css §14. */
+
+/* Summary callout outside .prose: links and paragraphs */
+.legal-callout a {
+  color: var(--ink-hi); text-decoration: underline; text-decoration-color: var(--hair-3);
+  text-decoration-thickness: 1px; text-underline-offset: 3px;
+  transition: text-decoration-color 160ms var(--ease-std);
+}
+.legal-callout a:hover { text-decoration-color: var(--ember); }
+.legal-callout > p + p { margin-top: 12px; }
+.legal-callout a, .prose a { overflow-wrap: anywhere; }
+
+/* Contents lists whose headings already carry their section numbers
+   (privacy, terms): no CSS counter, so items never read "1. 1. …" */
+.toc-mobile--plain a::before { content: none; }
+.toc-mobile a { line-height: 1.35; padding-block: 6px; }
+
+/* Anchor jumps: html already has scroll-padding-top (88px) for the sticky nav,
+   and v3.css adds a 96px scroll-margin on .prose headings, so the two stack to
+   184px. Keep a small margin so a jumped-to heading lines up with the rail. */
+.legal .prose h2, .legal .prose h3, .legal .prose [id] { scroll-margin-top: 16px; }
+
+/* Back to contents: below 1180px there is no rail, so each H2 section ends with
+   a quiet link that opens the contents list (inline script) and jumps to it.
+   44px hit area. The 4px above it and 36px below it keep the link with its
+   section and add about 28px per break. Hidden where the rail shows, and in
+   print (.no-print). */
+.prose .to-contents { display: none; }
+@media (max-width: 1179.98px) {
+  .toc-mobile { scroll-margin-top: 16px; }
+  .prose a.to-contents {
+    display: flex; align-items: center; gap: 6px; width: max-content; min-height: 44px;
+    margin-top: 4px; font-size: 14px; line-height: 1.4; color: var(--ink-mut);
+    text-decoration: none; transition: color 160ms var(--ease-std);
+  }
+  .prose a.to-contents:hover { color: var(--ink-hi); }
+  .prose a.to-contents svg { flex: none; }
+  .prose .to-contents + h2 { margin-top: 36px; }
+  .prose .legal-footer-note + .to-contents { margin-top: 16px; }
+}
+
+/* Long contents rails (terms has 18 sections) stay inside the viewport */
+.toc { max-height: calc(100vh - 120px); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; }
+
+/* Terms §10 and §11: the liability limit and warranty disclaimer stand out
+   without a word changing (terms deck §8, flag 3). Not all caps. */
+.prose .caps-section { color: var(--ink-hi); font-weight: 600; }
+
+/* Closing notes (terms, references) */
+.prose .legal-footer-note { margin-top: 40px; font-size: 14px; line-height: 1.5; color: var(--ink-mut); }
+
+/* References: citation paragraphs, hanging indent, text byte-exact */
+.prose .cite { font-size: 16px; line-height: 1.55; padding-left: 2em; text-indent: -2em; color: var(--ink-mut); }
+.prose .cite em { font-style: italic; }
+
+@media print {
+  .prose strong, .prose b, .prose .caps-section, .prose .cite, .prose .legal-footer-note,
+  .legal-callout strong, .legal-callout a, .prose code, .prose li::marker { color: #000 !important; }
+  .prose code { background: none; border-color: #ccc; }
+  .legal-callout a[href^="mailto:"]::after { content: none; }
+  .toc { max-height: none; overflow: visible; }
+}

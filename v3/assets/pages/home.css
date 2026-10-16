@@ -1,0 +1,263 @@
+/* Home page only (v3/index.html). Shared components live in ../v3.css. */
+
+/* ── Hero ───────────────────────────────────────────────── */
+.hero { position: relative; text-align: center; padding-top: 32px; overflow: hidden; }
+@media (min-width: 600px) { .hero { padding-top: 48px; } }
+.hero-copy { position: relative; z-index: 4; }
+.hero .t-hero { margin-inline: auto; }
+.hero .t-lead { margin: 16px auto 0; max-width: 30em; }
+.hero .badges { justify-content: center; margin-top: 24px; }
+.hero .badge-lines { justify-items: center; }
+@media (min-width: 600px) { .hero .t-lead { margin-top: 20px; } .hero .badges { margin-top: 32px; } }
+
+/* Stage: the orb disc rises behind the phone. --disc is the visible disc;
+   the image is wider because the artwork carries its own glow. */
+.hero-stage { --disc: 340px; position: relative; height: 480px; margin-top: 0; }
+@media (min-width: 600px) { .hero-stage { height: 600px; } }
+@media (min-width: 600px) { .hero-stage { --disc: 420px; } }
+@media (min-width: 1024px) { .hero-stage { --disc: 560px; height: 640px; } }
+.hero-orb {
+  position: absolute; left: 50%; z-index: 0;
+  width: calc(var(--disc) / .56); max-width: none;
+  top: calc(var(--disc) / .56 * -.218);
+  transform: translateX(-50%);
+  pointer-events: none;
+  opacity: .85;
+}
+@media (min-width: 600px) { .hero-orb { opacity: 1; } }
+.hero-glow { display: none; }
+@media (min-width: 600px) {
+  .hero-glow {
+    display: block; position: absolute; z-index: 0; pointer-events: none;
+    left: 50%; top: calc(var(--disc) * -.15); width: calc(var(--disc) * 2.1); height: calc(var(--disc) * 1.6);
+    transform: translateX(-50%);
+    background: radial-gradient(closest-side, rgba(236, 170, 104, .16), rgba(201, 106, 58, .05) 55%, transparent);
+  }
+}
+.hero-phone { position: relative; z-index: 2; display: flex; justify-content: center; padding-top: 32px; }
+.hero-fade { position: absolute; left: 0; right: 0; bottom: 0; height: 160px; z-index: 3; pointer-events: none; background: linear-gradient(to bottom, rgba(10, 10, 10, 0), var(--bg) 88%); }
+/* ≥1024 the phone is 300px wide and centered, so these offsets hold at every
+   desktop width. The text sits on --bg left of the orb; the leader ends on the
+   "Mild" chip (207px down the stage, 52px left of center). */
+.hero-annot { top: 207px; translate: 0 -50%; right: calc(50% + 290px); --leader: 222px; }
+
+/* the hero fades into the page, so the next section needs less top room */
+.hero + .sec { padding-top: 32px; }
+@media (min-width: 600px) { .hero + .sec { padding-top: 48px; } }
+@media (min-width: 1024px) { .hero + .sec { padding-top: 64px; } }
+
+/* ── Classify ───────────────────────────────────────────── */
+.try { border: 1px solid var(--hair); border-radius: var(--radius-card); padding: var(--card-pad); display: grid; gap: 24px; }
+.try-row { display: grid; gap: 12px; }
+.try-label { font-size: 14px; font-weight: 500; line-height: 1.3; color: var(--ink-mut); }
+.try .chips { gap: 8px; }
+.try-pain { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.try-pain .chip { padding: 0 10px; }
+/* narrow phones: the app's own pain chips, dot above the word */
+@media (max-width: 399px) {
+  .try-pain { gap: 6px; }
+  .try-pain .chip { flex-direction: column; gap: 6px; min-height: 56px; padding: 8px 2px; font-size: 14px; }
+}
+@media (max-width: 599px) { .try { gap: 16px; padding: 18px; } }
+.pain-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--c); flex: none; }
+.try-impact { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.try-impact .chip { padding: 0 10px; }
+.try-result {
+  --rc: var(--mig);
+  position: relative; overflow: hidden;
+  background: var(--surface); border: 1px solid var(--hair); border-radius: 16px;
+  padding: 18px 20px 18px 24px;
+  transition: border-color 200ms var(--ease-std);
+}
+.try-result::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--rc); transition: background-color 200ms var(--ease-std); }
+.try-title { display: flex; align-items: center; gap: 10px; font: 400 26px/1.15 var(--serif); color: var(--ink-hi); letter-spacing: -.01em; font-optical-sizing: auto; }
+.try-rule { margin-top: 6px; font-size: 14px; line-height: 1.45; color: var(--ink-mut); }
+.try-feats { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.try-feats li { font-size: 14px; line-height: 1; color: var(--ink); background: var(--raised); border: 1px solid var(--hair); border-radius: 999px; padding: 7px 12px; }
+
+/* ── Your month ─────────────────────────────────────────── */
+.month-comp { position: relative; max-width: 520px; margin-inline: auto; display: grid; gap: 12px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 900px) { .month-comp { max-width: 860px; grid-template-columns: minmax(0, 440px) minmax(0, 1fr); gap: 24px; align-items: center; } }
+.month-comp .glow { width: 90%; left: 30%; }
+.month-card { background: var(--bg); border: 1px solid var(--hair); border-radius: var(--radius-card); padding: 16px 16px 18px; }
+@media (min-width: 600px) { .month-card { padding: 28px; } }
+.month-head { font: 400 22px/1.2 var(--serif); color: var(--ink-hi); letter-spacing: -.01em; margin-bottom: 12px; font-optical-sizing: auto; }
+@media (min-width: 600px) { .month-head { margin-bottom: 16px; } }
+.month-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px 0; isolation: isolate; }
+.month-grid .dow { text-align: center; font-size: 14px; color: var(--ink-mut); padding-bottom: 4px; }
+.mday { position: relative; display: grid; place-items: center; height: 40px; font: 500 15px/1 var(--sans); font-variant-numeric: tabular-nums; color: var(--clear); }
+.mday::after { content: ""; position: absolute; width: 36px; height: 36px; left: 50%; top: 50%; transform: translate(-50%, -50%); border-radius: 50%; border: 1.75px solid var(--ring, transparent); }
+.mday--mig { --ring: var(--mig); color: var(--ink-hi); }
+.mday--head { --ring: var(--head); color: var(--ink-hi); }
+.mday--sym { --ring: var(--sym); color: var(--ink-hi); }
+.mday--clear { color: var(--clear); }
+.mday.is-period::before { content: ""; position: absolute; z-index: -1; top: 1px; bottom: 1px; left: 0; right: 0; background: rgba(204, 127, 163, .13); border-top: 1px solid rgba(204, 127, 163, .45); border-bottom: 1px solid rgba(204, 127, 163, .45); }
+.mday.p-start::before { left: 2px; border-left: 1px solid rgba(204, 127, 163, .45); border-radius: 12px 0 0 12px; }
+.mday.p-end::before { right: 2px; border-right: 1px solid rgba(204, 127, 163, .45); border-radius: 0 12px 12px 0; }
+@media (max-width: 599px) { .month-grid { row-gap: 4px; } }
+@media (max-width: 399px) { .mday::after { width: 32px; height: 32px; } .mday { height: 36px; font-size: 14px; } }
+/* Totals: one row of 4 under the calendar below 900px (compact stats on phone),
+   a 2×2 wall of fixed 140px tiles centered against the calendar from 900px. */
+.month-comp .totals { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.month-comp .t-num { font-size: 36px; }
+@media (max-width: 599px) {
+  .month-comp .totals { gap: 8px; }
+  .month-comp .total { min-height: 0; padding: 12px 4px; border-radius: 16px; align-items: center; justify-content: flex-start; gap: 4px; text-align: center; }
+  .month-comp .total-label { flex-direction: column; gap: 4px; }
+  .month-comp .t-num { font-size: 28px; }
+}
+@media (max-width: 359px) { .month-comp .totals { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 900px) {
+  .month-comp .totals { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 140px; }
+  .month-comp .total { min-height: 0; }
+  .month-comp .t-num { font-size: 44px; }
+}
+@media (min-width: 1024px) { .month-comp .t-num { font-size: 56px; } }
+.month-caps { margin-top: var(--obj-cap); }
+/* Sam's line reads as a sentence, not fine print */
+.month-caps .month-note { max-width: 34em; margin-inline: auto; font-size: 15px; line-height: 1.5; color: var(--ink); }
+.month-caps .caption + .month-note { margin-top: 8px; }
+
+/* ── Tour row ───────────────────────────────────────────── */
+.head-obj { justify-content: center; padding-bottom: 16px; }
+.head-fig { position: relative; width: 100%; max-width: 280px; }
+/* ≥600 the head and its "Right temple" tag keep 16px from each card edge, so
+   the ear clears the border in the 260px cards (600–767 and 4-up from 1200) */
+@media (min-width: 600px) { .head-fig { max-width: min(340px, calc(100% - 32px)); } }
+.head-fig svg { width: 100%; height: auto; overflow: visible; }
+.head-tag { position: absolute; left: 61.5%; top: calc(24.8% - 10px); font-size: 14px; font-weight: 500; line-height: 1.3; color: var(--ink-hi); white-space: nowrap; }
+/* The crop ends at the card's edge, so its fade finishes inside the visible card */
+.crop-obj { justify-content: flex-start; padding-left: 16px; }
+.crop-obj .story-img { display: block; width: 100%; max-width: 380px; height: auto; flex: none; overflow: hidden; }
+.story-mini { display: none; }
+
+/* Injection reminder: the top of the app's Today card (inj alert styles in
+   the app: surface #151515, 1.5px orange-at-25% border), cut by the tour
+   card's right and bottom edges like a crop. Real app strings. */
+.inj-obj { justify-content: flex-start; padding-left: 16px; }
+.inj-card {
+  flex: none; width: calc(100% + 24px); margin: 0 -24px -2px 0; padding-bottom: 28px;
+  background: #151515; border: 1.5px solid rgba(196, 138, 74, .25); border-radius: 14px 0 0 0;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, .35);
+}
+.inj-title { display: flex; align-items: flex-start; gap: 10px; padding: 14px 40px 14px 16px; font: 600 15px/1.35 var(--sans); color: var(--ink-hi); text-wrap: balance; }
+.inj-dot { width: 8px; height: 8px; margin-top: 6px; border-radius: 50%; background: #c48a4a; flex: none; }
+.inj-action { padding: 12px 16px; border-block: 1px solid #222; font-size: 14px; line-height: 1.3; color: #c4b5a0; }
+@media (min-width: 600px) {
+  .inj-title { font-size: 16px; padding-block: 16px; }
+  .inj-action { font-size: 15px; padding-block: 14px; }
+}
+.nudge-obj { flex-direction: column; align-items: stretch; justify-content: flex-end; gap: 12px; padding: 0 16px 20px; }
+.nudge-obj figure { display: grid; gap: 12px; width: 100%; }
+.med-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.med-chips span { font: 500 14px/1 var(--sans); padding: 9px 12px; border-radius: 10px; border: 1px solid var(--hair-2); background: var(--raised); color: var(--ink-mut); }
+.med-chips span.on { color: var(--ink-hi); border-color: var(--ink); }
+.nudge { max-width: none; border-color: rgba(214, 140, 72, .5); background: rgba(30, 24, 18, .92); }
+.nudge .fc-body { color: var(--ink-hi); }
+.nudge-got { margin-top: 10px; text-align: right; font-size: 14px; font-weight: 600; color: #d68c48; }
+
+/* Phone (360–599): landscape cards, copy left, the object right at full card
+   height, bleeding off the card's right and bottom edges. */
+@media (min-width: 360px) and (max-width: 599px) {
+  #features .tour-card {
+    display: grid; grid-template-columns: minmax(0, 1fr) 44%; grid-template-rows: auto 1fr;
+    column-gap: 12px; min-height: 176px; padding: 20px 0 20px 20px;
+  }
+  #features .tour-card > .t-h3 { grid-column: 1; grid-row: 1; font-size: 21px; }
+  #features .tour-card > .tour-cap { grid-column: 1; grid-row: 2; margin-top: 8px; }
+  /* contain: size keeps the object from setting the card's height; it fills the copy's height */
+  #features .tour-obj { grid-column: 2; grid-row: 1 / span 2; margin: -20px 0; padding: 0; min-height: 0; overflow: hidden; contain: size; }
+  /* head: the head alone, centered, neck cut by the card edge */
+  #features .head-obj { align-items: flex-end; justify-content: flex-start; }
+  #features .head-fig { position: absolute; width: 212px; max-width: none; left: calc(50% - 59px); bottom: -12px; }
+  #features .head-tag, #features .head-leader { display: none; }
+  /* injection card: anchored bottom-left, cut by the right and bottom edges */
+  #features .inj-obj { align-items: flex-end; }
+  #features .inj-card { width: calc(100% + 24px); }
+  #features .inj-title { padding-right: 32px; }
+  /* treatment response: the redrawn chart, bottom-aligned */
+  #features .crop-obj { align-items: flex-end; padding-bottom: 8px; }
+  #features .story-img { display: none; }
+  #features .story-mini { display: block; width: 100%; height: auto; overflow: hidden; }
+  /* heads-up: the message alone, sliding in from the card's right edge */
+  #features .tour-card:has(.nudge-obj) { grid-template-columns: minmax(0, 1fr) 50%; }
+  #features .nudge-obj { justify-content: center; padding: 12px 0; }
+  #features .med-chips, #features .nudge-got { display: none; }
+  #features .nudge { padding: 12px 10px 12px 12px; border-right: 0; border-radius: 16px 0 0 16px; box-shadow: none; }
+  #features .nudge .fc-body { font-size: 14px; line-height: 1.35; }
+}
+
+/* ── Report ─────────────────────────────────────────────── */
+.report-comp { position: relative; }
+.report-comp .glow { --glow: rgba(236, 170, 104, .18); width: 110%; }
+.report-comp .report-paper { z-index: 1; }
+/* Phone: the report alone (a QR on a phone screen is a QR nobody scans). */
+.report-comp .lobby-card { display: none; }
+@media (min-width: 600px) {
+  .report-comp { padding-bottom: 48px; }
+  .report-comp .lobby-card { display: grid; position: absolute; z-index: 2; bottom: 0; width: 180px; padding: 14px 14px 12px; gap: 6px; border-radius: 16px; left: -16px; }
+  .report-comp .lobby-card .lobby-top img { width: 20px; height: 20px; }
+}
+@media (min-width: 1024px) { .report-comp .lobby-card { left: -24px; transform: rotate(-3deg); } }
+.report-copy .t-line { margin-top: 24px; }
+.report-copy .t-small { margin-top: 12px; }
+.report-copy > .tlink { margin-top: 24px; }
+
+/* ── Ember Plus band ────────────────────────────────────── */
+/* the H2 gets a wider measure than the lead so it holds one line from 1024px */
+#plus .center-head { max-width: 880px; }
+.plus-tiles .tile-obj { position: relative; margin-top: 24px; flex: 1 0 auto; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; padding-bottom: 20px; }
+.pressure-mini { width: 100%; max-width: 340px; }
+.pressure-mini svg { width: 100%; height: auto; overflow: visible; }
+.pressure-obj .float-card { width: 100%; max-width: 320px; margin-top: 8px; }
+.plus-tiles .app-card { width: 100%; }
+
+/* Phone: the pressure tile shows the alert alone; objects stay compact. */
+@media (max-width: 599px) {
+  .plus-tiles .tile-obj { margin-top: 16px; padding-bottom: 16px; }
+  /* the tile's H3 already names the card, so the card drops its own label row */
+  .plus-tiles .app-card-label { display: none; }
+  .plus-tiles .app-card-headline { margin-top: 0; }
+  .plus-price { margin-top: 24px; }
+  .plus-price .tlink { margin-top: 12px; }
+  .pressure-obj .pressure-mini { display: none; }
+  .pressure-obj .float-card { margin-top: 0; }
+  .plus-tiles .app-card-headline { font-size: 20px; }
+}
+/* 600–767: stacked full width; tiles fit their content instead of a 360px floor */
+@media (min-width: 600px) and (max-width: 767px) { .plus-tiles .tile-card { min-height: 0; } }
+/* 768–1279: pressure and patterns side by side, the Brief full width with its
+   card beside the copy, so the cards keep short wraps and the chart's labels
+   stay at 14px or more. 3 across from 1280. */
+@media (min-width: 768px) and (max-width: 1279px) {
+  .plus-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .plus-tiles .tile-card:nth-child(3) {
+    grid-column: 1 / -1; min-height: 0;
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: auto 1fr; column-gap: 24px;
+    padding-bottom: var(--card-pad);
+  }
+  .plus-tiles .tile-card:nth-child(3) > .t-h3 { grid-column: 1; grid-row: 1; }
+  .plus-tiles .tile-card:nth-child(3) > .tour-cap { grid-column: 1; grid-row: 2; align-self: start; }
+  .plus-tiles .tile-card:nth-child(3) > .tile-obj { grid-column: 2; grid-row: 1 / span 2; margin-top: 0; padding-bottom: 0; justify-content: center; }
+}
+
+.plus-price { margin-top: 32px; text-align: center; }
+.plus-price .price-line { font-size: 17px; line-height: 1.4; color: var(--ink-hi); font-variant-numeric: tabular-nums; }
+.plus-price .t-small { margin-top: 4px; }
+.plus-price .tlink { margin-top: 16px; }
+
+/* ── Privacy strip ──────────────────────────────────────── */
+/* Below 768px the lock sits beside the headline (which holds 2 lines at 262px)
+   and the sentence and link run full width. */
+@media (max-width: 767px) {
+  #privacy .strip { grid-template-columns: 32px minmax(0, 1fr); gap: 12px 14px; align-items: start; }
+  #privacy .strip > div { display: contents; }
+  #privacy .strip-icon, #privacy .strip-icon svg { width: 32px; height: 32px; }
+  #privacy .strip-icon { margin-top: 1px; }
+  #privacy .strip-text, #privacy .strip > .tlink { grid-column: 1 / -1; }
+  #privacy .strip-text { margin-top: -4px; }
+  #privacy .strip > .tlink { justify-self: start; margin-top: 4px; }
+}
+
+/* ── Closing ────────────────────────────────────────────── */
+.close .t-lead { max-width: 24em; }

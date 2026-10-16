@@ -3,151 +3,101 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Ember for clinicians · The report your patient brings</title>
+<title>For clinicians | Ember Migraine Tracker</title>
 <meta name="robots" content="noindex">
-<meta name="description" content="A free migraine tracker built by a practicing headache specialist. Patients bring a 90-day calendar and a chart note you can read in about a minute.">
+<meta name="description" content="A free migraine tracker made by a practicing headache specialist. Patients bring 90 days on one page, with MIDAS and response to each preventive.">
+<meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#0a0a0a">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://embertracker.app/v3/providers/">
+<meta property="og:title" content="For clinicians | Ember Migraine Tracker">
+<meta property="og:description" content="A free migraine tracker made by a practicing headache specialist. Patients bring 90 days on one page, with MIDAS and response to each preventive.">
+<meta property="og:image" content="https://embertracker.app/v3/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Ember orb beside the line Migraine tracking, without the headache.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="For clinicians | Ember Migraine Tracker">
+<meta name="twitter:description" content="A free migraine tracker made by a practicing headache specialist. Patients bring 90 days on one page, with MIDAS and response to each preventive.">
+<meta name="twitter:image" content="https://embertracker.app/v3/assets/og.png">
+<meta name="twitter:image:alt" content="The Ember orb beside the line Migraine tracking, without the headache.">
 <link rel="icon" type="image/png" href="../assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..600;1,8..60,300..500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/v3.css?v=1">
-<style>
-  /* tokens the classification demo expects (carried over unchanged from the live providers page) */
-  :root { --head-blue: #4a8abf; --sea: #7fc0a8; --leaf: #5a9a6a; --sect: clamp(76px, 11vw, 132px); }
-  .marker {
-    position: absolute; width: 26px; height: 26px; margin: -13px 0 0 -13px; border-radius: 50%;
-    display: grid; place-items: center;
-    background: #ecaa68; color: #15120e; font: 700 12.5px/1 var(--sans);
-    box-shadow: 0 0 0 5px rgba(236,170,104,.22), 0 6px 18px rgba(0,0,0,.45);
-  }
-  .anat { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px 24px; margin: 30px auto 0; max-width: 1060px; padding: 0; list-style: none; }
-  .anat li { display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 12px; align-items: start; font-size: 14.5px; line-height: 1.45; color: var(--ink); }
-  .anat li b { display: block; color: var(--ink-hi); font-weight: 600; margin-bottom: 2px; }
-  .anat .marker { position: static; margin: 0; width: 26px; height: 26px; }
-  @media (max-width: 900px) { .anat { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  @media (max-width: 520px) { .anat { grid-template-columns: minmax(0, 1fr); } .marker { width: 20px; height: 20px; margin: -10px 0 0 -10px; font-size: 11px; } }
-  .note-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(28px, 5vw, 72px); align-items: center; }
-  @media (max-width: 900px) { .note-grid { grid-template-columns: minmax(0, 1fr); } }
-  .engine-host .engine-stage { background: transparent; }
-</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300..600&display=swap">
+<link rel="stylesheet" href="../assets/v3.css?v=3">
+<link rel="stylesheet" href="../assets/pages/providers.css?v=10">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
-<div class="draft-strip">V3 draft for review. <a href="https://embertracker.app/providers/">See the live page</a></div>
+<div class="draft-strip">V3 draft for review. <a href="https://embertracker.app/providers/">See the live page ›</a></div>
 
-<header class="nav">
+<header class="nav" id="nav">
   <div class="wrap nav-inner">
-    <a class="brand" href="../index.html" aria-label="Ember home"><img src="../assets/orb.webp" alt="" width="30" height="30">Ember</a>
+    <a class="brand" href="../" aria-label="Ember home"><img src="../assets/orb-120.webp" alt="" width="30" height="30">Ember</a>
     <nav class="nav-links" aria-label="Main">
-      <a href="../index.html">For patients</a>
-      <a class="hide-sm" href="index.html" aria-current="page">For clinicians</a>
-      <a class="btn" href="https://embertracker.app/providers/join/" target="_blank" rel="noopener">Add your clinic</a>
+      <a class="nav-link" href="../">For patients</a>
+      <a class="nav-link hide-phone" href="../provider-handoff/">Provider Handoff</a>
+      <a class="btn btn--sm" href="join/">Add your clinic</a>
     </nav>
   </div>
 </header>
 
 <main id="main">
 
-<!-- Hero: the artifact is the pitch -->
-<section class="pro-hero">
+<!-- 1 Hero: the report is the pitch -->
+<section class="sec pro-hero" aria-labelledby="hero-title">
   <div class="wrap">
-    <p class="eyebrow">For clinicians</p>
-    <h1 class="display" style="margin-top:18px">Your patient’s last 90 days, on one page.</h1>
-    <p class="lede">Ember is a free migraine tracker built by a practicing headache specialist. Patients log in seconds and send your clinic a report you can read in about a minute.</p>
+    <p class="label">For clinicians</p>
+    <h1 class="t-display" id="hero-title">Your patient’s last 90&nbsp;days, on one page.</h1>
+    <p class="t-lead">Ember is a free migraine tracker made by a practicing headache specialist. Patients send or bring this calendar and a chart note you can read in about a minute.</p>
     <div class="actions">
-      <a class="btn" href="../assets/sample-calendar.pdf" target="_blank" rel="noopener">Open the sample report</a>
-      <a class="btn btn--ghost" href="https://embertracker.app/providers/join/" target="_blank" rel="noopener">Add your clinic</a>
+      <a class="btn" href="../assets/sample-calendar.pdf">Open the sample report (PDF)</a>
+      <a class="btn btn--ghost" href="join/">Add your clinic</a>
     </div>
 
-    <div class="annot-stage">
-      <div class="stage" style="--atmo: rgba(246,242,234,.06)">
-        <a class="paper" href="../assets/sample-calendar.pdf" target="_blank" rel="noopener" style="position:relative" aria-label="Open the sample report (PDF)">
-          <img src="../assets/report.webp" alt="Sample 90-day calendar report with monthly strips of day type, impact and acute medications." width="1600" height="1235">
+    <div class="hero-report">
+      <figure class="report has-glow" id="report">
+        <div class="glow" aria-hidden="true"></div>
+        <a class="report-paper report-paper--flat" href="../assets/sample-calendar.pdf">
+          <img src="../assets/report.webp" srcset="../assets/report.webp 1600w, ../assets/report-2400.webp 2400w" sizes="(min-width: 1180px) 1100px, 100vw" alt="Sample Ember report (PDF) covering 51 days: 18 migraine days, 5 headache days, 18 impacted days and 19 clear days." width="1600" height="1235" fetchpriority="high">
           <span class="marker" style="left:5.4%;top:15.6%" aria-hidden="true">1</span>
           <span class="marker" style="left:18.9%;top:49%" aria-hidden="true">2</span>
           <span class="marker" style="left:5.4%;top:56%" aria-hidden="true">3</span>
           <span class="marker" style="left:61.6%;top:73.6%" aria-hidden="true">4</span>
         </a>
-      </div>
-      <ol class="anat">
-        <li><span class="marker">1</span><span><b>Totals up top</b>Migraine, headache, impacted and clear days for the window.</span></li>
-        <li><span class="marker">2</span><span><b>Treatment markers</b>Injections and devices land on the day they were logged.</span></li>
-        <li><span class="marker">3</span><span><b>Every date</b>Day type, impact and acute medication under each day.</span></li>
-        <li><span class="marker">4</span><span><b>Medication days</b>Each acute medication with its day count.</span></li>
+        <figcaption class="caption">Sample report. The fictional patient started logging May 20.</figcaption>
+      </figure>
+      <ol class="marker-legend">
+        <li><span class="marker marker--inline" aria-hidden="true">1</span><b>Day totals</b><span>Migraine, headache, impacted and clear days out of the days covered.</span></li>
+        <li><span class="marker marker--inline" aria-hidden="true">2</span><b>Treatment markers</b><span>Injection and device days marked on the date logged.</span></li>
+        <li><span class="marker marker--inline" aria-hidden="true">3</span><b>Each date</b><span>Period, day type, impact and acute medication in one column.</span></li>
+        <li><span class="marker marker--inline" aria-hidden="true">4</span><b>Medication days</b><span>Acute medications and the number of days each was taken.</span></li>
       </ol>
-      <p class="caption">Sample report, fictional patient.</p>
     </div>
+
+    <nav class="chip-row chip-row--scroll on-page" aria-label="On this page">
+      <a class="chip chip--sm" href="#classification">Classification</a>
+      <a class="chip chip--sm" href="#chart-note">Chart note</a>
+      <a class="chip chip--sm" href="#treatment">Treatment response</a>
+      <a class="chip chip--sm" href="#setup">Clinic setup</a>
+      <a class="chip chip--sm" href="#questions">Questions</a>
+    </nav>
   </div>
 </section>
 
-<!-- Connect your clinic -->
-<section class="panel" id="connect" style="--accent: var(--ember)">
+<!-- 2 How days are classified. The engine demo below is byte-identical to the
+     live providers page; data-copylint="ignore" because its strings are frozen. -->
+<section class="sec" id="classification" aria-labelledby="classification-title">
   <div class="wrap">
-    <div class="split" style="align-items:start">
-      <div class="copy">
-        <p class="eyebrow">For your clinic</p>
-        <h2 class="h2">Connect your clinic for free.</h2>
-        <p class="lede">Patients scan your clinic’s code and send their report to your inbox from their own phones. Reports don’t pass through Ember’s servers.</p>
-      </div>
-      <div class="copy" style="padding-top:clamp(0px,2vw,30px)">
-        <ol class="steps">
-          <li>Add your clinic and the secure inbox that should receive reports.</li>
-          <li>Put your clinic’s code in the lobby or the visit summary.</li>
-          <li>Reports arrive before the visit, reviewed and sent by the patient.</li>
-        </ol>
-      </div>
-    </div>
-    <div class="who" style="margin-top:clamp(32px,5vw,52px)">
-      <div class="pro-card">
-        <h3 class="h3">Clinic direct send</h3>
-        <p class="small">Your clinic appears by name in Ember, so patients don’t type an address. You supply the inbox; there’s no cost to you or your patients.</p>
-        <div class="actions"><a class="btn" href="https://embertracker.app/providers/join/" target="_blank" rel="noopener">Add your clinic</a></div>
-      </div>
-      <div class="pro-card">
-        <h3 class="h3">Provider handoff</h3>
-        <p class="small">Build a patient’s medication plan before they leave the visit. They import it into Ember. The tool runs in your browser.</p>
-        <div class="actions"><a class="btn btn--ghost" href="https://embertracker.app/provider-handoff/" target="_blank" rel="noopener">Open the handoff tool</a></div>
-      </div>
+    <div class="center-head classify-head">
+      <h2 class="t-h2" id="classification-title">How a day becomes a migraine day.</h2>
+      <p class="t-lead">Every classification follows fixed rules built on ICHD-3 criteria. No AI guesses, no black box.</p>
+      <a class="tlink" href="../references/">Clinical references</a>
     </div>
   </div>
-</section>
-
-<!-- What you receive -->
-<section class="panel">
-  <div class="wrap">
-    <div class="copy" style="max-width:720px;margin-bottom:clamp(32px,5vw,52px)">
-      <p class="eyebrow">What you receive</p>
-      <h2 class="h2">The numbers you ask for at every follow-up.</h2>
-    </div>
-    <div class="three">
-      <div>
-        <h3 class="h3">90-day calendar</h3>
-        <p class="small">Day type, impact, acute medications and menstrual days for every date, with treatment starts on the day they happened.</p>
-      </div>
-      <div>
-        <h3 class="h3">Chart note</h3>
-        <p class="small">Monthly migraine and headache days, MIDAS, acute medication days and response to each preventive. Patients paste it into your portal.</p>
-      </div>
-      <div>
-        <h3 class="h3">Safety flags</h3>
-        <p class="small">Acute medication days counted by class against standard overuse thresholds. Attacks with one-sided weakness are called out.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Classification engine (carried over unchanged from the live page) -->
-<section class="panel" style="padding-bottom: clamp(40px, 6vw, 72px)">
-  <div class="wrap">
-    <div class="copy center" style="justify-items:center;max-width:760px;margin:0 auto clamp(24px,4vw,40px)">
-      <p class="eyebrow">How days are counted</p>
-      <h2 class="h2">See how Ember classifies a day.</h2>
-      <p class="lede">Every classification follows fixed rules built on ICHD-3 criteria. No AI guesses, no black box.</p>
-    </div>
-  </div>
-  <div class="wrap engine-host">
+  <div class="wrap engine-host" data-copylint="ignore">
 <!-- BEGIN: Ember Classification Engine Animation -->
 
 <style>
@@ -970,85 +920,211 @@
   </div>
 </section>
 
-<!-- Chart note -->
-<section class="panel" style="--accent: var(--amber)">
-  <div class="wrap note-grid">
-    <div class="copy">
-      <p class="eyebrow">The chart note</p>
-      <h2 class="h2">Ready to paste into the visit note.</h2>
-      <p class="lede">Changes are shown against the patient’s pre-treatment baseline, with reporting completeness up top.</p>
-      <div class="note-block" aria-label="Excerpt of Ember's chart note">For review by your provider. Data sourced
-from patient-reported daily logs.
-
-<span class="nh">HEADACHE DIARY SUMMARY</span>
-Apr 9, 2026 – Jul 7, 2026 (90 days)
-100% reporting compliance — HIGH DATA CONFIDENCE
-
-<span class="nh">DATA THIS 90 DAY PERIOD</span>
-  Migraine days:   18/mo → 12/mo  <span class="ng">(33% reduction)</span>
-  Total HA days:   24/mo → 17/mo  <span class="ng">(28% reduction)</span>
-  Symptom days:    9 (3/mo)
-  Clear days:      29
-  Impacted days:   18/mo → 9/mo   <span class="ng">(50% reduction)</span>
-  Avg severity:    7/10 → 4/10    <span class="ng">(43% reduction)</span>
-  MIDAS:           42 → 9         (Grade IV → II)
-
-<span class="nd">The note continues: acute medication use,
-hormonal pattern, treatment response.</span></div>
+<!-- 3 Chart note. The excerpt is real app output: buildProviderChartNoteFromData
+     over the app's demo data, dated Jul 7, 2026 (the run behind card-story.webp).
+     Rows are verbatim; sections in between are skipped (dotted gap). -->
+<section class="sec" id="chart-note" aria-labelledby="note-title">
+  <div class="wrap split split--mirror split--wide note-split">
+    <div class="split-copy">
+      <h2 class="t-h2" id="note-title">Ready to paste into the chart.</h2>
+      <p class="t-lead">The chart note shows migraine and headache days against the patient’s pre-treatment baseline, with logging coverage up top.</p>
     </div>
-    <div class="stage" style="--atmo: rgba(232,165,71,.10)">
-      <div class="phone" style="--pw: 280px"><img src="../assets/screen-chartnote.webp" alt="The chart note as the patient sees it in Ember, ready to share." width="760" height="1650" loading="lazy"></div>
-      <p class="caption">Sample data.</p>
-    </div>
-  </div>
-</section>
-
-<!-- Treatment response -->
-<section class="panel" style="--accent: var(--mig)">
-  <div class="wrap split flip">
-    <div class="copy">
-      <p class="eyebrow">Treatment response</p>
-      <h2 class="h2">Is the preventive working?</h2>
-      <p class="lede">Monthly migraine days before and after each preventive’s start date, including Botox and CGRP antibodies.</p>
-      <p class="small">Overlapping treatments and gaps in logging are marked. Patient estimates are labeled as estimates.</p>
-    </div>
-    <div class="stage" style="--atmo: rgba(155,122,204,.13)">
-      <div class="stack">
-        <div class="ui-card base"><img src="../assets/card-baseline.webp" alt="Baseline comparison: migraine days 33% lower, headache days 17% lower, impacted days 50% lower than before treatment." width="760" height="836" loading="lazy"></div>
-        <div class="ui-card story"><img src="../assets/card-story.webp" alt="Treatment story chart: migraine days fell from 18 to 11 a month after starting Botox, then held at 11 after adding Emgality." width="760" height="576" loading="lazy"></div>
-      </div>
-      <p class="caption">Sample data.</p>
+    <div class="split-object">
+      <figure class="note-fig">
+        <div class="note" data-copylint="app" role="group" aria-label="Chart note excerpt">
+          <div class="ln ln--h">HEADACHE LOG SUMMARY</div>
+          <div class="ln ln--wrap">Apr 9 to Jul 7, 2026 (90 days): 90 logged; 100% reporting compliance <span class="nw">— HIGH TRACKING COVERAGE</span></div>
+          <div class="ln ln--gap"></div>
+          <div class="ln ln--h">DATA THIS 90 DAY PERIOD</div>
+          <div class="ln ln--row">  Migraine days:      18/mo <span class="nw">(patient estimate)</span>  →  11/mo   <span class="nw">(39% reduction)</span></div>
+          <div class="ln ln--row">  Total HA days:      24/mo <span class="nw">(patient estimate)</span>  →  17/mo   <span class="nw">(30% reduction)</span></div>
+          <div class="ln ln--row">  Symptom days:       9 (3/mo)</div>
+          <div class="ln ln--row">  Clear days:         29</div>
+          <div class="ln ln--row">  Impacted days:      18/mo <span class="nw">(patient estimate)</span>  →  7/mo   <span class="nw">(62% reduction)</span></div>
+          <div class="ln ln--row">  Pain severity:      38 mild, 10 moderate, 0 severe days; average 4/10 (n=48); 7/10 recalled baseline, 43% reduction</div>
+          <div class="ln ln--row">  Pain rating (0-10): 4/10 (n=48)</div>
+          <div class="ln ln--row ln--annot">  MIDAS:              42  →  9 <span class="nw">(Grade IV → II, latest Jul 2, 2026)</span><span class="annot annot--right" style="--leader:64px" aria-hidden="true"><span class="annot-label">MIDAS</span><span class="annot-value">Score and grade over time</span></span></div>
+          <span class="note-gap" aria-hidden="true"></span>
+          <div class="ln ln--h">TREATMENT RESPONSE</div>
+          <div class="ln ln--block ln--annot">Botox (started Feb 2026)<span class="annot annot--right" style="--leader:64px" aria-hidden="true"><span class="annot-label">Preventives</span><span class="annot-value">Response from each start date</span></span></div>
+          <div class="ln ln--dash">- Baseline (patient estimate): 24 HA days/mo, severity 7/10</div>
+          <div class="ln ln--dash">- MIDAS: 42 → 9 <span class="nw">(79% reduction)</span></div>
+          <div class="ln ln--dash">- Average severity (mild/moderate/severe): 7/10 → 4/10 <span class="nw">(43% reduction)</span></div>
+          <div class="ln ln--dash">- Migraine days: 18 → 11/mo <span class="nw">(39% reduction)</span></div>
+          <div class="ln ln--dash">- Total HA days: 24 → 17/mo <span class="nw">(30% reduction)</span></div>
+          <div class="ln ln--gap"></div>
+          <div class="ln ln--block">Emgality (added May 2026, on Botox)</div>
+          <div class="ln ln--dash">- Pre-add logged Feb to May 2026 (n=81 days): 19 HA days/mo, average severity (mild/moderate/severe) 4/10</div>
+        </div>
+        <figcaption class="caption">Example data.</figcaption>
+      </figure>
     </div>
   </div>
 </section>
 
-<!-- Data -->
-<section class="panel">
-  <div class="wrap privacy">
-    <div class="lock" aria-hidden="true">
-      <svg viewBox="0 0 48 48" fill="none" stroke="#ecaa68" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="11" y="21" width="26" height="20" rx="5"/><path d="M16 21v-5a8 8 0 0 1 16 0v5"/><circle cx="24" cy="31" r="2" fill="#ecaa68"/></svg>
-    </div>
-    <div class="copy" style="gap:12px">
-      <h2 class="h3" style="font-size:clamp(28px,3.4vw,40px)">Diary data stays on the patient’s phone.</h2>
-      <p class="lede">Patients choose when to share a report. Ember doesn’t diagnose; you interpret the data in clinical context.</p>
-    </div>
-    <a class="link" href="https://embertracker.app/references/" target="_blank" rel="noopener">Clinical references</a>
-  </div>
-</section>
-
-<!-- Closing -->
-<section class="panel closing" id="get">
+<!-- 4 Treatment response and safety -->
+<section class="sec" id="treatment" aria-labelledby="treatment-title">
   <div class="wrap">
-    <img class="closing-orb" src="../assets/orb-rays.webp" alt="" width="1000" height="1000" loading="lazy">
-    <h2 class="h2">Know a patient who might benefit?</h2>
-    <p class="lede">Ember is free for patients on iPhone and Android. Send them to embertracker.app.</p>
-    <div class="badges">
-      <a href="https://apps.apple.com/us/app/ember-migraine-tracker/id6762041852" target="_blank" rel="noopener"><img src="../assets/app-store-badge.svg" alt="Download on the App Store" width="144" height="48"></a>
-      <a class="play" href="https://play.google.com/store/apps/details?id=com.cascadeheadache.ember" target="_blank" rel="noopener"><img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" width="646" height="250" loading="lazy" onerror="this.parentElement.classList.add('nobadge')"><span class="badge-fallback">Get it on Google Play</span></a>
+    <div class="center-head">
+      <h2 class="t-h2" id="treatment-title">Migraine days before and after each preventive.</h2>
     </div>
-    <div class="after">
-      <span>Questions or feedback? <a class="link" href="https://embertracker.app/contact/" target="_blank" rel="noopener">Contact us</a></span>
+    <div class="treat-grid">
+      <article class="tour-card tour-card--wide treat-card">
+        <h3 class="t-h3">Treatment response</h3>
+        <p class="tour-cap">Patient estimates are labeled, and overlapping treatments and logging gaps are marked.</p>
+        <figure class="treat-fig">
+          <img class="treat-img" src="../assets/crop-story-tabs.webp" alt="Treatment chart: migraine days fell from 18 to 11 a month after Botox started and stayed at 11 after Emgality was added." width="716" height="478" loading="lazy">
+          <figcaption class="caption">Example data.</figcaption>
+        </figure>
+      </article>
+      <article class="tour-card tour-card--wide treat-card">
+        <h3 class="t-h3">Safety flags</h3>
+        <p class="tour-cap">Both appear in the chart note only when they apply.</p>
+        <dl class="flags">
+          <div class="flag">
+            <dt>Medication overuse</dt>
+            <dd>Acute medication days are counted by class against 9- or 14-day monthly limits. Gepants never count.</dd>
+          </div>
+          <div class="flag">
+            <dt>One-sided weakness</dt>
+            <dd>Patients see a stroke-safety card first, and the note lists the attack dates.</dd>
+          </div>
+        </dl>
+      </article>
     </div>
+  </div>
+</section>
+
+<!-- 5 Clinic setup -->
+<section class="sec" id="setup" aria-labelledby="setup-title">
+  <div class="wrap split setup-split">
+    <div class="split-copy">
+      <h2 class="t-h2" id="setup-title">Connect your clinic.</h2>
+      <p class="t-lead">Ember is used in headache clinics. Patients review the report on their phone and send it to your secure inbox.</p>
+      <ol class="steps">
+        <li>Request setup with your report inbox.</li>
+        <li>We confirm the address and set up a test report.</li>
+        <li>Post the QR code in your lobby.</li>
+        <li>Patients scan it, and Ember fills in your inbox.</li>
+      </ol>
+      <p class="t-small">Without setup, patients can still email the report to any provider.</p>
+      <figure class="lobby-fig">
+        <div class="lobby-card lobby-card--sm" data-copylint="app">
+          <span class="lobby-top"><img src="../assets/orb-120.webp" alt="" width="20" height="20" loading="lazy">Ember</span>
+          <b class="lobby-title">Send to provider</b>
+          <img class="qr" src="../assets/qr-home.svg" alt="" aria-hidden="true" width="132" height="132" loading="lazy">
+          <span class="lobby-hint">Scan with your phone</span>
+        </div>
+        <figcaption class="caption">Example lobby card.</figcaption>
+      </figure>
+    </div>
+    <div class="split-object">
+      <figure class="path-fig">
+        <div class="path" role="img" aria-label="Report path: the patient’s phone, then their email app, then your inbox. Ember’s servers are not in the path.">
+          <div class="path-row" aria-hidden="true">
+            <div class="path-node">
+              <span class="path-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6.5" y="2.5" width="11" height="19" rx="2.75"/><path d="M10.5 18.5h3"/></svg></span>
+              <span class="path-label">Patient’s phone</span>
+            </div>
+            <span class="path-arrow"></span>
+            <div class="path-node">
+              <span class="path-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M3.8 7.2l8.2 5.8 8.2-5.8"/></svg></span>
+              <span class="path-label">Their email app</span>
+            </div>
+            <span class="path-arrow"></span>
+            <div class="path-node">
+              <span class="path-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 13.5 6.2 6.4A2 2 0 0 1 8.1 5h7.8a2 2 0 0 1 1.9 1.4l2.7 7.1V17a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2z"/><path d="M3.5 13.5H8l1.5 2.5h5l1.5-2.5h4.5"/></svg></span>
+              <span class="path-label">Your inbox</span>
+            </div>
+          </div>
+          <div class="path-off" aria-hidden="true">
+            <div class="path-node path-node--off">
+              <span class="path-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="7" rx="2"/><rect x="4" y="13" width="16" height="7" rx="2"/><path d="M8 7.5h.01M8 16.5h.01"/></svg></span>
+              <span class="path-label">Ember’s servers</span>
+            </div>
+            <span class="path-tag">Not in the path</span>
+          </div>
+        </div>
+        <figcaption class="caption">When a patient sends from their own mail or share sheet.</figcaption>
+      </figure>
+      <div class="grid-2 connect-cards">
+        <article class="card connect-card">
+          <div class="connect-text">
+            <h3 class="t-h3">Clinic connection</h3>
+            <p>Patients pick your clinic by name, and it stays in their Profile.</p>
+          </div>
+          <a class="btn" href="join/">Add your clinic</a>
+        </article>
+        <article class="card connect-card">
+          <div class="connect-text">
+            <h3 class="t-h3">Provider Handoff</h3>
+            <p>Set up a patient’s medications and limits in your browser for them to import.</p>
+          </div>
+          <a class="btn btn--ghost" href="../provider-handoff/">Open the handoff tool</a>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 Questions -->
+<section class="sec sec--band" id="questions" aria-labelledby="q-title">
+  <div class="wrap faq">
+    <h2 class="t-h2 faq-title" id="q-title">Questions from clinicians.</h2>
+    <div class="faq-list">
+      <details name="faq-pro" open>
+        <summary>Who can see a patient’s report?</summary>
+        <div class="faq-a"><p>Only the people the patient sends it to. A report emailed or shared from the patient’s phone doesn’t pass through Ember’s servers, so Ember’s team never receives it.</p></div>
+      </details>
+      <details name="faq-pro">
+        <summary>Does Ember connect to our EHR?</summary>
+        <div class="faq-a"><p>No. The report is a PDF your staff can attach to the chart. Patients can also copy the chart note as plain text and send it through your patient portal.</p></div>
+      </details>
+      <details name="faq-pro">
+        <summary>Does a patient need Ember Plus?</summary>
+        <div class="faq-a"><p>No. Logging and the report are free to use. Ember Plus is an optional subscription, and the report doesn’t need it.</p></div>
+      </details>
+      <details name="faq-pro">
+        <summary>What if a patient logs only some days?</summary>
+        <div class="faq-a"><p>The note says so in its coverage line, which separates logged days from presumed-clear and unknown ones. Unlogged days count as clear only if the patient chose that setting, and the calendar marks missed days with a dash.</p></div>
+      </details>
+      <details name="faq-pro">
+        <summary>Can I change a patient’s medication limits?</summary>
+        <div class="faq-a"><p>Yes. Set each acute class’s monthly limit in Provider Handoff. After the patient imports the plan, Ember’s overuse warnings use your limits.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- 7 Privacy strip -->
+<section class="sec sec--compact strip-sec" id="privacy" aria-labelledby="privacy-title">
+  <div class="wrap">
+    <div class="strip">
+      <span class="strip-icon" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="17.5" width="22" height="16" rx="4"/><path d="M13.5 17.5v-4a6.5 6.5 0 0 1 13 0v4"/><path d="M20 24v3.5"/></svg></span>
+      <div>
+        <h2 class="strip-title" id="privacy-title">Health records stay on the patient’s phone.</h2>
+        <p class="strip-text">We don’t sell health data or use it for ads.</p>
+      </div>
+      <a class="tlink" href="../privacy/">Privacy policy</a>
+    </div>
+  </div>
+</section>
+
+<!-- 8 Closing -->
+<section class="sec close" id="get" aria-labelledby="get-title">
+  <div class="wrap">
+    <img class="close-orb close-orb--mark" src="../assets/orb-120.webp" alt="" aria-hidden="true" width="64" height="64" loading="lazy">
+    <h2 class="t-h2-close" id="get-title">Recommend Ember to your patients.</h2>
+    <p class="t-lead">It’s free on iPhone and Android. Send them to embertracker.app.</p>
+    <div class="badges" role="group" aria-label="Store links">
+      <a class="badge-apple" href="https://apps.apple.com/us/app/ember-migraine-tracker/id6762041852"><img src="../assets/app-store-badge.svg" alt="Download on the App Store" width="132" height="44" loading="lazy"></a>
+      <a class="badge-play" href="https://play.google.com/store/apps/details?id=com.cascadeheadache.ember"><img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" width="168" height="65" loading="lazy" onerror="this.parentElement.classList.add('nobadge')"><span class="nobadge-text">Get it on Google Play</span></a>
+    </div>
+    <div class="qr-tile desktop-only">
+      <span class="qr-face" aria-hidden="true"><img src="../assets/qr-home.svg" alt="" width="84" height="84" loading="lazy"></span>
+      <p class="t-small">Scan to get Ember on your phone.</p>
+    </div>
+    <p class="close-contact"><a class="tlink" href="../contact/">Contact the Ember team</a></p>
   </div>
 </section>
 
@@ -1056,25 +1132,46 @@ hormonal pattern, treatment response.</span></div>
 
 <footer class="foot">
   <div class="wrap">
-    <div class="foot-grid">
-      <div>
-        <a class="brand" href="../index.html"><img src="../assets/orb.webp" alt="" width="30" height="30">Ember</a>
-        <p>A migraine and headache tracker built by a headache specialist.</p>
-        <p>Ember helps patients track and organize what they experience. It doesn’t diagnose, and it isn’t a substitute for clinical care.</p>
+    <div class="foot-top">
+      <div class="foot-id">
+        <a class="brand" href="../" aria-label="Ember home"><img src="../assets/orb-120.webp" alt="" width="30" height="30" loading="lazy">Ember</a>
+        <p class="foot-tagline">Migraine and headache tracker for iPhone and Android.</p>
       </div>
-      <nav aria-label="Footer">
-        <a href="../index.html">For patients</a>
-        <a href="https://embertracker.app/plus/">Ember Plus</a>
-        <a href="https://embertracker.app/contact/">Contact</a>
-        <a href="https://embertracker.app/references/">References</a>
-        <a href="https://embertracker.app/privacy/">Privacy</a>
-        <a href="https://embertracker.app/terms/">Terms</a>
+      <nav class="foot-groups" aria-label="Footer">
+        <div class="foot-group">
+          <p class="foot-label">Ember</p>
+          <ul>
+            <li><a href="../plus/">Ember Plus</a></li>
+            <li><a href="../contact/">Contact</a></li>
+            <li><a href="../delete-account/">Delete account</a></li>
+          </ul>
+        </div>
+        <div class="foot-group">
+          <p class="foot-label">Clinicians</p>
+          <ul>
+            <li><a href="./" aria-current="page">For clinicians</a></li>
+            <li><a href="join/">Add your clinic</a></li>
+            <li><a href="../provider-handoff/">Provider Handoff</a></li>
+            <li><a href="../references/">Clinical references</a></li>
+          </ul>
+        </div>
+        <div class="foot-group">
+          <p class="foot-label">Legal</p>
+          <ul>
+            <li><a href="../privacy/">Privacy</a></li>
+            <li><a href="../consumer-health/">Consumer health privacy</a></li>
+            <li><a href="../terms/">Terms</a></li>
+          </ul>
+        </div>
       </nav>
     </div>
-    <p class="legal">© 2026 Cascade Headache, PLLC</p>
+    <div class="foot-bottom">
+      <p class="foot-disclaimer">Ember helps patients track and organize what they experience. It doesn’t diagnose, and it isn’t a substitute for clinical care.</p>
+      <p class="foot-legal">© 2026 Cascade Headache, PLLC</p>
+    </div>
   </div>
 </footer>
 
-<script src="../assets/v3.js?v=1"></script>
+<script src="../assets/v3.js?v=3" defer></script>
 </body>
 </html>

@@ -1,0 +1,17 @@
+/* Contact page only (v3/contact/). Form styles live in ../v3.css §13.
+   One desktop screen: H1, lead and routing rows on the left, the form on the right. */
+.contact { padding-block: 40px 72px; }
+@media (min-width: 600px) { .contact { padding-block: 64px 96px; } }
+@media (min-width: 1024px) { .contact { padding-block: 88px 128px; } .contact .form-copy { padding-top: 8px; } }
+
+/* desktop: each sentence of the lead gets its own line */
+@media (min-width: 1024px) { .contact .t-lead { max-width: 19em; } }
+.contact .route-list { max-width: 560px; }
+.contact .route-list .tlink { white-space: nowrap; min-height: 44px; align-items: center; }
+/* keep the privacy link in one piece on phones */
+.contact .form-note a { white-space: nowrap; }
+/* Tablet (600–1023): the column is stacked, so the routing rows and the form
+   fill the container instead of stopping at 560px beside an empty strip. */
+@media (min-width: 600px) and (max-width: 1023px) {
+  .contact .route-list, .contact .form-card { max-width: none; }
+}

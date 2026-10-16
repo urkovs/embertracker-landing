@@ -1,0 +1,178 @@
+/* Ember Plus page only (v3/plus/index.html). Shared components live in ../v3.css. */
+
+/* ── Hero ───────────────────────────────────────────────── */
+.plus-hero { padding-top: 32px; }
+@media (min-width: 600px) { .plus-hero { padding-top: 48px; } }
+@media (min-width: 1024px) { .plus-hero { padding-bottom: 64px; } }
+.plus-hero .split-copy > .status-soon + .t-display { margin-top: 12px; }
+@media (min-width: 600px) { .plus-hero .split-copy > .status-soon + .t-display { margin-top: 16px; } }
+.plus-hero .t-lead { max-width: 26em; }
+/* launch line under the buttons (data-plus-soon: hides at launch) */
+.plus-hero .split-copy > .plus-launch { margin-top: 16px; }
+
+/* Pressure composition: the real pattern alert arrives over the top of a
+   forecast card, the way a banner notification lands on a phone. */
+.press-comp { margin: 0; }
+.press-comp .glow { --glow: rgba(236, 170, 104, .16); width: 115%; top: 46%; }
+.press-stage { display: flex; flex-direction: column; }
+/* the alert's right edge stays on the card's edge, inside the grid */
+.press-notif { position: relative; z-index: 2; align-self: flex-end; width: min(100%, 320px); }
+.press-card {
+  position: relative; z-index: 1;
+  margin-top: -20px; padding: 42px 22px 18px;
+  background: var(--surface); border: 1px solid var(--hair-2); border-radius: var(--radius-card);
+}
+@media (min-width: 600px) {
+  .press-card { margin-top: -44px; padding: 28px 28px 20px; }
+}
+
+.press-plot {
+  position: relative; height: 176px;
+  /* faint value grid, decoration only */
+  background: linear-gradient(to bottom, var(--hair) 1px, transparent 1px) 0 0 / 100% 25%;
+}
+@media (min-width: 600px) { .press-plot { height: 220px; } }
+.press-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.press-val { position: absolute; z-index: 1; display: flex; align-items: baseline; gap: 6px; font-size: 15px; line-height: 1; color: var(--ink-mut); white-space: nowrap; }
+.press-num { font: 400 30px/1 var(--serif); color: var(--ink-hi); letter-spacing: -.01em; font-variant-numeric: tabular-nums; font-optical-sizing: auto; }
+.press-val--hi { left: 0; top: 0; }
+.press-val--lo { right: 0; top: calc(78% + 10px); }
+@media (min-width: 600px) { .press-val--lo { top: calc(78% + 14px); } }
+.press-val--lo .press-num { font-size: 26px; }
+@media (min-width: 1024px) { .press-num { font-size: 36px; } .press-val--lo .press-num { font-size: 30px; } }
+/* starts Thu 4:00 PM: x 55%, where the curve sits at 24% of the plot */
+.press-mark { position: absolute; left: 55%; top: 24%; bottom: 0; width: 0; border-left: 1.2px dashed rgba(236, 170, 104, .7); }
+.press-mark::before {
+  content: ""; position: absolute; left: -6.5px; top: -6px; width: 12px; height: 12px; border-radius: 50%;
+  background: var(--surface); border: 2px solid var(--ember); box-sizing: border-box;
+}
+.press-axis { position: relative; display: flex; justify-content: space-between; height: 40px; padding-top: 14px; border-top: 1px solid var(--hair-2); font-size: 15px; line-height: 1; color: var(--ink-mut); font-variant-numeric: tabular-nums; }
+.press-now { position: absolute; left: 55%; transform: translateX(-50%); color: var(--ink); white-space: nowrap; }
+.press-comp .caption { margin-top: 20px; }
+
+/* ── What's included (bento) ────────────────────────────── */
+.bento { display: grid; gap: var(--grid-gap); grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 600px) {
+  .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .bt--patterns { grid-column: 1 / -1; }
+}
+/* Desktop row 2: the Brief (span 3) beside the two text tiles stacked in one
+   span-3 column, so the short text tiles don't stretch to the Brief's height. */
+@media (min-width: 1024px) {
+  .bento { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .bt--patterns { grid-column: span 4; }
+  .bt--watch { grid-column: span 2; }
+  .bt--brief { grid-column: 1 / span 3; grid-row: span 2; }
+  .bt--text { grid-column: 4 / span 3; }
+  .bt--crop { grid-column: span 3; }
+}
+.bt { min-height: 0; }
+.bento .tour-cap { text-wrap: pretty; }
+.bt-obj { position: relative; margin-top: 24px; flex: 1 0 auto; display: flex; align-items: flex-end; }
+
+/* app cards (pattern, Brief) sit on the tile's bottom padding */
+.bt-obj--card { justify-content: center; padding-bottom: var(--card-pad); }
+.bt-obj--card .app-card { width: 100%; max-width: 360px; }
+@media (min-width: 600px) { .bt--watch { min-height: 400px; } }
+/* tablet: Brief pairs with the Watch tile. Desktop: row 2 takes the Brief's own height. */
+@media (min-width: 600px) and (max-width: 1023px) { .bt--brief { min-height: 400px; } }
+/* desktop: the Brief card starts on the copy's edge and matches the Health
+   slice's width, so the left column lines up from row 2 to row 3 */
+@media (min-width: 1024px) {
+  .bt--brief .bt-obj--card { justify-content: flex-start; }
+  .bt--brief .app-card { max-width: 420px; }
+}
+
+/* Your patterns: wide tile. Copy top left, the card bottom right. */
+@media (min-width: 600px) {
+  .bt--patterns { min-height: 340px; }
+  .bt--patterns .bt-obj--card { justify-content: flex-end; margin-top: 32px; }
+  .bt-obj--card .bt-pattern { max-width: 420px; }
+  .bt-pattern .app-card-headline { font-size: 26px; }
+}
+@media (min-width: 1024px) {
+  .bt-obj--card .bt-pattern { max-width: 460px; padding: 20px 22px; }
+  .bt-pattern .app-card-headline { font-size: 30px; }
+}
+@media (min-width: 1024px) { .bt--patterns { min-height: 400px; } }
+
+/* Apple Watch: the real Watch screens, the entry screen in front */
+.watch-pair { justify-content: center; margin-inline: calc(var(--card-pad) * -1); padding: 0 16px var(--card-pad); }
+.watch-face {
+  display: block; flex: none; overflow: hidden;
+  border-radius: 24%/20%; border: 1px solid var(--hair-2); background: #0a0a0a;
+}
+.watch-face img { width: 100%; }
+/* the entry capture ends mid-button; fade the list out the way watchOS scrolls it */
+.watch-face--front img { -webkit-mask-image: linear-gradient(to bottom, #000 64%, transparent 85%); mask-image: linear-gradient(to bottom, #000 64%, transparent 85%); }
+.watch-face--back { width: 148px; margin-bottom: 72px; }
+.watch-face--front { width: 184px; margin-left: -28px; box-shadow: 0 18px 40px rgba(0, 0, 0, .45); }
+@media (min-width: 1024px) { .watch-face--back { width: 150px; } .watch-face--front { width: 186px; } }
+/* Under 360px, and at 1024–1179 where the span-2 tile is about 300–350px,
+   the full-size pair runs past the tile's edges */
+@media (max-width: 359px), (min-width: 1024px) and (max-width: 1179px) {
+  .watch-face--back { width: 128px; margin-bottom: 62px; }
+  .watch-face--front { width: 160px; margin-left: -24px; }
+}
+
+/* Text tiles: the app's own feature glyph with the words right under it */
+.bt--text { padding-bottom: var(--card-pad); justify-content: flex-start; gap: 20px; }
+.bt-icon {
+  display: grid; place-items: center; width: 48px; height: 48px; flex: none;
+  border-radius: 14px; background: var(--raised); border: 1px solid var(--hair); color: var(--ink);
+}
+.bt-icon svg { width: 24px; height: 24px; }
+.bt-copy .t-h3 + .tour-cap { margin-top: 8px; }
+/* Desktop: a short row. The glyph sits left of the H3 and caption, and the
+   pair is centered in the tile's height. */
+@media (min-width: 1024px) {
+  .bt--text {
+    display: grid; grid-template-columns: 48px minmax(0, 1fr);
+    column-gap: 20px; align-content: center; align-items: start;
+  }
+}
+
+/* Health: a slice of the real screen rising from the tile's bottom edge,
+   fitted to the tile's width at every size */
+.bt-obj--crop { justify-content: flex-start; }
+.bt-shot {
+  width: 100%; max-width: 420px; flex: none;
+  border: 1px solid var(--hair-2); border-bottom: 0; border-radius: 20px 20px 0 0;
+}
+@media (min-width: 1024px) { .bt--crop { min-height: 440px; } }
+
+/* Backup: the capture is already a card, so it is cut to that card's own edge
+   (x 41–798, y 23–566 of 840 × 585, corner radius 35) and floats like the
+   pattern and Brief cards. No second frame. Lighten drops the capture's
+   #0a0a0a corners into the tile. */
+.bt-obj--backup { justify-content: flex-start; }
+.bt-cardshot {
+  width: 100%; max-width: 380px; aspect-ratio: 758 / 544; overflow: hidden;
+  border-radius: 4.6% / 6.4%; box-shadow: 0 18px 40px rgba(0, 0, 0, .45);
+}
+.bt-cardshot img {
+  width: calc(100% * 840 / 758); max-width: none;
+  margin: calc(-100% * 23 / 758) 0 0 calc(-100% * 41 / 758);
+  mix-blend-mode: lighten;
+}
+
+/* ── Free and Plus ──────────────────────────────────────── */
+.plan-card .check-list { margin-top: 16px; }
+
+/* ── Pricing ────────────────────────────────────────────── */
+.pricing-card { text-align: left; }
+.price-tile { display: flex; flex-direction: column; }
+.price-tile .t-num { margin-bottom: 6px; }
+.price-terms { margin-top: 20px; display: grid; gap: 4px; }
+.price-terms .t-line + .t-small { margin-top: 4px; }
+
+/* ── Questions ──────────────────────────────────────────── */
+/* The approved title needs 5 columns to hold 2 lines at 56px. */
+@media (min-width: 1024px) {
+  .faq-title { grid-column: 1 / span 5; align-self: start; }
+  .faq-list { grid-column: 6 / span 7; }
+}
+
+/* ── Closing ────────────────────────────────────────────── */
+/* spec §6.4: a 180px orb here, smaller than the home closing */
+@media (min-width: 1024px) { .close .close-orb { width: 180px; } }

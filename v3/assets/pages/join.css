@@ -1,0 +1,20 @@
+/* Clinic join page only (v3/providers/join/). Form styles live in ../v3.css §13;
+   the form markup and /assets/web-form.* are the live contract, unchanged.
+   One desktop screen: H1, lead and next steps on the left, the form on the right. */
+.join { padding-block: 40px 72px; }
+@media (min-width: 600px) { .join { padding-block: 64px 96px; } }
+@media (min-width: 1024px) { .join { padding-block: 88px 128px; } .join .form-copy { padding-top: 8px; } }
+
+.join .t-display { max-width: 9em; }
+.join .list-title { font-size: 15px; font-weight: 600; line-height: 1.3; color: var(--ink-hi); }
+.join .form-copy > .t-lead + .list-title { margin-top: var(--lead-cta); }
+.join .list-title + .steps { margin-top: 16px; }
+.join .steps { max-width: 30em; }
+
+.join-after { margin-top: 48px; }
+@media (min-width: 1024px) { .join-after { margin-top: 64px; } }
+
+.join-after .tlink { font-size: inherit; }
+/* 44px hit area on the standalone contact link */
+.join-after .tlink { position: relative; }
+.join-after .tlink::before { content: ""; position: absolute; inset: -13px -6px; }

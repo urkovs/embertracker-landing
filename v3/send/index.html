@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Send your provider your report | Ember Migraine Tracker</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="Send your provider your Ember report.">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0a0a0a">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://embertracker.app/v3/send/">
+<meta property="og:title" content="Send your provider your report">
+<meta property="og:description" content="Send your provider your Ember report.">
+<meta property="og:image" content="https://embertracker.app/v3/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Ember orb beside the line Migraine tracking, without the headache.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Send your provider your report">
+<meta name="twitter:description" content="Send your provider your Ember report.">
+<meta name="twitter:image" content="https://embertracker.app/v3/assets/og.png">
+<meta name="twitter:image:alt" content="The Ember orb beside the line Migraine tracking, without the headache.">
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300..600&display=swap">
+<link rel="stylesheet" href="../assets/v3.css?v=3">
+<link rel="stylesheet" href="../assets/pages/util.css?v=3">
+</head>
+<body class="util-page">
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="draft-strip">V3 draft for review. <a href="https://embertracker.app/send/">See the live page ›</a></div>
+
+<div class="util">
+  <a class="brand" href="../" aria-label="Ember home"><img src="../assets/orb-120.webp" alt="" width="30" height="30">Ember</a>
+  <main id="main" class="util-main">
+    <section class="util-card" aria-labelledby="send-title">
+      <img class="util-orb" src="../assets/orb-app-240.webp" alt="" aria-hidden="true" width="120" height="120">
+      <span class="label label--mut">For your appointment</span>
+      <h1 class="t-h2" id="send-title">Send your provider your report.</h1>
+      <a class="btn btn--lg" id="open-ember" href="ember://send">Open Ember</a>
+      <p class="util-store"><span class="util-store-lead">Get Ember: </span><a id="ios-link" href="https://apps.apple.com/us/app/ember-migraine-tracker/id6762041852">App Store</a><span class="sep" aria-hidden="true">·</span><a id="android-link" href="https://play.google.com/store/apps/details?id=com.cascadeheadache.ember">Google Play</a></p>
+    </section>
+    <a class="tlink tlink--sm util-after" href="../">About Ember</a>
+  </main>
+</div>
+
+<script>
+  (function () {
+    var ua = navigator.userAgent || navigator.vendor || window.opera;
+    var ios = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+    var android = /android/i.test(ua);
+    var iosLink = document.getElementById('ios-link');
+    var androidLink = document.getElementById('android-link');
+
+    if (ios) {
+      androidLink.hidden = true;
+      iosLink.textContent = 'Get Ember';
+    } else if (android) {
+      iosLink.hidden = true;
+      androidLink.textContent = 'Get Ember';
+    }
+  }());
+</script>
+</body>
+</html>

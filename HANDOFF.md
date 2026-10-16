@@ -190,15 +190,18 @@ clinical-artifact/figure labels only.
 
 `/atlas/` redirects to the separately hosted Firebase operator dashboard at `https://ember-navigation-atlas.web.app/`. GitHub Pages hosts only this static entry; no sign-in transaction, private counts or credentials are stored here. The collector independently requires the designated Firebase operator and mobile collection remains disabled. The public patient navigation is unchanged.
 
-## V3 draft (2026-10-14, branch `claude/website-v3`, not pushed)
+## V3 draft (2026-10-15, published at /v3/)
 
-- `v3/index.html` (patients) and `v3/providers/index.html` (clinicians), own CSS/JS in
-  `v3/assets/`. Dark editorial panels: one serif statement plus one object each (orb,
-  real month, head wireframe drawn from the app's head-map geometry, report). Patient
-  page has a "Try a day" classifier mirroring `src/utils/classification.ts` for pain,
-  symptoms and impact (medication rules left out) and a phone-only sticky download bar.
-  Providers page carries the classification engine block over byte-for-byte.
-- `get/index.html`: smart store redirect for social bios. `PT` (App Store Connect
-  provider token) is blank on purpose until Sam generates a campaign link.
-- All new wording awaits Sam's approval. Kept Sam's H1. Not linked from the live site;
-  `noindex`. Review link and the launch playbook are in the session summary.
+- Every page has a V3 version under `v3/` (mirrors root paths: home, providers, providers/join,
+  plus, contact, privacy, consumer-health, terms, references, delete-account, send,
+  clinic/cascade-headache, get, provider-handoff, 404, atlas, creators, provider-update, beta).
+  All `noindex`, with a review strip linking to the live page. Shared system in
+  `v3/assets/v3.css` + `v3.js`; page CSS in `v3/assets/pages/`.
+- Built by a multi-agent team (design and copy research, master designer spec, copy chief
+  voice guide, marketer critique, developers, two review rounds). Forms on contact and join
+  post exactly what live posts and reuse the live `/assets/web-form.js`; the providers
+  classification engine block is byte-identical to live; provider-handoff reuses the live JS.
+- Positioning: Sam's H1 plus two proofs (made by a headache specialist; used in headache
+  clinics), each stated once. Plus shows a "Coming soon" pill until 1.2.0 is released.
+- All V3 wording awaits Sam's approval before it replaces the live pages. `v3/get/` keeps
+  the App Store provider token (`PT`) blank until Sam generates a campaign link.

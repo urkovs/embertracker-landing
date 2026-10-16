@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ember Plus | Ember Migraine Tracker</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="Coming soon. Ember Plus compares your migraine days with sleep and weather, and adds Apple Watch logging and encrypted backup. $7.99 a month or $59.99 a year.">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0a0a0a">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://embertracker.app/v3/plus/">
+<meta property="og:title" content="Ember Plus">
+<meta property="og:description" content="Coming soon. Ember Plus compares your migraine days with sleep and weather, and adds Apple Watch logging and encrypted backup. $7.99 a month or $59.99 a year.">
+<meta property="og:image" content="https://embertracker.app/v3/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Ember orb beside the line Migraine tracking, without the headache.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ember Plus">
+<meta name="twitter:description" content="Coming soon. Ember Plus compares your migraine days with sleep and weather, and adds Apple Watch logging and encrypted backup. $7.99 a month or $59.99 a year.">
+<meta name="twitter:image" content="https://embertracker.app/v3/assets/og.png">
+<meta name="twitter:image:alt" content="The Ember orb beside the line Migraine tracking, without the headache.">
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300..600&display=swap">
+<link rel="stylesheet" href="../assets/v3.css?v=3">
+<link rel="stylesheet" href="../assets/pages/plus.css?v=3">
+</head>
+<!-- Launch switch: add the class plus-live to the body element. The Coming soon
+     pill, the hero launch line and the data-plus-soon FAQ item hide; FAQ 2
+     then needs Sam's launch wording.
+     The meta, og and twitter descriptions start with "Coming soon." by hand:
+     delete those two words from all three at launch. -->
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="draft-strip">V3 draft for review. <a href="https://embertracker.app/plus/">See the live page ›</a></div>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="../" aria-label="Ember home"><img src="../assets/orb-120.webp" alt="" width="30" height="30">Ember</a>
+    <nav class="nav-links" aria-label="Main">
+      <a class="nav-link hide-phone" href="./" aria-current="page">Ember Plus</a>
+      <a class="nav-link" href="../providers/">For clinicians</a>
+      <a class="btn btn--sm" data-get href="#download">Get Ember</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- 1 Hero -->
+<section class="sec plus-hero" aria-labelledby="plus-title">
+  <div class="wrap split split--keep">
+    <div class="split-copy">
+      <span class="status-soon">Coming soon</span>
+      <h1 class="t-display" id="plus-title">Ember Plus</h1>
+      <p class="t-lead">See your migraine days beside your sleep and the weather. Get an alert before a large pressure change, or a smaller one that matches your patterns.</p>
+      <div class="actions">
+        <a class="btn btn--lg" data-get href="#download">Get Ember</a>
+        <a class="btn btn--lg btn--ghost" href="#pricing">See pricing</a>
+      </div>
+      <p class="t-small plus-launch" data-plus-soon>Plus arrives in the free app after store review.</p>
+    </div>
+    <div class="split-object">
+      <figure class="press-comp has-glow">
+        <div class="glow" aria-hidden="true"></div>
+        <div class="press-stage">
+          <div class="float-card float-card--notif press-notif" role="group" aria-label="Example notification" data-copylint="app">
+            <img class="fc-icon" src="../assets/orb-120.webp" alt="" width="32" height="32">
+            <span class="fc-meta"><span>Ember</span><span>now</span></span>
+            <b class="fc-title">Pressure drop ahead</b>
+            <span class="fc-body">This matches one of your Ember patterns. It starts Thu 4:00 PM.</span>
+          </div>
+          <div class="press-card" role="img" aria-label="Example pressure forecast falling from 1018 to 1011 hPa between Wednesday and Friday.">
+            <div class="press-plot">
+              <p class="press-val press-val--hi"><span class="press-num">1018</span> hPa</p>
+              <p class="press-val press-val--lo"><span class="press-num">↓ 1011</span> hPa</p>
+              <svg class="press-svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                <defs>
+                  <linearGradient id="pressLine" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#8a847b"/><stop offset=".5" stop-color="#ecaa68"/><stop offset="1" stop-color="#c96a3a"/></linearGradient>
+                  <linearGradient id="pressArea" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ecaa68" stop-opacity=".16"/><stop offset="1" stop-color="#ecaa68" stop-opacity="0"/></linearGradient>
+                </defs>
+                <path d="M0 24 C18 22 40 20 55 24 C66 27 73 68 85 75 C91 78 96 78 100 78 V100 H0 Z" fill="url(#pressArea)"/>
+                <path d="M0 24 C18 22 40 20 55 24 C66 27 73 68 85 75 C91 78 96 78 100 78" fill="none" stroke="url(#pressLine)" stroke-width="2.2" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+              </svg>
+              <span class="press-mark" aria-hidden="true"></span>
+            </div>
+            <!-- copylint: the tick repeats the alert's start time on purpose -->
+            <div class="press-axis" aria-hidden="true" data-copylint="ignore"><span>Wed</span><span class="press-now">Thu 4:00 PM</span><span>Fri</span></div>
+          </div>
+        </div>
+        <figcaption class="caption">Example forecast and alert.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- 2 What's included -->
+<section class="sec" id="features" aria-labelledby="features-title">
+  <div class="wrap">
+    <div class="center-head">
+      <h2 class="t-h2" id="features-title">What comes with Ember Plus.</h2>
+    </div>
+    <div class="bento">
+      <article class="tile-card bt bt--patterns">
+        <div class="bt-copy">
+          <h3 class="t-h3">Your patterns</h3>
+          <p class="tour-cap">Built from your own records, with the counts behind each one.</p>
+        </div>
+        <div class="bt-obj bt-obj--card">
+          <div class="app-card bt-pattern" data-copylint="app">
+            <p class="app-card-label"><img src="../assets/orb-120.webp" alt="" width="20" height="20" loading="lazy">Your patterns</p>
+            <p class="app-card-headline">In your records, migraine days were more common after shorter sleep.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="tile-card bt bt--watch">
+        <h3 class="t-h3">Apple Watch</h3>
+        <p class="tour-cap">Log your day from Apple Watch paired with an iPhone.</p>
+        <div class="bt-obj watch-pair">
+          <span class="watch-face watch-face--back"><img src="../assets/watch.webp" alt="Ember on Apple Watch with a Log your day button." width="416" height="496" loading="lazy"></span>
+          <span class="watch-face watch-face--front"><img src="../assets/watch-entry.webp" alt="Ember on Apple Watch asking about head pain, with No pain and Mild as the first answers." width="416" height="496" loading="lazy"></span>
+        </div>
+      </article>
+
+      <article class="tile-card bt bt--brief">
+        <h3 class="t-h3">Ember Brief</h3>
+        <p class="tour-cap">Your last 30 days, in up to 3 findings with charts.</p>
+        <div class="bt-obj bt-obj--card">
+          <div class="app-card" data-copylint="app">
+            <p class="app-card-label"><img src="../assets/orb-120.webp" alt="" width="20" height="20" loading="lazy">Ember Brief</p>
+            <p class="app-card-headline">9 migraine days in the last 30 days, down from 11 in the previous 30 days.</p>
+            <div class="hbars" aria-hidden="true"><span><i>11</i><b style="--v:1"></b></span><span><i>9</i><b style="--v:.818"></b></span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="tile-card bt bt--text">
+        <span class="bt-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.2L4.6 18.1A2 2 0 0 0 6.3 21h11.4a2 2 0 0 0 1.7-2.9L14 9.2V3"/><path d="M7.2 15h9.6"/></svg></span>
+        <div class="bt-copy">
+          <h3 class="t-h3">Personal experiments</h3>
+          <p class="tour-cap">Try one routine change and compare migraine days before and during it.</p>
+        </div>
+      </article>
+
+      <article class="tile-card bt bt--text">
+        <span class="bt-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5.5" y="6" width="3" height="12" rx="1"/><rect x="15.5" y="6" width="3" height="12" rx="1"/><rect x="2.5" y="9" width="3" height="6" rx="1"/><rect x="18.5" y="9" width="3" height="6" rx="1"/><path d="M8.5 12h7"/></svg></span>
+        <div class="bt-copy">
+          <h3 class="t-h3">Workouts</h3>
+          <p class="tour-cap">Log workouts, with a lighter option on or after a migraine day.</p>
+        </div>
+      </article>
+
+      <article class="tile-card bt bt--crop bt--health">
+        <h3 class="t-h3">Apple Health and Health Connect</h3>
+        <p class="tour-cap">Plus imports sleep, steps, resting heart rate and HRV.</p>
+        <div class="bt-obj bt-obj--crop">
+          <img class="bt-shot" src="../assets/crop-health.webp" alt="Ember’s Connections screen with Apple Health connected." width="840" height="585" loading="lazy">
+        </div>
+      </article>
+
+      <article class="tile-card bt bt--crop bt--backup">
+        <h3 class="t-h3">Automatic encrypted backup</h3>
+        <p class="tour-cap">Stored encrypted in Google Cloud. Your recovery key never reaches Ember’s server.</p>
+        <div class="bt-obj bt-obj--card bt-obj--backup">
+          <div class="bt-cardshot"><img src="../assets/crop-backup.webp" alt="Ember’s Automatic backup screen showing Backed up 1 hour ago, with automatic backup turned on." width="840" height="585" loading="lazy"></div>
+        </div>
+      </article>
+    </div>
+    <p class="row-label">Example data.</p>
+  </div>
+</section>
+
+<!-- 3 Free and Plus -->
+<section class="sec" id="free" aria-labelledby="free-title">
+  <div class="wrap">
+    <div class="center-head">
+      <h2 class="t-h2" id="free-title">Compare free and Plus.</h2>
+      <p class="t-lead">Ember is free to use, and Ember Plus is an optional subscription.</p>
+    </div>
+    <div class="plan-lists">
+      <div class="card plan-card">
+        <h3 class="t-h3">Free to use</h3>
+        <ul class="check-list">
+          <li>Headache log</li>
+          <li>Day classification</li>
+          <li>Calendar and period days</li>
+          <li>Head map</li>
+          <li>Treatments and injections</li>
+          <li>Treatment response</li>
+          <li>Rebound heads-up</li>
+          <li>Provider report</li>
+          <li>Clinic connection</li>
+          <li>Migraine Buddy import</li>
+          <li>Manual backup and restore</li>
+        </ul>
+      </div>
+      <div class="card plan-card">
+        <h3 class="t-h3">Ember Plus adds</h3>
+        <ul class="check-list check-list--ember">
+          <li>Pressure forecast and alerts</li>
+          <li>Your patterns</li>
+          <li>Ember Brief</li>
+          <li>Apple Health, Health Connect</li>
+          <li>Workouts</li>
+          <li>Personal experiments</li>
+          <li>Apple Watch <small>(iPhone)</small></li>
+          <li>Automatic encrypted backup</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 Pricing -->
+<section class="sec" id="pricing" aria-labelledby="pricing-title">
+  <div class="wrap">
+    <div class="center-head">
+      <h2 class="t-h2" id="pricing-title">Pay monthly or yearly.</h2>
+    </div>
+    <div class="card pricing-card">
+      <h3 class="t-h3">Ember Plus</h3>
+      <div class="price-tiles">
+        <div class="price-tile price-tile--featured">
+          <span class="t-label">Yearly</span>
+          <span class="t-num">$59.99</span>
+          <span class="price-per">a year</span>
+          <p class="price-note">about $5 a month</p>
+        </div>
+        <div class="price-tile">
+          <span class="t-label">Monthly</span>
+          <span class="t-num">$7.99</span>
+          <span class="price-per">a month</span>
+        </div>
+      </div>
+      <div class="price-terms">
+        <p class="t-line">New subscribers get 14 days free.</p>
+        <p class="t-small">Plans renew until you cancel.</p>
+        <p class="t-small">Prices in USD.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 Questions -->
+<section class="sec sec--band" id="questions" aria-labelledby="q-title">
+  <div class="wrap faq">
+    <h2 class="t-h2 faq-title" id="q-title">Questions about Ember Plus.</h2>
+    <div class="faq-list">
+      <details name="faq-plus" open>
+        <summary>How does the free trial work?</summary>
+        <div class="faq-a"><p>Every Plus feature is free for 14 days, and Ember reminds you 2 days before the trial ends if notifications are on. Cancel in App Store or Google Play settings before then and you pay nothing.</p></div>
+      </details>
+      <details name="faq-plus" data-plus-soon>
+        <summary>When can I get Ember Plus?</summary>
+        <div class="faq-a"><p>Soon. It’s in App Store and Google Play review, and it will appear in Ember after approval. There’s no waitlist to join.</p></div>
+      </details>
+      <details name="faq-plus">
+        <summary>Does Ember Plus predict migraines?</summary>
+        <div class="faq-a"><p>No. Ember Plus shows patterns in your own records. Pressure alerts describe the weather forecast, and they mention when a change matches one of your patterns.</p></div>
+      </details>
+      <details name="faq-plus">
+        <summary>Does Ember Plus work on Android?</summary>
+        <div class="faq-a"><p>Yes. Plus imports from Health Connect on Android and Apple Health on iPhone. A wearable is optional, and Apple Watch logging needs an iPhone.</p></div>
+      </details>
+      <details name="faq-plus">
+        <summary>What happens if I cancel?</summary>
+        <div class="faq-a"><p>You keep the free app and every record on your phone. Plus features stop when your plan ends, and you can still restore an existing backup.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- 6 Closing -->
+<section class="sec close" id="download" aria-labelledby="download-title">
+  <div class="wrap">
+    <img class="close-orb" src="../assets/orb-rays.webp" alt="" aria-hidden="true" width="1000" height="1000" loading="lazy">
+    <h2 class="t-h2-close" id="download-title">Get Ember on your phone.</h2>
+    <div class="badges" aria-label="Store links" role="group">
+      <a class="badge-apple" href="https://apps.apple.com/us/app/ember-migraine-tracker/id6762041852"><img src="../assets/app-store-badge.svg" alt="Download on the App Store" width="132" height="44" loading="lazy"></a>
+      <a class="badge-play" href="https://play.google.com/store/apps/details?id=com.cascadeheadache.ember"><img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" width="168" height="65" loading="lazy" onerror="this.parentElement.classList.add('nobadge')"><span class="nobadge-text">Get it on Google Play</span></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-id">
+        <a class="brand" href="../" aria-label="Ember home"><img src="../assets/orb-120.webp" alt="" width="30" height="30" loading="lazy">Ember</a>
+        <p class="foot-tagline">Migraine and headache tracker for iPhone and Android.</p>
+      </div>
+      <nav class="foot-groups" aria-label="Footer">
+        <div class="foot-group">
+          <p class="foot-label">Ember</p>
+          <ul>
+            <li><a href="./" aria-current="page">Ember Plus</a></li>
+            <li><a href="../contact/">Contact</a></li>
+            <li><a href="../delete-account/">Delete account</a></li>
+          </ul>
+        </div>
+        <div class="foot-group">
+          <p class="foot-label">Clinicians</p>
+          <ul>
+            <li><a href="../providers/">For clinicians</a></li>
+            <li><a href="../providers/join/">Add your clinic</a></li>
+            <li><a href="../provider-handoff/">Provider Handoff</a></li>
+            <li><a href="../references/">Clinical references</a></li>
+          </ul>
+        </div>
+        <div class="foot-group">
+          <p class="foot-label">Legal</p>
+          <ul>
+            <li><a href="../privacy/">Privacy</a></li>
+            <li><a href="../consumer-health/">Consumer health privacy</a></li>
+            <li><a href="../terms/">Terms</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="foot-bottom">
+      <p class="foot-disclaimer">Ember helps you track and organize what you experience. It doesn’t diagnose, and it isn’t a substitute for care from your clinician.</p>
+      <p class="foot-legal">© 2026 Cascade Headache, PLLC</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/v3.js?v=3" defer></script>
+</body>
+</html>

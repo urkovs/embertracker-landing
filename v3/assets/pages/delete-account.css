@@ -1,0 +1,24 @@
+/* Delete account only (v3/delete-account/). Legal layout from ../v3.css §14.
+   The document is about two screens long, so it has no contents rail: one centered column. */
+@media (min-width: 1180px) {
+  .legal--short .legal-grid { grid-template-columns: minmax(0, 1fr); }
+  .legal--short .legal-doc { margin-inline: auto; }
+}
+
+/* In-app steps: 17px, numbered circles, each control in bold (spec §6.10) */
+.prose ol.app-steps { list-style: none; padding-left: 0; counter-reset: step; display: grid; gap: 12px; }
+.prose ol.app-steps li { counter-increment: step; position: relative; min-height: 28px; padding-left: 42px; margin: 0; }
+.prose ol.app-steps li::before {
+  content: counter(step); position: absolute; left: 0; top: 0; width: 28px; height: 28px; border-radius: 50%;
+  display: grid; place-items: center; background: var(--raised); border: 1px solid var(--hair-2);
+  font: 600 14px/1 var(--sans); color: var(--ink-hi); font-variant-numeric: tabular-nums;
+}
+.prose ol.app-steps code { font-size: 15px; }
+.prose ol.app-steps strong { white-space: nowrap; }
+
+/* the subject line is copied as one string */
+.select-all { -webkit-user-select: all; user-select: all; }
+
+@media print {
+  .prose ol.app-steps li::before { background: none; border-color: #999; color: #000; }
+}

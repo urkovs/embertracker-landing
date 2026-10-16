@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Add your clinic | Ember Migraine Tracker</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="Patients send their Ember report to your clinic’s secure inbox from their own phones. Setup is free for clinics and patients.">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0a0a0a">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://embertracker.app/v3/providers/join/">
+<meta property="og:title" content="Add your clinic | Ember Migraine Tracker">
+<meta property="og:description" content="Patients send their Ember report to your clinic’s secure inbox from their own phones. Setup is free for clinics and patients.">
+<meta property="og:image" content="https://embertracker.app/v3/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Ember orb beside the line Migraine tracking, without the headache.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Add your clinic | Ember Migraine Tracker">
+<meta name="twitter:description" content="Patients send their Ember report to your clinic’s secure inbox from their own phones. Setup is free for clinics and patients.">
+<meta name="twitter:image" content="https://embertracker.app/v3/assets/og.png">
+<meta name="twitter:image:alt" content="The Ember orb beside the line Migraine tracking, without the headache.">
+<link rel="icon" type="image/png" href="../../assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300..600&display=swap">
+<link rel="stylesheet" href="/assets/web-form.css?v=1">
+<link rel="stylesheet" href="../../assets/v3.css?v=3">
+<link rel="stylesheet" href="../../assets/pages/join.css?v=3">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="draft-strip">V3 draft for review. <a href="https://embertracker.app/providers/join/">See the live page ›</a></div>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="../../" aria-label="Ember home"><img src="../../assets/orb-120.webp" alt="" width="30" height="30">Ember</a>
+    <nav class="nav-links" aria-label="Main">
+      <a class="nav-link" href="../../">For patients</a>
+      <a class="nav-link" href="../">For clinicians</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="join" aria-labelledby="join-title">
+  <div class="wrap form-layout">
+    <div class="form-copy">
+      <h1 class="t-display" id="join-title">Add your clinic to Ember</h1>
+      <p class="t-lead">Patients send their Ember report to your clinic’s secure inbox from their own phones. It’s free for your clinic and your patients.</p>
+      <h2 class="list-title" id="next-title">Once the inbox is confirmed</h2>
+      <ol class="steps" aria-labelledby="next-title">
+        <li>You get a lobby QR code and a link to add to after-visit summaries.</li>
+        <li>Scanning the code opens Ember with your inbox already filled in.</li>
+        <li>Your clinic also appears by name when patients send a report.</li>
+      </ol>
+    </div>
+    <div class="form-side">
+<!-- Form contract (inventory §2.1): action, method, data-ember-form, every field's
+     name/id/type/autocomplete/maxlength/required, the honeypot and the button/status
+     hooks are identical to live. V3 changes only: the inbox help line + placeholder
+     (aria-describedby), the form-note wording and link path, and the noscript text (D14). -->
+<form class="form-card" data-ember-form="clinic" method="post" action="https://ember-clinic-delivery-m7tqb7cmgq-uc.a.run.app/v1/web-contact">
+<div class="form-row"><label class="form-label" for="clinic-name">Clinic name</label><input class="input" id="clinic-name" name="clinic" autocomplete="organization" maxlength="160" required></div>
+<div class="form-row"><label class="form-label" for="clinic-inbox">Secure email for patient reports</label><p class="form-help" id="clinic-inbox-help">It can be different from your own email.</p><input class="input" id="clinic-inbox" name="inbox" type="email" maxlength="254" autocomplete="off" required placeholder="reports@example.org" aria-describedby="clinic-inbox-help"></div>
+<div class="form-row"><label class="form-label" for="contact-name">Your name</label><input class="input" id="contact-name" name="name" autocomplete="name" maxlength="100" required></div>
+<div class="form-row"><label class="form-label" for="contact-email">Your email</label><input class="input" id="contact-email" name="email" type="email" autocomplete="email" maxlength="254" required></div>
+<label class="form-check"><input type="checkbox" name="approved" required><span>My clinic approves this inbox for patient reports.</span></label>
+<div class="form-trap" aria-hidden="true"><label>Leave this empty<input name="website" tabindex="-1" autocomplete="off"></label></div>
+<p class="form-note">Don’t include patient information. <a href="../../privacy/#website-contact">How we handle your request</a></p>
+<button class="form-submit" type="submit" disabled>Request clinic setup</button>
+<p class="form-status" role="status" aria-live="polite" tabindex="-1"></p>
+<noscript><p>Turn on JavaScript to send this form, or email <a href="mailto:hello@cascadeheadache.com">hello@cascadeheadache.com</a>.</p></noscript>
+<p class="form-next">We’ll contact you to confirm the inbox and arrange a test report.</p>
+</form>
+    </div>
+  </div>
+  <div class="wrap">
+    <p class="t-line join-after">For other questions, <a class="tlink" href="../../contact/">contact the Ember team</a></p>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-id">
+        <a class="brand" href="../../" aria-label="Ember home"><img src="../../assets/orb-120.webp" alt="" width="30" height="30" loading="lazy">Ember</a>
+        <p class="foot-tagline">Migraine and headache tracker for iPhone and Android.</p>
+      </div>
+      <nav class="foot-groups" aria-label="Footer">
+        <div class="foot-group">
+          <p class="foot-label">Ember</p>
+          <ul>
+            <li><a href="../../plus/">Ember Plus</a></li>
+            <li><a href="../../contact/">Contact</a></li>
+            <li><a href="../../delete-account/">Delete account</a></li>
+          </ul>
+        </div>
+        <div class="foot-group">
+          <p class="foot-label">Clinicians</p>
+          <ul>
+            <li><a href="../">For clinicians</a></li>
+            <li><a href="./" aria-current="page">Add your clinic</a></li>
+            <li><a href="../../provider-handoff/">Provider Handoff</a></li>
+            <li><a href="../../references/">Clinical references</a></li>
+          </ul>
+        </div>
+        <div class="foot-group">
+          <p class="foot-label">Legal</p>
+          <ul>
+            <li><a href="../../privacy/">Privacy</a></li>
+            <li><a href="../../consumer-health/">Consumer health privacy</a></li>
+            <li><a href="../../terms/">Terms</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="foot-bottom">
+      <p class="foot-disclaimer">Ember helps patients track and organize what they experience. It doesn’t diagnose, and it isn’t a substitute for clinical care.</p>
+      <p class="foot-legal">© 2026 Cascade Headache, PLLC</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../../assets/v3.js?v=3" defer></script>
+<script src="/assets/web-form.js?v=2" defer></script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+/* Utility pages (send, clinic QR, get, 404, redirect stubs, beta).
+   Builds on the shared .util / .util-card layout in ../v3.css (§15).
+   Shared components live there; only utility-family details go here. */
+
+/* Pages that are only the card: fill the screen exactly (no 1px scroll from the strip's border). */
+body.util-page { display: flex; flex-direction: column; min-height: 100svh; }
+body.util-page .util { flex: 1 0 auto; min-height: 0; }
+
+/* The card holds the task. Anything after it (a home link) sits below it. */
+.util-main { flex-direction: column; align-items: center; }
+
+/* Desktop: the logo stays in the flow 32px under the strip and the card centers
+   in the space below it. (The shared rule pins the logo at top: 64px, which
+   overlaps a tall card such as the clinic QR card on a 900px-tall screen.) */
+@media (min-width: 768px) {
+  .util { justify-content: flex-start; }
+  .util .brand { position: static; margin-bottom: 0; }
+  .util-main { flex: 1; justify-content: center; padding-block: 32px 0; }
+  body.util-page .util { padding-bottom: 32px; }
+}
+
+/* Same night brightness as the home hero orb (spec D32). */
+.util-orb { margin-bottom: -4px; }
+@media (max-width: 599px) { .util-orb { opacity: .85; } }
+
+.util-card .label { margin-top: -4px; }
+.util-card h1 { margin-inline: auto; }
+.util-line { font-size: 17px; line-height: 1.5; color: var(--ink); max-width: 24em; text-wrap: balance; }
+.util-card .btn, .util-card .badges { margin-top: 8px; }
+.util-card .util-line + .util-qr { margin-top: 8px; }
+
+/* Under the card: one quiet way home (44px tap height) */
+.util-after { margin-top: 16px; min-height: 44px; align-items: center; }
+
+/* Clinic QR page: the note under the button. Store row (clinic and send):
+   "Get Ember: App Store · Google Play", one inline form on every utility card. */
+.util-note { font-size: 15px; line-height: 1.5; color: var(--ink-mut); max-width: 26em; text-wrap: pretty; margin-top: -4px; }
+.util-store { font-size: 15px; line-height: 1.5; color: var(--ink-mut); }
+/* Send: on a phone the UA script hides the other store's link and renames this
+   one "Get Ember", so the lead-in and the dot go too. */
+.util-store:has(> a[hidden]) .util-store-lead,
+.util-store:has(> a[hidden]) .sep { display: none; }
+.util-store a {
+  display: inline-block; padding-block: 11px; color: var(--ink-hi);
+  text-decoration: underline; text-decoration-color: var(--hair-3);
+  text-decoration-thickness: 1px; text-underline-offset: 3px;
+}
+.util-store a:hover { text-decoration-color: var(--ember); }
+.util-store .sep { color: var(--ink-mut); padding-inline: 6px; }
+/* 320–359px: keep the row on one line (it wrapped and left the dot hanging) */
+@media (max-width: 359px) {
+  .util-store { font-size: 14px; }
+  .util-store .sep { padding-inline: 4px; }
+}
+.util-qr { box-shadow: 0 12px 32px rgba(0, 0, 0, .35); filter: brightness(.92); }
+.print-only { display: none; }
+
+/* Clinic QR page on a phone: nobody scans their own screen, so the button, its
+   note and the store row come first and a smaller QR closes the card. Tablets
+   and desktops keep the code first (a front desk may show it for scanning). */
+@media screen and (max-width: 599px) {
+  .util-qr ~ #open-ember, .util-qr ~ #open-note, .util-qr ~ .util-store { order: 1; }
+  .util-card .util-qr { order: 2; width: 160px; margin-top: 8px; }
+}
+
+/* Get: the badges and the desktop QR */
+.util-card .badge-line { font-size: 15px; line-height: 1.45; color: var(--ink); }
+.util-card .qr-tile { margin-top: 16px; padding-top: 24px; border-top: 1px solid var(--hair); width: 100%; justify-content: center; }
+/* One-line caption, so the QR and caption pair centers on the card's axis
+   (a wrapped caption kept its 13em box and pulled the pair about 20px left). */
+.util-card .qr-tile .t-small { max-width: none; white-space: nowrap; }
+
+/* Beta: "Free on iPhone and Android." sits above the badges as on get,
+   close under the line it completes. */
+.util-card .util-line + .badge-line { margin-top: -8px; }
+
+/* Beta: the tester note sits under a hairline, like get's QR tile (no second box inside the card) */
+.tester-note { width: 100%; margin-top: 16px; padding-top: 24px; border-top: 1px solid var(--hair); }
+.tester-note b { display: block; font-size: 15px; font-weight: 600; line-height: 1.4; color: var(--ink-hi); }
+.tester-note p { margin: 4px auto 0; max-width: 24em; font-size: 15px; line-height: 1.5; color: var(--ink); text-wrap: balance; }
+
+/* Redirect stubs: H1 and one link, nothing else */
+.util-card--stub { gap: 20px; }
+.util-card--stub .tlink { min-height: 44px; align-items: center; }
+
+/* 404 and beta keep the footer: the card sits in the first screen, the footer follows */
+.util--foot { min-height: calc(100svh - 32px); }
+
+/* Clinic QR page in print: a lobby card. H1, one scan line and the QR on white. */
+@media print {
+  @page { margin: 0.75in; }
+  html, body { background: #fff !important; }
+  .util { min-height: 0; padding: 0; display: block; }
+  .util .brand, .util-orb, .util-line, #open-ember, #open-note, .util-store, .util-after { display: none !important; }
+  .util-main { display: block; }
+  .util-card { max-width: none; background: none; border: 0; border-radius: 0; padding: 0; gap: 0; }
+  .util-card h1 { color: #000; font-size: 32pt; line-height: 1.1; }
+  .print-only { display: block; margin-top: 10pt; font-size: 14pt; line-height: 1.4; color: #000; }
+  /* The SVG carries its own 4-module quiet zone, so the tile needs no padding.
+     3in tile: the code itself prints about 2.3in wide (spec: at least 2in). */
+  .util-qr { width: 3in; margin: 20pt auto 0; padding: 0; background: #fff; border: 1px solid #bbb; box-shadow: none; filter: none; }
+  .util-qr img { display: block; width: 100%; height: auto; }
+}

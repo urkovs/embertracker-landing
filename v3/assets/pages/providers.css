@@ -1,0 +1,201 @@
+/* Providers page only (v3/providers/). Shared components live in ../v3.css.
+   The classification engine block is byte-locked: nothing here targets its
+   selectors. It gets its container width from .engine-host, its one token
+   (--head-blue) from :root below, and its finite arrow from v3.css §18. */
+
+/* the engine's own CSS reads this token (live site value) */
+:root { --head-blue: #4a8abf; }
+
+/* Clinician nav: "For patients" + the "Add your clinic" pill is wider than the
+   shared nav spacing allows below 430px (it ran into the right gutter at
+   360–416). Same tightened spacing as the handoff page (provider-handoff.css),
+   applied up to 429px so 402 and 414px phones fit too. */
+@media (max-width: 429px) {
+  .nav-inner { gap: 8px; }
+  .nav .brand { gap: 8px; }
+  .nav-link { padding: 0 6px; }
+  .nav-links .btn { margin-left: 0; padding: 0 14px; }
+}
+@media (max-width: 369px) {
+  .nav-link { padding: 0 2px; }
+  .nav-links .btn { padding: 0 10px; }
+}
+
+/* ── 1 Hero ─────────────────────────────────────────────── */
+.pro-hero { padding-top: 32px; }
+@media (min-width: 600px) { .pro-hero { padding-top: 48px; } }
+.pro-hero .t-display { margin-top: 12px; max-width: 12em; }
+.pro-hero .t-lead { margin-top: var(--h2-lead); max-width: 34em; }
+.pro-hero .actions { margin-top: var(--lead-cta); }
+
+.hero-report { margin-top: 48px; }
+@media (min-width: 1024px) { .hero-report { margin-top: 64px; } }
+.hero-report .report { isolation: isolate; }
+.hero-report .glow { --glow: rgba(236, 170, 104, .10); width: 110%; aspect-ratio: 1.6; }
+.hero-report .report-paper { z-index: 1; }
+.hero-report .marker { z-index: 2; }
+@media (max-width: 599px) { .hero-report .report-paper { border-radius: 6px; } }
+.hero-report .marker-legend { margin-top: 32px; }
+/* v3.css gap: a stretched legend item spreads its spare height into row 1 */
+.marker-legend li { align-content: start; }
+.on-page { margin-top: 40px; }
+
+/* ── 2 Classification: the locked engine block sits in this container ── */
+.engine-host { max-width: calc(1100px + 2 * var(--gutter)); margin-top: var(--stack-gap); }
+.classify-head .tlink { margin-top: var(--lead-cta); }
+
+/* ── 3 Chart note ───────────────────────────────────────── */
+/* Copy right, note left (mirrored). The copy sits at the top so the two
+   desktop annotations can hang below it, level with their note lines. */
+.note-split { align-items: start; }
+@media (min-width: 1024px) { .note-split > .split-copy { padding-top: 8px; } }
+
+.note-fig { position: relative; }
+.note {
+  --note-pad: 20px;
+  position: relative;
+  padding: var(--note-pad);
+  background: var(--surface);
+  border: 1px solid var(--hair);
+  border-radius: 20px;
+  font: 400 14px/1.55 var(--mono);
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+/* phone: plain wrapping text; the column padding doesn't fit, so spaces collapse */
+.note .ln { white-space: normal; padding-left: 2ch; text-indent: -2ch; overflow-wrap: anywhere; }
+.note .ln--row, .note .ln--dash { padding-left: 4ch; text-indent: -2ch; }
+.note .ln--gap { height: 1.55em; }
+.note .ln--h, .note .ln--block { color: var(--ink-hi); font-weight: 600; }
+
+.note-gap { display: block; height: 1px; margin: 12px 0 14px; background-image: linear-gradient(to right, var(--hair-3) 40%, transparent 0); background-size: 6px 1px; }
+/* the excerpt continues past what is shown: fade the last lines into the card */
+.note::after {
+  content: ""; position: absolute; left: 1px; right: 1px; bottom: 1px; height: 80px;
+  border-radius: 0 0 19px 19px; pointer-events: none;
+  background: linear-gradient(to bottom, rgba(18, 17, 16, 0), var(--surface) 85%);
+}
+@media (max-width: 599px) {
+  .note { max-height: 580px; overflow: hidden; }
+}
+@media (min-width: 600px) {
+  .note { --note-pad: 24px; font-size: 15px; }
+  /* keep the app's column alignment; wrapped values continue under the value column */
+  .note .ln { white-space: pre-wrap; overflow-wrap: normal; padding-left: 0; text-indent: 0; }
+  .note .ln--row { padding-left: 22ch; text-indent: -22ch; }
+  .note .ln--dash { padding-left: 2ch; text-indent: -2ch; }
+  .note .ln--wrap { padding-left: 2ch; text-indent: -2ch; }
+  .note .nw { white-space: nowrap; }
+}
+/* annotations hang off the right edge of the note, at their line */
+.note .ln--annot { position: relative; }
+.note .annot { text-indent: 0; white-space: normal; font-family: var(--sans); user-select: none; -webkit-user-select: none; }
+.note .annot--right { top: 50%; transform: translateY(-50%); left: calc(100% + var(--note-pad) + 4px + var(--leader, 64px)); }
+.note .annot-value { font-variant-numeric: normal; }
+.note-fig .caption { text-align: left; }
+@media (min-width: 1024px) { .note-fig .caption { text-align: center; } }
+/* ≥1180 (the container is at its 1100px max): give the note 8 of 12 columns so
+   each 74-character data row holds one line at 15px. The copy takes 9–12 and
+   its left edge lines up with the annotations (note edge + 4 + 40px leader). */
+/* 1024–1179: the 7-column note is 541–631px, too narrow for the MIDAS row's
+   nowrap grade clause at 15px (it ran past the card edge at 1024) */
+@media (min-width: 1024px) and (max-width: 1179px) { .note { font-size: 14px; } }
+@media (min-width: 1180px) {
+  .note-split.split--wide > .split-object { grid-column: 1 / span 8; }
+  .note-split.split--wide > .split-copy { grid-column: 9 / span 4; padding-left: 20px; }
+  .note .annot--right { --leader: 40px !important; }
+}
+
+/* ── 4 Treatment response and safety ────────────────────── */
+.treat-grid { display: grid; gap: var(--grid-gap); grid-template-columns: minmax(0, 1fr); max-width: 1100px; margin-inline: auto; }
+@media (min-width: 1024px) { .treat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.treat-card { padding-bottom: var(--card-pad); }
+.treat-card .tour-cap { max-width: 30em; }
+/* Treatment response: the app's tab row and chart, frameless (the app card's
+   background is mapped to --surface in the asset), "Example data." under it.
+   Only the bottom edge is a cut through the chart panel, so only it fades. */
+.treat-fig { margin: 24px 0 0; flex: 1 0 auto; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; }
+.treat-img { display: block; width: 100%; max-width: 600px; height: auto;
+  -webkit-mask-image: linear-gradient(to bottom, #000 90%, transparent);
+  mask-image: linear-gradient(to bottom, #000 90%, transparent); }
+.treat-fig .caption { margin-top: 4px; }
+@media (min-width: 1024px) { .treat-img { max-width: 420px; } }
+/* phone: the crop's side margins are already --surface, so let it run 14px into
+   the card padding for a slightly larger chart */
+@media (max-width: 599px) { .treat-fig { margin-inline: -14px; } }
+.flags { margin: 0; padding-top: 24px; display: grid; gap: 12px; }
+.flag { background: var(--raised); border: 1px solid var(--hair); border-radius: 16px; padding: 18px 20px; display: grid; gap: 4px; }
+.flag dt { font-size: 15px; font-weight: 600; line-height: 1.35; color: var(--ink-hi); }
+.flag dd { margin: 0; font-size: 14px; line-height: 1.5; color: var(--ink-mut); text-wrap: pretty; }
+@media (min-width: 1024px) { .flag { padding: 20px 22px; } }
+@media (max-width: 1023px) { .treat-card { min-height: 0; } .treat-fig { flex: none; } }
+
+/* ── 5 Clinic setup ─────────────────────────────────────── */
+.setup-split { align-items: start; }
+.setup-split .steps { margin-top: var(--lead-cta); }
+.setup-split .steps + .t-small { margin-top: 16px; }
+.lobby-fig { margin-top: 32px; display: flex; align-items: flex-end; gap: 16px; }
+.lobby-fig .lobby-card { box-shadow: 0 14px 32px rgba(0, 0, 0, .4); }
+.lobby-fig .lobby-hint { text-wrap: balance; }
+.lobby-fig figcaption { margin: 0; text-align: left; padding-bottom: 4px; }
+
+/* data-path diagram */
+.path-fig { margin: 0; }
+.path { border: 1px solid var(--hair); border-radius: var(--radius-card); padding: 24px 20px; }
+.path-row { display: grid; grid-template-columns: minmax(0, 1fr); }
+.path-node { display: flex; align-items: center; gap: 14px; min-width: 0; }
+.path-icon { width: 44px; height: 44px; flex: none; border-radius: 14px; display: grid; place-items: center; background: var(--raised); border: 1px solid var(--hair-2); color: var(--ink-hi); }
+.path-icon svg { width: 22px; height: 22px; }
+.path-label { font-size: 15px; font-weight: 500; line-height: 1.3; color: var(--ink-hi); }
+/* phone: a column, arrows point down */
+.path-arrow { position: relative; width: 44px; height: 28px; }
+.path-arrow::before { content: ""; position: absolute; left: 21.5px; top: 4px; bottom: 4px; width: 1px; background: var(--hair-3); }
+.path-arrow::after { content: ""; position: absolute; left: 19px; bottom: 5px; width: 6px; height: 6px; border-right: 1px solid var(--hair-3); border-bottom: 1px solid var(--hair-3); transform: rotate(45deg); }
+.path-off { margin-top: 20px; padding-top: 20px; border-top: 1px dashed var(--hair-2); display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+.path-node--off .path-icon { background: transparent; border-style: dashed; border-color: var(--hair-3); color: var(--ink-dim); }
+.path-node--off .path-label { color: var(--ink-mut); text-decoration: line-through; text-decoration-color: var(--ink-mut); text-decoration-thickness: 1px; }
+.path-tag { display: inline-flex; align-items: center; height: 28px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--hair-2); font-size: 14px; line-height: 1; color: var(--ink-mut); white-space: nowrap; }
+.path-fig .caption { text-align: left; }
+@media (min-width: 600px) {
+  .path { padding: 32px 28px 28px; }
+  .path-row { grid-template-columns: minmax(0, 1fr) 40px minmax(0, 1fr) 40px minmax(0, 1fr); align-items: start; }
+  .path-node { flex-direction: column; gap: 12px; text-align: center; }
+  .path-icon { width: 52px; height: 52px; border-radius: 16px; }
+  .path-icon svg { width: 24px; height: 24px; }
+  .path-arrow { width: auto; height: 52px; }
+  .path-arrow::before { left: 0; right: 4px; top: 25.5px; bottom: auto; width: auto; height: 1px; }
+  .path-arrow::after { left: auto; right: 4px; top: 22.5px; bottom: auto; border-bottom: 0; border-top: 1px solid var(--hair-3); }
+  .path-off { justify-content: center; margin-top: 28px; padding-top: 24px; }
+  .path-off .path-node { flex-direction: row; text-align: left; }
+  .path-off .path-icon { width: 44px; height: 44px; border-radius: 14px; }
+  .path-off .path-icon svg { width: 22px; height: 22px; }
+}
+@media (min-width: 1024px) { .path-fig .caption { text-align: center; } }
+
+.connect-cards { margin-top: 32px; }
+.connect-card { display: flex; flex-direction: column; gap: 20px; }
+.connect-card > * + * { margin-top: 0; }
+.connect-text p { margin-top: 8px; color: var(--ink); font-size: 15px; line-height: 1.5; text-wrap: pretty; }
+.connect-card .btn { align-self: flex-start; margin-top: auto; }
+@media (min-width: 1024px) {
+  .connect-cards { grid-template-columns: minmax(0, 1fr); }
+  .connect-card { flex-direction: row; align-items: center; gap: 24px; }
+  .connect-text { flex: 1; min-width: 0; }
+  .connect-card .btn { align-self: center; margin-top: 0; flex: none; }
+}
+
+/* ── 7 Privacy strip after the FAQ band ─────────────────── */
+.strip-sec { padding-bottom: 0; }
+
+/* ── 8 Closing ──────────────────────────────────────────── */
+.close .t-lead { max-width: 32em; text-wrap: balance; }
+.close-contact { margin-top: 24px; }
+.close-contact .tlink { font-size: 15px; min-height: 44px; align-items: center; }
+
+/* ── Hit areas (phone): 44px targets without changing the look ── */
+.on-page .chip, .classify-head .tlink, .strip .tlink, .close-contact .tlink { position: relative; }
+.on-page .chip::before { content: ""; position: absolute; inset: -4px 0; }
+.classify-head .tlink::before, .strip .tlink::before { content: ""; position: absolute; inset: -9px -6px; }
+
+/* the FAQ title is a grid item; keep it at its own height */
+.faq-title { align-self: start; }
