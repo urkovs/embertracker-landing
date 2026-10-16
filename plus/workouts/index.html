@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex,nofollow"><!-- preview: remove when linked from /plus/ -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Workouts | Ember Plus</title>
+<meta name="description" content="Log every set in Ember Plus, with last time shown and a suggested next weight. On a migraine day, go lighter or skip.">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0a0a0a">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://embertracker.app/plus/workouts/">
+<meta property="og:title" content="Workouts | Ember Plus">
+<meta property="og:description" content="Log every set in Ember Plus, with last time shown and a suggested next weight. On a migraine day, go lighter or skip.">
+<meta property="og:image" content="https://embertracker.app/assets/v3/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Ember orb beside the line Migraine tracking, without the headache.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Workouts | Ember Plus">
+<meta name="twitter:description" content="Log every set in Ember Plus, with last time shown and a suggested next weight. On a migraine day, go lighter or skip.">
+<meta name="twitter:image" content="https://embertracker.app/assets/v3/og.png">
+<meta name="twitter:image:alt" content="The Ember orb beside the line Migraine tracking, without the headache.">
+<link rel="icon" type="image/png" href="../../assets/v3/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300..600&display=swap">
+<link rel="stylesheet" href="../../assets/v3/v3.css?v=6">
+<link rel="stylesheet" href="../../assets/v3/pages/plus.css?v=6">
+<link rel="stylesheet" href="../../assets/v3/pages/workouts.css?v=1">
+<link rel="canonical" href="https://embertracker.app/plus/workouts/" />
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="../../" aria-label="Ember home"><img src="../../assets/v3/orb-120.webp" alt="" width="30" height="30">Ember</a>
+    <nav class="nav-links" aria-label="Main">
+      <a class="nav-link hide-phone" href="../">Ember Plus</a>
+      <a class="nav-link" href="../../providers/">For clinicians</a>
+      <a class="btn btn--sm" data-get href="#download">Get Ember</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- Workouts (Ember Plus), reached from the Plus page's Workouts tab. Every
+     claim is true of app 1.2.0 (7eba5771): no rest timer, kg, Watch/Health
+     sync, guides or weekly goal for members. Mockups use the app's strings. -->
+<section class="sec plus-hero wo-hero" aria-labelledby="wo-title">
+  <div class="wrap plus-hero-in">
+    <p class="kicker k-routines rise">Ember Plus</p>
+    <h1 class="t-display rise" id="wo-title">Good enough to replace your workout app.</h1>
+    <p class="t-lead rise">Log every set, with last time shown. On a migraine day, go lighter or skip.</p>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="wo-log-title">
+  <div class="wrap split split--keep">
+    <div class="split-copy" data-reveal>
+      <p class="kicker k-routines">Logging</p>
+      <h2 class="t-h2" id="wo-log-title">Every set, with last time beside it.</h2>
+      <ul class="wo-list t-body">
+        <li>Weight and reps for each set. Check it off as you go; it saves automatically.</li>
+        <li>Ember suggests your next weight from how your last sets went.</li>
+        <li>Three starter workouts for a gym, dumbbells at home or no equipment, or build your own.</li>
+        <li>Swap any exercise for one that works the same muscles. 56 are built in, and you can add your own.</li>
+      </ul>
+    </div>
+    <div class="split-object" data-reveal>
+      <div class="ws" data-copylint="app" role="group" aria-label="Workout screen">
+        <p class="ws-name">Machine Chest Press</p>
+        <p class="ws-last">Last: 60×12 · 60×12 · est. 1RM 84 lb</p>
+        <p class="ws-hint">Suggested 65 lb: you reached the top of the range at 60 lb (12, 12).</p>
+        <p class="ws-head">Tap ✓ after the actual reps</p>
+        <div class="ws-set is-done"><span class="ws-n">1</span><span class="ws-f">65<small>lb</small></span><span class="ws-f">12<small>reps</small></span><span class="ws-check" aria-hidden="true">✓</span></div>
+        <div class="ws-set"><span class="ws-n">2</span><span class="ws-f">65<small>lb</small></span><span class="ws-f">10<small>reps</small></span><span class="ws-check" aria-hidden="true"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="wo-mig-title">
+  <div class="wrap split split--keep split--mirror">
+    <div class="split-copy" data-reveal>
+      <p class="kicker k-mig">Migraine days</p>
+      <h2 class="t-h2" id="wo-mig-title">Lighter on a migraine day.</h2>
+      <p class="t-body">When today or yesterday was a migraine day, Ember offers a lighter version of your next workout, one set per exercise, or you can skip it.</p>
+      <p class="t-body">After a workout, Ember asks whether you had head pain during or after it, and tells you when that happens often.</p>
+    </div>
+    <div class="split-object" data-reveal>
+      <div class="wk wo-cards" data-copylint="app" role="group" aria-label="Workout cards">
+        <div class="wk-card">
+          <p class="wk-title">Yesterday was a migraine day</p>
+          <p class="wo-sub">Go lighter or skip — either is fine.</p>
+          <div class="wk-row"><span class="wk-opt">Lighter version</span><span class="wk-opt">Skip today</span></div>
+        </div>
+        <div class="wk-card">
+          <p class="wk-title">Head pain with your last workout?</p>
+          <div class="wk-row"><span class="wk-opt">During</span><span class="wk-opt">After</span><span class="wk-opt">No</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="wo-exp-title">
+  <div class="wrap split split--keep">
+    <div class="split-copy" data-reveal>
+      <p class="kicker k-exp">Experiments</p>
+      <h2 class="t-h2" id="wo-exp-title">Test a workout routine.</h2>
+      <p class="t-body">Pick how many workouts a week, for 2, 3 or 4 weeks. Ember compares your migraine days with the 4 weeks before and tells you what it saw, not why.</p>
+    </div>
+    <div class="split-object" data-reveal>
+      <div class="wo-exp" data-copylint="app" role="group" aria-label="Experiment result">
+        <p class="wo-exp-name">3 workouts each week</p>
+        <p class="wo-exp-result">Migraine days were less frequent than before.</p>
+        <p class="wo-exp-note">This is an observed association. It does not prove that the change caused the result.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec close" id="download" aria-labelledby="download-title">
+  <div class="wrap">
+    <img class="close-orb" src="../../assets/v3/orb-rays.webp" alt="" aria-hidden="true" width="1000" height="1000" loading="lazy">
+    <h2 class="t-h2-close" id="download-title">Workouts come with Ember Plus.</h2>
+    <p class="t-lead wo-price">$7.99 a month or $59.99 a year. New subscribers get 14 days free.</p>
+    <div class="badges" aria-label="Store links" role="group">
+      <a class="badge-apple" href="https://apps.apple.com/us/app/ember-migraine-tracker/id6762041852"><img src="../../assets/v3/app-store-badge.svg" alt="Download on the App Store" width="132" height="44" loading="lazy"></a>
+      <a class="badge-play" href="https://play.google.com/store/apps/details?id=com.cascadeheadache.ember"><img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" width="149" height="44" loading="lazy"></a>
+    </div>
+    <a class="tlink wo-back" href="../">See everything in Ember Plus</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-id">
+        <a class="brand" href="../../" aria-label="Ember home"><img src="../../assets/v3/orb-120.webp" alt="" width="30" height="30" loading="lazy">Ember</a>
+        <p class="foot-tagline">Migraine and headache tracker for iPhone and Android.</p>
+      </div>
+      <nav class="foot-groups" aria-label="Footer">
+        <div class="foot-group">
+          <p class="foot-label">Ember</p>
+          <ul>
+            <li><a href="../">Ember Plus</a></li>
+            <li><a href="../../contact/">Contact</a></li>
+            <li><a href="../../delete-account/">Delete account</a></li>
+          </ul>
+        </div>
+        <div class="foot-group">
+          <p class="foot-label">Clinicians</p>
+          <ul>
+            <li><a href="../../providers/">For clinicians</a></li>
+            <li><a href="../../providers/join/">Add your clinic</a></li>
+            <li><a href="../../provider-handoff/">Provider Handoff</a></li>
+            <li><a href="../../references/">Clinical references</a></li>
+          </ul>
+        </div>
+        <div class="foot-group">
+          <p class="foot-label">Legal</p>
+          <ul>
+            <li><a href="../../privacy/">Privacy</a></li>
+            <li><a href="../../consumer-health/">Consumer health privacy</a></li>
+            <li><a href="../../terms/">Terms</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="foot-bottom">
+      <p class="foot-disclaimer">Ember helps you track and organize what you experience. It doesn’t diagnose, and it isn’t a substitute for care from your clinician.</p>
+      <p class="foot-legal">© 2026 Cascade Headache, PLLC</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Feature explorer (ARIA tabs). Runs before the deferred v3.js on purpose:
+     panels it hides are skipped by the reveal scan, and the Brief line draws
+     the first time its panel opens (EmberV3.reveal.play). -->
+<script>
+(() => {
+  const fx = document.querySelector('[data-fx]');
+  if (!fx) return;
+  const list = fx.querySelector('[role="tablist"]');
+  const tabs = [...list.querySelectorAll('[role="tab"]')];
+  const panels = tabs.map(t => document.getElementById(t.getAttribute('aria-controls')));
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  const wide = matchMedia('(min-width: 1024px)');
+  const drawn = new Set();
+  let current = -1;
+  const orient = () => list.setAttribute('aria-orientation', wide.matches ? 'vertical' : 'horizontal');
+  orient();
+  wide.addEventListener ? wide.addEventListener('change', orient) : wide.addListener(orient);
+  // keep the chosen chip inside the phone chip row (horizontal only; never scrolls the page)
+  const reveal = tab => {
+    if (list.scrollWidth <= list.clientWidth + 1) return;
+    const left = tab.offsetLeft - (list.clientWidth - tab.offsetWidth) / 2;
+    list.scrollTo({ left: Math.max(0, left), behavior: reduce.matches ? 'auto' : 'smooth' });
+  };
+  const select = (i, user) => {
+    if (i === current) return;
+    tabs.forEach((t, j) => {
+      const on = j === i;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      panels[j].hidden = !on;
+      panels[j].classList.remove('is-entering');
+    });
+    current = i;
+    if (!user) return;
+    const p = panels[i];
+    if (!reduce.matches) { void p.offsetWidth; p.classList.add('is-entering'); }
+    reveal(tabs[i]);
+    const d = p.querySelector('[data-draw]');
+    if (d && !drawn.has(d) && window.EmberV3 && EmberV3.reveal) { drawn.add(d); EmberV3.reveal.play(d); }
+  };
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => select(i, true));
+    t.addEventListener('keydown', e => {
+      const k = e.key, n = tabs.length;
+      const next = k === 'ArrowRight' || k === 'ArrowDown' ? (i + 1) % n
+        : k === 'ArrowLeft' || k === 'ArrowUp' ? (i - 1 + n) % n
+        : k === 'Home' ? 0 : k === 'End' ? n - 1 : -1;
+      if (next < 0) return;
+      e.preventDefault();
+      select(next, true);
+      tabs[next].focus({ preventScroll: true });
+    });
+  });
+  // the first panel is open from the start; its own data-draw plays on first view.
+  // A link to #fx-<feature> (e.g. from the home page) opens that feature instead.
+  drawn.add(panels[0].querySelector('[data-draw]'));
+  fx.classList.add('fx--js');
+  const start = panels.findIndex(p => '#' + p.id === location.hash);
+  select(Math.max(0, start), false);
+})();
+</script>
+<script src="../../assets/v3/v3.js?v=4" defer></script>
+</body>
+</html>
