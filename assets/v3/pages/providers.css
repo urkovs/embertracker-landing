@@ -281,3 +281,15 @@
 
 /* the FAQ title is a grid item; keep it at its own height */
 .faq-title { align-self: start; }
+
+/* ── Phone pass (Sam, Oct 16: too much text and space) ──── */
+/* Tighter section rhythm on phones only, as on the home page; tablet and
+   desktop keep theirs. */
+@media (max-width: 599px) {
+  :root { --sec-y: 44px; --stack-gap: 24px; --strip-y: 40px; }
+  /* report tabs: each part is its title and its picture; the numbered
+     parts keep their names and drop their descriptions */
+  .rx-head p { display: none; }
+  .rx-more .marker-legend li > span:not(.marker) { display: none; }
+  .setup-split .steps { margin-top: var(--h2-lead); }
+}

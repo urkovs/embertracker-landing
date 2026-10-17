@@ -293,3 +293,10 @@
 /* ── Closing ────────────────────────────────────────────── */
 /* spec §6.4: a 180px orb here, smaller than the home closing */
 @media (min-width: 1024px) { .close .close-orb { width: 180px; } }
+
+/* ── Phone pass (Sam, Oct 16: too much text and space) ──── */
+/* Tighter section rhythm on phones only, as on the home page; tablet and
+   desktop keep theirs. */
+@media (max-width: 599px) {
+  :root { --sec-y: 44px; --stack-gap: 24px; --strip-y: 40px; }
+}
