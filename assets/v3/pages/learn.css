@@ -1,0 +1,92 @@
+/* Ember V3: learn pages (/migraine-day/, /headache-diary/). Loaded after
+   v3.css; uses only its tokens. The "Try a day" classifier is v3.css §23. */
+
+/* ── Hero: the question, then the answer ───────────────── */
+.learn-hero { padding-top: 40px; padding-bottom: 0; text-align: center; }
+@media (min-width: 600px) { .learn-hero { padding-top: 64px; } }
+.learn-hero .wrap > .kicker { margin-inline: auto; }
+.learn-hero .t-display { max-width: 13em; margin-inline: auto; }
+.learn-hero .t-lead { margin: var(--h2-lead) auto 0; max-width: 34em; }
+.learn-hero .actions { justify-content: center; margin-top: var(--lead-cta); }
+.learn-hero + .sec { padding-top: 48px; }
+@media (min-width: 1024px) { .learn-hero + .sec { padding-top: 80px; } }
+
+/* ── Static pills (feature and medicine lists) ─────────── */
+.pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.pill { font-size: 15px; line-height: 1.2; color: var(--ink-hi); background: var(--raised); border: 1px solid var(--hair-2); border-radius: 999px; padding: 9px 14px; }
+.pills--mut .pill { color: var(--ink-mut); background: transparent; border-style: dashed; }
+
+/* A card holding labeled groups of pills or rows */
+.learn-card { border: 1px solid var(--hair); border-radius: var(--radius-card); padding: var(--card-pad); background: var(--bg); }
+.learn-card > * + * { margin-top: 20px; }
+.learn-card-label { font-size: 14px; font-weight: 500; line-height: 1.3; color: var(--ink-mut); }
+.learn-card-label + * { margin-top: 12px; }
+
+/* ── Day types: the app's four rows, dot + name + definition ── */
+.types { max-width: 760px; margin-inline: auto; border-top: 1px solid var(--hair); }
+.type { display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; padding: 20px 0; border-bottom: 1px solid var(--hair); }
+.type-name { display: flex; align-items: center; gap: 12px; font: 400 24px/1.2 var(--serif); letter-spacing: -.01em; color: var(--ink-hi); font-optical-sizing: auto; }
+.type-name .dot { width: 10px; height: 10px; }
+.type-def { padding-left: 22px; font-size: 17px; line-height: 1.55; color: var(--ink); text-wrap: pretty; }
+@media (min-width: 768px) {
+  .type { grid-template-columns: 220px minmax(0, 1fr); gap: 24px; align-items: baseline; padding: 24px 0; }
+  .type-def { padding-left: 0; }
+}
+
+/* ── Stat pair (why the count matters) ─────────────────── */
+.stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--grid-gap); max-width: 560px; margin-inline: auto; }
+.stat { border: 1px solid var(--hair); border-radius: var(--radius-card); padding: 20px; background: var(--bg); text-align: left; }
+.stat-num { font: 400 48px/1 var(--serif); letter-spacing: -.02em; color: var(--ink-hi); font-variant-numeric: tabular-nums; font-optical-sizing: auto; }
+.stat-num.tint { color: var(--k); }
+.stat-label { margin-top: 8px; font-size: 16px; line-height: 1.35; color: var(--ink); }
+@media (min-width: 600px) { .stat { padding: 24px; } .stat-num { font-size: 64px; } }
+.stats + .t-small { max-width: 560px; margin: 16px auto 0; text-align: center; }
+
+/* ── Comparison table (research definition vs Ember) ───── */
+.compare { width: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.45; text-align: left; }
+.compare caption { text-align: left; font-size: 14px; color: var(--ink-mut); padding-bottom: 12px; }
+.compare th, .compare td { padding: 14px 12px 14px 0; border-bottom: 1px solid var(--hair); vertical-align: top; }
+.compare thead th { font-size: 14px; font-weight: 600; color: var(--ink-mut); border-bottom-color: var(--hair-2); }
+.compare tbody th { font-weight: 600; color: var(--ink-hi); width: 32%; }
+.compare td { color: var(--ink); }
+.compare td:last-child { color: var(--ink-hi); }
+/* phones: each row becomes a small block, the two answers side by side */
+@media (max-width: 599px) {
+  .compare thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .compare tr { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 4px 12px; padding: 14px 0; border-bottom: 1px solid var(--hair); }
+  .compare th, .compare td { padding: 0; border: 0; }
+  .compare tbody th { grid-column: 1 / -1; width: auto; }
+  .compare td::before { content: attr(data-col); display: block; font-size: 13px; font-weight: 500; color: var(--ink-mut); margin-bottom: 2px; }
+}
+
+/* ── Sources and review line ───────────────────────────── */
+.sources { max-width: 760px; }
+.sources h2 { font: 600 15px/1.3 var(--sans); color: var(--ink-hi); }
+.sources ol { margin-top: 12px; padding-left: 1.4em; list-style: decimal; display: grid; gap: 10px; }
+.sources li { font-size: 14px; line-height: 1.5; color: var(--ink-mut); padding-left: 4px; }
+.sources li::marker { color: var(--ink-mut); }
+.sources a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--hair-3); text-underline-offset: 3px; overflow-wrap: anywhere; }
+.sources a:hover { text-decoration-color: var(--ember); }
+.sources .reviewed { margin-top: 20px; font-size: 14px; color: var(--ink-mut); }
+sup.ref { font-size: .7em; line-height: 0; vertical-align: super; margin-left: 1px; }
+sup.ref a { color: var(--ink-mut); text-decoration: none; }
+sup.ref a:hover { color: var(--ember); }
+
+/* ── Headache diary: the printable page as an object ───── */
+.diary-sheet { display: block; max-width: 440px; margin-inline: auto; border-radius: 6px; overflow: hidden; background: #fff; box-shadow: 0 30px 70px rgba(0, 0, 0, .55), 0 0 0 1px rgba(232, 230, 227, .08); }
+.diary-sheet img { width: 100%; height: auto; }
+.diary-crop { border-radius: 12px; overflow: hidden; background: #fff; border: 1px solid var(--hair-2); }
+.diary-crop img { width: 100%; height: auto; }
+.learn-list { display: grid; gap: 12px; max-width: 34em; }
+.learn-list li { position: relative; padding-left: 20px; font-size: 17px; line-height: 1.5; color: var(--ink); text-wrap: pretty; }
+.learn-list li::before { content: ""; position: absolute; left: 0; top: .62em; width: 7px; height: 7px; border-radius: 50%; background: var(--k, var(--ember)); }
+.learn-list b { color: var(--ink-hi); font-weight: 600; }
+.report-shot { border-radius: 10px; overflow: hidden; box-shadow: 0 30px 70px rgba(0, 0, 0, .5); }
+.report-shot img { width: 100%; height: auto; }
+.split-object > figcaption, .split-object figcaption { margin-top: 12px; font-size: 14px; line-height: 1.45; color: var(--ink-mut); text-align: center; }
+
+/* Day-type key as live text (/headache-diary/): the paper key, readable at any size */
+.key-list { display: grid; gap: 14px; }
+.key-list > div { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 12px; align-items: baseline; }
+.key-list dt { display: flex; align-items: center; gap: 8px; font: 600 17px/1.3 var(--sans); color: var(--ink-hi); }
+.key-list dd { font-size: 16px; line-height: 1.5; color: var(--ink); text-wrap: pretty; }

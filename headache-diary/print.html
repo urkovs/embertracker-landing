@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>Headache diary (print source) | Ember Migraine Tracker</title>
+<!-- Source for ember-headache-diary.pdf. Rebuild after any change:
+     "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new \
+       --no-pdf-header-footer --print-to-pdf=headache-diary/ember-headache-diary.pdf \
+       http://localhost:4173/headache-diary/print.html  (from the repo root: python3 -m http.server 4173)
+     The day-type rules below mirror the app's classifyDay (see /migraine-day/). -->
+<style>
+@font-face { font-family: "Source Serif 4"; font-weight: 300 600; src: url(../assets/v3/fonts/source-serif-4-latin.woff2) format("woff2"); }
+@page { size: letter portrait; margin: 0.36in 0.45in; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { font: 8.4pt/1.3 -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif; color: #1c1915; background: #fff; }
+@media screen { body { width: 8.5in; padding: 0.36in 0.45in; margin: 0 auto; } }
+.top { display: flex; justify-content: space-between; align-items: flex-end; gap: 16pt; padding-bottom: 7pt; border-bottom: 1.2pt solid #1c1915; }
+h1 { font: 400 22pt/1 "Source Serif 4", Georgia, serif; letter-spacing: -.01em; }
+.sub { margin-top: 4pt; color: #5c564e; font-size: 8.6pt; }
+.fields { display: grid; grid-template-columns: auto 1.9in; gap: 7pt 6pt; align-items: end; font-size: 8.6pt; }
+.fields span { display: block; border-bottom: .6pt solid #8a847b; height: 12pt; }
+table { width: 100%; border-collapse: collapse; margin-top: 6pt; table-layout: fixed; }
+col.day { width: .3in; } col.c { width: .27in; } col.med { width: auto; } col.type { width: .5in; }
+thead th { font-weight: 600; font-size: 7.4pt; color: #1c1915; vertical-align: bottom; padding: 0 0 3pt; }
+thead tr.grp th { font-size: 7.4pt; font-weight: 600; text-align: left; padding: 0 2pt 2pt; border-bottom: .6pt solid #1c1915; }
+thead tr.grp th.pad { border-bottom: 0; }
+th.rot { height: .86in; }
+th.rot span { display: inline-block; writing-mode: vertical-rl; transform: rotate(180deg); inline-size: .84in; line-height: 1.1; text-align: left; font-weight: 500; }
+th.medh, th.typeh { text-align: left; padding-left: 4pt; font-weight: 500; }
+tbody th { font-weight: 600; font-variant-numeric: tabular-nums; text-align: center; font-size: 8pt; }
+tbody td, tbody th { height: .208in; border-bottom: .5pt solid #cfc8bd; }
+tbody tr:nth-child(7n) td, tbody tr:nth-child(7n) th { border-bottom-color: #8a847b; }
+td.ck { text-align: center; vertical-align: middle; }
+td.ck i { display: inline-block; width: 8.5pt; height: 8.5pt; border: .6pt solid #9a948a; border-radius: 50%; vertical-align: middle; }
+td.lim, th.lim { border-left: .5pt solid #cfc8bd; }
+.g-pain { border-left: 0; }
+td.med { border-left: .5pt solid #cfc8bd; }
+td.type { border-left: .5pt solid #cfc8bd; }
+tbody tr td:nth-child(2), tbody tr td:nth-child(6), tbody tr td:nth-child(13), tbody tr td:nth-child(15) { border-left: .6pt solid #8a847b; }
+.bottom { display: grid; grid-template-columns: 1fr 1.9in; gap: 14pt; margin-top: 6pt; }
+.key h2, .totals h2 { font: 600 8.6pt/1.3 -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif; margin-bottom: 4pt; }
+.key dl { display: grid; grid-template-columns: 12pt 1fr; gap: 2.5pt 4pt; }
+.key dt { font-weight: 700; }
+.key p { margin-top: 5pt; color: #5c564e; }
+.totals { border: .8pt solid #1c1915; border-radius: 5pt; padding: 7pt 8pt; }
+.totals div { display: grid; grid-template-columns: 1fr .42in; align-items: end; gap: 4pt; margin-top: 6pt; }
+.totals span { border-bottom: .6pt solid #1c1915; height: 13pt; }
+.foot { display: flex; align-items: center; justify-content: space-between; gap: 12pt; margin-top: 6pt; padding-top: 6pt; border-top: .5pt solid #cfc8bd; color: #5c564e; font-size: 7.6pt; }
+.foot .app { display: flex; align-items: center; gap: 7pt; text-align: right; }
+.foot img { width: .46in; height: .46in; }
+.foot b { color: #1c1915; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>Headache diary</h1>
+    <p class="sub">One line a day. Tick what applies, and leave clear days blank.</p>
+  </div>
+  <div class="fields"><b>Month</b><span></span><b>Name</b><span></span></div>
+</header>
+<table>
+  <colgroup><col class="day"><col class="c"><col class="c"><col class="c"><col class="c"><col class="c"><col class="c"><col class="c"><col class="c"><col class="c"><col class="c"><col class="c"><col class="c"><col class="med"><col class="c"><col class="type"></colgroup>
+  <thead>
+    <tr class="grp"><th class="pad"></th><th colspan="4">Head pain</th><th colspan="7">Migraine features</th><th class="pad" colspan="4"></th></tr>
+    <tr><th scope="col" class="dayh">Day</th><th scope="col" class="rot"><span>None</span></th><th scope="col" class="rot"><span>Mild</span></th><th scope="col" class="rot"><span>Moderate</span></th><th scope="col" class="rot"><span>Severe</span></th><th scope="col" class="rot"><span>Nausea or vomiting</span></th><th scope="col" class="rot"><span>Light sensitivity</span></th><th scope="col" class="rot"><span>Sound sensitivity</span></th><th scope="col" class="rot"><span>Aura</span></th><th scope="col" class="rot"><span>Neck pain</span></th><th scope="col" class="rot"><span>Dizziness</span></th><th scope="col" class="rot"><span>Smell sensitivity</span></th><th scope="col" class="rot"><span>Limited my day</span></th><th scope="col" class="medh">As-needed medicine taken</th><th scope="col" class="rot"><span>Period</span></th><th scope="col" class="typeh">Day type</th></tr>
+  </thead>
+  <tbody>
+    <tr><th scope="row">1</th><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck lim"><i></i></td><td class="med"></td><td class="ck"><i></i></td><td class="type"></td></tr>
+<tr><th scope="row">2</th><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck lim"><i></i></td><td class="med"></td><td class="ck"><i></i></td><td class="type"></td></tr>
+<tr><th scope="row">3</th><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck lim"><i></i></td><td class="med"></td><td class="ck"><i></i></td><td class="type"></td></tr>
+<tr><th scope="row">4</th><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck lim"><i></i></td><td class="med"></td><td class="ck"><i></i></td><td class="type"></td></tr>
+<tr><th scope="row">5</th><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck lim"><i></i></td><td class="med"></td><td class="ck"><i></i></td><td class="type"></td></tr>
+<tr><th scope="row">6</th><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck lim"><i></i></td><td class="med"></td><td class="ck"><i></i></td><td class="type"></td></tr>
+<tr><th scope="row">7</th><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck lim"><i></i></td><td class="med"></td><td class="ck"><i></i></td><td class="type"></td></tr>
+<tr><th scope="row">8</th><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck lim"><i></i></td><td class="med"></td><td class="ck"><i></i></td><td class="type"></td></tr>
+<tr><th scope="row">9</th><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck lim"><i></i></td><td class="med"></td><td class="ck"><i></i></td><td class="type"></td></tr>
+<tr><th scope="row">10</th><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck lim"><i></i></td><td class="med"></td><td class="ck"><i></i></td><td class="type"></td></tr>
+<tr><th scope="row">11</th><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck lim"><i></i></td><td class="med"></td><td class="ck"><i></i></td><td class="type"></td></tr>
+<tr><th scope="row">12</th><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck lim"><i></i></td><td class="med"></td><td class="ck"><i></i></td><td class="type"></td></tr>
+<tr><th scope="row">13</th><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck lim"><i></i></td><td class="med"></td><td class="ck"><i></i></td><td class="type"></td></tr>
+<tr><th scope="row">14</th><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck lim"><i></i></td><td class="med"></td><td class="ck"><i></i></td><td class="type"></td></tr>
+<tr><th scope="row">15</th><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck lim"><i></i></td><td class="med"></td><td class="ck"><i></i></td><td class="type"></td></tr>
+<tr><th scope="row">16</th><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck lim"><i></i></td><td class="med"></td><td class="ck"><i></i></td><td class="type"></td></tr>
+<tr><th scope="row">17</th><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck lim"><i></i></td><td class="med"></td><td class="ck"><i></i></td><td class="type"></td></tr>
+<tr><th scope="row">18</th><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck lim"><i></i></td><td class="med"></td><td class="ck"><i></i></td><td class="type"></td></tr>
+<tr><th scope="row">19</th><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck lim"><i></i></td><td class="med"></td><td class="ck"><i></i></td><td class="type"></td></tr>
+<tr><th scope="row">20</th><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck lim"><i></i></td><td class="med"></td><td class="ck"><i></i></td><td class="type"></td></tr>
+<tr><th scope="row">21</th><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck lim"><i></i></td><td class="med"></td><td class="ck"><i></i></td><td class="type"></td></tr>
+<tr><th scope="row">22</th><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck lim"><i></i></td><td class="med"></td><td class="ck"><i></i></td><td class="type"></td></tr>
+<tr><th scope="row">23</th><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck lim"><i></i></td><td class="med"></td><td class="ck"><i></i></td><td class="type"></td></tr>
+<tr><th scope="row">24</th><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck lim"><i></i></td><td class="med"></td><td class="ck"><i></i></td><td class="type"></td></tr>
+<tr><th scope="row">25</th><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck lim"><i></i></td><td class="med"></td><td class="ck"><i></i></td><td class="type"></td></tr>
+<tr><th scope="row">26</th><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck lim"><i></i></td><td class="med"></td><td class="ck"><i></i></td><td class="type"></td></tr>
+<tr><th scope="row">27</th><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck lim"><i></i></td><td class="med"></td><td class="ck"><i></i></td><td class="type"></td></tr>
+<tr><th scope="row">28</th><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck lim"><i></i></td><td class="med"></td><td class="ck"><i></i></td><td class="type"></td></tr>
+<tr><th scope="row">29</th><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck lim"><i></i></td><td class="med"></td><td class="ck"><i></i></td><td class="type"></td></tr>
+<tr><th scope="row">30</th><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck lim"><i></i></td><td class="med"></td><td class="ck"><i></i></td><td class="type"></td></tr>
+<tr><th scope="row">31</th><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck"><i></i></td><td class="ck lim"><i></i></td><td class="med"></td><td class="ck"><i></i></td><td class="type"></td></tr>
+  </tbody>
+</table>
+<section class="bottom">
+  <div class="key">
+    <h2>Day type: write M, H or S</h2>
+    <dl>
+      <dt>M</dt><dd>Migraine day: head pain with 2 or more migraine features, symptoms without head pain that limited your day, or a migraine medicine taken with pain or symptoms.</dd>
+      <dt>H</dt><dd>Headache day: head pain with fewer than 2 migraine features.</dd>
+      <dt>S</dt><dd>Symptom day: symptoms without head pain that didn&rsquo;t limit your day.</dd>
+    </dl>
+    <p>Migraine features are the seven columns above, plus moderate or severe pain and a limited day. Brain fog and fatigue don&rsquo;t count.</p>
+  </div>
+  <div class="totals">
+    <h2>Month totals</h2>
+    <div>Migraine days (M)<span></span></div>
+    <div>Headache days (H)<span></span></div>
+    <div>Days with as-needed medicine<span></span></div>
+  </div>
+</section>
+<footer class="foot">
+  <p>This is your record, not a diagnosis. Bring it to your provider for medical interpretation.</p>
+  <div class="app"><p><b>Ember</b> keeps this diary on your phone.<br>Free at embertracker.app</p><img src="../assets/v3/qr-home.svg" alt=""></div>
+</footer>
+</body>
+</html>

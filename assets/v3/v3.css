@@ -952,14 +952,13 @@ button { font: inherit; color: inherit; }
    link in one centered row, then a hairline, the disclaimer and the © line,
    all inside the page's content column (.wrap: 170–1270 at 1440). Same markup
    on every page.
-   The ten links flow as one inline list with one even gap: the groups and
+   The twelve links flow as one inline list with one even gap: the groups and
    their lists are inline, so links wrap one at a time, never group by group,
-   and text-wrap: balance evens out the rows when one row doesn't fit (one row
-   from 1180px, two at 1024, three at 768, four at 375; no link alone on a
-   row). The gap is a margin on each item; the list's negative margin cancels
+   and text-wrap: balance evens out the rows (two rows of six from 1024px,
+   three at 768, five at 375; no link alone on a row). The gap is a margin on each item; the list's negative margin cancels
    it at the row ends, so every row centers exactly. Font size 0 on the list
    removes the source whitespace between items (it stays a wrap point).
-   The group labels ("Ember", "Clinicians", "Legal") stay for screen readers. */
+   The group labels ("Ember", "Learn", "Clinicians", "Legal") stay for screen readers. */
 .foot { padding-block: 56px 40px; text-align: center; }
 .foot-top { display: flex; flex-direction: column; align-items: center; gap: 16px; }
 .foot-id { display: flex; flex-direction: column; align-items: center; }
@@ -987,8 +986,7 @@ button { font: inherit; color: inherit; }
   .foot { padding-block: 48px 36px; }
   .foot-groups { --foot-gap: 18px; }
 }
-/* ≥1024: 14px links and a 20px gap put all ten in one row inside the 1100px
-   column (about 1070px measured with SF Pro; ~30px to spare for wider fonts) */
+/* ≥1024: 14px links and a 20px gap; the twelve links balance into two rows */
 @media (min-width: 1024px) {
   .foot-groups { --foot-gap: 20px; }
   .foot-group a { font-size: 14px; }
@@ -1237,3 +1235,51 @@ button { font: inherit; color: inherit; }
   .js-motion [data-draw] :is(.draw, .draw-fill, .draw-after) { opacity: 1 !important; stroke-dashoffset: 0 !important; }
   .orb-layer, .orb-dot { display: none !important; }
 }
+
+/* ── 23 Day classifier ("Try a day": home #classify, /migraine-day/) ── */
+/* Markup and behavior: [data-try] in v3.js, which mirrors the app's
+   classifyDay. Moved from pages/home.css when /migraine-day/ reused it. */
+/* the approved rule line, set off with a migraine-purple rule */
+.split-copy > .rule-line { margin-top: 24px; }
+.rule-line { max-width: 30em; padding-left: 16px; border-left: 2px solid var(--mig); font-size: 16px; line-height: 1.5; color: var(--ink-hi); text-wrap: pretty; }
+@media (min-width: 600px) { .rule-line { font-size: 17px; } }
+.split-copy > .rule-line + .t-small { margin-top: 24px; }
+.try { border: 1px solid var(--hair); border-radius: var(--radius-card); padding: var(--card-pad); display: grid; gap: 24px; }
+.try-row { display: grid; gap: 12px; }
+.try-label { font-size: 14px; font-weight: 500; line-height: 1.3; color: var(--ink-mut); }
+.try .chips { gap: 8px; }
+.try-pain { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.try-pain .chip { padding: 0 10px; }
+/* Pain chips switch on the row's own width, not the screen's: four across
+   with the dot beside "Moderate" needs ~445px, more than any phone gives.
+   Below that, the app's own pain chips (dot above the word); 13px from
+   ~360px phones; 2 × 2 under 275px. */
+.try-row { container-type: inline-size; }
+@container (max-width: 459px) {
+  .try-pain { gap: 6px; }
+  .try-pain .chip { flex-direction: column; gap: 6px; min-height: 56px; padding: 8px 2px; font-size: 14px; }
+}
+@container (max-width: 299px) {
+  .try-pain { gap: 4px; }
+  .try-pain .chip { font-size: 13px; }
+}
+@container (max-width: 274px) {
+  .try-pain { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .try-pain .chip { flex-direction: row; gap: 8px; min-height: 44px; padding: 0 10px; font-size: 15px; }
+}
+@media (max-width: 599px) { .try { gap: 16px; padding: 18px; } }
+.pain-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--c); flex: none; }
+.try-impact { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.try-impact .chip { padding: 0 10px; }
+.try-result {
+  --rc: var(--mig);
+  position: relative; overflow: hidden;
+  background: var(--surface); border: 1px solid var(--hair); border-radius: 16px;
+  padding: 18px 20px 18px 24px;
+  transition: border-color 200ms var(--ease-std);
+}
+.try-result::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--rc); transition: background-color 200ms var(--ease-std); }
+.try-title { display: flex; align-items: center; gap: 10px; font: 400 26px/1.15 var(--serif); color: var(--ink-hi); letter-spacing: -.01em; font-optical-sizing: auto; }
+.try-rule { margin-top: 6px; font-size: 14px; line-height: 1.45; color: var(--ink-mut); }
+.try-feats { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.try-feats li { font-size: 14px; line-height: 1; color: var(--ink); background: var(--raised); border: 1px solid var(--hair); border-radius: 999px; padding: 7px 12px; }

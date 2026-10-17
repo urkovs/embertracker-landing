@@ -90,6 +90,18 @@ original round-2 spec. Check `git status`/`git log` for anything newer.
   `.well-known/assetlinks.json` are production link-verification contracts.
   Asset Links keeps both the Google Play app-signing certificate and the EAS
   upload certificate so Play installs and direct preview installs both verify.
+- `migraine-day/` and `headache-diary/` — patient learn pages written for
+  search (styles `assets/v3/pages/learn.css`, linked from the footer's Learn
+  group). Day types, features and the medicine rule use the app's Learning
+  Center wording; the "Try a day" classifier is the homepage widget (v3.css
+  §23, v3.js `[data-try]`). Clinical claims carry numbered sources and a
+  "Reviewed by a practicing headache specialist" date: update that date when
+  Sam re-reviews. If the app's classification rules change, update both pages,
+  the classifier and the diary key together.
+- `headache-diary/ember-headache-diary.pdf` is rendered from
+  `headache-diary/print.html` (noindex; the rebuild command is in its head
+  comment). It must stay one US Letter page; re-render the images in
+  `assets/v3/diary/` from the PDF after any change.
 - `beta/ provider-update/` — legacy one-off pages, self-contained. Leave alone.
 - Keep the favicon files and the App Store link (`id6762041852`) intact.
 - `<title>` patterns in use: brand-first with a hyphen for main pages
