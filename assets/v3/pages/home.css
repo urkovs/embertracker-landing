@@ -5,7 +5,7 @@
 @media (min-width: 600px) { .hero { padding-top: 48px; } }
 .hero-copy { position: relative; z-index: 4; }
 .hero .t-hero { margin-inline: auto; }
-.hero .t-lead { margin: 16px auto 0; max-width: 30em; }
+.hero .t-lead { margin: 16px auto 0; max-width: 30em; text-wrap: balance; }
 .hero .badges { justify-content: center; margin-top: 24px; }
 @media (min-width: 600px) { .hero .t-lead { margin-top: 20px; } .hero .badges { margin-top: 32px; } }
 /* the credential under the badges: a seal and the line in a cool blue, so it
@@ -434,9 +434,9 @@
   #get { padding-top: max(96px, calc(10.5vw - 36px)); }
   /* above the hero's bottom fade, so the trail leaves the orb's rim unbroken;
      it fades in over its first 50px. The start point (data-orb-start, the
-     disc's lower-left rim) rests at page y 1033 at every width from 1260, so
+     disc's lower-left rim) rests at page y 1025 at every width from 1260, so
      the mask's stops are page px; move them with it if the hero changes. */
-  .orb-layer { z-index: 3; -webkit-mask-image: linear-gradient(to bottom, transparent 1027px, #000 1083px); mask-image: linear-gradient(to bottom, transparent 1027px, #000 1083px); }
+  .orb-layer { z-index: 3; -webkit-mask-image: linear-gradient(to bottom, transparent 1019px, #000 1075px); mask-image: linear-gradient(to bottom, transparent 1019px, #000 1075px); }
   .orb-dot { z-index: 3; }
 }
 
