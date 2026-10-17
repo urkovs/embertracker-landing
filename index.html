@@ -8,6 +8,7 @@
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#0a0a0a">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Ember Migraine Tracker">
 <meta property="og:url" content="https://embertracker.app/">
 <meta property="og:title" content="Ember Migraine Tracker">
 <meta property="og:description" content="A free migraine and headache tracker made by a headache specialist. Log a day in 10 to 20 seconds and bring your doctor a report.">
@@ -21,36 +22,61 @@
 <meta name="twitter:image" content="https://embertracker.app/assets/v3/og.png">
 <meta name="twitter:image:alt" content="The Ember orb beside the line Migraine tracking, without the headache.">
 <link rel="icon" type="image/png" href="assets/v3/favicon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300..600&display=swap">
+<link rel="preload" as="font" type="font/woff2" href="assets/v3/fonts/source-serif-4-latin.woff2" crossorigin>
 <link rel="preload" as="image" href="assets/v3/orb.webp" fetchpriority="high">
-<link rel="stylesheet" href="assets/v3/v3.css?v=7">
+<link rel="stylesheet" href="assets/v3/v3.css?v=8">
 <link rel="stylesheet" href="assets/v3/pages/home.css?v=16">
 <link rel="canonical" href="https://embertracker.app/" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "Ember - Migraine Tracker",
-  "url": "https://embertracker.app/",
-  "image": "https://embertracker.app/assets/og-image.png",
-  "description": "A free migraine tracker built by a practicing headache specialist. A few taps a day become patterns you can see and a report your clinician can use.",
-  "operatingSystem": ["iOS", "Android"],
-  "applicationCategory": "MedicalApplication",
-  "downloadUrl": [
-    "https://apps.apple.com/us/app/ember-migraine-tracker/id6762041852",
-    "https://play.google.com/store/apps/details?id=com.cascadeheadache.ember"
-  ],
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Cascade Headache, PLLC"
-  }
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://embertracker.app/#website",
+      "url": "https://embertracker.app/",
+      "name": "Ember Migraine Tracker",
+      "alternateName": "Ember",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://embertracker.app/#publisher"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://embertracker.app/#publisher",
+      "name": "Cascade Headache, PLLC",
+      "url": "https://embertracker.app/"
+    },
+    {
+      "@type": "MobileApplication",
+      "@id": "https://embertracker.app/#app",
+      "name": "Ember - Migraine Tracker",
+      "url": "https://embertracker.app/",
+      "description": "A free migraine and headache tracker made by a headache specialist. Log a day in 10 to 20 seconds and bring your doctor a report.",
+      "image": "https://embertracker.app/assets/v3/og.png",
+      "screenshot": "https://embertracker.app/assets/v3/screen-today.jpg",
+      "operatingSystem": "iOS, Android",
+      "applicationCategory": "HealthApplication",
+      "inLanguage": "en",
+      "installUrl": [
+        "https://apps.apple.com/us/app/ember-migraine-tracker/id6762041852",
+        "https://play.google.com/store/apps/details?id=com.cascadeheadache.ember"
+      ],
+      "sameAs": [
+        "https://apps.apple.com/us/app/ember-migraine-tracker/id6762041852",
+        "https://play.google.com/store/apps/details?id=com.cascadeheadache.ember"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "publisher": {
+        "@id": "https://embertracker.app/#publisher"
+      }
+    }
+  ]
 }
 </script>
 </head>

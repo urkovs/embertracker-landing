@@ -198,6 +198,18 @@ explicit pivot from Sam, not drift to correct back.
   least three widths before committing: ~375px, ~768px (several components
   switch layout under 768px), and ~1280–1440px.
 - Deploy is a push to `main`; GitHub Pages serves the tree as-is.
+- Fonts: Source Serif 4 is self-hosted (`assets/v3/fonts/`, `@font-face` at
+  the top of `v3.css`); every page preloads the latin file. Don't add Google
+  Fonts links back: they were the main render-blocking cost on phones.
+- SEO (Oct 16, 2026): every indexable page carries an absolute canonical (with
+  the trailing slash, since `/x` 301s to `/x/`), a description, OG/Twitter tags
+  and `og:site_name`. The homepage JSON-LD `@graph` (WebSite, Organization,
+  MobileApplication) reuses the meta description, so change them together.
+  Add new indexable pages to `sitemap.xml` with a `lastmod`; utility and
+  legacy pages (`/send`, `/clinic/*`, `beta/`, `v2/`, `v3/`) stay `noindex`.
+  `robots.txt` keeps the repo's `.md` notes, which Pages also serves, out of
+  search. The hero screenshot stays the uncompressed JPG (Sam's crispness
+  call), even though Lighthouse flags it.
 
 ## Quick verify checklist when you change things
 

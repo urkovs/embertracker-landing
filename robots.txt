@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+# Repo notes (CLAUDE.md, HANDOFF.md and the like) are served too; keep them out of search.
+Disallow: /*.md$
+Disallow: /docs/
 
 Sitemap: https://embertracker.app/sitemap.xml
