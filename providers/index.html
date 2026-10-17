@@ -26,6 +26,60 @@
 <link rel="stylesheet" href="../assets/v3/v3.css?v=9">
 <link rel="stylesheet" href="../assets/v3/pages/providers.css?v=14">
 <link rel="canonical" href="https://embertracker.app/providers/" />
+<!-- FAQPage: the FAQ section below, word for word. Change them together. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": "https://embertracker.app/providers/#faq",
+  "url": "https://embertracker.app/providers/",
+  "isPartOf": {
+    "@id": "https://embertracker.app/#website"
+  },
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Who can see a patient’s report?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Only the people the patient sends it to. A report emailed or shared from the patient’s phone doesn’t pass through Ember’s servers, so Ember’s team never receives it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Ember connect to our EHR?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The report is a PDF your staff can attach to the chart. Patients can also copy the chart note as plain text and send it through your patient portal."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does a patient need Ember Plus?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Logging and the report are free. Ember Plus is for patients who want to understand their migraines in more depth."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if a patient logs only some days?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The note says so in its coverage line, which separates logged days from presumed-clear and unknown ones. Unlogged days count as clear only if the patient chose that setting, and the calendar marks missed days with a dash."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I change a patient’s medication limits?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Set each acute class’s monthly limit in Provider Handoff. After the patient imports the plan, Ember’s overuse warnings use your limits."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>

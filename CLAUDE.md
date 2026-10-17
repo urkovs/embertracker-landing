@@ -220,7 +220,14 @@ explicit pivot from Sam, not drift to correct back.
   Add new indexable pages to `sitemap.xml` with a `lastmod`; utility and
   legacy pages (`/send`, `/clinic/*`, `beta/`, `v2/`, `v3/`) stay `noindex`.
   `robots.txt` keeps the repo's `.md` notes, which Pages also serves, out of
-  search. The hero screenshot stays the uncompressed JPG (Sam's crispness
+  search, and lets every crawler in, AI search and assistants included.
+- AI search (Oct 17, 2026): `/llms.txt` is built from each page's live title
+  and meta description; rebuild it when those change or a page is added. The
+  Plus and clinicians FAQs carry FAQPage JSON-LD that repeats the visible Q&A
+  word for word, so edit both together. IndexNow (Bing, which feeds ChatGPT
+  search and Copilot): the key file is `/ebe3c7b9dc16705c4ef3b14314152817.txt`; after a deploy that adds
+  or changes pages, POST the changed URLs to `https://api.indexnow.org/indexnow`
+  with that key. The hero screenshot stays the uncompressed JPG (Sam's crispness
   call), even though Lighthouse flags it.
 
 ## Quick verify checklist when you change things

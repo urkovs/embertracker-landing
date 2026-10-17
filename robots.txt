@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
+# Search engines, AI search and AI assistants are all welcome; don't block them.
 # Repo notes (CLAUDE.md, HANDOFF.md and the like) are served too; keep them out of search.
 Disallow: /*.md$
 Disallow: /docs/
