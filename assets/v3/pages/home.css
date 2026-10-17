@@ -76,10 +76,22 @@
 .try .chips { gap: 8px; }
 .try-pain { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .try-pain .chip { padding: 0 10px; }
-/* narrow phones: the app's own pain chips, dot above the word */
-@media (max-width: 399px) {
+/* Pain chips switch on the row's own width, not the screen's: four across
+   with the dot beside "Moderate" needs ~445px, more than any phone gives.
+   Below that, the app's own pain chips (dot above the word); 13px from
+   ~360px phones; 2 × 2 under 275px. */
+.try-row { container-type: inline-size; }
+@container (max-width: 459px) {
   .try-pain { gap: 6px; }
   .try-pain .chip { flex-direction: column; gap: 6px; min-height: 56px; padding: 8px 2px; font-size: 14px; }
+}
+@container (max-width: 299px) {
+  .try-pain { gap: 4px; }
+  .try-pain .chip { font-size: 13px; }
+}
+@container (max-width: 274px) {
+  .try-pain { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .try-pain .chip { flex-direction: row; gap: 8px; min-height: 44px; padding: 0 10px; font-size: 15px; }
 }
 @media (max-width: 599px) { .try { gap: 16px; padding: 18px; } }
 .pain-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--c); flex: none; }
