@@ -19,7 +19,7 @@ Ember helps you track and organize what you experience. It doesn’t diagnose, a
 ## Ember
 
 - [Home](https://embertracker.app/): Migraine tracking, without the headache.
-- [Ember Plus](https://embertracker.app/plus/): Ember Plus compares your migraine days with sleep and weather, and adds Apple Watch logging and encrypted backup. $7.99 a month or $59.99 a year.
+- [Ember Plus](https://embertracker.app/plus/): Ember Plus compares your migraine days with sleep and weather, and adds Apple Watch logging and encrypted backup. $7.99 monthly or $59.99 annually.
 - [Ember Plus workouts](https://embertracker.app/plus/workouts/): Log every set in Ember Plus, with last time shown and a suggested next weight. On a migraine day, go lighter or skip.
 - [Contact](https://embertracker.app/contact/): Write to the Ember team about the app or setting up a clinic. We reply by email.
 - [Delete your account](https://embertracker.app/delete-account/): How to delete your Ember account and the data tied to it, in the app or by email.
