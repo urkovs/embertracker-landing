@@ -7,8 +7,15 @@
 .hero .t-hero { margin-inline: auto; }
 .hero .t-lead { margin: 16px auto 0; max-width: 30em; }
 .hero .badges { justify-content: center; margin-top: 24px; }
-.hero .badge-lines { justify-items: center; }
 @media (min-width: 600px) { .hero .t-lead { margin-top: 20px; } .hero .badges { margin-top: 32px; } }
+/* the credential under the badges: a seal and the line in a cool blue, so it
+   stands apart from the ember orb (Sam, Oct 17: no outline, not ember) */
+.maker-badge {
+  display: inline-flex; align-items: center; gap: 8px; margin-top: 18px;
+  font: 600 15px/1.2 var(--sans); color: var(--routines);
+}
+.maker-badge svg { flex: none; }
+@media (min-width: 600px) { .maker-badge { margin-top: 20px; font-size: 16px; } }
 
 /* Stage: the orb disc rises behind the phone. --disc is the visible disc;
    the image is wider because the artwork carries its own glow. */
@@ -24,12 +31,25 @@
   top: calc(var(--disc) / .56 * -.218);
   transform: translateX(-50%);
   pointer-events: none;
-  /* dimmed for light-sensitive eyes (Sam, round 3): about 65% of the old
-     brightness, a little less saturated */
-  opacity: .6;
-  filter: saturate(.84);
+  /* resting brightness (Sam, Oct 17: a bit brighter than round 3's .6/.7,
+     which had dimmed it for light-sensitive eyes) */
+  --orb-o: .76;
+  filter: saturate(.9);
 }
-@media (min-width: 600px) { .hero-orb { opacity: .7; } }
+@media (min-width: 600px) { .hero-orb { --orb-o: .86; } }
+/* Scroll rise ([data-scroll-rise], driven by v3.js): --rise runs 0 → 1 over
+   the first stretch of scroll and sets the fade; --rise-e is its eased twin
+   and sets the climb from --rise-d below the resting spot. Unset (no JS) or
+   Reduce Motion: both read 1, the resting state. .js-rise (inline script in
+   the page head) holds the start state until v3.js runs, so the orb never
+   flashes in at full brightness. Opacity and translate only: no repaints. */
+[data-scroll-rise] {
+  --rise-d: calc(var(--disc) * .4);
+  opacity: calc(var(--orb-o, 1) * var(--rise, 1));
+  translate: 0 calc((1 - var(--rise-e, 1)) * var(--rise-d));
+}
+.js-rise [data-scroll-rise] { --rise: 0; --rise-e: 0; will-change: opacity, translate; }
+@media (prefers-reduced-motion: reduce) { .js-rise [data-scroll-rise] { --rise: 1; --rise-e: 1; } }
 .hero-glow { display: none; }
 @media (min-width: 600px) {
   .hero-glow {
@@ -202,13 +222,80 @@
 .send-text b { font-size: 16px; font-weight: 600; line-height: 1.35; color: var(--ink-hi); }
 .send-text span { font-size: 14px; line-height: 1.45; color: var(--ink-mut); }
 @media (min-width: 600px) { .send-text b { font-size: 17px; } }
-/* clinic callout, tinted with the section's sky key */
-.report-copy > .clinic-note { margin-top: 28px; }
-.clinic-note { display: grid; gap: 4px; justify-items: start; padding: 16px 18px 10px; border-radius: 16px; background: rgba(168, 196, 212, .06); border: 1px solid rgba(168, 196, 212, .2); }
-.clinic-note p { font-size: 15px; line-height: 1.5; color: var(--ink-hi); text-wrap: pretty; }
-.report-copy > .clinic-note + .tlink { margin-top: 20px; }
+/* Providers link: the whole callout is the link, tinted with the section's
+   sky key so it reads as a door to another audience, not another step */
+.report-copy > .pro-link { margin-top: 28px; }
+.pro-link {
+  display: grid; gap: 6px; justify-items: start; padding: 14px 18px 16px; border-radius: 16px;
+  background: rgba(168, 196, 212, .07); border: 1px solid rgba(168, 196, 212, .28);
+  text-decoration: none; transition: background-color 160ms var(--ease-std), border-color 160ms var(--ease-std);
+}
+.pro-link:hover { background: rgba(168, 196, 212, .11); border-color: rgba(168, 196, 212, .45); }
+.pro-link-tag { font: 600 13px/1.2 var(--sans); letter-spacing: .06em; text-transform: uppercase; color: var(--clear); }
+.pro-link-text { font-size: 16px; font-weight: 500; line-height: 1.45; color: var(--ink-hi); text-wrap: pretty; }
+.pro-link-arrow { display: inline-block; margin-left: 6px; color: var(--clear); transition: translate 160ms var(--ease-std); }
+.pro-link:hover .pro-link-arrow { translate: 3px 0; }
+.report-copy > .pro-link + .tlink { margin-top: 20px; }
+@media (max-width: 599px) { .report-copy > .pro-link { margin-top: 20px; } .pro-link-text { font-size: 15px; } }
 
 /* ── Ember Plus band ────────────────────────────────────── */
+/* The whole section sits in one gold-edged panel (the patterns key), so Plus
+   reads as its own place on the page. On phones the panel runs edge to edge
+   and drops its side borders, so the tile swipe row still bleeds to the
+   screen edges. */
+.plus-panel {
+  position: relative; padding: 40px 24px 36px; border-radius: 32px;
+  border: 1px solid rgba(230, 184, 92, .26);
+  background:
+    radial-gradient(120% 60% at 50% 0%, rgba(230, 184, 92, .10), rgba(230, 184, 92, 0) 70%),
+    linear-gradient(180deg, rgba(18, 17, 16, .9), rgba(10, 10, 10, 0) 60%);
+}
+.plus-panel::before {
+  content: ""; position: absolute; top: -1px; left: 50%; translate: -50% 0; width: min(60%, 520px); height: 1px;
+  background: linear-gradient(90deg, rgba(230, 184, 92, 0), var(--patterns), rgba(230, 184, 92, 0));
+}
+@media (min-width: 1024px) { .plus-panel { padding: 64px 48px 52px; border-radius: 40px; } }
+@media (max-width: 599px) {
+  .plus-panel { margin-inline: calc(var(--gutter) * -1); padding: 32px var(--gutter) 28px; border-radius: 0; border-inline: 0; }
+}
+/* "Works with": the Health sources named up front (Mitch, Oct 17: it wasn't
+   obvious Ember already connects to Apple Health) */
+.works-with { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px 12px; margin-top: 24px; }
+.works-label { font-size: 14px; color: var(--ink-mut); }
+.works-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.works-list li {
+  display: inline-flex; align-items: center; gap: 7px; min-height: 34px; padding: 0 13px 0 10px; border-radius: 999px;
+  background: var(--raised); border: 1px solid var(--hair-2); font: 600 14px/1 var(--sans); color: var(--ink-hi); white-space: nowrap;
+}
+.works-list svg { width: 17px; height: 17px; fill: none; stroke: var(--health); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.works-list li:last-child svg { stroke: var(--sleep); }
+@media (min-width: 600px) { .works-with { margin-top: 28px; } .works-list li { font-size: 15px; } }
+/* phones: label and chips flow as one centered group, two lines at 375px */
+@media (max-width: 599px) {
+  .works-list, .plus-more-list { display: contents; }
+  .works-with { gap: 8px 6px; margin-top: 20px; }
+  .plus-more { gap: 8px 6px; margin-top: 24px; }
+  .works-label, .plus-more-label { font-size: 13px; margin-right: 2px; }
+  .works-list li { min-height: 32px; padding: 0 11px 0 9px; gap: 6px; font-size: 13px; }
+  .works-list svg { width: 15px; height: 15px; }
+  .plus-more-list a { min-height: 36px; padding: 0 12px 0 10px; gap: 7px; font-size: 14px; }
+  .plus-more-list svg { width: 16px; height: 16px; }
+}
+/* the rest of the 8 features, each opening its tab on /plus/ */
+.plus-more { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px 12px; margin-top: 28px; }
+.plus-more-label { font-size: 14px; color: var(--ink-mut); }
+.plus-more-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.plus-more-list a {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 14px 0 11px; border-radius: 999px;
+  background: color-mix(in srgb, var(--k) 8%, var(--surface)); border: 1px solid color-mix(in srgb, var(--k) 30%, transparent);
+  font: 500 15px/1 var(--sans); color: var(--ink-hi); text-decoration: none; white-space: nowrap;
+  transition: background-color 160ms var(--ease-std), border-color 160ms var(--ease-std);
+}
+.plus-more-list a:hover { background: color-mix(in srgb, var(--k) 14%, var(--surface)); border-color: color-mix(in srgb, var(--k) 55%, transparent); }
+.plus-more-list svg { width: 17px; height: 17px; flex: none; fill: none; stroke: var(--k); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+/* one clear way in: a gold button, then the price under it */
+.plus-cta { background: var(--patterns); color: var(--btn-ink); }
+.plus-cta:hover { background: #efc877; }
 /* each tile carries its feature color the way the app's Plus tiles do: a
    tinted edge, a faint wash at the top and a colored title */
 .plus-tiles .tile-card {
@@ -226,23 +313,37 @@
 .plus-tiles .app-card { width: 100%; }
 .plus-tiles .brief { width: 100%; max-width: 340px; }
 
-/* Your patterns: two of the app's findings, each a small title over its
-   sentence, divided by a hairline. The card fills its tile's visual area,
-   so its bottom lines up with the Brief beside it. */
-.plus-tiles .tile-obj > .pattern-card { flex: 1 0 auto; }
-.pattern-obs { padding-top: 12px; }
-.pattern-obs + .pattern-obs { margin-top: 12px; border-top: 1px solid var(--hair); }
-.pattern-name { font-size: 14px; font-weight: 500; line-height: 18px; color: var(--ink-mut); }
-.pattern-card .app-card-headline { margin-top: 4px; font-size: 20px; line-height: 1.2; }
+/* Your patterns: today's risk card. A rust chip (the app's High risk color)
+   over two rows, each a fact about today in its own key color with what the
+   history shows under it. A warm top edge like the Brief's. The card fills
+   its tile's visual area, so its bottom lines up with the Brief beside it. */
+.plus-tiles .tile-obj > .risk-card { flex: 1 0 auto; }
+.risk-card {
+  max-width: 340px; padding: 16px 18px 6px; background: #151515;
+  border: 1px solid rgba(201, 106, 58, .45); border-top: 2px solid var(--ember-deep);
+  background-image: radial-gradient(90% 50% at 0% 0%, rgba(201, 106, 58, .16), rgba(201, 106, 58, 0) 70%);
+}
+.risk-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.risk-chip {
+  display: inline-flex; align-items: center; gap: 7px; padding: 5px 11px 5px 9px; border-radius: 999px;
+  background: rgba(201, 106, 58, .16); border: 1px solid rgba(201, 106, 58, .6);
+  font: 700 14px/1 var(--sans); color: #ee9a6c; white-space: nowrap;
+}
+.risk-chip::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.risk-when { font-size: 14px; color: var(--ink-mut); }
+/* each row: icon beside the fact, the history line full width under both */
+.risk-row { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 6px 10px; align-items: center; padding: 14px 0; }
+.risk-row > div { display: contents; }
+.risk-row + .risk-row { border-top: 1px solid var(--hair); }
+.risk-ico { width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center; background: color-mix(in srgb, var(--k) 14%, transparent); border: 1px solid color-mix(in srgb, var(--k) 35%, transparent); }
+.risk-ico svg { width: 17px; height: 17px; fill: none; stroke: var(--k); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.risk-fact { font: 400 19px/1.2 var(--serif); color: var(--k); letter-spacing: -.01em; font-optical-sizing: auto; text-wrap: balance; }
+.risk-why { grid-column: 1 / -1; font-size: 15px; line-height: 1.4; color: var(--ink); text-wrap: pretty; }
 
 /* Phone: the pressure tile shows the alert alone; objects stay compact. */
 @media (max-width: 599px) {
   .plus-tiles .tile-obj { margin-top: 16px; padding-bottom: 16px; }
-  /* the tile's H3 already names the card, so the card drops its own label row */
-  .plus-tiles .app-card-label { display: none; }
-  .pattern-card .pattern-obs:first-of-type { padding-top: 0; }
   .plus-price { margin-top: 24px; }
-  .plus-price .tlink { margin-top: 12px; }
   .pressure-obj .pressure-mini { display: none; }
   .pressure-obj .float-card { margin-top: 0; }
 }
@@ -250,14 +351,14 @@
 @media (min-width: 600px) and (max-width: 767px) { .plus-tiles .tile-card { min-height: 0; } }
 /* 768–1279: two columns. Pressure and the Brief sit side by side (their
    phone-width visuals fit a half tile, and the chart labels stay at 14px or
-   more); Your patterns runs full width below them, its two observations side
-   by side, so no tile is left with an empty half. 3 across from 1280. */
+   more); Your patterns runs full width below them, its two rows side by side,
+   so no tile is left with an empty half. 3 across from 1280. */
 @media (min-width: 768px) and (max-width: 1279px) {
   .plus-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .plus-tiles .tile-card:nth-child(2) { order: 1; grid-column: 1 / -1; min-height: 0; }
-  .pattern-card { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 32px; align-content: start; }
-  .pattern-card .app-card-label { grid-column: 1 / -1; }
-  .pattern-obs + .pattern-obs { margin-top: 0; border-top: 0; }
+  .risk-card { max-width: 640px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 28px; align-content: start; }
+  .risk-head { grid-column: 1 / -1; }
+  .risk-row + .risk-row { border-top: 0; }
 }
 
 /* Side by side (≥768): titles, captions and visuals share row lines across
@@ -279,9 +380,8 @@
 }
 
 .plus-price { margin-top: 32px; text-align: center; }
-.plus-price .price-line { font-size: 17px; line-height: 1.4; color: var(--ink-hi); font-variant-numeric: tabular-nums; }
+.plus-price .price-line { margin-top: 16px; font-size: 17px; line-height: 1.4; color: var(--ink-hi); font-variant-numeric: tabular-nums; }
 .plus-price .t-small { margin-top: 4px; }
-.plus-price .tlink { margin-top: 16px; }
 
 /* ── Privacy strip ──────────────────────────────────────── */
 #privacy .strip-icon { color: var(--backup); }
@@ -334,9 +434,9 @@
   #get { padding-top: max(96px, calc(10.5vw - 36px)); }
   /* above the hero's bottom fade, so the trail leaves the orb's rim unbroken;
      it fades in over its first 50px. The start point (data-orb-start, the
-     disc's lower-left rim) rests at page y 1074 at every width from 1260, so
+     disc's lower-left rim) rests at page y 1033 at every width from 1260, so
      the mask's stops are page px; move them with it if the hero changes. */
-  .orb-layer { z-index: 3; -webkit-mask-image: linear-gradient(to bottom, transparent 1068px, #000 1124px); mask-image: linear-gradient(to bottom, transparent 1068px, #000 1124px); }
+  .orb-layer { z-index: 3; -webkit-mask-image: linear-gradient(to bottom, transparent 1027px, #000 1083px); mask-image: linear-gradient(to bottom, transparent 1027px, #000 1083px); }
   .orb-dot { z-index: 3; }
 }
 
@@ -376,7 +476,7 @@
   #features .grid-4 > *, .plus-tiles > * { scroll-snap-align: start; }
   /* each swipe card is its title and its picture */
   #features .tour-cap, .plus-tiles .tour-cap { display: none; }
-  .pattern-card .app-card-headline { font-size: 18px; }
+  .risk-fact { font-size: 18px; }
   /* the pressure tile has room for its chart again */
   .pressure-obj .pressure-mini { display: block; }
   .pressure-obj .float-card { margin-top: 8px; }

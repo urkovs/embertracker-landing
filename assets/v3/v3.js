@@ -13,6 +13,7 @@
    [data-reveal], [data-reveal-group], [data-draw]
                         rise / draw once on first view (round 3; CSS §20)
    [data-orb-path]      scroll orb along a winding path (round 3; CSS §22)
+   [data-scroll-rise]   the home hero orb rises and fades in with scroll (pages/home.css "Hero")
    [data-orb-mark="k-…"] a ring on the path beside this element's kicker, in its color
    [data-orb-days="mhsc…"] on a [data-orb-gap]: a month of day types along that crossing
                         (m migraine, h headache, s symptom, c clear); both light as the orb passes
@@ -252,9 +253,9 @@
     let layer = null, trail = null, dot = null, geo = null, ticking = false, ro = null;
 
     // Resting boxes: an object still waiting to rise ([data-reveal], a group
-    // child, the hero's .rise) sits up to 12px low for a moment. Measure where
+    // child, a .rise, the hero orb's [data-scroll-rise]) sits low for a while. Measure where
     // it will rest, so the path and check() don't depend on scroll history.
-    const REST = '[data-reveal], [data-reveal-group] > *, .rise';
+    const REST = '[data-reveal], [data-reveal-group] > *, .rise, [data-scroll-rise]';
     const restOffset = el => {
       let dx = 0, dy = 0;
       for (let n = el.closest(REST); n; n = n.parentElement && n.parentElement.closest(REST)) {
@@ -477,5 +478,49 @@
     // refresh(): re-read the page (host, anchors, gaps) and redraw. Call it
     // after changing layout in a way that doesn't resize <body>.
     api.orb = { refresh: setup, check, get geometry() { return geo; } };
+  })();
+
+  // Hero orb rise ([data-scroll-rise]; CSS in pages/home.css "Hero"). The orb
+  // behind the phone starts dark and low and rises into place over the first
+  // stretch of scroll: it lands when the stage's top reaches a quarter of the
+  // way down the screen, so the bright orb is seen whole. A pure function of
+  // scroll, so it sinks again on the way back up. Where the scroll orb runs,
+  // the rise finishes 40px before the ember leaves the orb's rim. Reduce
+  // Motion: nothing moves and the orb rests in place.
+  (() => {
+    const els = [...document.querySelectorAll('[data-scroll-rise]')];
+    if (!els.length) return;
+    const stage = els[0].parentElement;
+    let range = 1, ticking = false, on = false;
+    const measure = () => { range = Math.max(200, stage.getBoundingClientRect().top + window.scrollY - window.innerHeight * .25); };
+    const update = () => {
+      ticking = false;
+      let r = range;
+      const g = api.orb && api.orb.geometry;
+      if (g) r = Math.max(120, Math.min(r, g.S.y - g.k * window.innerHeight - 40));
+      const p = Math.min(1, Math.max(0, window.scrollY / r));
+      const fade = p * p * (3 - 2 * p), climb = 1 - (1 - p) * (1 - p);
+      els.forEach(el => { el.style.setProperty('--rise', fade.toFixed(4)); el.style.setProperty('--rise-e', climb.toFixed(4)); });
+    };
+    const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+    const onResize = () => { measure(); onScroll(); };
+    const set = () => {
+      const want = !reduceMQ.matches;
+      if (want === on) return;
+      on = want;
+      root.classList.toggle('js-rise', on);
+      if (on) {
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onResize, { passive: true });
+        window.addEventListener('load', onResize);
+        measure(); update();
+      } else {
+        window.removeEventListener('scroll', onScroll);
+        window.removeEventListener('resize', onResize);
+        els.forEach(el => { el.style.removeProperty('--rise'); el.style.removeProperty('--rise-e'); });
+      }
+    };
+    set();
+    if (reduceMQ.addEventListener) reduceMQ.addEventListener('change', set);
   })();
 })();

@@ -25,8 +25,10 @@
 <link rel="preload" as="font" type="font/woff2" href="assets/v3/fonts/source-serif-4-latin.woff2" crossorigin>
 <link rel="preload" as="image" href="assets/v3/orb.webp" fetchpriority="high">
 <link rel="stylesheet" href="assets/v3/v3.css?v=9">
-<link rel="stylesheet" href="assets/v3/pages/home.css?v=17">
+<link rel="stylesheet" href="assets/v3/pages/home.css?v=19">
 <link rel="canonical" href="https://embertracker.app/" />
+<!-- hides the hero orb's resting state before v3.js takes over the scroll rise, so it never flashes in -->
+<script>if (window.matchMedia && matchMedia('(prefers-reduced-motion: no-preference)').matches) document.documentElement.classList.add('js-rise');</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -109,19 +111,18 @@
 <section class="hero" data-hero aria-labelledby="hero-title">
   <div class="wrap hero-copy">
     <h1 class="t-hero" id="hero-title">Migraine tracking,<br>without the headache.</h1>
-    <p class="t-lead">Log a day in 10 to 20 seconds. Ember counts your migraine days and builds your doctor a report they’ll actually use.</p>
+    <p class="t-lead">Log your day in seconds. Ember counts your migraine days and builds your doctor a report they’ll actually use.</p>
     <div class="badges" aria-label="Store links" role="group">
       <a class="badge-apple" href="https://apps.apple.com/us/app/ember-migraine-tracker/id6762041852"><img src="assets/v3/app-store-badge.svg" alt="Download on the App Store" width="132" height="44"></a>
       <a class="badge-play" href="https://play.google.com/store/apps/details?id=com.cascadeheadache.ember"><img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" width="168" height="65" onerror="this.parentElement.classList.add('nobadge')"><span class="nobadge-text">Get it on Google Play</span></a>
     </div>
-    <div class="badge-lines">
-      <p>Free on iPhone and Android.</p>
-      <p>Made by a headache specialist.</p>
-    </div>
+    <p class="maker-badge"><svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 1.8l2.1 1.5 2.6-.1.8 2.5 2.1 1.5-.8 2.5.8 2.5-2.1 1.5-.8 2.5-2.6-.1L10 18.2l-2.1-1.5-2.6.1-.8-2.5-2.1-1.5.8-2.5-.8-2.5 2.1-1.5.8-2.5 2.6.1z"/><path d="M6.8 10.2l2.2 2.2 4.2-4.6"/></svg>Made by a headache specialist</p>
   </div>
+  <!-- data-scroll-rise (v3.js, home.css "Hero"): the orb and its glow start
+       dark and low behind the phone and rise into place as the page scrolls. -->
   <div class="hero-stage">
-    <div class="hero-glow" aria-hidden="true"></div>
-    <img class="hero-orb rise" data-orb-start="0.30,0.70" src="assets/v3/orb.webp" alt="" aria-hidden="true" width="900" height="900" fetchpriority="high">
+    <div class="hero-glow" data-scroll-rise aria-hidden="true"></div>
+    <img class="hero-orb" data-scroll-rise data-orb-start="0.30,0.70" src="assets/v3/orb.webp" alt="" aria-hidden="true" width="900" height="900" fetchpriority="high">
     <div class="annot annot--left hero-annot" aria-hidden="true">
       <span class="annot-label">Today</span>
       <span class="annot-value"><span class="dot dot--mig"></span>Migraine day</span>
@@ -185,10 +186,10 @@
 </section>
 
 <!-- 3 Your month (raised band) -->
-<section class="sec sec--band" id="month" data-orb-mark="k-pink" aria-labelledby="month-title">
+<section class="sec sec--band" id="month" data-orb-mark="k-exp" aria-labelledby="month-title">
   <div class="wrap">
     <div class="center-head" data-reveal>
-      <p class="kicker k-pink">Your calendar</p>
+      <p class="kicker k-exp">Your calendar</p>
       <h2 class="t-h2" id="month-title">Migraine days, month by month.</h2>
       <p class="t-lead hide-phone">Headache days are counted separately, and so are the days you took <span class="nowrap">as-needed</span> medicine.</p>
     </div>
@@ -344,16 +345,16 @@
   <div class="wrap split split--mirror split--wide">
     <div class="split-copy report-copy" data-reveal>
       <p class="kicker k-sky">For your doctor</p>
-      <h2 class="t-h2" id="report-title">One report for your next visit.</h2>
-      <p class="t-lead">Your doctor gets a 90-day calendar and a chart note, readable in about a minute.</p>
+      <h2 class="t-h2" id="report-title">A report your doctor will actually care about.</h2>
+      <p class="t-lead">Your last 90 days on one calendar, with a chart note that takes about a minute to read.</p>
       <ol class="send-steps hide-phone">
         <li><span class="send-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6.5" y="2.5" width="11" height="19" rx="2.6"/><path d="M10.5 18.5h3"/></svg></span><span class="send-text"><b>Review it on your phone</b></span></li>
         <li><span class="send-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 3 10.5 13.5"/><path d="M21 3 14.5 21l-4-7.5L3 9.5 21 3Z"/></svg></span><span class="send-text"><b>Send it by email or the share sheet</b><span>If your clinic has an Ember code, scanning it fills in where the report goes.</span></span></li>
       </ol>
-      <div class="clinic-note hide-phone">
-        <p>Ember is used in headache clinics, and yours can join free.</p>
-        <a class="tlink tlink--sm" href="providers/">Ember for clinicians</a>
-      </div>
+      <a class="pro-link" href="providers/">
+        <span class="pro-link-tag">Providers</span>
+        <span class="pro-link-text">See how Ember saves time and money for your clinic and helps you make better treatment decisions<span class="pro-link-arrow" aria-hidden="true">→</span></span>
+      </a>
       <a class="tlink" href="assets/v3/ember-report.pdf">See a report calendar (PDF)</a>
     </div>
     <div class="split-object">
@@ -371,13 +372,24 @@
   </div>
 </section>
 
-<!-- 6 Ember Plus -->
+<!-- 6 Ember Plus: a gold-edged panel. The "Works with" row names the Health
+     sources up front, the three tiles show Plus at work, and "Also in Plus"
+     lists the rest of the 8 features (plus/ tabs), above one clear button. -->
 <section class="sec" id="plus" data-orb-mark="k-patterns" aria-labelledby="plus-title">
   <div class="wrap">
+   <div class="plus-panel">
     <div class="center-head" data-reveal>
       <p class="kicker k-patterns">Ember Plus</p>
       <h2 class="t-h2" id="plus-title">Bring in your sleep and the weather.</h2>
       <p class="t-lead">Everything you need is free. Add <a href="plus/">Ember Plus</a> to understand your migraines in more depth.</p>
+      <div class="works-with">
+        <p class="works-label">Works with</p>
+        <ul class="works-list">
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7.5-4.6-7.5-10.2A4.2 4.2 0 0 1 12 7.2a4.2 4.2 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20z"/></svg>Apple Health</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7.5-4.6-7.5-10.2A4.2 4.2 0 0 1 12 7.2a4.2 4.2 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20z"/></svg>Health Connect</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="3.5"/><path d="M9 6l.7-3h4.6l.7 3"/><path d="M9 18l.7 3h4.6l.7-3"/></svg>Apple Watch</li>
+        </ul>
+      </div>
     </div>
     <div class="grid-3 plus-tiles" data-reveal-group>
       <article class="tile-card k-weather">
@@ -414,18 +426,26 @@
         <!-- The true set of pattern sources: sleep, activity and weather. -->
         <p class="tour-cap">Migraine days compared with your sleep, activity and the weather.</p>
         <div class="tile-obj">
-          <!-- Two of the app's Your patterns findings, verbatim: the sleep
-               observation (src/plus/personalInsights/engine.ts) and the
-               pressure row's finding (plus/weather/pressureCopy.ts). -->
-          <div class="app-card pattern-card" data-copylint="app">
-            <p class="app-card-label"><img src="assets/v3/orb-120.webp" alt="" width="20" height="20" loading="lazy">Your patterns</p>
-            <div class="pattern-obs">
-              <p class="pattern-name">Shorter sleep</p>
-              <p class="app-card-headline">Migraine days were more common after nights when you slept less than usual.</p>
+          <!-- Today's risk card: two of your patterns that line up today,
+               each a fact about today over what your history shows. -->
+          <div class="app-card risk-card" data-copylint="app">
+            <div class="risk-head">
+              <span class="risk-chip">Extra high risk</span>
+              <span class="risk-when">Today</span>
             </div>
-            <div class="pattern-obs">
-              <p class="pattern-name">Pressure</p>
-              <p class="app-card-headline">You had a migraine more often when air pressure fell 5&nbsp;hPa or more in 12&nbsp;hours.</p>
+            <div class="risk-row k-sleep">
+              <span class="risk-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19.5 14.6A8 8 0 0 1 9.4 4.5a8 8 0 1 0 10.1 10.1z"/></svg></span>
+              <div>
+                <p class="risk-fact">5 hours of sleep last night</p>
+                <p class="risk-why">You get more migraines after sleeping under 6 hours.</p>
+              </div>
+            </div>
+            <div class="risk-row k-patterns">
+              <span class="risk-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="5.5" width="16" height="14.5" rx="2.5"/><path d="M4 10h16M8.5 3.5v4M15.5 3.5v4"/></svg></span>
+              <div>
+                <p class="risk-fact">Today is Friday</p>
+                <p class="risk-why">More of your migraines fall on Fridays than any other day.</p>
+              </div>
             </div>
           </div>
         </div>
@@ -454,17 +474,25 @@
                 <span class="brief-val brief-val--recent draw-after" style="--y:43.8" aria-hidden="true">9 days</span>
                 <span class="brief-chip draw-after" style="--y:38.9" aria-hidden="true">−2</span>
               </div>
-              <div class="brief-pills" aria-hidden="true"><span class="brief-pill">Aug 15 – Sep 13</span><span class="brief-pill brief-pill--recent">Sep 14 – Oct 13</span></div>
             </div>
           </article>
         </div>
       </article>
     </div>
+    <div class="plus-more">
+      <p class="plus-more-label">Also in Plus</p>
+      <ul class="plus-more-list">
+        <li><a class="k-routines" href="plus/#fx-workouts"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5.5" y="6" width="3" height="12" rx="1"/><rect x="15.5" y="6" width="3" height="12" rx="1"/><rect x="2.5" y="9" width="3" height="6" rx="1"/><rect x="18.5" y="9" width="3" height="6" rx="1"/><path d="M8.5 12h7"/></svg>Workouts</a></li>
+        <li><a class="k-exp" href="plus/#fx-experiments"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6"/><path d="M10 3v6.2L4.6 18.1A2 2 0 0 0 6.3 21h11.4a2 2 0 0 0 1.7-2.9L14 9.2V3"/><path d="M7.2 15h9.6"/></svg>Personal experiments</a></li>
+        <li><a class="k-backup" href="plus/#fx-backup"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8.5 10.5V7.5a3.5 3.5 0 0 1 7 0v3"/></svg>Automatic backup</a></li>
+      </ul>
+    </div>
     <div class="plus-price">
+      <a class="btn btn--lg plus-cta" href="plus/">See everything in Ember Plus</a>
       <p class="price-line">$7.99 a month or $59.99 a year</p>
       <p class="t-small">New subscribers get 14 days free.</p>
-      <a class="tlink" href="plus/">See Ember Plus</a>
     </div>
+   </div>
   </div>
 </section>
 
@@ -476,7 +504,7 @@
       <div>
         <p class="kicker k-backup">Privacy</p>
         <h2 class="strip-title" id="privacy-title">Your headache log stays on your phone.</h2>
-        <p class="strip-text">So do your period days. We don’t sell health data or use it for ads.</p>
+        <p class="strip-text">We don’t sell health data or use it for ads.</p>
       </div>
       <a class="tlink" href="privacy/">How Ember handles data</a>
     </div>
@@ -558,6 +586,6 @@
   <a class="btn btn--sm" data-get href="#get">Get Ember</a>
 </div>
 
-<script src="assets/v3/v3.js?v=5" defer></script>
+<script src="assets/v3/v3.js?v=6" defer></script>
 </body>
 </html>

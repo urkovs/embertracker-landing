@@ -45,6 +45,12 @@ original round-2 spec. Check `git status`/`git log` for anything newer.
   diagnosis claims (the "doesn't diagnose, isn't a substitute for care" footer
   line stays); no colorblind report version (removed July 2026); pattern
   insights use observation language, never "predict."
+- Exception, on purpose (Sam, Oct 17, 2026): the homepage Plus "Your
+  patterns" tile shows a today risk card ("Extra high risk", 5 hours of
+  sleep plus Friday) that the app doesn't have yet. Sam chose to publish it
+  ahead of the app and align the app later. Don't swap it back to an app
+  finding. The /plus/ FAQ "Does Ember Plus predict migraines? No." predates
+  it; ask Sam before changing either.
 - Homepage H1 is Sam's: "Migraine tracking, without the headache." Do not
   rewrite it (a Sept 2026 replacement was rejected and reverted).
 - Do not invent clinical or demo-data details (sample adverse effects, med
