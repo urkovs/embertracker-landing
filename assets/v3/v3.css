@@ -260,6 +260,18 @@ button { font: inherit; color: inherit; }
 .center-head > * + * { margin-top: var(--h2-lead); }
 .center-head .t-lead { margin-inline: auto; }
 .center-head + * { margin-top: var(--stack-gap); }
+/* Split and FAQ sections lift their kicker and title into a .center-head
+   above the columns, so every section title on a page takes one alignment:
+     <div class="wrap split-head"><div class="center-head" data-reveal>kicker + h2</div></div>
+     <div class="wrap split …"> or <div class="wrap faq"> */
+.split-head + :is(.split, .faq) { margin-top: var(--stack-gap); }
+.split-head + .split .split-copy > :first-child { margin-top: 0; }
+@media (min-width: 1024px) { .split-head + .faq > .faq-list { grid-column: 1 / -1; justify-self: center; width: 100%; max-width: 760px; } }
+@media (max-width: 599px) {
+  /* one flow on phones: title to the next visible line at the usual step */
+  .split-head + .split { margin-top: var(--h2-lead); }
+  .split-head + .split .split-copy > .hide-phone:first-child + * { margin-top: 0; }
+}
 
 .stack > * + * { margin-top: var(--h2-lead); }
 .actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }

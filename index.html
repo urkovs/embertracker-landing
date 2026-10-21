@@ -24,7 +24,7 @@
 <link rel="icon" type="image/png" href="assets/v3/favicon.png">
 <link rel="preload" as="font" type="font/woff2" href="assets/v3/fonts/source-serif-4-latin.woff2" crossorigin>
 <link rel="preload" as="image" href="assets/v3/orb.webp" fetchpriority="high">
-<link rel="stylesheet" href="assets/v3/v3.css?v=10">
+<link rel="stylesheet" href="assets/v3/v3.css?v=11">
 <link rel="stylesheet" href="assets/v3/pages/home.css?v=21">
 <link rel="canonical" href="https://embertracker.app/" />
 <!-- hides the hero orb's resting state before v3.js takes over the scroll rise, so it never flashes in -->
@@ -137,10 +137,14 @@
 
 <!-- 2 Every day, classified -->
 <section class="sec" id="classify" data-orb-mark="k-mig" data-orb-gap="12" aria-labelledby="classify-title">
-  <div class="wrap split split--mirror split--keep">
-    <div class="split-copy" data-reveal>
+  <div class="wrap split-head">
+    <div class="center-head" data-reveal>
       <p class="kicker k-mig">Day types</p>
       <h2 class="t-h2" id="classify-title">Log your symptoms. Ember names the day.</h2>
+    </div>
+  </div>
+  <div class="wrap split split--mirror split--keep">
+    <div class="split-copy" data-reveal>
       <p class="t-lead hide-phone">You don’t have to decide whether it was a migraine or a headache. Ember sorts each day into one of 4 types for you.</p>
       <p class="rule-line">Every classification follows fixed rules built on ICHD-3 criteria. No AI guesses, no black box.</p>
       <p class="t-small hide-phone">The app’s Learning Center explains the day types and the 4 phases of a migraine.</p>
@@ -342,10 +346,14 @@
 
 <!-- 5 The report -->
 <section class="sec" id="report" data-orb-days="mhhmhmmmmmmhsmcsmcmhccchcchmcms" data-orb-gap="1" aria-labelledby="report-title">
-  <div class="wrap split split--mirror split--wide">
-    <div class="split-copy report-copy" data-reveal>
+  <div class="wrap split-head">
+    <div class="center-head" data-reveal>
       <p class="kicker k-sky">For your doctor</p>
       <h2 class="t-h2" id="report-title">A report your doctor will actually care about.</h2>
+    </div>
+  </div>
+  <div class="wrap split split--mirror split--wide">
+    <div class="split-copy report-copy" data-reveal>
       <p class="t-lead">Your last 90 days on one calendar, with a chart note that takes about a minute to read.</p>
       <ol class="send-steps hide-phone">
         <li><span class="send-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6.5" y="2.5" width="11" height="19" rx="2.6"/><path d="M10.5 18.5h3"/></svg></span><span class="send-text"><b>Review it on your phone</b></span></li>

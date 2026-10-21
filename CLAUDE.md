@@ -126,7 +126,10 @@ orb (`[data-orb-path]`, wide screens only). Kicker alignment (Oct 21, 2026):
 on phones (under 600px) every section head starts at the left gutter with its
 dot, `.center-head` included, so sections share one left edge; page heroes
 stay centered. A kicker that stays centered (wider screens, heroes, `/send`)
-drops its dot. Rules in v3.css §19. The notes below are from V1; where
+drops its dot. Rules in v3.css §19. Split and FAQ sections put their kicker
+and title in a `.wrap.split-head > .center-head` above the columns (v3.css
+after `.center-head`), so on 600px and up every section title on a page is
+centered; build new split sections the same way. The notes below are from V1; where
 they name `site.css`/`site.js` classes, V3 equivalents live in `assets/v3/`.
 
 
