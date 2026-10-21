@@ -5,6 +5,7 @@
 .learn-hero { padding-top: 40px; padding-bottom: 0; text-align: center; }
 @media (min-width: 600px) { .learn-hero { padding-top: 64px; } }
 .learn-hero .wrap > .kicker { margin-inline: auto; }
+.learn-hero .wrap > .kicker::before { content: none; }
 .learn-hero .t-display { max-width: 13em; margin-inline: auto; }
 .learn-hero .t-lead { margin: var(--h2-lead) auto 0; max-width: 34em; }
 .learn-hero .actions { justify-content: center; margin-top: var(--lead-cta); }
@@ -41,6 +42,8 @@
 .stat-label { margin-top: 8px; font-size: 16px; line-height: 1.35; color: var(--ink); }
 @media (min-width: 600px) { .stat { padding: 24px; } .stat-num { font-size: 64px; } }
 .stats + .t-small { max-width: 560px; margin: 16px auto 0; text-align: center; }
+/* phones: the note follows its section head to the left edge */
+@media (max-width: 599px) { .stats + .t-small { margin-inline: 0; text-align: left; } }
 
 /* ── Comparison table (research definition vs Ember) ───── */
 .compare { width: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.45; text-align: left; }

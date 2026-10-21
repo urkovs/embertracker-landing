@@ -135,6 +135,8 @@
 /* Sam's line reads as a sentence, not fine print */
 .month-caps .month-note { max-width: 34em; margin: 10px auto 0; font-size: 15px; line-height: 1.5; color: var(--ink); text-wrap: pretty; }
 @media (min-width: 600px) { .month-caps .month-note { font-size: 16px; } }
+/* phones: the captions follow the section head to the left edge */
+@media (max-width: 599px) { .month-caps { text-align: left; } .month-caps .month-note { margin-inline: 0; } }
 
 /* ── Tour row ───────────────────────────────────────────── */
 /* each card's lead-in takes its key color (set on the card) */
@@ -270,7 +272,7 @@
 .works-list svg { width: 17px; height: 17px; fill: none; stroke: var(--health); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 .works-list li:last-child svg { stroke: var(--sleep); }
 @media (min-width: 600px) { .works-with { margin-top: 28px; } .works-list li { font-size: 15px; } }
-/* phones: label and chips flow as one centered group, two lines at 375px */
+/* phones: label and chips flow as one group from the left edge, two lines at 375px */
 @media (max-width: 599px) {
   .works-list, .plus-more-list { display: contents; }
   .works-with { gap: 8px 6px; margin-top: 20px; }
@@ -459,6 +461,9 @@
   .close .badges { margin-top: 24px; }
   .close .close-after { margin-top: 16px; }
   .foot { padding-top: 40px; }
+  /* the Plus panel follows its left-aligned head (v3.css .center-head) */
+  .works-with, .plus-more, .plus-more-list { justify-content: flex-start; }
+  .plus-price { text-align: left; }
 }
 
 /* Swipe rows: the tour cards and the Plus tiles scroll sideways on phones,

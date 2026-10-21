@@ -1077,6 +1077,17 @@ button { font: inherit; color: inherit; }
 .kicker--plain::before { content: none; }
 @media (min-width: 600px) { .kicker { font-size: 15px; } }
 .center-head > .kicker, .center > .kicker, .close .kicker, .kicker--center { margin-inline: auto; }
+/* The dot is a bullet, and a bullet only reads as one on a left edge: a
+   centered kicker drops it (page heroes do the same in their page CSS). */
+.center-head > .kicker::before, .center > .kicker::before, .close .kicker::before, .kicker--center::before { content: none; }
+/* Phones: section heads start at the page gutter with their dot, like the
+   split sections beside them, so every section on a page shares one left
+   edge. Page heroes stay centered. */
+@media (max-width: 599px) {
+  .center-head, .center-head .t-lead, .center-head > .kicker { margin-inline: 0; }
+  .center-head { text-align: left; }
+  .center-head > .kicker::before { content: ""; }
+}
 /* kicker → heading is a tighter step than heading → lead */
 .kicker + :is(h1, h2, h3, .t-hero, .t-display, .t-h2, .t-h2-close, .t-h3) { margin-top: 12px; }
 .close .kicker + .t-h2-close { margin-top: 12px; }

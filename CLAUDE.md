@@ -122,7 +122,11 @@ original round-2 spec. Check `git status`/`git log` for anything newer.
 V3 (live): app tokens below; Source Serif 4 display with the system UI font for
 body; colored section kickers (`.kicker.k-*`); finite reveal motion gated by a
 JS class (content visible without JS, none with Reduce Motion); the home scroll
-orb (`[data-orb-path]`, wide screens only). The notes below are from V1; where
+orb (`[data-orb-path]`, wide screens only). Kicker alignment (Oct 21, 2026):
+on phones (under 600px) every section head starts at the left gutter with its
+dot, `.center-head` included, so sections share one left edge; page heroes
+stay centered. A kicker that stays centered (wider screens, heroes, `/send`)
+drops its dot. Rules in v3.css §19. The notes below are from V1; where
 they name `site.css`/`site.js` classes, V3 equivalents live in `assets/v3/`.
 
 

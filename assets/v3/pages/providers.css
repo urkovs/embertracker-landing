@@ -27,6 +27,7 @@
 /* centered like home and Plus, so the wide screen has no empty right half
    above the explorer */
 .pro-hero-head { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.pro-hero-head > .kicker::before { content: none; }
 .pro-hero .t-display { max-width: 12em; }
 .pro-hero .t-lead { margin-top: var(--h2-lead); max-width: 34em; text-wrap: balance; }
 .pro-hero .actions { margin-top: var(--lead-cta); justify-content: center; }
