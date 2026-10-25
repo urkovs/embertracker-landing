@@ -1,20 +1,29 @@
-/* Clinic join page only (v3/providers/join/). Form styles live in ../v3.css §13;
+/* Clinic join page only (providers/join/). Form styles live in ../v3.css §13;
    the form markup and /assets/web-form.* are the live contract, unchanged.
-   One desktop screen: H1, lead and next steps on the left, the form on the right. */
-.join { padding-block: 40px 72px; }
-@media (min-width: 600px) { .join { padding-block: 64px 96px; } }
-@media (min-width: 1024px) { .join { padding-block: 88px 128px; } .join .form-copy { padding-top: 8px; } }
+   Page order: hero, how it works, what arrives, patient control, setup, then the one form. */
+.join-hero { padding-bottom: 0; }
+.join-hero .t-display { max-width: 12em; margin-inline: auto; }
+.join-hero .t-line { margin-top: var(--lead-cta); }
 
-.join .t-display { max-width: 9em; }
-.join .list-title { font-size: 15px; font-weight: 600; line-height: 1.3; color: var(--ink-hi); }
-.join .form-copy > .t-lead + .list-title { margin-top: var(--lead-cta); }
-.join .list-title + .steps { margin-top: 16px; }
-.join .steps { max-width: 30em; }
-/* Round 3: the step numbers take the kicker's color key (sky), one accent for the column */
-.join .steps li::before { color: var(--clear); background: rgba(168, 196, 212, .14); }
+.join-col { max-width: 680px; margin-inline: auto; }
+.join-col > * + * { margin-top: 16px; }
+.join-col > .steps + .join-inbox { margin-top: 40px; }
+.join-col + .join-cards { margin-top: 40px; }
 
+.join-cards { max-width: 880px; margin-inline: auto; }
+.join-cards .card p, .join-inbox p { font-size: 16px; line-height: 1.55; color: var(--ink); }
+.join-cards .card > * + *, .join-inbox > * + * { margin-top: 10px; }
+
+/* Step numbers take the setup kicker's color key (teal) */
+.join-col .steps li { font-size: 17px; }
+.join-col .steps li::before { color: var(--teal); background: rgba(143, 184, 168, .14); }
+
+/* Visible placeholders for facts Sam still has to supply. Remove before merge. */
+.todo { background: rgba(230, 184, 92, .16); color: var(--patterns); border: 1px dashed var(--patterns); border-radius: 6px; padding: 1px 6px; font-weight: 600; }
+
+.join .form-copy .t-lead { max-width: 24em; }
 .join-after { margin-top: 48px; }
-@media (min-width: 1024px) { .join-after { margin-top: 64px; } }
+@media (min-width: 1024px) { .join-after { margin-top: 64px; } .join .form-copy { padding-top: 8px; } }
 
 .join-after .tlink { font-size: inherit; }
 /* 44px hit area on the standalone contact link */
