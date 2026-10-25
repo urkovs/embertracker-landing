@@ -4,28 +4,28 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Add your clinic | Ember Migraine Tracker</title>
-<meta name="description" content="Patients send their Ember report to your clinic’s secure inbox from their own phones. Setup is free for clinics and patients.">
+<meta name="description" content="Direct Send lets patients email their Ember report to your clinic from their own phone. Free for clinics and patients.">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#0a0a0a">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Ember Migraine Tracker">
 <meta property="og:url" content="https://embertracker.app/providers/join/">
 <meta property="og:title" content="Add your clinic | Ember Migraine Tracker">
-<meta property="og:description" content="Patients send their Ember report to your clinic’s secure inbox from their own phones. Setup is free for clinics and patients.">
+<meta property="og:description" content="Direct Send lets patients email their Ember report to your clinic from their own phone. Free for clinics and patients.">
 <meta property="og:image" content="https://embertracker.app/assets/v3/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="The Ember orb beside the line Migraine tracking, without the headache.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Add your clinic | Ember Migraine Tracker">
-<meta name="twitter:description" content="Patients send their Ember report to your clinic’s secure inbox from their own phones. Setup is free for clinics and patients.">
+<meta name="twitter:description" content="Direct Send lets patients email their Ember report to your clinic from their own phone. Free for clinics and patients.">
 <meta name="twitter:image" content="https://embertracker.app/assets/v3/og.png">
 <meta name="twitter:image:alt" content="The Ember orb beside the line Migraine tracking, without the headache.">
 <link rel="icon" type="image/png" href="../../assets/v3/favicon.png">
 <link rel="preload" as="font" type="font/woff2" href="../../assets/v3/fonts/source-serif-4-latin.woff2" crossorigin>
 <link rel="stylesheet" href="/assets/web-form.css?v=1">
 <link rel="stylesheet" href="../../assets/v3/v3.css?v=11">
-<link rel="stylesheet" href="../../assets/v3/pages/join.css?v=4">
+<link rel="stylesheet" href="../../assets/v3/pages/join.css?v=5">
 <link rel="canonical" href="https://embertracker.app/providers/join/" />
 </head>
 <body>
@@ -43,18 +43,102 @@
 </header>
 
 <main id="main">
-<section class="join" aria-labelledby="join-title">
+<section class="sec join-hero" aria-labelledby="join-title">
+  <div class="wrap center-head">
+    <p class="kicker k-sky">For clinics</p>
+    <h1 class="t-display" id="join-title">Add your clinic to Direct Send</h1>
+    <p class="t-lead">Patients email their Ember report to your clinic from their own phone. Ember supplies your address so the report reaches the right inbox.</p>
+    <p class="t-line"><a class="tlink" href="#request">Go to the setup form</a></p>
+  </div>
+</section>
+
+<section class="sec sec--band" id="how" aria-labelledby="how-title">
+  <div class="wrap">
+    <div class="center-head" data-reveal>
+      <p class="kicker k-ember">Direct Send</p>
+      <h2 class="t-h2" id="how-title">How Direct Send works.</h2>
+    </div>
+    <div class="join-col">
+      <p class="t-body">Direct Send adds your clinic to Ember by name. When a patient picks your clinic, Ember prepares their report and supplies your address to their own email app.</p>
+      <p class="t-body">Sending is email from the patient’s own account. The report doesn’t pass through Ember’s servers, so Ember’s team never sees it.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="arrives" aria-labelledby="arrives-title">
+  <div class="wrap">
+    <div class="center-head" data-reveal>
+      <p class="kicker k-sky">What arrives</p>
+      <h2 class="t-h2" id="arrives-title">One email with one PDF.</h2>
+    </div>
+    <div class="grid-2 join-cards">
+      <article class="card">
+        <h3 class="t-h3">The email</h3>
+        <p>The subject line names the patient and the date. The body holds a one-line summary of their day counts and acute medication use.</p>
+      </article>
+      <article class="card">
+        <h3 class="t-h3">The PDF</h3>
+        <p>Page one is a short summary and a chart note. The patient’s calendar for up to the last 90 days follows in black and white.</p>
+      </article>
+      <article class="card">
+        <h3 class="t-h3">Matching the chart</h3>
+        <p>The report carries the patient’s first and last name. It has no date of birth, so confirm identity with your usual checks.</p>
+      </article>
+      <article class="card">
+        <h3 class="t-h3">Your EHR</h3>
+        <p>Ember doesn’t connect to your EHR. Staff save the PDF to the chart like any outside record.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--band" id="patient" aria-labelledby="patient-title">
+  <div class="wrap">
+    <div class="center-head" data-reveal>
+      <p class="kicker k-backup">Patient control</p>
+      <h2 class="t-h2" id="patient-title">The patient decides when to send.</h2>
+    </div>
+    <div class="join-col">
+      <p class="t-body">Patients review the report on their phone first. Nothing leaves the phone until they tap Send in their own email app.</p>
+      <p class="t-body">They choose the recipient each time. Without setup, they can still email the report to any provider.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="setup" aria-labelledby="setup-title">
+  <div class="wrap">
+    <div class="center-head" data-reveal>
+      <p class="kicker k-teal">Setup</p>
+      <h2 class="t-h2" id="setup-title">Four steps to set up.</h2>
+    </div>
+    <div class="join-col">
+      <ol class="steps">
+        <li><span><b>Request setup</b> with the form below. Name the inbox that should receive reports.</span></li>
+        <li><span><b>We confirm the inbox</b> with you and send a test report.</span></li>
+        <li><span><b>We add your clinic</b> to Ember by name. <!-- TODO(Sam): typical time from request to live. Today a new clinic ships in an app update (bundled allowlist). --><mark class="todo">TODO: typical time from request to live.</mark></span></li>
+        <li><span><b>Post your QR code</b> in the lobby and add your link to after-visit summaries. Scanning the code opens Ember with your clinic selected.</span></li>
+      </ol>
+      <div class="grid-2 join-facts">
+        <div class="card">
+          <h3 class="t-label">Your inbox</h3>
+          <p>Use an inbox your clinic approves for patient health information. Reports arrive as standard email from the patient’s own account.</p>
+          <!-- TODO(Sam): HIPAA/BAA statement for clinics. The repos document none; /privacy says Ember makes no HIPAA-certification claim. --><p><mark class="todo">TODO: HIPAA and BAA statement for clinics, or delete this line.</mark></p>
+        </div>
+        <div class="card">
+          <h3 class="t-label">Cost</h3>
+          <p>Direct Send is free for your clinic and your patients.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--band join" id="request" aria-labelledby="request-title">
   <div class="wrap form-layout">
     <div class="form-copy">
-      <p class="kicker k-sky">Patient reports</p>
-      <h1 class="t-display" id="join-title">Add your clinic to Ember</h1>
-      <p class="t-lead">Patients send their Ember report to your clinic’s secure inbox from their own phones. It’s free for your clinic and your patients.</p>
-      <h2 class="list-title" id="next-title">Once the inbox is confirmed</h2>
-      <ol class="steps" aria-labelledby="next-title">
-        <li>You get a lobby QR code and a link to add to after-visit summaries.</li>
-        <li>Scanning the code opens Ember with your inbox already filled in.</li>
-        <li>Your clinic also appears by name when patients send a report.</li>
-      </ol>
+      <p class="kicker k-sky">Request setup</p>
+      <h2 class="t-h2" id="request-title">Add your clinic.</h2>
+      <p class="t-lead">Tell us which inbox should receive reports. Nothing goes live until we confirm it with you.</p>
     </div>
     <div class="form-side">
 <!-- Form contract (inventory §2.1): action, method, data-ember-form, every field's
