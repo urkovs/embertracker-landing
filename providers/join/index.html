@@ -4,28 +4,28 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Add your clinic | Ember Migraine Tracker</title>
-<meta name="description" content="Direct Send lets patients email their Ember report to your clinic from their own phone. See what arrives and how setup works.">
+<meta name="description" content="Direct Send lets patients email their Ember report to your clinic from their own phone. Free for 3 months, then $50 a month per clinic.">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#0a0a0a">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Ember Migraine Tracker">
 <meta property="og:url" content="https://embertracker.app/providers/join/">
 <meta property="og:title" content="Add your clinic | Ember Migraine Tracker">
-<meta property="og:description" content="Direct Send lets patients email their Ember report to your clinic from their own phone. See what arrives and how setup works.">
+<meta property="og:description" content="Direct Send lets patients email their Ember report to your clinic from their own phone. Free for 3 months, then $50 a month per clinic.">
 <meta property="og:image" content="https://embertracker.app/assets/v3/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="The Ember orb beside the line Migraine tracking, without the headache.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Add your clinic | Ember Migraine Tracker">
-<meta name="twitter:description" content="Direct Send lets patients email their Ember report to your clinic from their own phone. See what arrives and how setup works.">
+<meta name="twitter:description" content="Direct Send lets patients email their Ember report to your clinic from their own phone. Free for 3 months, then $50 a month per clinic.">
 <meta name="twitter:image" content="https://embertracker.app/assets/v3/og.png">
 <meta name="twitter:image:alt" content="The Ember orb beside the line Migraine tracking, without the headache.">
 <link rel="icon" type="image/png" href="../../assets/v3/favicon.png">
 <link rel="preload" as="font" type="font/woff2" href="../../assets/v3/fonts/source-serif-4-latin.woff2" crossorigin>
 <link rel="stylesheet" href="/assets/web-form.css?v=1">
 <link rel="stylesheet" href="../../assets/v3/v3.css?v=11">
-<link rel="stylesheet" href="../../assets/v3/pages/join.css?v=5">
+<link rel="stylesheet" href="../../assets/v3/pages/join.css?v=6">
 <link rel="canonical" href="https://embertracker.app/providers/join/" />
 </head>
 <body>
@@ -118,21 +118,38 @@
         <li><span><b>We add your clinic</b> to Ember by name. This usually happens the same day, and always within 5 business days.</span></li>
         <li><span><b>Post your QR code</b> in the lobby and add your link to after-visit summaries. Scanning the code opens Ember with your clinic selected.</span></li>
       </ol>
-      <div class="grid-2 join-facts">
-        <div class="card">
-          <h3 class="t-label">Your inbox</h3>
-          <p>Use an inbox your clinic approves for patient health information. Reports arrive as standard email from the patient’s own account.</p>
-        </div>
-        <div class="card">
-          <h3 class="t-label">Cost</h3>
-          <!-- TODO(Sam): clinic pricing. Draft under discussion: 3 months free, then a monthly fee per clinic. Patients stay free. --><p><mark class="todo">TODO: clinic pricing.</mark> Direct Send is always free for patients.</p>
-        </div>
+      <div class="card join-inbox">
+        <h3 class="t-label">Your inbox</h3>
+        <p>Use an inbox your clinic approves for patient health information. Reports arrive as standard email from the patient’s own account.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="sec sec--band join" id="request" aria-labelledby="request-title">
+<section class="sec sec--band" id="cost" aria-labelledby="cost-title">
+  <div class="wrap">
+    <div class="center-head" data-reveal>
+      <p class="kicker k-patterns">Cost</p>
+      <h2 class="t-h2" id="cost-title">Free for 3 months, then $50 a month.</h2>
+    </div>
+    <div class="join-col">
+      <p class="t-body">Your first 3 months after going live are free. That gives your patients time to start sending, and your team time to see what it saves.</p>
+      <p class="t-body">After that, Direct Send is $50 a month per clinic, or $500 a year. Patients never pay for it.</p>
+    </div>
+    <div class="grid-2 join-cards">
+      <article class="card">
+        <h3 class="t-h3">Prior authorizations</h3>
+        <p>Botox and CGRP prior authorizations ask for headache-day counts. The report has them counted, with a dated calendar to back them up.</p>
+      </article>
+      <article class="card">
+        <h3 class="t-h3">Staff time</h3>
+        <p>No one tallies a paper calendar or chases a patient’s notes. Staff save one PDF to the chart.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="sec join" id="request" aria-labelledby="request-title">
   <div class="wrap form-layout">
     <div class="form-copy">
       <p class="kicker k-sky">Request setup</p>

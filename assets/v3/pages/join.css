@@ -7,11 +7,12 @@
 
 .join-col { max-width: 680px; margin-inline: auto; }
 .join-col > * + * { margin-top: 16px; }
-.join-col > .steps + .join-facts { margin-top: 40px; }
+.join-col > .steps + .join-inbox { margin-top: 40px; }
+.join-col + .join-cards { margin-top: 40px; }
 
-.join-cards, .join-facts { max-width: 880px; margin-inline: auto; }
-.join-cards .card p, .join-facts .card p { font-size: 16px; line-height: 1.55; color: var(--ink); }
-.join-cards .card > * + * { margin-top: 10px; }
+.join-cards { max-width: 880px; margin-inline: auto; }
+.join-cards .card p, .join-inbox p { font-size: 16px; line-height: 1.55; color: var(--ink); }
+.join-cards .card > * + *, .join-inbox > * + * { margin-top: 10px; }
 
 /* Step numbers take the setup kicker's color key (teal) */
 .join-col .steps li { font-size: 17px; }

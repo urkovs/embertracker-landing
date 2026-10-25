@@ -33,6 +33,9 @@ original round-2 spec. Check `git status`/`git log` for anything newer.
   specialist wrote."
 - The app is **free** (no "free right now" / launch-window framing); "free to
   use" is the only pricing message.
+- Clinic pricing (Sam, Oct 25, 2026): Direct Send is free for a clinic's first
+  3 months after going live, then $50 a month per clinic or $500 a year.
+  Patients never pay for it. Stated only on `/providers/join/`.
 - **No personal names anywhere** — site copy, meta tags, or rendered artifacts
   (PDF renders included). Credibility is "a practicing headache specialist,"
   impersonal on purpose (July 2026, reversing an earlier decision).
