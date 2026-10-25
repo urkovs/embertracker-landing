@@ -74,9 +74,12 @@ original round-2 spec. Check `git status`/`git log` for anything newer.
   data practices, handoff link. **The engine demo is load-bearing — never
   drop it in a rewrite.** It is fully self-contained (inline style + markup +
   script); recover from git history if needed.
-- `contact/index.html` — form posts to FormSubmit
-  (`formsubmit.co/hello@cascadeheadache.com`). Do not alter the form fields,
-  action, or hidden inputs; the first-submission email confirmation is done.
+- `contact/index.html` and `providers/join/index.html` — forms post through
+  `assets/web-form.js` to the Ember form service (Cloud Run clinic-delivery).
+  Do not alter the form fields, action, or hidden inputs. The script adds a
+  Cloudflare Turnstile check only when the form service asks for one
+  (`challenge: 'turnstile-v1'` on the form token); `/privacy` and
+  `/consumer-health` name Cloudflare for it.
 - `privacy/ terms/ references/` — content pages, shared chrome only. Editing
   the substantive content of `/privacy` or `/terms` → update their "Last
   updated" date.
