@@ -36,6 +36,7 @@ Ember helps you track and organize what you experience. It doesn’t diagnose, a
 - [Privacy policy](https://embertracker.app/privacy/): How Ember handles your information. The free app keeps your headache log on your phone, and we don’t sell health data or use it for ads.
 - [Consumer health data privacy notice](https://embertracker.app/consumer-health/): Ember’s consumer health data privacy notice under Washington’s My Health My Data Act.
 - [Terms of service](https://embertracker.app/terms/): The terms of service for using Ember, the migraine and headache tracker from Cascade Headache, PLLC.
+- [Clinic terms](https://embertracker.app/providers/terms/): Subscription terms for clinics using Ember Direct Send: the free trial, billing, cancellation and what Direct Send includes.
 
 ## Optional
 

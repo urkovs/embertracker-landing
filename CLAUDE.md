@@ -34,8 +34,10 @@ original round-2 spec. Check `git status`/`git log` for anything newer.
 - The app is **free** (no "free right now" / launch-window framing); "free to
   use" is the only pricing message.
 - Clinic pricing (Sam, Oct 25, 2026): Direct Send is free for a clinic's first
-  3 months after going live, then $50 a month per clinic or $500 a year.
-  Patients never pay for it. Stated only on `/providers/join/`.
+  90 days, then $50 a month per clinic or $500 a year, billed through Stripe.
+  A card or bank account is required to start; the trial begins at checkout.
+  Patients never pay for it. Stated on `/providers/join/` and in the clinic
+  terms at `/providers/terms/` (keep the two in step).
 - **No personal names anywhere** — site copy, meta tags, or rendered artifacts
   (PDF renders included). Credibility is "a practicing headache specialist,"
   impersonal on purpose (July 2026, reversing an earlier decision).
@@ -77,7 +79,7 @@ original round-2 spec. Check `git status`/`git log` for anything newer.
 - `contact/index.html` — form posts to FormSubmit
   (`formsubmit.co/hello@cascadeheadache.com`). Do not alter the form fields,
   action, or hidden inputs; the first-submission email confirmation is done.
-- `privacy/ terms/ references/` — content pages, shared chrome only. Editing
+- `privacy/ terms/ providers/terms/ references/` — content pages, shared chrome only. Editing
   the substantive content of `/privacy` or `/terms` → update their "Last
   updated" date.
 - `provider-handoff/` — functional in-browser tool with its own CSS and JS.
