@@ -115,6 +115,12 @@ original round-2 spec. Check `git status`/`git log` for anything newer.
   "Reviewed by a practicing headache specialist" date: update that date when
   Sam re-reviews. If the app's classification rules change, update both pages,
   the classifier and the diary key together.
+- `midas/` — MIDAS score calculator (styles `assets/v3/pages/midas.css`,
+  script inline at the end of the page). It runs only in the browser and
+  saves and sends nothing. Questions, cap and grades copy the app; the head
+  comment in `midas/index.html` names each app source, so change the page when
+  those change. Keep the "MIDAS questionnaire © AstraZeneca" line (Sam, Nov 1
+  2026).
 - `headache-diary/ember-headache-diary.pdf` is rendered from
   `headache-diary/print.html` (noindex; the rebuild command is in its head
   comment). It must stay one US Letter page; re-render the images in

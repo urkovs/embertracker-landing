@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MIDAS score calculator | Ember Migraine Tracker</title>
+<meta name="description" content="Answer the 5 MIDAS questions about the last 3 months to see your migraine disability score and grade. Nothing you enter is saved or sent.">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0a0a0a">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Ember Migraine Tracker">
+<meta property="og:url" content="https://embertracker.app/midas/">
+<meta property="og:title" content="MIDAS score calculator">
+<meta property="og:description" content="Answer the 5 MIDAS questions about the last 3 months to see your migraine disability score and grade. Nothing you enter is saved or sent.">
+<meta property="og:image" content="https://embertracker.app/assets/v3/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Ember orb beside the line Migraine tracking, without the headache.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MIDAS score calculator">
+<meta name="twitter:description" content="Answer the 5 MIDAS questions about the last 3 months to see your migraine disability score and grade. Nothing you enter is saved or sent.">
+<meta name="twitter:image" content="https://embertracker.app/assets/v3/og.png">
+<meta name="twitter:image:alt" content="The Ember orb beside the line Migraine tracking, without the headache.">
+<link rel="icon" type="image/png" href="../assets/v3/favicon.png">
+<link rel="preload" as="font" type="font/woff2" href="../assets/v3/fonts/source-serif-4-latin.woff2" crossorigin>
+<link rel="stylesheet" href="../assets/v3/v3.css?v=11">
+<link rel="stylesheet" href="../assets/v3/pages/learn.css?v=2">
+<link rel="stylesheet" href="../assets/v3/pages/midas.css?v=1">
+<link rel="canonical" href="https://embertracker.app/midas/" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalWebPage",
+  "@id": "https://embertracker.app/midas/#page",
+  "url": "https://embertracker.app/midas/",
+  "name": "MIDAS score calculator",
+  "description": "Answer the 5 MIDAS questions about the last 3 months to see your migraine disability score and grade. Nothing you enter is saved or sent.",
+  "inLanguage": "en",
+  "isPartOf": {
+    "@id": "https://embertracker.app/#website"
+  },
+  "about": {
+    "@type": "MedicalCondition",
+    "name": "Migraine"
+  },
+  "audience": {
+    "@type": "MedicalAudience",
+    "audienceType": "Patient"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Cascade Headache, PLLC",
+    "url": "https://embertracker.app/"
+  },
+  "citation": "Stewart WF, Lipton RB, Dowson AJ, Sawyer J. Development and testing of the Migraine Disability Assessment (MIDAS) Questionnaire to assess headache-related disability. Neurology. 2001;56(suppl 1):S20-S28."
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="../" aria-label="Ember home"><img src="../assets/v3/orb-120.webp" alt="" width="30" height="30">Ember</a>
+    <nav class="nav-links" aria-label="Main">
+      <a class="nav-link hide-phone" href="../plus/">Ember Plus</a>
+      <a class="nav-link" href="../providers/">For clinicians</a>
+      <a class="btn btn--sm" data-get href="#get">Get Ember</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- MIDAS calculator. The app is the source of truth (~/Code/ember):
+     questions, hint and "days" are MIDAS_QUESTIONS and the quiz modal in
+     src/screens/ProfileScreen.tsx; the 90-day cap is MIDAS_MAX_DAYS there;
+     grading is scoreMidas in src/utils/classification.ts; grade words are
+     GRADE_WORD in src/components/BiggerPicture.tsx; the lead is
+     MidasReminderCard. Change the page with the app. The calculator runs in
+     the inline script at the end of this file: it saves and sends nothing. -->
+<section class="sec learn-hero" aria-labelledby="midas-title">
+  <div class="wrap">
+    <p class="kicker k-ember">Migraine Disability Assessment</p>
+    <h1 class="t-display" id="midas-title">MIDAS score calculator</h1>
+    <p class="t-lead">5 questions on how headaches affected you over the last 3 months. About 2 minutes.</p>
+  </div>
+</section>
+
+<section class="sec sec--tight-top" id="calculator" aria-label="MIDAS calculator">
+  <div class="wrap">
+    <div class="mcalc" data-midas>
+      <p class="mcalc-hint">Think about the last 3 months. Enter 0 if none.</p>
+      <ol class="mq-list">
+        <li class="mq">
+          <label class="mq-q" id="mq1-q" for="mq1"><span class="mq-n" aria-hidden="true">1</span><span>On how many days in the last 3 months did you miss work or school because of your headaches?</span></label>
+          <div class="mq-input" role="group" aria-labelledby="mq1-q">
+            <button class="mq-step" type="button" data-step="-1" aria-controls="mq1" aria-label="Decrease">&minus;</button>
+            <input class="mq-field" id="mq1" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="3" autocomplete="off" enterkeyhint="next" placeholder="0">
+            <button class="mq-step" type="button" data-step="1" aria-controls="mq1" aria-label="Increase">+</button>
+            <span class="mq-unit">days</span>
+          </div>
+        </li>
+        <li class="mq">
+          <label class="mq-q" id="mq2-q" for="mq2"><span class="mq-n" aria-hidden="true">2</span><span>How many days in the last 3 months was your productivity at work or school reduced by half or more because of your headaches? <span class="mq-note">(Do not include days you counted in question 1 where you missed work or school.)</span></span></label>
+          <div class="mq-input" role="group" aria-labelledby="mq2-q">
+            <button class="mq-step" type="button" data-step="-1" aria-controls="mq2" aria-label="Decrease">&minus;</button>
+            <input class="mq-field" id="mq2" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="3" autocomplete="off" enterkeyhint="next" placeholder="0">
+            <button class="mq-step" type="button" data-step="1" aria-controls="mq2" aria-label="Increase">+</button>
+            <span class="mq-unit">days</span>
+          </div>
+        </li>
+        <li class="mq">
+          <label class="mq-q" id="mq3-q" for="mq3"><span class="mq-n" aria-hidden="true">3</span><span>On how many days in the last 3 months did you not do household work (such as housework, home repairs and maintenance, shopping, caring for children and relatives) because of your headaches?</span></label>
+          <div class="mq-input" role="group" aria-labelledby="mq3-q">
+            <button class="mq-step" type="button" data-step="-1" aria-controls="mq3" aria-label="Decrease">&minus;</button>
+            <input class="mq-field" id="mq3" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="3" autocomplete="off" enterkeyhint="next" placeholder="0">
+            <button class="mq-step" type="button" data-step="1" aria-controls="mq3" aria-label="Increase">+</button>
+            <span class="mq-unit">days</span>
+          </div>
+        </li>
+        <li class="mq">
+          <label class="mq-q" id="mq4-q" for="mq4"><span class="mq-n" aria-hidden="true">4</span><span>How many days in the last 3 months was your productivity in household work reduced by half or more because of your headaches? <span class="mq-note">(Do not include days you counted in question 3 where you did not do household work.)</span></span></label>
+          <div class="mq-input" role="group" aria-labelledby="mq4-q">
+            <button class="mq-step" type="button" data-step="-1" aria-controls="mq4" aria-label="Decrease">&minus;</button>
+            <input class="mq-field" id="mq4" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="3" autocomplete="off" enterkeyhint="next" placeholder="0">
+            <button class="mq-step" type="button" data-step="1" aria-controls="mq4" aria-label="Increase">+</button>
+            <span class="mq-unit">days</span>
+          </div>
+        </li>
+        <li class="mq">
+          <label class="mq-q" id="mq5-q" for="mq5"><span class="mq-n" aria-hidden="true">5</span><span>On how many days in the last 3 months did you miss family, social or leisure activities because of your headaches?</span></label>
+          <div class="mq-input" role="group" aria-labelledby="mq5-q">
+            <button class="mq-step" type="button" data-step="-1" aria-controls="mq5" aria-label="Decrease">&minus;</button>
+            <input class="mq-field" id="mq5" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="3" autocomplete="off" enterkeyhint="done" placeholder="0">
+            <button class="mq-step" type="button" data-step="1" aria-controls="mq5" aria-label="Increase">+</button>
+            <span class="mq-unit">days</span>
+          </div>
+        </li>
+      </ol>
+      <!-- Shown by the script; without it, the grades below and "Your score
+           adds up your 5 answers." let a reader score it by hand. -->
+      <div class="mres" data-result hidden>
+        <p class="mres-label" id="mres-label">Your MIDAS score</p>
+        <div class="mres-row" aria-live="polite" aria-atomic="true" aria-describedby="mres-label">
+          <p class="mres-num" data-score>0</p>
+          <div>
+            <p class="mres-grade">Grade <span data-grade>I</span></p>
+            <p class="mres-word" data-word>Little or no disability</p>
+          </div>
+        </div>
+        <p class="mres-bring">Bring this score to your clinician.</p>
+      </div>
+      <p class="mcalc-note">Nothing you enter is saved or sent.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--band" id="grades" aria-labelledby="midas-grades-title">
+  <div class="wrap">
+    <div class="center-head" data-reveal>
+      <p class="kicker k-ember">Grades</p>
+      <h2 class="t-h2" id="midas-grades-title">What your score means.</h2>
+    </div>
+    <dl class="grades" data-reveal>
+      <div class="grade" data-grade-row="I"><dt><span class="grade-name">Grade I</span><span class="grade-range"><span class="sr-only">Score </span>0&ndash;5</span></dt><dd>Little or no disability</dd></div>
+      <div class="grade" data-grade-row="II"><dt><span class="grade-name">Grade II</span><span class="grade-range"><span class="sr-only">Score </span>6&ndash;10</span></dt><dd>Mild disability</dd></div>
+      <div class="grade" data-grade-row="III"><dt><span class="grade-name">Grade III</span><span class="grade-range"><span class="sr-only">Score </span>11&ndash;20</span></dt><dd>Moderate disability</dd></div>
+      <div class="grade" data-grade-row="IV"><dt><span class="grade-name">Grade IV</span><span class="grade-range"><span class="sr-only">Score </span>21+</span></dt><dd>Severe disability</dd></div>
+    </dl>
+    <p class="t-small grades-note">Your score adds up your 5 answers.</p>
+  </div>
+</section>
+
+<section class="sec sec--compact" aria-labelledby="midas-src-title">
+  <div class="wrap"><div class="sources">
+    <h2 id="midas-src-title">Sources</h2>
+    <ol>
+      <li id="src-1">Stewart WF, Lipton RB, Dowson AJ, Sawyer J. Development and testing of the Migraine Disability Assessment (MIDAS) Questionnaire to assess headache-related disability. <em>Neurology.</em> 2001;56(suppl 1):S20&ndash;S28.</li>
+    </ol>
+    <p class="rights">MIDAS questionnaire &copy; AstraZeneca, all rights reserved.</p>
+  </div></div>
+</section>
+
+<section class="sec sec--last close" id="get" aria-label="Get Ember">
+  <div class="wrap">
+    <img class="close-orb close-orb--mark" src="../assets/v3/orb-120.webp" alt="" aria-hidden="true" width="64" height="64" loading="lazy">
+    <p class="t-lead">Ember reminds you to take MIDAS every 3 months, or at each Botox visit.</p>
+    <div class="badges" aria-label="Store links" role="group">
+      <a class="badge-apple" href="https://apps.apple.com/us/app/ember-migraine-tracker/id6762041852"><img src="../assets/v3/app-store-badge.svg" alt="Download on the App Store" width="132" height="44" loading="lazy"></a>
+      <a class="badge-play" href="https://play.google.com/store/apps/details?id=com.cascadeheadache.ember"><img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" width="168" height="65" loading="lazy" onerror="this.parentElement.classList.add('nobadge')"><span class="nobadge-text">Get it on Google Play</span></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-id">
+        <a class="brand" href="../" aria-label="Ember home"><img src="../assets/v3/orb-120.webp" alt="" width="30" height="30" loading="lazy">Ember</a>
+        <p class="foot-tagline">Migraine and headache tracker for iPhone and Android.</p>
+      </div>
+      <nav class="foot-groups" aria-label="Footer">
+        <div class="foot-group">
+          <p class="foot-label">Ember</p>
+          <ul>
+            <li><a href="../plus/">Ember Plus</a></li>
+            <li><a href="../contact/">Contact</a></li>
+            <li><a href="../delete-account/">Delete account</a></li>
+          </ul>
+        </div>
+        <div class="foot-group">
+          <p class="foot-label">Learn</p>
+          <ul>
+            <li><a href="../migraine-day/">Migraine days</a></li>
+            <li><a href="../headache-diary/">Headache diary</a></li>
+          </ul>
+        </div>
+        <div class="foot-group">
+          <p class="foot-label">Clinicians</p>
+          <ul>
+            <li><a href="../providers/">For clinicians</a></li>
+            <li><a href="../providers/join/">Add your clinic</a></li>
+            <li><a href="../provider-handoff/">Provider Handoff</a></li>
+            <li><a href="../references/">Clinical references</a></li>
+          </ul>
+        </div>
+        <div class="foot-group">
+          <p class="foot-label">Legal</p>
+          <ul>
+            <li><a href="../privacy/">Privacy</a></li>
+            <li><a href="../consumer-health/">Consumer health privacy</a></li>
+            <li><a href="../terms/">Terms</a></li>
+            <li><a href="../providers/terms/">Clinic terms</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="foot-bottom">
+      <p class="foot-disclaimer">Ember helps you track and organize what you experience. It doesn’t diagnose, and it isn’t a substitute for care from your clinician.</p>
+      <p class="foot-legal">© 2026 Cascade Headache, PLLC</p>
+    </div>
+  </div>
+</footer>
+<script src="../assets/v3/v3.js?v=6" defer></script>
+<script>
+/* MIDAS calculator: mirrors the app's scoreMidas and MIDAS_MAX_DAYS.
+   Answers live only in the page's inputs; nothing is stored or sent. */
+(() => {
+  const calc = document.querySelector('[data-midas]');
+  if (!calc) return;
+  const MAX_DAYS = 90; // a MIDAS answer counts days in the last 3 months
+  const WORD = { I: 'Little or no disability', II: 'Mild disability', III: 'Moderate disability', IV: 'Severe disability' };
+  const gradeOf = s => s <= 5 ? 'I' : s <= 10 ? 'II' : s <= 20 ? 'III' : 'IV';
+  const days = t => Math.min(MAX_DAYS, Math.max(0, parseInt(t, 10) || 0));
+  const fields = [...calc.querySelectorAll('.mq-field')];
+  const result = calc.querySelector('[data-result]');
+  const scoreEl = result.querySelector('[data-score]');
+  const gradeEl = result.querySelector('[data-grade]');
+  const wordEl = result.querySelector('[data-word]');
+  const rows = document.querySelectorAll('[data-grade-row]');
+
+  function update() {
+    const score = fields.reduce((sum, f) => sum + days(f.value), 0);
+    const grade = gradeOf(score);
+    scoreEl.textContent = String(score);
+    gradeEl.textContent = grade;
+    wordEl.textContent = WORD[grade];
+    rows.forEach(r => r.classList.toggle('is-on', r.dataset.gradeRow === grade));
+    calc.querySelectorAll('[data-step="1"]').forEach(b => {
+      b.disabled = days(document.getElementById(b.getAttribute('aria-controls')).value) >= MAX_DAYS;
+    });
+  }
+
+  fields.forEach((f, i) => {
+    f.addEventListener('input', () => {
+      const digits = f.value.replace(/[^0-9]/g, '');
+      f.value = digits && parseInt(digits, 10) > MAX_DAYS ? String(MAX_DAYS) : digits;
+      update();
+    });
+    f.addEventListener('keydown', e => {
+      if (e.key !== 'Enter') return;
+      e.preventDefault();
+      if (fields[i + 1]) fields[i + 1].focus(); else f.blur();
+    });
+  });
+
+  calc.addEventListener('click', e => {
+    const btn = e.target.closest('[data-step]');
+    if (!btn) return;
+    const f = document.getElementById(btn.getAttribute('aria-controls'));
+    f.value = String(days(String(days(f.value) + Number(btn.dataset.step))));
+    update();
+  });
+
+  result.hidden = false;
+  update();
+})();
+</script>
+</body>
+</html>

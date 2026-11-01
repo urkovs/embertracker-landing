@@ -15,6 +15,7 @@ Ember helps you track and organize what you experience. It doesn’t diagnose, a
 
 - [What counts as a migraine day?](https://embertracker.app/migraine-day/): In Ember, a migraine day is a day with head pain and 2 or more migraine features, or symptoms that limit your day. Try the rules on your own day.
 - [Printable headache diary](https://embertracker.app/headache-diary/): A free one-page headache diary to print, made by a headache specialist. Track a month and bring your doctor the counts they ask for.
+- [MIDAS score calculator](https://embertracker.app/midas/): Answer the 5 MIDAS questions about the last 3 months to see your migraine disability score and grade. Nothing you enter is saved or sent.
 
 ## Ember
 
