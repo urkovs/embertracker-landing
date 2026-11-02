@@ -49,7 +49,7 @@
         <p class="toc-title">Contents</p>
         <ol>
           <li><a href="#diary">1. Diary and connected health information</a></li>
-          <li><a href="#backup">2. Optional encrypted backup</a></li>
+          <li><a href="#backup">2. Optional encrypted backup and sync</a></li>
           <li><a href="#accounts">3. Accounts and purchases</a></li>
           <li><a href="#weather">4. Weather and approximate location</a></li>
           <li><a href="#navigation-sharing">Optional navigation sharing</a></li>
@@ -68,13 +68,13 @@
       <header class="legal-head">
         <p class="kicker k-backup">Legal</p>
         <h1 class="t-legal-h1">Privacy policy</h1>
-        <p class="legal-updated">Last updated: November 1, 2026</p>
+        <p class="legal-updated">Last updated: November 2, 2026</p>
       </header>
       <details class="toc-mobile toc-mobile--plain" id="contents">
         <summary>Contents</summary>
         <ol>
           <li><a href="#diary">1. Diary and connected health information</a></li>
-          <li><a href="#backup">2. Optional encrypted backup</a></li>
+          <li><a href="#backup">2. Optional encrypted backup and sync</a></li>
           <li><a href="#accounts">3. Accounts and purchases</a></li>
           <li><a href="#weather">4. Weather and approximate location</a></li>
           <li><a href="#navigation-sharing">Optional navigation sharing</a></li>
@@ -88,7 +88,7 @@
           <li><a href="#changes">12. Policy changes and contact</a></li>
         </ol>
       </details>
-      <div class="legal-callout"><strong>The core diary is stored on your device.</strong> Optional automatic backup sends an encrypted copy to Google Cloud. Account, purchase, weather, diagnostic and support services handle the information described below.</div>
+      <div class="legal-callout"><strong>The core diary is stored on your device.</strong> Optional Backup &amp; sync sends an encrypted copy to Google Cloud. Account, purchase, weather, diagnostic and support services handle the information described below.</div>
       <div class="prose">
         <p>Ember is operated by Cascade Headache, PLLC. This policy covers Ember and this website. Feature availability varies by app version and account; describing an optional or testing feature here does not enable it or make it available to everyone.</p>
         <p>For Washington consumer health data, also read our <a href="../consumer-health/">Consumer Health Data Privacy Notice</a>.</p>
@@ -96,8 +96,9 @@
         <p>Ember stores the information you enter on your device: headache and migraine symptoms, severity, impact, notes, medications, treatments, menstrual-cycle information, questionnaire responses, profile details and provider or pharmacy details. It uses those records to provide tracking, observations and reports.</p>
         <p>If you connect Apple Health or Health Connect, Ember imports supported readings you authorize, such as sleep, activity and vital-sign readings, for on-device features. Imported raw Health readings are excluded from Ember backups. Saved personal experiments can contain results derived from those readings and can be included in an encrypted backup.</p>
         <a class="to-contents no-print" href="#contents"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M1.5 6.75 5 3.25l3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Back to contents</a>
-        <h2 id="backup">2. Optional encrypted backup</h2>
+        <h2 id="backup">2. Optional encrypted backup and sync</h2>
         <p>When you turn on automatic backup, Ember encrypts eligible records on your device and sends the encrypted copy to Google Cloud storage in the United States. The service also handles account-linked identifiers, backup versions, timestamps and security information needed to operate and protect the backup. This metadata is not anonymous.</p>
+        <p>When Backup &amp; sync runs on two or more of your devices, each one decrypts and merges the latest copy on that device, then uploads a new encrypted copy. The service also stores a random ID for each linked device, up to five. A new device needs your recovery material to join.</p>
         <p>The backup service does not receive the recovery key needed to read your encrypted records. Recovery material stays in secure storage on your device and, depending on your choice and platform support, may also be kept through iCloud Keychain, Google Block Store, or a recovery code you save yourself. Restoring through Ember requires account access and the applicable recovery material. If the recovery material is lost, we cannot reconstruct it from your account password.</p>
         <p>Turning backup off, deleting a backup, deleting your account and uninstalling the app are different actions. Uninstalling does not request remote deletion. Backup settings and the account-deletion process provide the relevant controls; contact us if a deletion fails. <strong>Never send us your recovery code.</strong></p>
         <a class="to-contents no-print" href="#contents"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M1.5 6.75 5 3.25l3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Back to contents</a>
@@ -142,7 +143,7 @@
         <a class="to-contents no-print" href="#contents"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M1.5 6.75 5 3.25l3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Back to contents</a>
         <h2 id="retention">7. Retention and deletion</h2>
         <p>Local records remain until you edit, delete, reset or restore them, or your device removes them. Your own exports and recipients’ copies are separate.</p>
-        <p>Automatic backup keeps up to ten verified versions, with cleanup of older versions; failed cleanup can temporarily retain additional versions. There is no automatic deletion solely because Plus access expires. Successful remote-backup deletion removes stored encrypted versions. Minimal revocation markers may remain to prevent previously enrolled devices from recreating a deleted backup. Account deletion also removes the authentication account through the app’s deletion process.</p>
+        <p>Automatic backup keeps the ten newest verified versions plus one from each of the last fourteen days (24 at most), with cleanup of older versions; failed cleanup can temporarily retain additional versions. There is no automatic deletion solely because Plus access expires. Successful remote-backup deletion removes stored encrypted versions. Minimal revocation markers may remain to prevent previously enrolled devices from recreating a deleted backup. Account deletion also removes the authentication account through the app’s deletion process.</p>
         <p>Account information is retained while the account is active. Support, security, diagnostic and purchase records have separate purposes and retention requirements. We retain them only as needed for those purposes, applicable legal obligations and documented exceptions.</p>
         <p>Using the in-app account-deletion control removes the authentication account and local Ember records after the supported backup-deletion step succeeds. New account deletions automatically queue a request to delete the associated RevenueCat customer record. Processing runs hourly; linked-account conflicts or service failures can delay deletion and require review. This does not cancel store subscriptions or delete store transaction records, Sentry diagnostic records, or support email and contact-delivery metadata. For a request about those other records, use the privacy-request process below; we will explain the records involved, any retention exception, and the outcome. Copies retained by Apple, Google, RevenueCat, Sentry, Google Workspace, Paubox, Visual Crossing or another recipient follow that recipient’s applicable process and retention rules.</p>
         <p>For in-app contact, our service stores request identifiers, payload fingerprints, submission status and abuse-prevention counters under a hashed account reference, not the message body, email address or screenshot. Contact metadata is scheduled for deletion after 400 days without an update, or handled earlier through a verified privacy request. A minimal deletion marker may remain to prevent an in-flight request from recreating erased metadata. Our support-mail procedure calls for deleting messages within 90 days after resolution unless a documented legal or security hold applies. Paubox, mailbox and backup copies require their own deletion handling; we do not promise immediate erasure of every vendor copy.</p>

@@ -119,7 +119,7 @@ original round-2 spec. Check `git status`/`git log` for anything newer.
   script inline at the end of the page). It runs only in the browser and
   saves and sends nothing. Questions, cap and grades copy the app; the head
   comment in `midas/index.html` names each app source, so change the page when
-  those change. Keep the "MIDAS questionnaire © AstraZeneca" line (Sam, Nov 1
+  those change. The copyright line reads "MIDAS questionnaire © Innovative Medical Research, 1997. Listed as public domain by Mapi Research Trust." (Sam, Nov 1
   2026).
 - `headache-diary/ember-headache-diary.pdf` is rendered from
   `headache-diary/print.html` (noindex; the rebuild command is in its head
