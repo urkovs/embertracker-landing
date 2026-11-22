@@ -38,6 +38,13 @@ original round-2 spec. Check `git status`/`git log` for anything newer.
   A card or bank account is required to start; the trial begins at checkout.
   Patients never pay for it. Stated on `/providers/join/` and in the clinic
   terms at `/providers/terms/` (keep the two in step).
+- Report routes (since Nov 1, 2026): **Send** (Direct Send, Plus, up to 2 a
+  month) goes through Ember's Cloud Run relay `ember-clinic-delivery` and
+  Paubox by encrypted email; the relay saves no PDF, only delivery records
+  (400-day lifecycle). **Email** goes from the patient's own email app. Never
+  write that reports don't pass through Ember without naming the Email route.
+  `/privacy`, `/consumer-health`, `/providers/terms/` and the `/providers/`
+  FAQ describe both; change them together.
 - **No personal names anywhere** — site copy, meta tags, or rendered artifacts
   (PDF renders included). Credibility is "a practicing headache specialist,"
   impersonal on purpose (July 2026, reversing an earlier decision).
