@@ -4,28 +4,28 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Add your clinic | Ember Migraine Tracker</title>
-<meta name="description" content="Direct Send lets patients email their Ember report to your clinic from their own phone. Free for 3 months, then $50 a month per clinic.">
+<meta name="description" content="Ember patients send your clinic a report with 90 days of headache-day counts and the preventives they’ve tried. Free for 90 days, then $50 a month per clinic.">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#0a0a0a">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Ember Migraine Tracker">
 <meta property="og:url" content="https://embertracker.app/providers/join/">
 <meta property="og:title" content="Add your clinic | Ember Migraine Tracker">
-<meta property="og:description" content="Direct Send lets patients email their Ember report to your clinic from their own phone. Free for 3 months, then $50 a month per clinic.">
+<meta property="og:description" content="Ember patients send your clinic a report with 90 days of headache-day counts and the preventives they’ve tried. Free for 90 days, then $50 a month per clinic.">
 <meta property="og:image" content="https://embertracker.app/assets/v3/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="The Ember orb beside the line Migraine tracking, without the headache.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Add your clinic | Ember Migraine Tracker">
-<meta name="twitter:description" content="Direct Send lets patients email their Ember report to your clinic from their own phone. Free for 3 months, then $50 a month per clinic.">
+<meta name="twitter:description" content="Ember patients send your clinic a report with 90 days of headache-day counts and the preventives they’ve tried. Free for 90 days, then $50 a month per clinic.">
 <meta name="twitter:image" content="https://embertracker.app/assets/v3/og.png">
 <meta name="twitter:image:alt" content="The Ember orb beside the line Migraine tracking, without the headache.">
 <link rel="icon" type="image/png" href="../../assets/v3/favicon.png">
 <link rel="preload" as="font" type="font/woff2" href="../../assets/v3/fonts/source-serif-4-latin.woff2" crossorigin>
 <link rel="stylesheet" href="/assets/web-form.css?v=1">
 <link rel="stylesheet" href="../../assets/v3/v3.css?v=11">
-<link rel="stylesheet" href="../../assets/v3/pages/join.css?v=6">
+<link rel="stylesheet" href="../../assets/v3/pages/join.css?v=7">
 <link rel="canonical" href="https://embertracker.app/providers/join/" />
 </head>
 <body>
@@ -46,22 +46,167 @@
 <section class="sec join-hero" aria-labelledby="join-title">
   <div class="wrap center-head">
     <p class="kicker k-sky">For clinics</p>
-    <h1 class="t-display" id="join-title">Add your clinic to Direct Send</h1>
-    <p class="t-lead">Patients email their Ember report to your clinic from their own phone. Ember supplies your address so the report reaches the right inbox.</p>
-    <p class="t-line"><a class="tlink" href="#request">Go to the setup form</a></p>
+    <h1 class="t-display" id="join-title">Get the headache history before the visit.</h1>
+    <p class="t-lead">Ember patients send your clinic a report with 90 days of headache-day counts and the preventives they’ve tried.</p>
+    <div class="actions">
+      <a class="btn btn--lg" href="#request">Add your clinic</a>
+      <p class="price-line">Free for 90 days, then $50 a month per clinic</p>
+    </div>
   </div>
 </section>
 
-<section class="sec sec--band" id="how" aria-labelledby="how-title">
+<section class="sec" id="gets" aria-labelledby="gets-title">
   <div class="wrap">
     <div class="center-head" data-reveal>
-      <p class="kicker k-ember">Direct Send</p>
-      <h2 class="t-h2" id="how-title">How Direct Send works.</h2>
+      <p class="kicker k-ember">In every report</p>
+      <h2 class="t-h2" id="gets-title">What your team gets.</h2>
     </div>
-    <div class="join-col">
-      <p class="t-body">Direct Send adds your clinic to Ember by name. When a patient picks your clinic, Ember prepares their report and supplies your address to their own email app.</p>
-      <p class="t-body">Sending is email from the patient’s own account. The report doesn’t pass through Ember’s servers, so Ember’s team never sees it.</p>
+    <div class="gets" data-reveal-group>
+      <article class="card get" style="--c: var(--mig)">
+        <span class="get-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/><circle cx="8.5" cy="14" r="1.2" fill="currentColor" stroke="none"/><circle cx="12" cy="14" r="1.2" fill="currentColor" stroke="none"/><circle cx="15.5" cy="17" r="1.2" fill="currentColor" stroke="none"/></svg></span>
+        <h3 class="t-h3">Headache days, counted</h3>
+        <p>Migraine and headache days for the last 90 days, with a dated calendar behind every count.</p>
+      </article>
+      <article class="card get" style="--c: var(--teal)">
+        <span class="get-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="9" width="16" height="7" rx="3.5" transform="rotate(-35 12 12.5)"/><path d="M9.6 7.4l4.4 6.3"/></svg></span>
+        <h3 class="t-h3">Preventives tried and stopped</h3>
+        <p>Each past preventive with when it stopped and what the patient reports about it.</p>
+      </article>
+      <article class="card get" style="--c: var(--clear)">
+        <span class="get-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12.5" r="8"/><path d="M12 8.5v4l2.8 1.8"/></svg></span>
+        <h3 class="t-h3">Faster check-in</h3>
+        <p>The history is in your inbox before the patient arrives.</p>
+      </article>
+      <article class="card get" style="--c: var(--patterns)">
+        <span class="get-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3.5H7.5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V8z"/><path d="M14 3.5V8h4.5M9 14l2 2 4-4"/></svg></span>
+        <h3 class="t-h3">Prior authorizations</h3>
+        <p>Botox and CGRP approvals ask for headache days and failed preventives. The report shows both.</p>
+      </article>
     </div>
+  </div>
+</section>
+
+<section class="sec sec--band" id="send" aria-labelledby="send-title">
+  <div class="wrap">
+    <div class="center-head" data-reveal>
+      <p class="kicker k-sky">How patients send</p>
+      <h2 class="t-h2" id="send-title">Two ways to send.</h2>
+    </div>
+    <div class="flow no-flow" data-flow>
+      <div class="flow-tabs" role="group" aria-label="Choose how the patient sends">
+        <button class="chip" type="button" aria-pressed="true" data-flow-tab="direct">Direct Send</button>
+        <button class="chip" type="button" aria-pressed="false" data-flow-tab="email">Email</button>
+      </div>
+
+      <div class="lane lane--direct" data-lane="direct">
+        <div class="lane-phone">
+          <div class="phone dphone">
+            <div class="dscreen" role="img" aria-label="Ember’s Direct Send screen: the report card, then Sending, then Delivered to your clinic.">
+              <div class="dstage is-on" data-stage="1">
+                <svg class="d-x" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 3l10 10M13 3L3 13"/></svg>
+                <div class="d-app">
+                  <div class="d-hero">
+                    <div class="d-report">
+                      <div class="d-brand"><span class="d-orb"></span>Ember report</div>
+                      <div><div class="d-name">Sample patient</div><div class="d-range">Oct 2 to today</div></div>
+                      <div class="d-rule"></div>
+                      <div class="d-count" style="--dc:#9b7acc"><i></i>18 migraine days</div>
+                      <div class="d-count" style="--dc:#4a8abf"><i></i>5 headache days</div>
+                      <div class="d-lines"><i></i><i></i><i></i></div>
+                    </div>
+                  </div>
+                  <div class="d-send"><span class="d-plane"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.4 11.2l16.9-7.3c.7-.3 1.4.4 1.1 1.1l-7.3 16.9c-.3.7-1.3.7-1.6 0l-2.3-5.6c-.1-.3-.3-.5-.6-.6l-5.6-2.3c-.7-.3-.7-1.3 0-1.6z"/></svg></span><span><small>Send to</small><b>Your clinic</b></span></div>
+                  <div class="d-manual">Export or share manually</div>
+                </div>
+              </div>
+              <div class="dstage" data-stage="2">
+                <div class="d-app" aria-hidden="true">
+                  <div class="d-hero"><div class="d-report"><div class="d-brand"><span class="d-orb"></span>Ember report</div><div><div class="d-name">Sample patient</div><div class="d-range">Oct 2 to today</div></div><div class="d-rule"></div><div class="d-count" style="--dc:#9b7acc"><i></i>18 migraine days</div><div class="d-count" style="--dc:#4a8abf"><i></i>5 headache days</div><div class="d-lines"><i></i><i></i><i></i></div></div></div>
+                  <div class="d-send"><span class="d-plane"></span><span><small>Send to</small><b>Your clinic</b></span></div>
+                  <div class="d-manual">Export or share manually</div>
+                </div>
+                <div class="d-scrim"><div class="d-popup">
+                  <span class="d-mark d-fly"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.4 11.2l16.9-7.3c.7-.3 1.4.4 1.1 1.1l-7.3 16.9c-.3.7-1.3.7-1.6 0l-2.3-5.6c-.1-.3-.3-.5-.6-.6l-5.6-2.3c-.7-.3-.7-1.3 0-1.6z"/></svg></span>
+                  <div><div class="d-pt">Sending</div><div class="d-pd">to Your clinic</div></div>
+                </div></div>
+              </div>
+              <div class="dstage" data-stage="3">
+                <div class="d-app" aria-hidden="true">
+                  <div class="d-hero"><div class="d-report"><div class="d-brand"><span class="d-orb"></span>Ember report</div><div><div class="d-name">Sample patient</div><div class="d-range">Oct 2 to today</div></div><div class="d-rule"></div><div class="d-count" style="--dc:#9b7acc"><i></i>18 migraine days</div><div class="d-count" style="--dc:#4a8abf"><i></i>5 headache days</div><div class="d-lines"><i></i><i></i><i></i></div></div></div>
+                  <div class="d-send"><span class="d-plane"></span><span><small>Send to</small><b>Your clinic</b></span></div>
+                  <div class="d-manual">Export or share manually</div>
+                </div>
+                <div class="d-scrim"><div class="d-popup">
+                  <span class="d-mark d-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+                  <div><div class="d-pt">Delivered</div><div class="d-pd">to Your clinic</div></div>
+                  <div class="d-done">Done</div>
+                </div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lane-copy">
+          <p class="lane-title">Direct Send</p>
+          <ol class="flow-steps">
+            <li><button class="flow-step" type="button" data-step="1"><span class="n">1</span><span><b>The patient taps Send.</b><span>They check the report first. Your clinic’s name is on the button.</span></span></button></li>
+            <li><button class="flow-step" type="button" data-step="2"><span class="n">2</span><span><b>Ember sends it by encrypted email.</b><span>It goes to the inbox your clinic approved.</span></span></button></li>
+            <li><button class="flow-step" type="button" data-step="3"><span class="n">3</span><span><b>They see Delivered.</b><span>It shows once the report reaches your inbox.</span></span></button></li>
+          </ol>
+          <ul class="lane-facts"><li>Ember Plus members</li><li>Up to 2 a month</li></ul>
+        </div>
+      </div>
+
+      <div class="lane lane--email" data-lane="email">
+        <div class="lane-phone">
+          <div class="phone dphone">
+            <div class="dscreen" role="img" aria-label="Sending by email: the report card, then the patient’s email app with your address and the PDF, then the email in your inbox.">
+              <div class="dstage is-on" data-stage="1">
+                <svg class="d-x" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 3l10 10M13 3L3 13"/></svg>
+                <div class="d-app">
+                  <div class="d-hero"><div class="d-report"><div class="d-brand"><span class="d-orb"></span>Ember report</div><div><div class="d-name">Sample patient</div><div class="d-range">Oct 2 to today</div></div><div class="d-rule"></div><div class="d-count" style="--dc:#9b7acc"><i></i>18 migraine days</div><div class="d-count" style="--dc:#4a8abf"><i></i>5 headache days</div><div class="d-lines"><i></i><i></i><i></i></div></div></div>
+                  <div class="d-send"><span class="d-plane"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg></span><span><small>Email</small><b>Your clinic</b></span></div>
+                  <div class="d-manual">Export or share manually</div>
+                </div>
+              </div>
+              <div class="dstage" data-stage="2">
+                <div class="d-mail">
+                  <div class="d-sheet">
+                    <div class="d-bar"><span>Cancel</span><b>Ember report</b><span class="d-up"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 13V3M4 7l4-4 4 4"/></svg></span></div>
+                    <div class="d-field">To:<span>reports@yourclinic.org</span></div>
+                    <div class="d-field">From:<span>the patient’s own email</span></div>
+                    <div class="d-body">
+                      <div class="d-attach"><span class="d-pdf">PDF</span><span><b>Ember report</b><small>Summary, chart note, calendar</small></span></div>
+                      <div class="d-lines"><i></i><i></i><i></i></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="dstage" data-stage="3">
+                <div class="d-inbox">
+                  <h4>Inbox</h4>
+                  <div class="d-row is-new"><i></i><div><b>Patient’s email</b><span>Ember report</span><small>PDF attached</small></div></div>
+                  <div class="d-row is-old"><i></i><div><span class="d-lines"><i></i><i></i></span></div></div>
+                  <div class="d-row is-old"><i></i><div><span class="d-lines"><i></i><i></i></span></div></div>
+                  <div class="d-row is-old"><i></i><div><span class="d-lines"><i></i><i></i></span></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lane-copy">
+          <p class="lane-title">Email</p>
+          <ol class="flow-steps">
+            <li><button class="flow-step" type="button" data-step="1"><span class="n">1</span><span><b>The patient taps Email.</b><span>Any Ember patient can send the same report this way.</span></span></button></li>
+            <li><button class="flow-step" type="button" data-step="2"><span class="n">2</span><span><b>Their email app opens.</b><span>Your address is filled in and the PDF is attached.</span></span></button></li>
+            <li><button class="flow-step" type="button" data-step="3"><span class="n">3</span><span><b>They tap Send.</b><span>It arrives from their own email account.</span></span></button></li>
+          </ol>
+          <ul class="lane-facts"><li>Free for every patient</li><li>Sent from their own account</li></ul>
+        </div>
+      </div>
+      <button class="tlink flow-replay" type="button" data-flow-replay hidden>Play again</button>
+      <p class="flow-cap">Illustration of the app’s screens with sample data.</p>
+    </div>
+    <p class="t-line flow-note">Nothing sends until the patient taps Send.</p>
   </div>
 </section>
 
@@ -71,86 +216,49 @@
       <p class="kicker k-sky">What arrives</p>
       <h2 class="t-h2" id="arrives-title">One email with one PDF.</h2>
     </div>
-    <div class="grid-2 join-cards">
-      <article class="card">
-        <h3 class="t-h3">The email</h3>
-        <p>The subject line names the patient and the date. The body holds a one-line summary of their day counts and acute medication use.</p>
-      </article>
-      <article class="card">
-        <h3 class="t-h3">The PDF</h3>
-        <p>Page one is a short summary and a chart note. The patient’s calendar for up to the last 90 days follows in black and white.</p>
-      </article>
-      <article class="card">
-        <h3 class="t-h3">Matching the chart</h3>
-        <p>The report carries the patient’s first and last name. It has no date of birth, so confirm identity with your usual checks.</p>
-      </article>
-      <article class="card">
-        <h3 class="t-h3">Your EHR</h3>
-        <p>Ember doesn’t connect to your EHR. Staff save the PDF to the chart like any outside record.</p>
-      </article>
+    <div class="arrive">
+      <figure class="report-paper report-paper--flat" data-reveal>
+        <img src="../../assets/v3/report.webp" srcset="../../assets/v3/report.webp 1600w, ../../assets/v3/report-2400.webp 2400w" sizes="(min-width: 1040px) 560px, (min-width: 900px) 52vw, 100vw" alt="Ember report (PDF) covering 51 days: 18 migraine days, 5 headache days, 18 impacted days and 19 clear days." width="1600" height="1235" loading="lazy">
+      </figure>
+      <ul class="check-list" data-reveal-group>
+        <li><span><b>Page one</b> is a short summary and a chart note.</span></li>
+        <li><span><b>The calendar</b> follows, for up to the last 90 days.</span></li>
+        <li><span><b>First and last name, no date of birth.</b> Confirm identity with your usual checks.</span></li>
+        <li><span><b>No EHR connection.</b> Staff save the PDF to the chart like any outside record.</span></li>
+      </ul>
     </div>
   </div>
 </section>
 
-<section class="sec sec--band" id="patient" aria-labelledby="patient-title">
-  <div class="wrap">
-    <div class="center-head" data-reveal>
-      <p class="kicker k-backup">Patient control</p>
-      <h2 class="t-h2" id="patient-title">Nothing sends without the patient.</h2>
-    </div>
-    <div class="join-col">
-      <p class="t-body">Patients review the report on their phone first. Nothing leaves the phone until they tap Send in their own email app.</p>
-      <p class="t-body">They choose the recipient each time. Without setup, they can still email the report to any provider.</p>
-    </div>
-  </div>
-</section>
-
-<section class="sec" id="setup" aria-labelledby="setup-title">
+<section class="sec sec--band" id="setup" aria-labelledby="setup-title">
   <div class="wrap">
     <div class="center-head" data-reveal>
       <p class="kicker k-teal">Setup</p>
-      <h2 class="t-h2" id="setup-title">Five steps to set up.</h2>
+      <h2 class="t-h2" id="setup-title">Four steps to set up.</h2>
     </div>
-    <div class="join-col">
-      <ol class="steps">
-        <li><span><b>Request setup</b> with the form below. Name the inbox that should receive reports.</span></li>
-        <li><span><b>We confirm the inbox</b> with you and send a test report.</span></li>
-        <li><span><b>Add a payment method</b> with the link we email you. Your 3 free months start then, and nothing is charged until they end.</span></li>
-        <li><span><b>We add your clinic</b> to Ember by name. This usually happens the same day, and always within 5 business days.</span></li>
-        <li><span><b>Post your QR code</b> in the lobby and add your link to after-visit summaries. Scanning the code opens Ember with your clinic selected.</span></li>
-      </ol>
-      <div class="card join-inbox">
-        <h3 class="t-label">Your inbox</h3>
-        <p>Use an inbox your clinic approves for patient health information. Reports arrive as standard email from the patient’s own account.</p>
-      </div>
-      <div class="card join-inbox">
-        <h3 class="t-label">Is Ember a business associate?</h3>
-        <p>No. Your patient chooses to send their report, and it goes from their email account to your inbox. Ember never receives it.</p>
-      </div>
-    </div>
+    <ol class="setup" data-reveal-group>
+      <li class="card"><h3 class="t-h3">Request setup</h3><p>Use the form below. Name the inbox that should receive reports.</p></li>
+      <li class="card"><h3 class="t-h3">Confirm your inbox</h3><p>We check it with you and send a test report.</p></li>
+      <li class="card"><h3 class="t-h3">Add a payment method</h3><p>Your 90 free days start then. Nothing is charged until they end.</p></li>
+      <li class="card"><h3 class="t-h3">Post your QR code</h3><p>We add your clinic within 5 business days. The code opens Ember with your clinic selected.</p></li>
+    </ol>
+    <p class="t-small setup-note">Use an inbox your clinic approves for patient health information.</p>
   </div>
 </section>
 
-<section class="sec sec--band" id="cost" aria-labelledby="cost-title">
+<section class="sec cost" id="cost" aria-labelledby="cost-title">
   <div class="wrap">
     <div class="center-head" data-reveal>
       <p class="kicker k-patterns">Cost</p>
-      <h2 class="t-h2" id="cost-title">Free for 3 months, then $50 a month.</h2>
+      <h2 class="t-h2" id="cost-title">Free for 90 days.</h2>
     </div>
-    <div class="join-col">
-      <p class="t-body">Your first 3 months are free. That gives your patients time to start sending, and your team time to realize the value of Ember Direct Send before paying anything.</p>
-      <p class="t-body">After that, Direct Send is $50 a month per clinic, or $500 a year. Patients never pay for it.</p>
-      <p class="t-body">A card or bank account is required to start. Cancel before the 3 months end and you pay nothing. <a class="ilink" href="../terms/">Clinic terms</a></p>
+    <div class="price-tiles" data-reveal-group>
+      <div class="price-tile price-tile--featured"><p class="t-label">First 90 days</p><span class="t-num">Free</span><p class="price-note">Card or bank account to start</p></div>
+      <div class="price-tile"><p class="t-label">After that</p><span class="t-num">$50</span><p class="price-per">a month per clinic</p><p class="price-note">or $500 a year</p></div>
     </div>
-    <div class="grid-2 join-cards">
-      <article class="card">
-        <h3 class="t-h3">Prior authorizations</h3>
-        <p>Botox and CGRP prior authorizations ask for headache-day counts. The report has them counted, with a dated calendar to back them up.</p>
-      </article>
-      <article class="card">
-        <h3 class="t-h3">Staff time</h3>
-        <p>No one tallies a paper calendar or chases a patient’s notes. Staff save one PDF to the chart.</p>
-      </article>
+    <div class="cost-notes">
+      <p class="t-body">Cancel before the 90 days end and you pay nothing. <a class="ilink" href="../terms/">Clinic terms</a></p>
+      <p class="t-body">Patients can always email your clinic for free. Direct Send is part of Ember Plus.</p>
     </div>
   </div>
 </section>
@@ -240,5 +348,67 @@
 
 <script src="../../assets/v3/v3.js?v=6" defer></script>
 <script src="/assets/web-form.js?v=3" defer></script>
+<script>
+/* Two ways to send: tabs pick a lane; each lane plays its three steps once
+   when it first comes into view (2.4 s a step), then rests on the last.
+   Tapping a step shows it and stops the play. Reduce Motion: no autoplay,
+   no transitions (join.css). Without this script both lanes show in full. */
+(() => {
+  const flow = document.querySelector('[data-flow]');
+  if (!flow) return;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const tabs = [...flow.querySelectorAll('[data-flow-tab]')];
+  const lanes = [...flow.querySelectorAll('[data-lane]')];
+  const replay = flow.querySelector('[data-flow-replay]');
+  const STEP_MS = 2400;
+  let timer = 0, current = lanes[0], played = new Set(), touched = false;
+  flow.classList.remove('no-flow');
+  flow.classList.add('js-flow');
+
+  const show = (lane, n) => {
+    lane.querySelectorAll('.dstage').forEach(s => s.classList.toggle('is-on', +s.dataset.stage === n));
+    lane.querySelectorAll('.flow-step').forEach(b => {
+      if (+b.dataset.step === n) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current');
+    });
+    lane.dataset.step = n;
+  };
+  const stop = () => { clearTimeout(timer); timer = 0; };
+  const play = lane => {
+    stop(); show(lane, 1); replay.hidden = true;
+    if (reduce) { replay.hidden = true; return; }
+    const next = n => { timer = setTimeout(() => {
+      show(lane, n);
+      if (n < 3) next(n + 1); else { timer = 0; replay.hidden = false; }
+    }, STEP_MS); };
+    next(2);
+  };
+  const select = key => {
+    touched = true; stop();
+    tabs.forEach(t => t.setAttribute('aria-pressed', String(t.dataset.flowTab === key)));
+    lanes.forEach(l => { l.hidden = l.dataset.lane !== key; });
+    current = lanes.find(l => l.dataset.lane === key);
+    if (!played.has(key)) { played.add(key); play(current); } else { show(current, 1); replay.hidden = reduce; }
+  };
+  lanes.forEach(lane => {
+    show(lane, 1);
+    lane.querySelectorAll('.flow-step').forEach(b => b.addEventListener('click', () => {
+      touched = true; stop(); show(lane, +b.dataset.step); replay.hidden = reduce;
+    }));
+  });
+  tabs.forEach(t => t.addEventListener('click', () => select(t.dataset.flowTab)));
+  replay.addEventListener('click', () => play(current));
+  lanes.slice(1).forEach(l => { l.hidden = true; });
+
+  // First view starts the play; until then the lane rests on step 1.
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entries => {
+      if (!entries.some(e => e.isIntersecting)) return;
+      io.disconnect();
+      if (!touched) { played.add(current.dataset.lane); play(current); }
+    }, { threshold: 0.3 });
+    io.observe(flow);
+  }
+})();
+</script>
 </body>
 </html>
