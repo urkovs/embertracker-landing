@@ -16,6 +16,9 @@
 }
 .maker-badge svg { flex: none; }
 @media (min-width: 600px) { .maker-badge { margin-top: 20px; font-size: 16px; } }
+/* One line for clinicians who scan the patient business card (its QR opens
+   this page, untagged) and are looking for the clinician page. */
+.hero-pro { margin-top: 10px; }
 
 /* Stage: the orb disc rises behind the phone. --disc is the visible disc;
    the image is wider because the artwork carries its own glow. */
