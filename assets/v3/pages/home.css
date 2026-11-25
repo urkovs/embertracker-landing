@@ -19,6 +19,12 @@
 /* One line for clinicians who scan the patient business card (its QR opens
    this page, untagged) and are looking for the clinician page. */
 .hero-pro { margin-top: 10px; }
+/* Provider-week banner above the nav (Dec 1–7 2026 only). */
+.hello-bar { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 2px 6px; padding: 9px 16px; background: var(--raised); border-bottom: 1px solid var(--hair); font: 500 14px/1.3 var(--sans); color: var(--ink); text-decoration: none; text-align: center; }
+.hello-bar[hidden] { display: none; }
+.hello-bar:hover { color: var(--ink-hi); }
+.hello-bar > span { display: inline-flex; align-items: center; gap: 6px; }
+.hello-heart { color: #F39A63; flex: none; }
 
 /* Stage: the orb disc rises behind the phone. --disc is the visible disc;
    the image is wider because the artwork carries its own glow. */
