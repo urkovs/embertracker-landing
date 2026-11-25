@@ -1,10 +1,10 @@
 # Ember Migraine Tracker
 
-> A free migraine and headache tracker for iPhone and Android, made by a headache specialist. Log a day in 10 to 20 seconds and bring your doctor a report.
+> A free migraine and headache tracker for iPhone and Android, made by a headache specialist. Log a day in 10 to 20 seconds and bring your provider a report.
 
 Every classification follows fixed rules built on ICHD-3 criteria. No AI guesses, no black box.
 
-Ember helps you track and organize what you experience. It doesn’t diagnose, and it isn’t a substitute for care from your clinician.
+Ember helps you track and organize what you experience. It doesn’t diagnose, and it isn’t a substitute for care from your provider.
 
 ## Get Ember
 
@@ -14,7 +14,7 @@ Ember helps you track and organize what you experience. It doesn’t diagnose, a
 ## Learn
 
 - [What counts as a migraine day?](https://embertracker.app/migraine-day/): In Ember, a migraine day is a day with head pain and 2 or more migraine features, or symptoms that limit your day. Try the rules on your own day.
-- [Printable headache diary](https://embertracker.app/headache-diary/): A free one-page headache diary to print, made by a headache specialist. Track a month and bring your doctor the counts they ask for.
+- [Printable headache diary](https://embertracker.app/headache-diary/): A free one-page headache diary to print, made by a headache specialist. Track a month and bring your provider the counts they ask for.
 - [MIDAS score calculator](https://embertracker.app/midas/): Answer the 5 MIDAS questions about the last 3 months to see your migraine disability score and grade. Nothing you enter is saved or sent.
 
 ## Ember
@@ -25,9 +25,9 @@ Ember helps you track and organize what you experience. It doesn’t diagnose, a
 - [Contact](https://embertracker.app/contact/): Write to the Ember team about the app or setting up a clinic. We reply by email.
 - [Delete your account](https://embertracker.app/delete-account/): How to delete your Ember account and the data tied to it, in the app or by email.
 
-## Clinicians
+## Providers
 
-- [For clinicians](https://embertracker.app/providers/): A free migraine tracker made by a practicing headache specialist. Patients bring 90 days on one page, with MIDAS and response to each preventive.
+- [For providers](https://embertracker.app/providers/): A free migraine tracker made by a practicing headache specialist. Patients bring 90 days on one page, with MIDAS and response to each preventive.
 - [Add your clinic](https://embertracker.app/providers/join/): Ember patients send your clinic a report with 90 days of headache-day counts and the preventives they’ve tried. Free for 90 days, then $50 a month per clinic.
 - [Provider Handoff](https://embertracker.app/provider-handoff/): Build a patient’s treatment plan in your browser and hand it to Ember. Follow-up handoffs change only the medications you name.
 - [Clinical references](https://embertracker.app/references/): Citations for the clinical criteria Ember uses, including ICHD-3 for day classification and MIDAS for disability scoring.

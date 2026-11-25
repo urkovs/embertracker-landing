@@ -637,7 +637,7 @@ function recordMatchesMedication(record, medication) {
 }
 function proposalEffect(action, status) {
     if (!action)
-        return 'Needs clinician resolution before any update.';
+        return 'Resolve this before any update.';
     if (action === 'continue')
         return status === 'active'
             ? 'Keep current medication state. No history change.'

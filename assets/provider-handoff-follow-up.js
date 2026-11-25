@@ -436,7 +436,7 @@ function addManualChange() {
         selected: false,
         resolved: false,
         ignored: false,
-        effect: 'Needs clinician resolution before any update.',
+        effect: 'Resolve this before any update.',
     });
     expandedRows.add(id);
     renderReview();
